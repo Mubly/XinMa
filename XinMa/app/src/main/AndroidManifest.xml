@@ -2,14 +2,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mubly.xinma">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
+        android:name=".base.CrossApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config_debug"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme_App">
+        <activity android:name=".activity.GroupActivity"></activity>
+        <activity android:name=".activity.DepartmentActivity" />
+        <activity android:name=".activity.EditStaffActivity" />
+        <activity android:name=".activity.DisposeActivity" />
+        <activity android:name=".activity.AnalysisActivity" />
+        <activity android:name=".activity.SortClassActivity" />
+        <activity android:name=".repair.RepairActivity" />
+        <activity android:name=".assetreturn.AssetsReturnActivity" />
+        <activity android:name=".brorrow.BrrorowActivity" />
+        <activity android:name=".getuse.GetUseActivity" />
+        <activity android:name=".check.CheckListActivity" />
+        <activity android:name=".assets.CreateActivity" />
+        <activity android:name=".assets.RepairActivity" />
+        <activity android:name=".assets.ReturnActivity" />
+        <activity android:name=".assets.ChangeActivity" />
+        <activity android:name=".assets.AssetsDetialActivity" />
+        <activity android:name=".print.PrintActivity" />
+        <activity android:name=".assets.AssetsListActivity" />
+        <activity android:name=".setting.SettingActivity" />
+        <activity android:name=".login.view.LostPassWordActivity" />
+        <activity android:name=".login.view.RegisterActivity" />
+        <activity android:name=".login.view.LoginActivity" />
+        <activity android:name=".home.MainActivity" />
+        <activity
+            android:name=".login.view.StartActivity"
+            android:theme="@style/splash_theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+<variable
+    name="persenter"
+    type="com.mubly.xinma.login.presenter.LoginPresenter" />
+        <import type="android.view.View"></import>
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <include layout="@layout/top_bar_layout">
+    </include>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_140dp"
+            android:background="@color/main_blue"></FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_60dp"
+            android:background="@drawable/shape_radius_10_white"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/size_16dp"
+            android:paddingLeft="@dimen/size_16dp"
+            android:paddingTop="@dimen/size_16dp"
+            android:paddingBottom="@dimen/size_6dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:background="@drawable/shape_storke_input_bg">
+
+                <ImageView
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@drawable/icon_phone"></ImageView>
+
+                <EditText
+                    android:id="@+id/phone_input_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:focusable="true"
+                    android:hint="请输入手机号码(11位)"
+                    android:inputType="phone"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    android:layout_marginLeft="@dimen/size_50dp"
+                    android:textSize="@dimen/size_14dp"></EditText>
+                <ImageView
+                    android:id="@+id/phone_check_iv"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/size_10dp"
+                    android:visibility="@{persenter.phoneCheck?View.VISIBLE:View.GONE}"
+                    android:src="@mipmap/icons_check_true"
+                    android:layout_height="@dimen/size_40dp">
+                </ImageView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginTop="@dimen/size_12dp"
+                android:background="@drawable/shape_storke_input_bg">
+
+                <ImageView
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@drawable/icons_password"></ImageView>
+
+                <EditText
+                    android:id="@+id/password_input_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size_50dp"
+                    android:background="@null"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    android:hint="请输入登录密码(5~14位)"
+                    android:inputType="phone"
+                    android:textSize="@dimen/size_14dp"></EditText>
+                <ImageView
+                    android:id="@+id/password_check_iv"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/size_10dp"
+                    android:visibility="@{persenter.phoneCheck?View.VISIBLE:View.GONE}"
+                    android:src="@mipmap/icons_check_true"
+                    android:layout_height="@dimen/size_40dp">
+
+                </ImageView>
+            </FrameLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_30dp"
+                android:background="@drawable/shape_blue_btn_bg_radius4"
+                android:text="立即登录"
+                android:onClick="@{()->persenter.login()}"
+                android:textColor="@color/white"></Button>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginTop="@dimen/size_20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="忘记密码？"
+                    android:onClick="@{()->persenter.lostPassWord()}"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_14dp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:text="体验登录"
+                    android:onClick="@{()->persenter.experienceLogin()}"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_14dp"></TextView>
+            </FrameLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>
+
+</layout>

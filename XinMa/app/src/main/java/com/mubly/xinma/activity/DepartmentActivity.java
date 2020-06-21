@@ -1,14 +1,19 @@
-package com.mubly.xinma;
+package com.mubly.xinma.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.mubly.xinma.R;
+
+/**
+ * 部门
+ */
+public class DepartmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_department);
     }
 }

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="persenter"
+            type="com.mubly.xinma.login.presenter.RegisterPresenter" />
+        <import type="android.view.View"></import>
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/top_bar_layout"></include>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".login.view.RegisterActivity">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_140dp"
+            android:background="@color/main_blue"></FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_60dp"
+            android:background="@drawable/shape_radius_10_white"
+            android:orientation="vertical"
+            android:padding="@dimen/size_16dp"
+            android:paddingBottom="@dimen/size_6dp">
+            <!--手机号-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:background="@drawable/shape_storke_input_bg">
+
+                <EditText
+                    android:id="@+id/register_phone_input_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size_50dp"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    android:background="@null"
+                    android:focusable="true"
+                    android:hint="请输入手机号码(11位)"
+                    android:inputType="phone"
+                    android:textSize="@dimen/size_14dp"></EditText>
+
+                <ImageView
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@drawable/icon_phone"></ImageView>
+
+                <ImageView
+                    android:id="@+id/register_phone_check_iv"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@mipmap/icons_check_true"
+                    android:visibility="@{persenter.phoneCheck?View.VISIBLE:View.GONE}"></ImageView>
+            </FrameLayout>
+            <!--验证码-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginTop="@dimen/size_12dp"
+                android:background="@drawable/shape_storke_input_bg">
+
+                <EditText
+                    android:id="@+id/register_phone_code_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size_50dp"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    android:background="@null"
+                    android:hint="请输入验证码"
+                    android:inputType="number"
+                    android:textSize="@dimen/size_14dp"></EditText>
+
+                <ImageView
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@drawable/icons_password"></ImageView>
+
+                <TextView
+                    android:id="@+id/register_phone_code_gain_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/size_12dp"
+                    android:text="验证码"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/size_16dp">
+
+                </TextView>
+            </FrameLayout>
+            <!--        密码-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginTop="@dimen/size_12dp"
+                android:background="@drawable/shape_storke_input_bg">
+
+                <EditText
+                    android:id="@+id/register_password_input_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size_50dp"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    android:background="@null"
+                    android:hint="请输入登录密码(5~14位)"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/size_14dp"></EditText>
+
+                <ImageView
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@drawable/icons_password"></ImageView>
+
+                <ImageView
+                    android:id="@+id/register_password_check_check_iv"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@mipmap/icons_check_true"
+                    android:visibility="@{persenter.passwordCheck?View.VISIBLE:View.GONE}">
+
+                </ImageView>
+            </FrameLayout>
+            <!--        密码确认-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginTop="@dimen/size_12dp"
+                android:background="@drawable/shape_storke_input_bg">
+
+                <EditText
+                    android:id="@+id/register_password2_input_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size_50dp"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    android:background="@null"
+                    android:hint="请确认密码(5~14位)"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/size_14dp"></EditText>
+
+                <ImageView
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@drawable/icons_password"></ImageView>
+
+                <ImageView
+                    android:id="@+id/register_password2_check_iv"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@mipmap/icons_check_true"
+                    android:visibility="@{persenter.password2Check?View.VISIBLE:View.GONE}">
+
+                </ImageView>
+            </FrameLayout>
+            <!--        公司名称-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginTop="@dimen/size_12dp"
+                android:background="@drawable/shape_storke_input_bg">
+
+                <EditText
+                    android:id="@+id/register_comp_name_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/size_50dp"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    android:background="@null"
+                    android:hint="请输入公司名称"
+                    android:inputType="phone"
+                    android:textSize="@dimen/size_14dp"></EditText>
+
+                <ImageView
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@drawable/icons_password"></ImageView>
+
+                <ImageView
+                    android:id="@+id/register_comp_name_check"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/size_10dp"
+                    android:src="@mipmap/icons_check_true"
+                    android:visibility="@{persenter.compNameCheck?View.VISIBLE:View.GONE}"></ImageView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_8dp">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我已阅读并同意用户协议"></androidx.appcompat.widget.AppCompatCheckBox>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:background="@drawable/shape_blue_btn_bg_radius4"
+                    android:onClick="@{()->persenter.register()}"
+                    android:text="立即注册"
+                    android:textColor="@color/white"></Button>
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
+
+</layout>

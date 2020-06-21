@@ -1,0 +1,245 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "ea8455b75f321c7a052a43c78201cb1f",
+    "entities": [
+      {
+        "tableName": "asset",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `AssetName` TEXT, `Category` TEXT, `CategoryID` TEXT, `AssetModel` TEXT, `Headimg` TEXT, `Supply` TEXT, `PurchaseDate` TEXT, `ExpireDate` TEXT, `Unit` TEXT, `Original` TEXT, `Price` TEXT, `Guaranteed` TEXT, `Depreciated` TEXT, `Remainder` TEXT, `RFID` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Remark` TEXT, `LastProcessTime` TEXT, `LastInventoryTime` TEXT, `IsLock` TEXT, `Status` TEXT, `StatusName` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "AssetID",
+            "columnName": "AssetID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetNo",
+            "columnName": "AssetNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetName",
+            "columnName": "AssetName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Category",
+            "columnName": "Category",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CategoryID",
+            "columnName": "CategoryID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetModel",
+            "columnName": "AssetModel",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Headimg",
+            "columnName": "Headimg",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Supply",
+            "columnName": "Supply",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "PurchaseDate",
+            "columnName": "PurchaseDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ExpireDate",
+            "columnName": "ExpireDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Unit",
+            "columnName": "Unit",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Original",
+            "columnName": "Original",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Price",
+            "columnName": "Price",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Guaranteed",
+            "columnName": "Guaranteed",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Depreciated",
+            "columnName": "Depreciated",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Remainder",
+            "columnName": "Remainder",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RFID",
+            "columnName": "RFID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Depart",
+            "columnName": "Depart",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Staff",
+            "columnName": "Staff",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Seat",
+            "columnName": "Seat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Remark",
+            "columnName": "Remark",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LastProcessTime",
+            "columnName": "LastProcessTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LastInventoryTime",
+            "columnName": "LastInventoryTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "IsLock",
+            "columnName": "IsLock",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Status",
+            "columnName": "Status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "StatusName",
+            "columnName": "StatusName",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "assetInfo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `AssetInfoID` TEXT, `AssetID` TEXT, `CategoryInfoID` TEXT, `InfoName` TEXT, `InfoValue` TEXT, `InfoType` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "AssetInfoID",
+            "columnName": "AssetInfoID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetID",
+            "columnName": "AssetID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CategoryInfoID",
+            "columnName": "CategoryInfoID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "InfoName",
+            "columnName": "InfoName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "InfoValue",
+            "columnName": "InfoValue",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "InfoType",
+            "columnName": "InfoType",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ea8455b75f321c7a052a43c78201cb1f\")"
+    ]
+  }
+}
