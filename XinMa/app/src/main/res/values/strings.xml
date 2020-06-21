@@ -10,4 +10,17 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="app_name_title">欣码固定资产</string>
+    <string name="group_name">组织</string>
+    <string name="assets_name">资产</string>
+    <string name="create_name">创建</string>
+    <string name="check_name">盘点</string>c
+    <string name="getuse_name">领用</string>
+    <string name="brrorow_name">借用</string>
+    <string name="return_name">归还</string>
+    <string name="repair_name">维修</string>
+    <string name="dispose_name">处置</string>
+    <string name="analysis_name">分析报表</string>
+
+    <string name="sort_class_name">资产分类</string>
+    <string name="group_atue_name">组织架构</string>
 </resources>

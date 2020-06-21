@@ -25,23 +25,23 @@
         <activity android:name=".activity.DisposeActivity" />
         <activity android:name=".activity.AnalysisActivity" />
         <activity android:name=".activity.SortClassActivity" />
-        <activity android:name=".repair.RepairActivity" />
-        <activity android:name=".assetreturn.AssetsReturnActivity" />
-        <activity android:name=".brorrow.BrrorowActivity" />
-        <activity android:name=".getuse.GetUseActivity" />
-        <activity android:name=".check.CheckListActivity" />
-        <activity android:name=".assets.CreateActivity" />
-        <activity android:name=".assets.RepairActivity" />
-        <activity android:name=".assets.ReturnActivity" />
-        <activity android:name=".assets.ChangeActivity" />
-        <activity android:name=".assets.AssetsDetialActivity" />
-        <activity android:name=".print.PrintActivity" />
-        <activity android:name=".assets.AssetsListActivity" />
-        <activity android:name=".setting.SettingActivity" />
+        <activity android:name=".activity.AssetsReturnActivity" />
+        <activity android:name=".activity.BrrorowActivity" />
+        <activity android:name=".activity.GetUseActivity" />
+        <activity android:name=".activity.CheckListActivity" />
+        <activity android:name=".activity.CreateActivity" />
+        <activity android:name=".activity.RepairActivity" />
+        <activity android:name=".activity.ReturnActivity" />
+        <activity android:name=".activity.ChangeActivity" />
+        <activity android:name=".activity.AssetsDetialActivity" />
+        <activity android:name=".activity.PrintActivity" />
+        <activity android:name=".activity.AssetsListActivity" />
+        <activity android:name=".activity.SettingActivity" />
         <activity android:name=".login.view.LostPassWordActivity" />
         <activity android:name=".login.view.RegisterActivity" />
         <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".home.MainActivity" />
+        <activity android:name=".activity.ScannerActivity" android:launchMode="singleTop"></activity>
         <activity
             android:name=".login.view.StartActivity"
             android:theme="@style/splash_theme">

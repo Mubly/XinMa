@@ -37,9 +37,11 @@
         tools:text="保存"></TextView>
 
     <LinearLayout
+        android:id="@+id/top_right_icon_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="right"
+        android:visibility="gone"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -63,4 +65,14 @@
             android:paddingBottom="@dimen/size_15dp"
             android:src="@mipmap/setting_white"></ImageView>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/right_add"
+        android:layout_width="@dimen/size_50dp"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_icon_add"
+        android:padding="@dimen/size_10dp"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/size_5dp"
+        android:layout_height="@dimen/size_50dp">
+    </ImageView>
 </FrameLayout>

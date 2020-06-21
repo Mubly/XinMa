@@ -38,7 +38,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ILoginView>imple
 
     @Override
     public void initView() {
-        super.initView();
         binding.setPersenter(mPresenter);
         binding.setLifecycleOwner(this);
         setBackBtnEnable(false);

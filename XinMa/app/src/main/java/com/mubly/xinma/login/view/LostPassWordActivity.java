@@ -24,7 +24,6 @@ public class LostPassWordActivity extends BaseActivity<LostPassWordPresenter, IL
 
     @Override
     public void initView() {
-        super.initView();
         setTitle(R.string.app_name_title);
         binding.setPersenter(mPresenter);
         binding.setLifecycleOwner(this);

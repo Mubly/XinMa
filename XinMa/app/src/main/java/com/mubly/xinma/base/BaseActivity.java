@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.mubly.xinma.R;
+import com.mubly.xinma.activity.PrintActivity;
+import com.mubly.xinma.activity.SettingActivity;
 import com.mubly.xinma.utils.AdaptScreenUtils;
 import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
@@ -41,8 +43,9 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     public Context mContext;
     protected Handler mHandler;
     private int animType = ANIMLEFTANDRIGHT;// activity 进入动画默认为从左至右
-    private ImageView backBtn;
+    private ImageView backBtn, rightAddBtn, printBtn, settingBtn;
     private TextView titleTv, rightTv;
+    private LinearLayout rightImgLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,13 +77,19 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
         backBtn = findViewById(R.id.root_back_btn);
         titleTv = findViewById(R.id.root_title_tv);
         rightTv = findViewById(R.id.root_right_btn);
+        rightAddBtn = findViewById(R.id.right_add);
+        rightImgLayout = findViewById(R.id.top_right_icon_layout);
+        printBtn = findViewById(R.id.print_icon);
+        settingBtn = findViewById(R.id.setting_icon);
         backBtn.setOnClickListener(this);
         rightTv.setOnClickListener(this);
+        rightAddBtn.setOnClickListener(this);
+        printBtn.setOnClickListener(this);
+        settingBtn.setOnClickListener(this);
     }
 
 
-    public void initView() {
-    }
+    public abstract void initView();
 
     public void initData() {
     }
@@ -170,11 +179,31 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
             case R.id.root_right_btn:
                 onRightClickEvent(rightTv);
                 break;
+            case R.id.right_add:
+                onRightAddEvent(rightAddBtn);
+                break;
+            case R.id.print_icon:
+                startActivity(PrintActivity.class);
+                break;
+            case R.id.setting_icon:
+                startActivity(SettingActivity.class);
+                break;
         }
+    }
+
+    public void onRightAddEvent(ImageView rightAddBtn) {
+    }
+
+    public void setRightAddBtnEnable(Boolean enable) {
+        rightAddBtn.setVisibility(enable ? View.VISIBLE : View.GONE);
     }
 
     public void setBackBtnEnable(Boolean enable) {
         backBtn.setVisibility(enable ? View.VISIBLE : View.GONE);
+    }
+
+    public void setRightImgLayoutEnable(Boolean enable) {
+        rightImgLayout.setVisibility(enable ? View.VISIBLE : View.GONE);
     }
 
     public void setTitle(String rightStr) {

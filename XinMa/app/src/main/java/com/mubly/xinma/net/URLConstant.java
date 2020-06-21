@@ -37,4 +37,6 @@ public class URLConstant {
     public static final String EXPERIENCE_LOGIN_URL = BASE_URL + "/AppUser/ExperienceLogin";
     //资产数据
     public static final String ASSET_DATA_DOWNLOAD_URL = BASE_URL + "/API_Asset/ListAsset";
+    //部门列表
+    public static final String API_Depart_ListDepart_URL=BASE_URL+"/API_Depart/ListDepart";
 }

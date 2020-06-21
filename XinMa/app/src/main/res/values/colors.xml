@@ -141,4 +141,6 @@
     <color name="color_323232">#323232</color>
 
     <color name="white_22aph">#c7ffffff</color>
+    <color name="color20White">#20ffffff</color>
+    <color name="color60Black">#60000000</color>
 </resources>
