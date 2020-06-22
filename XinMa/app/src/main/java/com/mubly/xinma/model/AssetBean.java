@@ -1,5 +1,8 @@
 package com.mubly.xinma.model;
 
+import com.mubly.xinma.common.Constant;
+import com.mubly.xinma.utils.StringUtils;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -23,13 +26,13 @@ public class AssetBean {
      * Guaranteed : 1
      * Depreciated : 1
      * Remainder : 1
-     * RFID : 
+     * RFID :
      * Depart : 质检部
-     * Staff : 
+     * Staff :
      * Seat : 仓库
      * Remark : null
      * LastProcessTime : 2020-06-20 00:05
-     * LastInventoryTime : 
+     * LastInventoryTime :
      * IsLock : 0
      * Status : 1
      * StatusName : 闲置
@@ -88,7 +91,7 @@ public class AssetBean {
     }
 
     public String getAssetName() {
-        return AssetName;
+        return StringUtils.notNull2(AssetName);
     }
 
     public void setAssetName(String AssetName) {
@@ -112,7 +115,7 @@ public class AssetBean {
     }
 
     public String getAssetModel() {
-        return AssetModel;
+        return StringUtils.notNull2(AssetModel);
     }
 
     public void setAssetModel(String AssetModel) {
@@ -120,7 +123,7 @@ public class AssetBean {
     }
 
     public String getHeadimg() {
-        return Headimg;
+        return Constant.APP_ID+Headimg;
     }
 
     public void setHeadimg(String Headimg) {
@@ -208,7 +211,7 @@ public class AssetBean {
     }
 
     public String getDepart() {
-        return Depart;
+        return StringUtils.notNull2(Depart);
     }
 
     public void setDepart(String Depart) {
@@ -224,7 +227,7 @@ public class AssetBean {
     }
 
     public String getSeat() {
-        return Seat;
+        return StringUtils.notNull2(Seat);
     }
 
     public void setSeat(String Seat) {
@@ -273,6 +276,22 @@ public class AssetBean {
 
     public String getStatusName() {
         return StatusName;
+    }
+
+    public String getSeatLabel() {
+        String label = "--";
+        if (Status.equals("1")) {
+            label = "存放地点";
+        } else if (Status.equals("3")) {
+            label = "使用地点";
+        } else if (Status.equals("5")) {
+            label = "使用地点";
+        } else if (Status.equals("6")) {
+            label = "维修地点";
+        } else if (Status.equals("8")) {
+            label = "处置方式";
+        }
+        return label;
     }
 
     public void setStatusName(String StatusName) {

@@ -14,5 +14,32 @@
         tools:context=".activity.AssetsListActivity">
 
         <include layout="@layout/top_bar_layout"></include>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/background"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/mTabLayout"
+                    android:layout_width="match_parent"
+                    app:tabMode="auto"
+                    app:tabTextColor="@color/color_919191"
+                    app:tabIndicatorColor="@color/main_blue"
+                    app:tabSelectedTextColor="@color/main_blue"
+                    android:background="@color/white"
+                    android:layout_height="@dimen/size_40dp"></com.google.android.material.tabs.TabLayout>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/mViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></androidx.viewpager.widget.ViewPager>
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 </layout>

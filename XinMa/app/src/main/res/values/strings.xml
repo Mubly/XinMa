@@ -23,4 +23,7 @@
 
     <string name="sort_class_name">资产分类</string>
     <string name="group_atue_name">组织架构</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="com.mubly.xinma.model.AssetBean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_5dp"
+        android:layout_marginBottom="@dimen/size_5dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:background="@drawable/shape_radius_10_white"
+        android:paddingLeft="@dimen/size_12dp"
+        android:paddingBottom="@dimen/size_10dp">
+
+        <ImageView
+            android:id="@+id/assets_img"
+            imageUrl="@{bean.headimg}"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:src="@mipmap/ic_launcher"></ImageView>
+
+        <ImageView
+            android:layout_width="@dimen/size_30dp"
+            android:layout_height="@dimen/size_30dp"
+            android:layout_alignParentRight="true"></ImageView>
+
+        <TextView
+            android:id="@+id/assets_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/assets_img"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_toRightOf="@id/assets_img"
+            android:text="@{bean.assetName}"
+            android:textColor="@color/color_414141"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="雪花膏"></TextView>
+
+        <TextView
+            android:id="@+id/assets_size_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assets_name"
+            android:layout_alignLeft="@id/assets_name"
+            android:layout_marginTop="@dimen/size_12dp"
+            android:text="规格型号 "
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_10dp"></TextView>
+
+        <TextView
+            android:id="@+id/assets_size_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/assets_size_label"
+            android:layout_marginLeft="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_12dp"
+            android:layout_toRightOf="@id/assets_size_label"
+            android:text="@{bean.assetModel}"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12dp"
+            tools:text="铜仁的"></TextView>
+
+        <View
+            android:id="@+id/mid_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignBottom="@id/assets_img"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_toRightOf="@id/assets_img"
+            android:background="@color/clr_gray_line">
+
+        </View>
+
+        <TextView
+            android:id="@+id/department_staff_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assets_img"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:text="@{bean.seatLabel}"
+            tools:text="存放地点"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"></TextView>
+
+        <TextView
+            android:id="@+id/department_staff_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assets_img"
+            android:layout_marginLeft="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:layout_toRightOf="@id/department_staff_label"
+            android:text="@{bean.depart}"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"
+            tools:text="质检部"></TextView>
+
+        <TextView
+            android:id="@+id/store_address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/department_staff_label"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:text="存放地点"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"></TextView>
+
+        <TextView
+            android:id="@+id/store_address_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/department_staff_label"
+            android:layout_marginLeft="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:layout_toRightOf="@id/store_address_label"
+            android:text="@{bean.seat}"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"
+            tools:text="仓库"></TextView>
+
+        <ImageView
+            android:layout_width="@dimen/size_20dp"
+            android:layout_height="@dimen/size_20dp"
+            android:layout_alignTop="@id/department_staff_label"
+            android:layout_alignBottom="@id/store_address_label"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:src="@mipmap/arrow_right_gray"></ImageView>
+    </RelativeLayout>
+</layout>

@@ -16,9 +16,8 @@ public class URLConstant {
     public static String BASE_URL = "";
     //进入后台
     public static String ENTER_SERVICE = "";
-    //聊天服务器
-    public static String WEB_SOCKET = "";
-    public static String WEB_BASEURL = "http://baoku-app.51kupai.com/#/";
+    //图片服务器
+    public static String BASE_IMG_URL = "http://asset.ymade.cn/";
 
     static {
         if (EnvironmentType.DEVELOP.equal(Constant.flag)) {
@@ -30,8 +29,6 @@ public class URLConstant {
         } else if (EnvironmentType.ONLINE.equal(Constant.flag)) {
             MAIN_URL = "qomolangma.hoecan.com";
             BASE_URL = "https://" + MAIN_URL;
-            WEB_BASEURL = "https://lhotse.hoecan.com/#";
-            WEB_SOCKET = "wss://qomolangma.hoecan.com";
         }
     }
 
