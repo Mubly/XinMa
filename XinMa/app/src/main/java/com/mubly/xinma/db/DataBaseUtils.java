@@ -13,7 +13,7 @@ public class DataBaseUtils {
     private XinMaDatabase database = null;
 
     private DataBaseUtils() {
-        database = Room.databaseBuilder(CrossApp.get(), XinMaDatabase.class, "xinma_db").build();
+        database = Room.databaseBuilder(CrossApp.get(), XinMaDatabase.class, "xinma_db").fallbackToDestructiveMigration().build();
     }
 
     public static DataBaseUtils getInstance() {
