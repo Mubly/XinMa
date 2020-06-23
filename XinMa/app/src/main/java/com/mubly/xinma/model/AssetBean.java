@@ -123,7 +123,7 @@ public class AssetBean {
     }
 
     public String getHeadimg() {
-        return Constant.APP_ID+Headimg;
+        return Headimg;
     }
 
     public void setHeadimg(String Headimg) {

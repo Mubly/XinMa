@@ -35,6 +35,9 @@ public class URLConstant {
     //体验登录
     public static final String EXPERIENCE_LOGIN_URL = BASE_URL + "/AppUser/ExperienceLogin";
 
+    //用户查询
+    public static final String GAIN_USERINFO_URL = BASE_URL + "/AppUser/SelectUser";
+
     //资产数据
     public static final String ASSET_DATA_DOWNLOAD_URL = BASE_URL + "/API_Asset/ListAsset";
 

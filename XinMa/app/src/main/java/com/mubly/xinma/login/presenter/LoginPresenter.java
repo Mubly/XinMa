@@ -11,6 +11,7 @@ import com.mubly.xinma.login.IView.ILoginView;
 import com.mubly.xinma.login.view.LostPassWordActivity;
 import com.mubly.xinma.login.view.RegisterActivity;
 import com.mubly.xinma.model.AssetDataBean;
+import com.mubly.xinma.model.UserInfoData;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
 import com.mubly.xinma.utils.AppConfig;
@@ -50,7 +51,12 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                             AssetDataBean.pullAssetData(new CallBack() {
                                 @Override
                                 public void callBack(Object obj) {
-                                    getMvpView().startActivity(MainActivity.class);
+                                    UserInfoData.getUserInfo(new CallBack<UserInfoData>() {
+                                        @Override
+                                        public void callBack(UserInfoData obj) {
+                                            getMvpView().startActivity(MainActivity.class);
+                                        }
+                                    });
                                 }
                             });
                         }

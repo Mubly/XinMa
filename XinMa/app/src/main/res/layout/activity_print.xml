@@ -14,5 +14,6 @@
         tools:context=".activity.PrintActivity">
 
         <include layout="@layout/top_bar_layout"></include>
+
     </LinearLayout>
 </layout>
