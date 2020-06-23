@@ -50,7 +50,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        CrossApp.get().addAct(this);
         ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.main_blue).init();
         //判断是否使用MVP模式
         mContext = this;
@@ -142,6 +142,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
             mHandler.removeCallbacksAndMessages(null);
             mHandler = null;
         }
+        CrossApp.get().deAct(this);
         ImmersionBar.with(this).destroy();
     }
 
@@ -227,8 +228,19 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     }
 
     @Override
+    public void startActivity(Class<?> act, boolean closeAct) {
+        startActivity(act);
+        if (closeAct)
+            finish();
+    }
+
+    @Override
     public Resources getResources() {
         return AdaptScreenUtils.adaptWidth(super.getResources(), 375);
     }
 
+    @Override
+    public void closeAllAct() {
+        CrossApp.get().closeAllAct();
+    }
 }

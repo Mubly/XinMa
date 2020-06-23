@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.mubly.xinma.R;
 
 public class ImageUtils {
 
@@ -33,7 +34,7 @@ public class ImageUtils {
      */
     public static void glideLoadUrl(Context context, ImageView imageView, String url, boolean isCircle, boolean isRoundConner, int phResId){
         if(context==null)return;
-        RequestOptions options = new RequestOptions().placeholder(phResId);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.img_defaut);
         options.disallowHardwareConfig();
         if(isCircle){
             options.circleCrop();

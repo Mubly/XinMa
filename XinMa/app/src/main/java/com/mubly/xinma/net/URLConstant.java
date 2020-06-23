@@ -35,6 +35,13 @@ public class URLConstant {
     //体验登录
     public static final String EXPERIENCE_LOGIN_URL = BASE_URL + "/AppUser/ExperienceLogin";
 
+//    退出登录
+public static final String EXPERIENCE_LOGIN_OUT_URL = BASE_URL + "/AppUser/Logout";
+
+
+
+
+
     //用户查询
     public static final String GAIN_USERINFO_URL = BASE_URL + "/AppUser/SelectUser";
 

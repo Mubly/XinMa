@@ -54,7 +54,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                     UserInfoData.getUserInfo(new CallBack<UserInfoData>() {
                                         @Override
                                         public void callBack(UserInfoData obj) {
-                                            getMvpView().startActivity(MainActivity.class);
+                                            getMvpView().startActivity(MainActivity.class,true);
                                         }
                                     });
                                 }

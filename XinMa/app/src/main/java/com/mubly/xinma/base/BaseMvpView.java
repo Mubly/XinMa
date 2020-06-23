@@ -9,4 +9,6 @@ public interface BaseMvpView {
     void checkNetCode(int code, String msg);
 
     void startActivity(Class<?>act);
+    void startActivity(Class<?>act,boolean closeAct);
+    void closeAllAct();
 }

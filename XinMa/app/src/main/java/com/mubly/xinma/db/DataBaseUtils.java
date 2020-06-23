@@ -13,7 +13,7 @@ public class DataBaseUtils {
     private XinMaDatabase database = null;
 
     private DataBaseUtils() {
-        database = Room.databaseBuilder(CrossApp.get(), XinMaDatabase.class, "xinma_db").fallbackToDestructiveMigration().build();
+        database = XinMaDatabase.getInstance();
     }
 
     public static DataBaseUtils getInstance() {
@@ -41,5 +41,15 @@ public class DataBaseUtils {
 
     public List<AssetInfoBean> getAssetInfoBeanList() {
         return database.assetInfoBeanDao().getAll();
+    }
+    public void clearAll(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                database.clearAllTables();
+                database.close();
+            }
+        }).start();
+
     }
 }

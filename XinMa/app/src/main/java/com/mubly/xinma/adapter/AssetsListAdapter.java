@@ -3,6 +3,7 @@ package com.mubly.xinma.adapter;
 import com.mubly.xinma.R;
 import com.mubly.xinma.databinding.ItemAssetsLayoutBinding;
 import com.mubly.xinma.model.AssetBean;
+import com.mubly.xinma.presenter.ImageUrlPersenter;
 
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class AssetsListAdapter extends NBaseBindingAdapter<List<AssetBean>, Item
 
     @Override
     public void onBindViewHolder(@NonNull BaseHolder holder, int position) {
-        ((ItemAssetsLayoutBinding)holder.getBind()).setBean(data.get(position));
+        ((ItemAssetsLayoutBinding) holder.getBind()).setBean(data.get(position));
+        ((ItemAssetsLayoutBinding) holder.getBind()).setImgPersent(new ImageUrlPersenter());
         holder.getBind().executePendingBindings();
     }
 }

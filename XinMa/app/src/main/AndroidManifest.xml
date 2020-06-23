@@ -39,7 +39,7 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".login.view.LostPassWordActivity" />
         <activity android:name=".login.view.RegisterActivity" />
-        <activity android:name=".login.view.LoginActivity" />
+        <activity android:name=".login.view.LoginActivity"/>
         <activity android:name=".home.MainActivity" />
         <activity android:name=".activity.ScannerActivity" android:launchMode="singleTop"></activity>
         <activity

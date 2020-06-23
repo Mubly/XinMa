@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="imgPersent"
+            type="com.mubly.xinma.presenter.ImageUrlPersenter" />
+
+        <variable
             name="bean"
             type="com.mubly.xinma.model.AssetBean" />
     </data>
@@ -12,19 +16,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_5dp"
-        android:layout_marginBottom="@dimen/size_5dp"
-        android:layout_marginRight="@dimen/size_16dp"
         android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_5dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:layout_marginBottom="@dimen/size_5dp"
         android:background="@drawable/shape_radius_10_white"
         android:paddingLeft="@dimen/size_12dp"
         android:paddingBottom="@dimen/size_10dp">
 
         <ImageView
             android:id="@+id/assets_img"
-            imageUrl="@{bean.headimg}"
+            imageUrl="@{imgPersent.getAssetListUrl(bean.headimg)}"
             android:layout_width="@dimen/size_60dp"
             android:layout_height="@dimen/size_60dp"
+            android:scaleType="centerCrop"
             android:layout_marginTop="@dimen/size_6dp"
             android:src="@mipmap/ic_launcher"></ImageView>
 
@@ -89,9 +94,9 @@
             android:layout_below="@id/assets_img"
             android:layout_marginTop="@dimen/size_5dp"
             android:text="@{bean.seatLabel}"
-            tools:text="存放地点"
             android:textColor="@color/color_919191"
-            android:textSize="@dimen/size_12sp"></TextView>
+            android:textSize="@dimen/size_12sp"
+            tools:text="存放地点"></TextView>
 
         <TextView
             android:id="@+id/department_staff_value"

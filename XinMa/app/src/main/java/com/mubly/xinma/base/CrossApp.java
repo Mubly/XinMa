@@ -1,5 +1,6 @@
 package com.mubly.xinma.base;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -15,6 +16,7 @@ import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -31,6 +33,7 @@ public class CrossApp extends Application {
         return sCrossApp;
     }
 
+    private List<Activity> activities = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -76,5 +79,21 @@ public class CrossApp extends Application {
             }
         }
         return false;
+    }
+
+    public void addAct(Activity activity) {
+        activities.add(activity);
+    }
+
+    public void deAct(Activity activity) {
+        if (activities.contains(activity)) {
+            activities.remove(activity);
+        }
+    }
+
+    public void closeAllAct() {
+        for (Activity activity : activities) {
+            activity.finish();
+        }
     }
 }
