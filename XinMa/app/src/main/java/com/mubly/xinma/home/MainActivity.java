@@ -55,9 +55,7 @@ public class MainActivity extends BaseActivity<HomePresenter, IHomeView> impleme
         setBackBtnEnable(false);
         setRightImgLayoutEnable(true);
         setTitle(R.string.app_name_title);
-        binding.ldleTv.setText("660");
-        binding.usingTv.setText("78");
-        binding.repairTv.setText("23");
+
     }
 
     @Override

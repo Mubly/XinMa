@@ -16,8 +16,11 @@ public interface AssetBeanDao {
     @Query("SELECT * FROM asset")
     List<AssetBean> getAll();
 
-    @Query("SELECT * FROM asset WHERE id IN (:ids)")
-    List<AssetBean> getAllByIds(long[] ids);
+    @Query("SELECT COUNT(*) FROM asset WHERE Status like :status")
+    int getCountByStatus(String status);
+
+    @Query("SELECT * FROM asset WHERE Status LIKE :status")
+    List<AssetBean> getAllByStatus(String status);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(AssetBean... entities);

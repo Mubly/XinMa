@@ -927,7 +927,13 @@ public class CommUtil {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
-
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static float dipTopx(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return  (dpValue * scale + 0.5f);
+    }
 
 //    public static void dealFlipperView(ViewFlipper mVp, final List<HomeIndexBean.NoticeListBean> mList, final Context mContext, final CallBackObj callBack) {
 //        for (int i = 0; i < mList.size(); i++) {

@@ -1,4 +1,5 @@
 package com.mubly.xinma.adapter;
+
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,6 +9,10 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.CornerTransform;
 import com.mubly.xinma.utils.ImageUtils;
 
 import androidx.databinding.BindingAdapter;
@@ -35,12 +40,20 @@ public class ImageViewAttrAdapter {
                 , option.isCircle(), option.isRounder(), option.getPhResId());
     }
 
-    //    销售数据头部banner详情背景
-    @BindingAdapter(value = {"phResId"}, requireAll = false)
-    public static void LoadResBg(View imageView, int phResId) {
-        if (phResId != -1)
-            imageView.setBackgroundResource(phResId);
+    //
+    @BindingAdapter(value = {"resIdImg", "imgRadious"}, requireAll = false)
+    public static void LoadResBg(ImageView imageView, int resIdImg, float imgRadious) {
+        if (resIdImg != -1) {
+            CornerTransform cornerTransform = new CornerTransform(imageView.getContext(), CommUtil.dipTopx(imageView.getContext(), 10));
+            cornerTransform.setExceptCorner(true, true, true, true);
+            Glide.with(imageView.getContext()).
+                    load(resIdImg)
+                    .apply(RequestOptions.bitmapTransform(cornerTransform))
+                    .into(imageView);
+        }
+
     }
+
     @BindingAdapter(value = {"imgResId"}, requireAll = false)
     public static void LoadImgResBg(ImageView imageView, int imgResId) {
         if (imgResId != -1)

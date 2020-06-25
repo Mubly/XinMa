@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.mubly.xinma.base.BasePresenter;
+import com.mubly.xinma.base.CrossApp;
 import com.mubly.xinma.base.ResponseData;
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.home.MainActivity;
@@ -11,6 +12,8 @@ import com.mubly.xinma.login.IView.ILoginView;
 import com.mubly.xinma.login.view.LostPassWordActivity;
 import com.mubly.xinma.login.view.RegisterActivity;
 import com.mubly.xinma.model.AssetDataBean;
+import com.mubly.xinma.model.CategoryDataBean;
+import com.mubly.xinma.model.GroupData;
 import com.mubly.xinma.model.UserInfoData;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
@@ -41,24 +44,41 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
     //体验登录
     public void experienceLogin() {
+        CommUtil.ToastU.showToast(CrossApp.get(),"登录中…");
         OkGo.<ResponseData>post(URLConstant.EXPERIENCE_LOGIN_URL)
                 .execute(new JsonCallback<ResponseData>() {
 
                     @Override
                     public void onSuccess(Response<ResponseData> response) {
-                        if (response.body().getCode() == 1) {
-                            AppConfig.token.put(response.body().getToken());
-                            AssetDataBean.pullAssetData(new CallBack() {
+                        if (response.body().getCode() == 1) {//登录成功
+                            AppConfig.token.put(response.body().getToken());//保存Token
+                            CommUtil.ToastU.showToast(CrossApp.get(),"获取用户信息…");
+                            UserInfoData.getUserInfo(new CallBack<UserInfoData>() {
                                 @Override
-                                public void callBack(Object obj) {
-                                    UserInfoData.getUserInfo(new CallBack<UserInfoData>() {
+                                public void callBack(UserInfoData obj) {//获取用户信息
+                                    CommUtil.ToastU.showToast(CrossApp.get(),"同步分类…");
+                                    CategoryDataBean.getCateGoryData(new CallBack<CategoryDataBean>() {
                                         @Override
-                                        public void callBack(UserInfoData obj) {
-                                            getMvpView().startActivity(MainActivity.class,true);
+                                        public void callBack(CategoryDataBean obj) {//获取分类信息
+                                            CommUtil.ToastU.showToast(CrossApp.get(),"同步组织…");
+                                            GroupData.getGroupData(new CallBack<GroupData>() {
+                                                @Override
+                                                public void callBack(GroupData obj) {//获取组织信息
+                                                    CommUtil.ToastU.showToast(CrossApp.get(),"同步资产…");
+                                                    AssetDataBean.pullAssetData(new CallBack() {
+                                                        @Override
+                                                        public void callBack(Object obj) {//获取资产
+                                                            getMvpView().startActivity(MainActivity.class, true);//跳转首页
+                                                        }
+                                                    });
+                                                }
+                                            });
                                         }
                                     });
+//
                                 }
                             });
+
                         }
                     }
                 });

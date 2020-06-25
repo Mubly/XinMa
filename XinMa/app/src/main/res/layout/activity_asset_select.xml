@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.AssetsListActivity">
+
+        <include layout="@layout/top_bar_layout"></include>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_60dp"
+                    android:background="@color/white"
+                    android:paddingLeft="@dimen/size_16dp">
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <include layout="@layout/search_layout"></include>
+                    </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/sort_asset_btn"
+                        android:layout_width="@dimen/size_30dp"
+                        android:layout_height="@dimen/size_30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_20dp"
+                        android:layout_marginRight="@dimen/size_20dp"
+                        android:onClick="clickEvent"
+                        android:src="@mipmap/sort_icon"></ImageView>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/asset_select_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+            <include layout="@layout/filter_layout"></include>
+        </FrameLayout>
+    </LinearLayout>
+</layout>

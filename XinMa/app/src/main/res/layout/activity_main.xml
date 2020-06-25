@@ -62,6 +62,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="@dimen/size_20sp"
+                    android:text="@{persenter.ldle}"
                     tools:text="558"></TextView>
 
                 <TextView
@@ -92,6 +93,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/size_20sp"
                     android:textStyle="bold"
+                    android:text="@{persenter.using}"
                     tools:text="558"></TextView>
 
                 <TextView
@@ -122,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+                    android:text="@{persenter.repair}"
                     android:textSize="@dimen/size_20sp"
                     tools:text="58"></TextView>
 

@@ -27,6 +27,11 @@ public final class AppConfig {
     public static SharedPreference<String> companyId = sPrefs.value("companyId", (String) null);
     public static SharedPreference<String> userName = sPrefs.value("userName", (String) null);
     public static SharedPreference<String> userInfo = sPrefs.value("userInfo", (String) null);
+    public static SharedPreference<String> companyInfo = sPrefs.value("companyInfo", (String) null);
+
+
+
+
 
     public static void clearAll() {
         sPrefs.clearAll();

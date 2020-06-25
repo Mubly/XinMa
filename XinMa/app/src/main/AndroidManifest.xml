@@ -19,7 +19,8 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme_App">
-        <activity android:name=".activity.GroupActivity"></activity>
+        <activity android:name=".activity.AssetSelectActivity"></activity>
+        <activity android:name=".activity.GroupActivity" />
         <activity android:name=".activity.DepartmentActivity" />
         <activity android:name=".activity.EditStaffActivity" />
         <activity android:name=".activity.DisposeActivity" />
@@ -39,9 +40,11 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".login.view.LostPassWordActivity" />
         <activity android:name=".login.view.RegisterActivity" />
-        <activity android:name=".login.view.LoginActivity"/>
+        <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".home.MainActivity" />
-        <activity android:name=".activity.ScannerActivity" android:launchMode="singleTop"></activity>
+        <activity
+            android:name=".activity.ScannerActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".login.view.StartActivity"
             android:theme="@style/splash_theme">

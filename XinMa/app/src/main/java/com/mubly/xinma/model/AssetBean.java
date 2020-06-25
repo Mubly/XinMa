@@ -3,11 +3,13 @@ package com.mubly.xinma.model;
 import com.mubly.xinma.common.Constant;
 import com.mubly.xinma.utils.StringUtils;
 
+import java.io.Serializable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "asset")
-public class AssetBean {
+public class AssetBean implements Serializable {
 
     /**
      * AssetID : 9dd6a5db-4a66-4dcf-ac18-f51b42667f86

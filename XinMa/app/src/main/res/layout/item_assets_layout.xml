@@ -29,14 +29,28 @@
             imageUrl="@{imgPersent.getAssetListUrl(bean.headimg)}"
             android:layout_width="@dimen/size_60dp"
             android:layout_height="@dimen/size_60dp"
-            android:scaleType="centerCrop"
             android:layout_marginTop="@dimen/size_6dp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"></ImageView>
 
         <ImageView
-            android:layout_width="@dimen/size_30dp"
-            android:layout_height="@dimen/size_30dp"
-            android:layout_alignParentRight="true"></ImageView>
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            imgRadious="10"
+            resIdImg="@{imgPersent.getAssetIcon(bean.status)}"
+            android:src="@drawable/ldle_icon_bg"></ImageView>
+
+        <com.mubly.xinma.common.weight.RotateTextView
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:text="@{bean.statusName}"
+            android:textSize="@dimen/size_12dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentRight="true">
+        </com.mubly.xinma.common.weight.RotateTextView>
 
         <TextView
             android:id="@+id/assets_name"

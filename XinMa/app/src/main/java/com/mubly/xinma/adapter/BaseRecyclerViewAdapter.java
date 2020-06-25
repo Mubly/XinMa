@@ -2,6 +2,7 @@ package com.mubly.xinma.adapter;
 
 import android.content.Context;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -146,18 +147,25 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 
         public void setNetImage(Context context, int id, String value) {
             ImageView view = getView(id);
-            Glide.with(context).load(value).apply(new RequestOptions().placeholder(R.mipmap.img_defaut)//占位图
-                    .error(R.mipmap.img_defaut)
-                    .centerCrop())
+            Glide.with(context).load(value).
+                    apply(new RequestOptions().placeholder(R.mipmap.img_defaut)//占位图
+                            .error(R.mipmap.img_defaut)
+                            .centerCrop())
                     .into(view);
         }
 
         public void setNetImage(Context context, int id, String value, int placeholder) {
             ImageView view = getView(id);
-            Glide.with(context).load(value).apply(new RequestOptions().placeholder(placeholder)
-                    .error(placeholder)
-                    .centerCrop())
-                    .into(view);
+            if (TextUtils.isEmpty(value)) {
+                Glide.with(context).load(placeholder).centerCrop().into(view);
+            } else {
+
+                Glide.with(context).load(value).
+                        apply(new RequestOptions().placeholder(placeholder)
+                                .error(placeholder)
+                                .centerCrop())
+                        .into(view);
+            }
         }
 
         public void setOverNetImage(Context context, int id, String value, int type, int with, int hight) {

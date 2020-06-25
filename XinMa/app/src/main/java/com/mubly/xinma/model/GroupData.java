@@ -5,6 +5,7 @@ import com.lzy.okgo.model.Response;
 import com.mubly.xinma.base.BaseModel;
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.db.DataBaseUtils;
+import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
 
@@ -26,9 +27,17 @@ public class GroupData extends BaseModel {
                 .execute(new JsonCallback<GroupData>() {
                     @Override
                     public void onSuccess(final Response<GroupData> response) {
-
-                        if (response.body().getCode() == 1) {
-                            callBack.callBack(response.body());
+                        final GroupData groupData=response.body();
+                        if (groupData.getCode() == 1) {
+                            if (null!=groupData.getDepart()){
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        XinMaDatabase.getInstance().groupBeanDao().insertAll(groupData.Depart);
+                                        callBack.callBack(response.body());
+                                    }
+                                }).start();
+                            }
                         }
                     }
                 });
