@@ -1,5 +1,6 @@
 package com.mubly.xinma.activity;
 
+import android.content.Intent;
 import android.widget.ImageView;
 
 import com.mubly.xinma.R;
@@ -9,6 +10,7 @@ import com.mubly.xinma.base.BaseMvpView;
 import com.mubly.xinma.databinding.ActivityGroupBinding;
 import com.mubly.xinma.db.DataBaseUtils;
 import com.mubly.xinma.iview.IGroupView;
+import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.presenter.GroupPresenter;
 import com.mubly.xinma.utils.CommUtil;
 
@@ -42,8 +44,18 @@ public class GroupActivity extends BaseActivity<GroupPresenter, IGroupView> impl
     }
 
     @Override
+    public void toDepartAct(GroupBean groupBean) {
+        Intent intent = new Intent(this, DepartmentActivity.class);
+        intent.putExtra("departId", groupBean.getDepartID());
+        intent.putExtra("departName", groupBean.getDepart());
+        startActivity(intent);
+
+    }
+
+    @Override
     public void onRightAddEvent(ImageView rightAddBtn) {
         super.onRightAddEvent(rightAddBtn);
-        CommUtil.ToastU.showToast("添加成功");
+        Intent intent = new Intent(this, DepartMentCreateActivity.class);
+        startActivity(intent);
     }
 }

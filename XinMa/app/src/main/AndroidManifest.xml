@@ -19,14 +19,15 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme_App">
-        <activity android:name=".activity.AssetSelectActivity"></activity>
+        <activity android:name=".activity.DepartMentCreateActivity"></activity>
+        <activity android:name=".activity.StaffCreateActivity" />
+        <activity android:name=".activity.AssetSelectActivity" />
         <activity android:name=".activity.GroupActivity" />
         <activity android:name=".activity.DepartmentActivity" />
         <activity android:name=".activity.EditStaffActivity" />
         <activity android:name=".activity.DisposeActivity" />
         <activity android:name=".activity.AnalysisActivity" />
         <activity android:name=".activity.SortClassActivity" />
-        <activity android:name=".activity.AssetsReturnActivity" />
         <activity android:name=".activity.BrrorowActivity" />
         <activity android:name=".activity.GetUseActivity" />
         <activity android:name=".activity.CheckListActivity" />

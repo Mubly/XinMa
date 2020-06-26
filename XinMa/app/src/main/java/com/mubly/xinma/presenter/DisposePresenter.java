@@ -1,14 +1,13 @@
 package com.mubly.xinma.presenter;
 
 import com.mubly.xinma.adapter.AssetsListCallBackAdapter;
-import com.mubly.xinma.base.BasePresenter;
-import com.mubly.xinma.iview.IReturnView;
+import com.mubly.xinma.iview.IDisposeView;
 import com.mubly.xinma.model.AssetBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReturnPresenter extends BaseOperatPresenter<IReturnView> {
+public class DisposePresenter extends BaseOperatPresenter<IDisposeView> {
     List<AssetBean> selectDataList = new ArrayList<>();
     AssetsListCallBackAdapter adapter = null;
 
@@ -20,7 +19,6 @@ public class ReturnPresenter extends BaseOperatPresenter<IReturnView> {
 
     @Override
     public void scanAdd() {
-
     }
 
     @Override

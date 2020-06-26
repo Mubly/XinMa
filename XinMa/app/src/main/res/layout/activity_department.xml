@@ -5,14 +5,69 @@
 
     <data>
 
+        <variable
+            name="persenter"
+            type="com.mubly.xinma.presenter.DepartMentPresenter" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:orientation="vertical"
         tools:context=".activity.DepartmentActivity">
 
         <include layout="@layout/top_bar_layout"></include>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_marginLeft="@dimen/size_20dp"
+                    android:gravity="center_vertical"
+                    android:text="@{persenter.topTitle}"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"
+                    tools:text="暂无员工"></TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/department_rv"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:onClick="@{()->persenter.edtDepartMent()}"
+                    android:text="编辑部门"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/size_15sp"></TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:layout_marginBottom="@dimen/size_50dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:onClick="@{()->persenter.delectDepartMent()}"
+                    android:text="删除部门"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/size_15sp"></TextView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
 </layout>

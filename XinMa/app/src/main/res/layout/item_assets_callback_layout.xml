@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="imgPersent"
+            type="com.mubly.xinma.presenter.ImageUrlPersenter" />
+
+        <variable
+            name="bean"
+            type="com.mubly.xinma.model.AssetBean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/size_12dp">
+
+        <ImageView
+            android:id="@+id/assets_img"
+            imageUrl="@{imgPersent.getAssetListUrl(bean.headimg)}"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"></ImageView>
+
+        <ImageView
+            imgRadious="10"
+            resIdImg="@{imgPersent.getAssetIcon(bean.status)}"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ldle_icon_bg"></ImageView>
+
+        <com.mubly.xinma.common.weight.RotateTextView
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@{bean.statusName}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_12dp"></com.mubly.xinma.common.weight.RotateTextView>
+
+        <TextView
+            android:id="@+id/assets_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/assets_img"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_toRightOf="@id/assets_img"
+            android:text="@{bean.assetName}"
+            android:textColor="@color/color_414141"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="雪花膏"></TextView>
+
+        <TextView
+            android:id="@+id/assets_no_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assets_name"
+            android:layout_alignLeft="@id/assets_name"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:text="资产编码 "
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_10dp"></TextView>
+
+        <TextView
+            android:id="@+id/assets_no_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/assets_no_label"
+            android:layout_marginLeft="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:layout_toRightOf="@id/assets_size_label"
+            android:text="@{bean.assetNo}"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_10sp"
+            tools:text="铜仁的"></TextView>
+
+
+        <TextView
+            android:id="@+id/assets_size_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assets_no_label"
+            android:layout_alignLeft="@id/assets_name"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:text="规格型号 "
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_10dp"></TextView>
+
+        <TextView
+            android:id="@+id/assets_size_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/assets_size_label"
+            android:layout_marginLeft="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:layout_toRightOf="@id/assets_size_label"
+            android:text="@{bean.assetModel}"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_10sp"
+            tools:text="铜仁的"></TextView>
+
+        <View
+            android:id="@+id/mid_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/assets_img"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:background="@color/clr_gray_line">
+        </View>
+    </RelativeLayout>
+</layout>

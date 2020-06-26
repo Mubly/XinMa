@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.AssetsListAdapter;
+import com.mubly.xinma.adapter.AssetsListCallBackAdapter;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityGetUseBinding;
 import com.mubly.xinma.iview.IGetUseVIew;
@@ -55,7 +56,7 @@ public class GetUseActivity extends BaseActivity<GetUsePresenter, IGetUseVIew> i
     }
 
     @Override
-    public void showRv(AssetsListAdapter adapter) {
+    public void showRv(AssetsListCallBackAdapter adapter) {
         binding.getUseRv.setLayoutManager(new LinearLayoutManager(this));
         binding.getUseRv.setAdapter(adapter);
     }

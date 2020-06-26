@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.mubly.xinma.presenter.DepartAndStaffCreatePresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        tools:context=".activity.StaffCreateActivity">
+
+        <include layout="@layout/top_bar_layout"></include>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_30dp"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size_16dp"
+            android:text="基本信息"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"></TextView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/size_16dp"
+                android:text="部门名称"
+                android:textColor="@color/color_414141"
+                android:textSize="@dimen/size_15sp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/size_50dp"
+                android:text="@{presenter.departName}"
+                android:textSize="@dimen/size_14sp"
+                tools:text="研发部">
+
+            </TextView>
+
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/size_20dp"
+                android:padding="@dimen/size_2dp"
+                android:src="@mipmap/arrow_right_gray"></ImageView>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_30dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size_16dp"
+            android:text="个人信息"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"></TextView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/size_16dp"
+                android:text="员工姓名"
+                android:textColor="@color/color_414141"
+                android:textSize="@dimen/size_15sp"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:layout_marginRight="@dimen/size_50dp"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入员工姓名"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/size_14sp"></EditText>
+
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_gravity="center_vertical|right"
+
+                android:layout_marginRight="@dimen/size_20dp"
+                android:padding="@dimen/size_2dp"
+                android:src="@mipmap/arrow_right_gray"></ImageView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:background="@color/clr_gray_line"></View>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/size_16dp"
+                android:text="员工职位"
+                android:textColor="@color/color_414141"
+                android:textSize="@dimen/size_15sp"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:layout_marginRight="@dimen/size_50dp"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入员工职位"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/size_14sp"></EditText>
+
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_gravity="center_vertical|right"
+
+                android:layout_marginRight="@dimen/size_20dp"
+                android:padding="@dimen/size_2dp"
+                android:src="@mipmap/arrow_right_gray"></ImageView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:background="@color/clr_gray_line"></View>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/size_16dp"
+                android:text="手机号"
+                android:textColor="@color/color_414141"
+                android:textSize="@dimen/size_15sp"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:layout_marginRight="@dimen/size_50dp"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入手机号"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/size_14sp"></EditText>
+
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_gravity="center_vertical|right"
+
+                android:layout_marginRight="@dimen/size_20dp"
+                android:padding="@dimen/size_2dp"
+                android:src="@mipmap/arrow_right_gray"></ImageView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@color/clr_gray_line"></View>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_30dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/size_16dp"
+            android:text="状态信息"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"></TextView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/size_16dp"
+                android:text="在职状态"
+                android:textColor="@color/color_414141"
+                android:textSize="@dimen/size_15sp"></TextView>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/size_10dp"></Switch>
+        </FrameLayout>
+    </LinearLayout>
+</layout>

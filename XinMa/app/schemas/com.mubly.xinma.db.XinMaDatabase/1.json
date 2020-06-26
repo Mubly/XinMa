@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0753d041e112e8a9f8ea0778cc072772",
+    "identityHash": "28830053f5cab8aebd5e1cb0006e9d40",
     "entities": [
       {
         "tableName": "asset",
@@ -403,11 +403,79 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "staffBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `StaffID` TEXT, `DepartID` TEXT, `Depart` TEXT, `Staff` TEXT, `Position` TEXT, `Phone` TEXT, `AssetQty` TEXT, `Status` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "StaffID",
+            "columnName": "StaffID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DepartID",
+            "columnName": "DepartID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Depart",
+            "columnName": "Depart",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Staff",
+            "columnName": "Staff",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Position",
+            "columnName": "Position",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Phone",
+            "columnName": "Phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetQty",
+            "columnName": "AssetQty",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Status",
+            "columnName": "Status",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0753d041e112e8a9f8ea0778cc072772\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"28830053f5cab8aebd5e1cb0006e9d40\")"
     ]
   }
 }

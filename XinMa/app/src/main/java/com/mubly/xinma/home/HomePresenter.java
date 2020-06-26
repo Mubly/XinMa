@@ -23,6 +23,7 @@ import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CategoryDataBean;
 import com.mubly.xinma.model.CompanyDataBean;
 import com.mubly.xinma.model.HomeMenuBean;
+import com.mubly.xinma.model.StaffDataBean;
 import com.mubly.xinma.utils.AppConfig;
 
 import java.util.ArrayList;
@@ -94,6 +95,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         });
         getMvpView().showMenu(homeMenuAdapter);
         initData();
+        gainStaffData();
     }
 
     public MutableLiveData<String> getLdle() {
@@ -135,7 +137,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     }
 
     private void gainCompanyInfo() {
-        if (null != AppConfig.companyInfo) return;
+        if (null != AppConfig.companyInfo.get()) return;
         CompanyDataBean.getCompanyInfo(new CallBack<CompanyDataBean>() {
             @Override
             public void callBack(CompanyDataBean obj) {
@@ -148,5 +150,15 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         for (int i = 0; i < 11; i++) {
             homeMenuBeanList.add(new HomeMenuBean(Constant.menuName[i], Constant.menuIconResId[i], i + 1));
         }
+    }
+
+
+    public void gainStaffData(){
+        StaffDataBean.getStaffList(new CallBack<StaffDataBean>() {
+            @Override
+            public void callBack(StaffDataBean obj) {
+
+            }
+        });
     }
 }
