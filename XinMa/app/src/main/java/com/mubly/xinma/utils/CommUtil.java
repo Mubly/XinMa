@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
@@ -186,77 +187,7 @@ public class CommUtil {
     }
 
 
-    /**
-     * 数组、判断数组大小
-     *
-     * @param list
-     * @param <T>
-     * @return
-     */
-    public static <T> boolean listSize(List<T> list) {
-        if (list == null || list.size() == 0)
-            return true;
-        return false;
-    }
-
-    public static String strLess(String count, int i) {
-        return String.valueOf(Integer.parseInt(count) - i);
-    }
-
     public static int currentOffset;
-
-    public static SpannableString getAuctionInfoSpannableStr(String lotNum, String browse, String bidNum) {
-        String data = lotNum + "拍品·" + browse + "围观·" + bidNum + "出价";
-        SpannableString spannableString = new SpannableString(data);
-        StyleSpan styleSpan_B1 = new StyleSpan(Typeface.BOLD);
-        StyleSpan styleSpan_B2 = new StyleSpan(Typeface.BOLD);
-        StyleSpan styleSpan_B3 = new StyleSpan(Typeface.BOLD);
-        ForegroundColorSpan colorSpan1 = new ForegroundColorSpan(Color.parseColor("#666666"));
-        ForegroundColorSpan colorSpan2 = new ForegroundColorSpan(Color.parseColor("#666666"));
-        ForegroundColorSpan colorSpan3 = new ForegroundColorSpan(Color.parseColor("#666666"));
-        spannableString.setSpan(styleSpan_B1, 0, lotNum.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(styleSpan_B2, lotNum.length() + 3, data.indexOf("围"), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(styleSpan_B3, data.lastIndexOf("·") + 1, data.lastIndexOf("·") + bidNum.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-
-        spannableString.setSpan(colorSpan1, 0, lotNum.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(colorSpan2, lotNum.length() + 3, data.indexOf("围"), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(colorSpan3, data.lastIndexOf("·") + 1, data.lastIndexOf("·") + bidNum.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        return spannableString;
-    }
-
-    public static SpannableString getAuctionPriceStr(String leftStr, String price) {
-        if (!price.contains(".")) {
-            price = price + ".00";
-        }
-        String data = leftStr + "￥" + price;
-
-        SpannableString spannableString = new SpannableString(data);
-        StyleSpan styleSpan_B1 = new StyleSpan(Typeface.BOLD);
-        AbsoluteSizeSpan ab16 = new AbsoluteSizeSpan(16, true);
-        AbsoluteSizeSpan ab14 = new AbsoluteSizeSpan(14, true);
-        spannableString.setSpan(ab16, leftStr.length() + 1, data.indexOf("."), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(ab14, data.indexOf("."), data.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(styleSpan_B1, leftStr.length() + 1, data.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        return spannableString;
-    }
-
-    public static SpannableString getAuctionInfoSpannableStr2(String browse, String bidNum) {
-        String data = browse + "围观·" + bidNum + "出价";
-        SpannableString spannableString = new SpannableString(data);
-        StyleSpan styleSpan_B1 = new StyleSpan(Typeface.BOLD);
-        StyleSpan styleSpan_B2 = new StyleSpan(Typeface.BOLD);
-        ForegroundColorSpan colorSpan1 = new ForegroundColorSpan(Color.parseColor("#666666"));
-        ForegroundColorSpan colorSpan2 = new ForegroundColorSpan(Color.parseColor("#666666"));
-        spannableString.setSpan(styleSpan_B1, 0, browse.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(colorSpan1, 0, browse.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(styleSpan_B2, data.indexOf("·") + 1, data.indexOf("·") + bidNum.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(colorSpan2, data.indexOf("·") + 1, data.indexOf("·") + bidNum.length() + 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        return spannableString;
-    }
-
-    public static void toSearchView(Context mContext, int searchArtist) {
-
-    }
 
 
     /**
@@ -514,45 +445,6 @@ public class CommUtil {
 //        dialog.show();
 //    }
 
-    /**
-     * 省市区对话框
-     *
-     * @param context
-     * @param layoutId
-     * @param bgColor
-     * @param widthPercent
-     * @param heightPercent
-     * @return
-     */
-    public static Dialog showProvCityAreaWheelDialog(Context context, int layoutId, int bgColor, double widthPercent, double heightPercent) {
-        View view = LayoutInflater.from(context).inflate(layoutId, null);
-        Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(view);
-        dialog.getWindow().setBackgroundDrawableResource(bgColor);
-        DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        int displayWidth = dm.widthPixels;
-        int displayHeight = dm.heightPixels;
-        WindowManager.LayoutParams p = dialog.getWindow().getAttributes();  //获取对话框当前的参数值
-        p.gravity = Gravity.BOTTOM;
-        p.width = (int) (displayWidth * widthPercent);    //宽度设置为屏幕的0.5
-        p.height = (int) (displayHeight * heightPercent);    //宽度设置为屏幕的0.5
-        dialog.setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
-        dialog.getWindow().setAttributes(p);     //设置生效
-        return dialog;
-    }
-
-    /**
-     * 设置TextView 左
-     *
-     * @param context
-     * @param textView
-     * @param mipmapId
-     */
-    public static void setLeftCompoundDrawables(Context context, TextView textView, int mipmapId) {
-        Drawable drawableLeft = CommUtil.getDrawableToMipmap(context, mipmapId);
-        textView.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
-    }
 
     /**
      * 存储对象
@@ -643,26 +535,7 @@ public class CommUtil {
      */
     public static boolean isMobileNumber(String mobiles) {
         String telRegex = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|(147,145))\\d{8}$";
-        return !isEmpty(mobiles) && mobiles.matches(telRegex);
-    }
-
-    /**
-     * 字符串为空判断
-     *
-     * @param s
-     * @return
-     */
-    public static boolean isEmpty(String s) {
-        return s == null || "".equals(s) || "null".equals(s) || s.trim().length() == 0;
-    }
-
-    public static String getStr(String s) {
-        try {
-            if (isEmpty(s)) return " ";
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return s;
+        return !TextUtils.isEmpty(mobiles) && mobiles.matches(telRegex);
     }
 
     /**
@@ -672,7 +545,7 @@ public class CommUtil {
      */
     public static String dealPhoneNumber(String phoneNum) {
         StringBuilder builder = new StringBuilder();
-        if (!isEmpty(phoneNum)) {
+        if (!TextUtils.isEmpty(phoneNum)) {
             int phoneNumLength = phoneNum.length();
             for (int i = 0; i < phoneNumLength; i++) {
                 builder.append(phoneNum.charAt(i));
@@ -692,7 +565,7 @@ public class CommUtil {
      * @return
      */
     public static boolean isMatch(String matchStr, String regex) {
-        return !isEmpty(matchStr) && matchStr.matches(regex);
+        return !TextUtils.isEmpty(matchStr) && matchStr.matches(regex);
     }
 
     /**
@@ -713,34 +586,6 @@ public class CommUtil {
      */
     public static double stringToDouble(String s) {
         return Double.parseDouble(s);
-    }
-
-    /**
-     * 银行卡替换，保留后四位
-     * <p>
-     * 如果银行卡号为空 或者 null ,返回null ；否则，返回替换后的字符串；
-     *
-     * @param bankCard 银行卡号
-     * @return
-     */
-    public static String bankCardReplaceWith(String bankCard) {
-
-        if (bankCard.isEmpty() || bankCard == null) {
-            return null;
-        } else {
-            return replaceAction(bankCard, "(?<=\\d{0})\\d(?=\\d{4})");
-        }
-    }
-
-    /**
-     * 银行卡替换
-     *
-     * @param username username
-     * @param regular  正则
-     * @return
-     */
-    private static String replaceAction(String username, String regular) {
-        return username.replaceAll(regular, "*");
     }
 
     /**
@@ -921,19 +766,6 @@ public class CommUtil {
     }
 
     /**
-     * List集合大小
-     *
-     * @param tList
-     * @param <T>
-     * @return
-     */
-    public static <T> boolean listEmpty(List<T> tList) {
-        if (tList == null || tList.size() == 0)
-            return true;
-        return false;
-    }
-
-    /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dip2px(Context context, float dpValue) {
@@ -1041,25 +873,6 @@ public class CommUtil {
 //        return channel;
 //    }
 
-
-    public static String getDateFromDetailTimeAndDate(String string) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        String nowDate = null;
-        try {
-            date = dateFormat.parse(string);
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            nowDate = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            nowDate = string;
-        }
-
-        return nowDate;
-
-    }
-
     /*
      * 如果是小数，保留两位，非小数，保留整数
      * @param number
@@ -1090,101 +903,6 @@ public class CommUtil {
         }
         return true;
     }
-    public static String getImgOfVideo(String path) {
-        return bitmap2File(getVideoThumb(path), System.currentTimeMillis() + "");
-    }
-
-    /**
-     * 获取视频文件截图
-     *
-     * @param path 视频文件的路径
-     * @return Bitmap 返回获取的Bitmap
-     */
-    public static Bitmap getVideoThumb(String path) {
-        MediaMetadataRetriever media = new MediaMetadataRetriever();
-        media.setDataSource(path);
-        return media.getFrameAtTime();
-    }
-
-    public static String bitmap2File(Bitmap bitmap, String name) {
-        File f = new File(Environment.getExternalStorageDirectory() + name + ".jpg");
-        if (f.exists()) f.delete();
-        FileOutputStream fOut = null;
-        try {
-            fOut = new FileOutputStream(f);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-            fOut.flush();
-            fOut.close();
-        } catch (IOException e) {
-            return null;
-        }
-        return f.getAbsolutePath();
-    }
-
-    public void getTagTextStr(String content) {
-        List<String> tagList = getTaglist(content);
-
-    }
-
-
-    private List<String> getTaglist(String content) {
-        List<String> tagList = new ArrayList<>();
-        if (content.contains("")) {
-            String[] contentSplit = content.split("#");
-            for (int i = 1; i < contentSplit.length; i++) {
-                String continKeyValue = contentSplit[i];
-                if (continKeyValue.length() > 0 && continKeyValue.endsWith(" ")) {
-                    String tagKey = "#" + continKeyValue.substring(0, continKeyValue.indexOf(" ")) + " ";
-                    tagList.add(tagKey);
-                }
-            }
-        }
-        return tagList;
-    }
-
-//    public static String object2Json(Object object) {
-//        return new Gson().toJson(object);
-//    }
-
-//    public static boolean isLogin(Context context) {
-//        if (TextUtils.isEmpty(AppConfig.token.get())) {
-//            context.startActivity(new Intent(context, PhoneLoginActivity.class));
-//            return false;
-//        }
-//        return true;
-//    }
-
-
-//    public static void getLocal(Context context, final CallBackObject callBackObject) {
-//
-//        final AMapLocationClient mlocationClient;
-////声明mLocationOption对象
-//        AMapLocationClientOption mLocationOption = null;
-//        mlocationClient = new AMapLocationClient(context.getApplicationContext());
-////初始化定位参数
-//        mLocationOption = new AMapLocationClientOption();
-//        AMapLocationListener aMapLocationListener = new AMapLocationListener() {
-//            @Override
-//            public void onLocationChanged(AMapLocation aMapLocation) {
-//                mlocationClient.stopLocation();
-//                if (null != callBackObject&&null!=aMapLocation) {
-//                    callBackObject.callBack(aMapLocation);
-//                }
-//
-//            }
-//        };
-////设置定位监听
-//        mlocationClient.setLocationListener(aMapLocationListener);
-////设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-//        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-//        mLocationOption.setOnceLocation(true);
-////获取最近3s内精度最高的一次定位结果：
-////设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
-//        mLocationOption.setOnceLocationLatest(true);
-////设置定位参数
-//        mlocationClient.setLocationOption(mLocationOption);
-//        mlocationClient.startLocation();
-//    }
 
     @SuppressLint("MissingPermission")
     public static String getMyUUID(Context context) {

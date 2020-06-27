@@ -21,6 +21,7 @@ import com.mubly.xinma.db.DataBaseUtils;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CategoryDataBean;
+import com.mubly.xinma.model.CheckData;
 import com.mubly.xinma.model.CompanyDataBean;
 import com.mubly.xinma.model.HomeMenuBean;
 import com.mubly.xinma.model.StaffDataBean;
@@ -96,6 +97,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         getMvpView().showMenu(homeMenuAdapter);
         initData();
         gainStaffData();
+        gainCheckData();
+    }
+
+    private void gainCheckData() {
+        CheckData.getNetCheckData();
     }
 
     public MutableLiveData<String> getLdle() {
@@ -126,7 +132,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 .subscribe(new Consumer<List<String>>() {
                     @Override
                     public void accept(List<String> assetBeanList) throws Exception {
-                        if (assetBeanList!=null&&assetBeanList.size()==3){
+                        if (assetBeanList != null && assetBeanList.size() == 3) {
                             ldle.setValue(assetBeanList.get(0));
                             using.setValue(assetBeanList.get(1));
                             repair.setValue(assetBeanList.get(2));
@@ -153,7 +159,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     }
 
 
-    public void gainStaffData(){
+    public void gainStaffData() {
         StaffDataBean.getStaffList(new CallBack<StaffDataBean>() {
             @Override
             public void callBack(StaffDataBean obj) {

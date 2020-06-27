@@ -19,7 +19,8 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme_App">
-        <activity android:name=".activity.DepartMentCreateActivity"></activity>
+        <activity android:name=".activity.CategoryCreateActivity" />
+        <activity android:name=".activity.DepartMentCreateActivity" />
         <activity android:name=".activity.StaffCreateActivity" />
         <activity android:name=".activity.AssetSelectActivity" />
         <activity android:name=".activity.GroupActivity" />

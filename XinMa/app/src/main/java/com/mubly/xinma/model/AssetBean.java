@@ -1,5 +1,7 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
 import com.mubly.xinma.common.Constant;
 import com.mubly.xinma.utils.StringUtils;
 
@@ -165,7 +167,7 @@ public class AssetBean implements Serializable {
     }
 
     public String getOriginal() {
-        return Original;
+        return TextUtils.isEmpty(Original) ? "0" : Original;
     }
 
     public void setOriginal(String Original) {

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mubly.xinma.presenter.AnalysisTablePresenter" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".fragment.AnalysisTableFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_200dp"></com.github.mikephil.charting.charts.PieChart>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:background="@color/white">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/clr_gray_line"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="闲置"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:gravity="center_vertical"
+                    android:text="@{vm.ldleValue}"
+                    android:paddingRight="@dimen/size_16dp"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"
+                    tools:text="2382586"></TextView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:background="@color/clr_gray_line"></View>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="在用"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:gravity="center_vertical"
+                    android:text="@{vm.usingValue}"
+                    android:paddingRight="@dimen/size_16dp"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"
+                    tools:text="2382586"></TextView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:background="@color/clr_gray_line"></View>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="借用"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:gravity="center_vertical"
+                    android:text="@{vm.brrorowValue}"
+                    android:paddingRight="@dimen/size_16dp"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"
+                    tools:text="2382586"></TextView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:background="@color/clr_gray_line"></View>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="维修"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/size_16dp"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"
+                    android:text="@{vm.repairValue}"
+                    tools:text="2382586"></TextView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:background="@color/clr_gray_line"></View>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_marginBottom="@dimen/size_40dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="处置"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/size_16dp"
+                    android:textColor="@color/color_414141"
+                    android:textSize="@dimen/size_14sp"
+                    android:text="@{vm.disposeValue}"
+                    tools:text="2382586"></TextView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:background="@color/clr_gray_line"></View>
+            </FrameLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

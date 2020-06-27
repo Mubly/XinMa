@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_check_tv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selecter_check_tab_bg"
+    android:gravity="center"
+    android:textColor="@color/select_tab_tv_color"
+    android:textSize="@dimen/size_14sp"></TextView>

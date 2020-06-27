@@ -10,9 +10,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:orientation="vertical"
         tools:context=".activity.SortClassActivity">
 
         <include layout="@layout/top_bar_layout"></include>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:gravity="center_vertical"
+            android:text="分类列表"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"></TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sort_class_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </layout>

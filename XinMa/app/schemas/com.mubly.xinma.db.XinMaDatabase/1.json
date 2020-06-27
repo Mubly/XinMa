@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "28830053f5cab8aebd5e1cb0006e9d40",
+    "identityHash": "9dca6790e5fa47eda1ef9c23b75eef54",
     "entities": [
       {
         "tableName": "asset",
@@ -406,19 +406,13 @@
       },
       {
         "tableName": "staffBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `StaffID` TEXT, `DepartID` TEXT, `Depart` TEXT, `Staff` TEXT, `Position` TEXT, `Phone` TEXT, `AssetQty` TEXT, `Status` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`StaffID` TEXT NOT NULL, `DepartID` TEXT, `Depart` TEXT, `Staff` TEXT, `Position` TEXT, `Phone` TEXT, `AssetQty` TEXT, `Status` TEXT, PRIMARY KEY(`StaffID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "StaffID",
             "columnName": "StaffID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "DepartID",
@@ -465,9 +459,127 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "StaffID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "checkBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`CheckID` TEXT NOT NULL, `CheckSN` TEXT, `Items` TEXT, `Status` TEXT, `StatusName` TEXT, `Stamp` TEXT, `LastTime` TEXT, `CreateTime` TEXT, PRIMARY KEY(`CheckID`))",
+        "fields": [
+          {
+            "fieldPath": "CheckID",
+            "columnName": "CheckID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "CheckSN",
+            "columnName": "CheckSN",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Items",
+            "columnName": "Items",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Status",
+            "columnName": "Status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "StatusName",
+            "columnName": "StatusName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Stamp",
+            "columnName": "Stamp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "LastTime",
+            "columnName": "LastTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CreateTime",
+            "columnName": "CreateTime",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "CheckID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "inventoryBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`InventoryID` TEXT NOT NULL, `CheckID` TEXT, `AssetID` TEXT, `Status` TEXT, `StatusName` TEXT, `InventoryTime` TEXT, `CreateTime` TEXT, PRIMARY KEY(`InventoryID`))",
+        "fields": [
+          {
+            "fieldPath": "InventoryID",
+            "columnName": "InventoryID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "CheckID",
+            "columnName": "CheckID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetID",
+            "columnName": "AssetID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Status",
+            "columnName": "Status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "StatusName",
+            "columnName": "StatusName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "InventoryTime",
+            "columnName": "InventoryTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CreateTime",
+            "columnName": "CreateTime",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "InventoryID"
+          ],
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -475,7 +587,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"28830053f5cab8aebd5e1cb0006e9d40\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9dca6790e5fa47eda1ef9c23b75eef54\")"
     ]
   }
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
     </data>
 
     <LinearLayout
@@ -15,5 +14,20 @@
 
         <include layout="@layout/top_bar_layout"></include>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/analysis_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            app:tabIndicatorColor="@color/main_blue"
+            app:tabIndicatorHeight="1dp"
+            app:tabSelectedTextColor="@color/main_blue"
+            app:tabTextColor="@color/color_919191"></com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/analysis_vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.viewpager.widget.ViewPager>
     </LinearLayout>
 </layout>
