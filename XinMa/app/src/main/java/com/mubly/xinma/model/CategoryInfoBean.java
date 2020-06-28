@@ -27,6 +27,20 @@ public class CategoryInfoBean {
     private String Status;
     private String Stamp;
 
+    public CategoryInfoBean() {
+    }
+
+    public CategoryInfoBean(String infoName, String infoType) {
+        InfoName = infoName;
+        InfoType = infoType;
+    }
+
+    public CategoryInfoBean(String categoryID, String category, String infoType) {
+        CategoryID = categoryID;
+        Category = category;
+        InfoType = infoType;
+    }
+
     public long getId() {
         return id;
     }

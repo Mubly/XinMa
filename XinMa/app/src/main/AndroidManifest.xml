@@ -19,6 +19,7 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme_App">
+        <activity android:name=".activity.CategoryInfoSelectActivity"></activity>
         <activity android:name=".activity.CategoryCreateActivity" />
         <activity android:name=".activity.DepartMentCreateActivity" />
         <activity android:name=".activity.StaffCreateActivity" />

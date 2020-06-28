@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_50dp"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:background="@color/clr_gray_line"></View>
+
+    <TextView
+        android:id="@+id/item_categroy_crate_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/size_16dp"
+        android:textColor="@color/color_414141"
+        android:textSize="@dimen/size_14sp"
+        tools:text="暂无参数"></TextView>
+
+    <EditText
+        android:id="@+id/item_categroy_crate_input_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/size_100dp"
+        android:layout_marginRight="@dimen/size_60dp"
+        android:background="@null"
+        android:gravity="right"
+        android:maxLines="1"
+        android:hint="请输入参数名称"
+        android:singleLine="true"
+        android:textSize="@dimen/size_14sp"></EditText>
+
+    <ImageView
+        android:id="@+id/item_categroy_crate_input_icon"
+        android:layout_width="@dimen/size_50dp"
+        android:layout_height="@dimen/size_50dp"
+        android:layout_gravity="right"
+        android:paddingTop="@dimen/size_15dp"
+        android:paddingRight="@dimen/size_20dp"
+        android:paddingBottom="@dimen/size_15dp"
+        android:src="@mipmap/arrow_right_gray"></ImageView>
+</FrameLayout>

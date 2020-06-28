@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.mubly.xinma.R;
@@ -48,9 +49,13 @@ public class SortClassActivity extends BaseActivity<SortClassPresenter, ISortCla
     }
 
     @Override
-    public void toCreate(String categoryID) {
+    public void toCreate(String categoryID, String categoryName) {
         Intent intent = new Intent(this, CategoryCreateActivity.class);
         intent.putExtra("categoryId", categoryID);
+        if (!TextUtils.isEmpty(categoryName)) {
+            intent.putExtra("categoryName", categoryName);
+        }
+
         startActivity(intent);
     }
 

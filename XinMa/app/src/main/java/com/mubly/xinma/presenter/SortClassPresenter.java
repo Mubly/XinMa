@@ -37,7 +37,7 @@ public class SortClassPresenter extends BasePresenter<ISortClassView> {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        getMvpView().toCreate(data.getCategoryID());
+                        getMvpView().toCreate(data.getCategoryID(),data.getCategory());
                     }
                 });
             }

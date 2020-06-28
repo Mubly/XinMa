@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_radius_10_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/size_40dp"
+    android:paddingRight="@dimen/size_40dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:text="添加新的参数"
+        android:textColor="@color/color_919191"
+        android:textSize="@dimen/size_14sp"></TextView>
+
+    <EditText
+        android:id="@+id/dialog_custom_param_key"
+        android:layout_width="@dimen/size_200dp"
+        android:layout_height="@dimen/size_40dp"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/shape_storke_input_bg"
+        android:hint="请输入参数名称"
+        android:paddingLeft="@dimen/size_5dp"
+        android:textColor="@color/color_414141"
+        android:textSize="@dimen/size_14sp"></EditText>
+
+    <EditText
+        android:id="@+id/dialog_custom_param_value"
+        android:layout_width="@dimen/size_200dp"
+        android:layout_height="@dimen/size_40dp"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@drawable/shape_storke_input_bg"
+        android:hint=" 请输入参数内容"
+        android:paddingLeft="@dimen/size_5dp"
+        android:textColor="@color/color_414141"
+        android:textSize="@dimen/size_14sp"></EditText>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:background="@color/clr_gray_line"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/size_40dp">
+
+        <TextView
+            android:id="@+id/dialog_custom_param_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/color_919191"
+            android:textSize="13sp"></TextView>
+
+<!--        <view-->
+<!--            android:layout_width="1dp"-->
+<!--            android:layout_height="@dimen/size_40dp"-->
+<!--            android:background="@color/clr_gray_line">-->
+<!--        </view>-->
+
+        <TextView
+            android:id="@+id/dialog_custom_param_ack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/main_blue"
+            android:textSize="13sp"></TextView>
+    </LinearLayout>
+</LinearLayout>

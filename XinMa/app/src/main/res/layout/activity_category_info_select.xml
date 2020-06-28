@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mubly.xinma.presenter.CategoryInfoSelectPresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.CategoryInfoSelectActivity">
+
+        <include layout="@layout/top_bar_layout"></include>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="选择项信息"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                  android:id="@+id/select_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_50dp"
+                    android:background="@color/white"
+                    android:onClick="@{()->vm.addNew()}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="@dimen/size_16dp"
+                        android:text="添加选项"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_14sp"></TextView>
+
+                    <ImageView
+                        android:layout_width="@dimen/size_20dp"
+                        android:layout_height="@dimen/size_20dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="@dimen/size_20dp"
+                        android:src="@mipmap/arrow_right_gray">
+
+                    </ImageView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/clr_gray_line"></View>
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>
