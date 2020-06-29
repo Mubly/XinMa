@@ -110,6 +110,16 @@ public class CommUtil {
         return file;
     }
 
+    /**
+     * 获取手机型号
+     *
+     * @return
+     */
+    public static String getPhoneModel() {
+        return android.os.Build.MODEL;
+
+    }
+
     public static File getFilesDirSystem() {
         String externalStorageState;
         Context context = CrossApp.get();
@@ -726,14 +736,14 @@ public class CommUtil {
     /**
      * 获取应用版本号
      *
-     * @param context
+     * @param
      * @return
      */
-    public static String getPackageName(Context context) {
-        PackageManager manager = context.getPackageManager();
+    public static String getPackageName() {
+        PackageManager manager = CrossApp.get().getPackageManager();
         String name = "";
         try {
-            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            PackageInfo info = manager.getPackageInfo(CrossApp.get().getPackageName(), 0);
             name = info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -768,16 +778,17 @@ public class CommUtil {
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
-    public static int dip2px( float dpValue) {
+    public static int dip2px(float dpValue) {
         final float scale = CrossApp.get().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
+
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static float dipTopx(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
-        return  (dpValue * scale + 0.5f);
+        return (dpValue * scale + 0.5f);
     }
 
 //    public static void dealFlipperView(ViewFlipper mVp, final List<HomeIndexBean.NoticeListBean> mList, final Context mContext, final CallBackObj callBack) {
@@ -894,11 +905,12 @@ public class CommUtil {
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(number);
     }
-//    判断字符串是否为数字
-    public static boolean isNumeric(String str){
+
+    //    判断字符串是否为数字
+    public static boolean isNumeric(String str) {
         Pattern pattern = Pattern.compile("[0-9]*");
         Matcher isNum = pattern.matcher(str);
-        if( !isNum.matches() ){
+        if (!isNum.matches()) {
             return false;
         }
         return true;

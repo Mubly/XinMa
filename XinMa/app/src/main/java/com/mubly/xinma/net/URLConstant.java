@@ -32,14 +32,27 @@ public class URLConstant {
         }
     }
 
+    //app启动
+    public static final String APP_START_URL = BASE_URL + "/APP/Index";
+    //    注册
+    public static final String REGISTER_URL = BASE_URL + "/AppUser/Reg";
+
+    //    登录
+    public static final String LOGIN_URL = BASE_URL + "/AppUser/Login";
+
+    //    重复注册校验
+    public static final String CHECK_REPEAT_URL = BASE_URL + "/AppUser/CheckRepeat";
+    //    手机验证码(注册)
+    public static final String REGISTER_GAIN_PHONE_CODE_URL = BASE_URL + "/APP/SendCode";
+
+    //    手机验证码（忘记密码）
+    public static final String FORGET_GAIN_PHONE_CODE_URL = BASE_URL + "/APP/ForgetCode";
+
     //体验登录
     public static final String EXPERIENCE_LOGIN_URL = BASE_URL + "/AppUser/ExperienceLogin";
 
-//    退出登录
-public static final String EXPERIENCE_LOGIN_OUT_URL = BASE_URL + "/AppUser/Logout";
-
-
-
+    //    退出登录
+    public static final String EXPERIENCE_LOGIN_OUT_URL = BASE_URL + "/AppUser/Logout";
 
 
     //用户查询

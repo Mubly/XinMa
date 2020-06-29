@@ -25,7 +25,7 @@ public final class AppConfig {
     public static SharedPreference<String> deviceId = sPrefs.value("deviceIdKey", (String) null);
     public static SharedPreference<String> token = sPrefs.value("token", (String) null);
     public static SharedPreference<String> companyId = sPrefs.value("companyId", (String) null);
-    public static SharedPreference<String> userName = sPrefs.value("userName", (String) null);
+    public static SharedPreference<String> LogID = sPrefs.value("LogID", (String) null);
     public static SharedPreference<String> userInfo = sPrefs.value("userInfo", (String) null);
     public static SharedPreference<String> companyInfo = sPrefs.value("companyInfo", (String) null);
 
