@@ -47,7 +47,6 @@ public class DataBaseUtils {
             @Override
             public void run() {
                 database.clearAllTables();
-                database.close();
             }
         }).start();
 

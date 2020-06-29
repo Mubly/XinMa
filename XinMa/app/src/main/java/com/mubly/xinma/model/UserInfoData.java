@@ -24,7 +24,7 @@ public class UserInfoData extends BaseModel {
 
                         if (response.body().getCode() == 1) {
                             if (null!=response.body().UserInfo&&response.body().UserInfo.size()>0){
-                                AppConfig.companyId.put(response.body().UserInfo.get(0).CompanyID);
+                                AppConfig.companyId.put(response.body().UserInfo.get(0).getCompanyID());
                                 AppConfig.userInfo.put(JSON.toJSONString(response.body().UserInfo.get(0)));
                             }
 

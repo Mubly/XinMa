@@ -66,17 +66,15 @@ public class CommUtil {
     /**
      * 判断是否有网络
      *
-     * @param context
+     * @param
      * @return
      */
-    public static boolean isNetWorkConnected(Context context) {
-        if (context != null) {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isNetWorkConnected() {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) CrossApp.get().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
             if (mNetworkInfo != null) {
                 return mNetworkInfo.isAvailable() && mNetworkInfo.isConnected();
             }
-        }
         return false;
     }
 

@@ -190,7 +190,6 @@
                     android:layout_marginRight="@dimen/size_40dp"
                     android:background="@null"
                     android:hint="请输入公司名称"
-                    android:inputType="phone"
                     android:textSize="@dimen/size_14dp"></EditText>
 
                 <ImageView
@@ -225,11 +224,11 @@
                 android:layout_height="wrap_content">
 
                 <Button
+                    android:id="@+id/register_ack"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_10dp"
                     android:background="@drawable/shape_blue_btn_bg_radius4"
-                    android:onClick="@{()->persenter.register()}"
                     android:text="立即注册"
                     android:textColor="@color/white"></Button>
             </FrameLayout>

@@ -18,7 +18,7 @@ import com.mubly.xinma.login.IView.ILoginView;
 import com.mubly.xinma.login.presenter.LoginPresenter;
 import com.mubly.xinma.utils.EditViewUtil;
 
-public class LoginActivity extends BaseActivity<LoginPresenter, ILoginView>implements ILoginView {
+public class LoginActivity extends BaseActivity<LoginPresenter, ILoginView> implements ILoginView {
     ActivityLoginBinding binding = null;
 
     @Override
@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ILoginView>imple
 
     @Override
     protected void getLayoutId() {
-        binding=DataBindingUtil.setContentView(this,R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ILoginView>imple
         EditViewUtil.EditDatachangeLister(binding.passwordInputEt, new CallBack<String>() {
             @Override
             public void callBack(String obj) {
-                if (obj.length() > 5)
+                if (obj.length() > 6)
                     mPresenter.getPasswordCheck().setValue(true);
                 else
                     mPresenter.getPasswordCheck().setValue(false);
@@ -66,7 +66,18 @@ public class LoginActivity extends BaseActivity<LoginPresenter, ILoginView>imple
                     mPresenter.getPhoneCheck().setValue(false);
             }
         });
+        binding.loginAck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneStr = binding.phoneInputEt.getText().toString();
+                String passStr = binding.passwordInputEt.getText().toString();
+                if (mPresenter.getPhoneCheck().getValue() && mPresenter.getPasswordCheck().getValue()) {
+                    mPresenter.login(phoneStr,passStr);
+                }
+            }
+        });
     }
+
     @Override
     public void onRightClickEvent(TextView rightTv) {
         startActivity(RegisterActivity.class);

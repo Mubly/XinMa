@@ -48,6 +48,8 @@ public class URLConstant {
     //    手机验证码（忘记密码）
     public static final String FORGET_GAIN_PHONE_CODE_URL = BASE_URL + "/APP/ForgetCode";
 
+    //    忘记密码
+    public static final String FORGET_PASS_URL = BASE_URL + "/AppUser/Forget";
     //体验登录
     public static final String EXPERIENCE_LOGIN_URL = BASE_URL + "/AppUser/ExperienceLogin";
 

@@ -22,6 +22,7 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
         setTitle("设置");
         binding.setPersenter(mPresenter);
         binding.setLifecycleOwner(this);
+        mPresenter.init();
     }
 
     @Override

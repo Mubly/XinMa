@@ -20,6 +20,7 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> {
     private MutableLiveData<Boolean> passwordCheck = new MutableLiveData<>();
     private MutableLiveData<Boolean> password2Check = new MutableLiveData<>();
     private MutableLiveData<Boolean> compNameCheck = new MutableLiveData<>();
+    private MutableLiveData<Boolean> phoneCodeCheck = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getPhoneCheck() {
         return phoneCheck;
@@ -37,6 +38,17 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> {
         return compNameCheck;
     }
 
+    public MutableLiveData<Boolean> getPhoneCodeCheck() {
+        return phoneCodeCheck;
+    }
+
+    public RegisterPresenter() {
+        phoneCheck.setValue(false);
+        passwordCheck.setValue(false);
+        password2Check.setValue(false);
+        compNameCheck.setValue(false);
+        phoneCodeCheck.setValue(false);
+    }
 
     public void gainPhoneCode(String phone) {
         OkGo.<ResponseData>post(URLConstant.REGISTER_GAIN_PHONE_CODE_URL)
@@ -59,6 +71,13 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> {
                 .execute(new JsonCallback<ResponseData>() {
                     @Override
                     public void onSuccess(Response<ResponseData> response) {
+                        if (response.body().getCode()==1){
+                            AppConfig.token.put(response.body().getToken());
+                            CommUtil.ToastU.showToast("注册成功");
+                            getMvpView().closeAct();
+                        }else {
+                            CommUtil.ToastU.showToast(response.body().getMsg());
+                        }
 
                     }
                 });
@@ -80,5 +99,9 @@ public class RegisterPresenter extends BasePresenter<IRegisterView> {
                         }
                     }
                 });
+    }
+
+    public boolean registerEnable() {
+        return (phoneCheck.getValue() && password2Check.getValue() && passwordCheck.getValue() && compNameCheck.getValue() && phoneCodeCheck.getValue());
     }
 }

@@ -18,7 +18,7 @@ public class AssetDataBean extends BaseModel {
     public List<AssetBean> Asset;
     public List<AssetInfoBean> AssetInfo;
 
-    public static void pullAssetData(final CallBack callBack) {
+    public static void pullAssetData(final CallBack<AssetDataBean> callBack) {
         OkGo.<AssetDataBean>post(URLConstant.ASSET_DATA_DOWNLOAD_URL)
                 .execute(new JsonCallback<AssetDataBean>() {
                     @Override
@@ -30,7 +30,7 @@ public class AssetDataBean extends BaseModel {
                                     DataBaseUtils.getInstance().setAssetBeanList(response.body().Asset);
                                 if (null != response.body().AssetInfo)
                                     DataBaseUtils.getInstance().setAssetInfoBeanList(response.body().AssetInfo);
-                                callBack.callBack(null);
+                                callBack.callBack(response.body());
                             }
                         }).start();
 

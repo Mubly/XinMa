@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9dca6790e5fa47eda1ef9c23b75eef54",
+    "identityHash": "eb90d0c26e7200542f1338f01e30789e",
     "entities": [
       {
         "tableName": "asset",
@@ -583,11 +583,173 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "processBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ProcessID` TEXT, `AssetID` TEXT, `AssetNo` TEXT, `AssetName` TEXT, `AssetModel` TEXT, `Headimg` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ProcessID",
+            "columnName": "ProcessID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetID",
+            "columnName": "AssetID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetNo",
+            "columnName": "AssetNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetName",
+            "columnName": "AssetName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetModel",
+            "columnName": "AssetModel",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Headimg",
+            "columnName": "Headimg",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "propertyBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`PropertyID` TEXT NOT NULL, `Code` TEXT, `Property` TEXT, `ShowIndex` INTEGER NOT NULL, PRIMARY KEY(`PropertyID`))",
+        "fields": [
+          {
+            "fieldPath": "PropertyID",
+            "columnName": "PropertyID",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Code",
+            "columnName": "Code",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Property",
+            "columnName": "Property",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ShowIndex",
+            "columnName": "ShowIndex",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "PropertyID"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "operateBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OperateID` TEXT, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "OperateID",
+            "columnName": "OperateID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ProcessCate",
+            "columnName": "ProcessCate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ProcessTime",
+            "columnName": "ProcessTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Depart",
+            "columnName": "Depart",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Staff",
+            "columnName": "Staff",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Seat",
+            "columnName": "Seat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Fee",
+            "columnName": "Fee",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Remark",
+            "columnName": "Remark",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"9dca6790e5fa47eda1ef9c23b75eef54\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"eb90d0c26e7200542f1338f01e30789e\")"
     ]
   }
 }

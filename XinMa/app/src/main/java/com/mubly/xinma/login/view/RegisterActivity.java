@@ -44,20 +44,21 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, IRegisterV
     public void initEvent() {
         super.initEvent();
         binding.registerPhoneCodeGainBtn.setOnClickListener(this);
+        binding.registerAck.setOnClickListener(this);
         EditViewUtil.EditDatachangeLister(binding.registerPhoneInputEt, new CallBack<String>() {
             @Override
             public void callBack(String obj) {
                 if (!TextUtils.isEmpty(obj) && obj.length() == 11) {
-                mPresenter.registerPhoneCheck(obj, new CallBack<Boolean>() {
-                    @Override
-                    public void callBack(Boolean obj) {
-                        if (obj){
-                            mPresenter.getPhoneCheck().setValue(true);
-                        }else {
-                            mPresenter.getPhoneCheck().setValue(false);
+                    mPresenter.registerPhoneCheck(obj, new CallBack<Boolean>() {
+                        @Override
+                        public void callBack(Boolean obj) {
+                            if (obj) {
+                                mPresenter.getPhoneCheck().setValue(true);
+                            } else {
+                                mPresenter.getPhoneCheck().setValue(false);
+                            }
                         }
-                    }
-                });
+                    });
 
                 } else {
                     mPresenter.getPhoneCheck().setValue(false);
@@ -88,15 +89,24 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, IRegisterV
         EditViewUtil.EditDatachangeLister(binding.registerCompNameEt, new CallBack<String>() {
             @Override
             public void callBack(String obj) {
-                if (!TextUtils.isEmpty(obj)){
+                if (!TextUtils.isEmpty(obj)) {
                     mPresenter.getCompNameCheck().setValue(true);
-                }else {
+                } else {
                     mPresenter.getCompNameCheck().setValue(false);
                 }
             }
         });
+        EditViewUtil.EditDatachangeLister(binding.registerPhoneCodeEt, new CallBack<String>() {
+            @Override
+            public void callBack(String obj) {
+                if (!TextUtils.isEmpty(obj) && obj.length() > 3) {
+                    mPresenter.getPhoneCodeCheck().setValue(true);
+                } else {
+                    mPresenter.getPhoneCodeCheck().setValue(false);
+                }
+            }
+        });
     }
-
 
 
     @Override
@@ -112,6 +122,18 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, IRegisterV
                 mPresenter.gainPhoneCode(phone);
                 timeUtils.runTimer();
                 break;
+            case R.id.register_ack:
+                String phoneStr = binding.registerPhoneInputEt.getText().toString();
+                String phoneCodeStr = binding.registerPhoneCodeEt.getText().toString();
+                String passStr = binding.registerPasswordInputEt.getText().toString();
+                String companyStr = binding.registerCompNameEt.getText().toString();
+                if (mPresenter.registerEnable()) {
+                    mPresenter.register(companyStr, phoneStr, phoneCodeStr, passStr);
+                } else {
+                    CommUtil.ToastU.showToast("请填写完整的注册信息");
+                }
+
+                break;
         }
     }
 
@@ -120,4 +142,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, IRegisterV
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
     }
 
+    @Override
+    public void closeAct() {
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != timeUtils)
+            timeUtils.cancelTimer();
+    }
 }

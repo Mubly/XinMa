@@ -55,6 +55,7 @@
                             android:layout_marginRight="@dimen/size_40dp"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
+                            android:text="@{persenter.userInfo.company}"
                             tools:text="上海登元信息科技有限公司"></TextView>
 
                         <ImageView
@@ -93,6 +94,7 @@
                             android:layout_marginRight="@dimen/size_40dp"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
+                            android:text="@{persenter.userInfo.fullName}"
                             tools:text="小刘"></TextView>
 
                         <ImageView
@@ -131,6 +133,7 @@
                             android:layout_marginRight="@dimen/size_40dp"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
+                            android:text="@{persenter.userInfo.phone}"
                             tools:text="155876839755"></TextView>
 
                         <ImageView
@@ -257,6 +260,7 @@
                             android:layout_marginRight="@dimen/size_40dp"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
+                            android:text="@{persenter.versionCode}"
                             tools:text="v1.0"></TextView>
 
                         <ImageView
