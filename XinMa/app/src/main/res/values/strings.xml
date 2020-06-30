@@ -26,4 +26,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="check_create_promat">1.通过“搜索添加”或者“扫码添加”将需要盘点的资产加入到盘点列表中。
+    \n 2.点击“保存”创建新的盘点单</string>
+    <string name="check_assets_info">1、检查资产的实物信息、外观、状态、及使用情况。\n2、如检查结果全部正常，则标记为正常。\n3、如检查检查结果与当前信息有少许差别，如（资产参数不正确、使用人与登记不符等），则标记为差异。\n4、如检查结果与登记信息严重不符，如（资产遗失、资产事物信息与登记信息有重大差别等），则标记为亏损。</string>
 </resources>

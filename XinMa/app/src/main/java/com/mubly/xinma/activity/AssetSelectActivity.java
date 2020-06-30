@@ -29,7 +29,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     public static final int BRROROW_REQUEST_CODE = 1002;//借用
     public static final int RETURN_REQUEST_CODE = 1003;//归还
     public static final int REPAIR_REQUEST_CODE = 1004;//维修
-
+    public static final int CHECK_CREATE_REQUEST_CODE = 1005;//盘点创建
 
     //    返回码
     public static final int RESULT_OK_CODE = 10010;//数据返回成功

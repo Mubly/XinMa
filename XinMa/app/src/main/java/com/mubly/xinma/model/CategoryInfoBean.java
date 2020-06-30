@@ -1,5 +1,7 @@
 package com.mubly.xinma.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -16,8 +18,8 @@ public class CategoryInfoBean {
      * Status : 1
      * Stamp : 0
      */
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+    @NotNull
+    @PrimaryKey
     private String CategoryInfoID;
     private String CategoryID;
     private String Category;
@@ -39,14 +41,6 @@ public class CategoryInfoBean {
         CategoryID = categoryID;
         Category = category;
         InfoType = infoType;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCategoryInfoID() {

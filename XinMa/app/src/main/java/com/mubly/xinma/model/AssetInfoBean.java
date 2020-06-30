@@ -1,24 +1,66 @@
 package com.mubly.xinma.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "assetInfo")
 public class AssetInfoBean {
-    @PrimaryKey(autoGenerate = true)
-    private long id;
-    public String AssetInfoID;
-    public String AssetID;
-    public String CategoryInfoID;
-    public String InfoName;
-    public String InfoValue;
-    public String InfoType;
+    @NotNull
+    @PrimaryKey
+    private String AssetInfoID;
+    private String AssetID;
+    private String CategoryInfoID;
+    private String InfoName;
+    private String InfoValue;
+    private String InfoType;
 
-    public long getId() {
-        return id;
+    public String getAssetInfoID() {
+        return AssetInfoID;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAssetInfoID(String assetInfoID) {
+        AssetInfoID = assetInfoID;
+    }
+
+    public String getAssetID() {
+        return AssetID;
+    }
+
+    public void setAssetID(String assetID) {
+        AssetID = assetID;
+    }
+
+    public String getCategoryInfoID() {
+        return CategoryInfoID;
+    }
+
+    public void setCategoryInfoID(String categoryInfoID) {
+        CategoryInfoID = categoryInfoID;
+    }
+
+    public String getInfoName() {
+        return InfoName;
+    }
+
+    public void setInfoName(String infoName) {
+        InfoName = infoName;
+    }
+
+    public String getInfoValue() {
+        return InfoValue;
+    }
+
+    public void setInfoValue(String infoValue) {
+        InfoValue = infoValue;
+    }
+
+    public String getInfoType() {
+        return InfoType;
+    }
+
+    public void setInfoType(String infoType) {
+        InfoType = infoType;
     }
 }

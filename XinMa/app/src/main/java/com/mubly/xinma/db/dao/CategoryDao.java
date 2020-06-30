@@ -8,6 +8,7 @@ import java.util.List;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -16,12 +17,12 @@ public interface CategoryDao {
     @Query("SELECT * FROM categoryBean")
     List<CategoryBean> getAll();
 
-    @Query("SELECT * FROM categoryBean WHERE id IN (:ids)")
-    List<CategoryBean> getAllByIds(long[] ids);
+//    @Query("SELECT * FROM categoryBean WHERE id IN (:ids)")
+//    List<CategoryBean> getAllByIds(long[] ids);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(CategoryBean... entities);
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<CategoryBean> categoryBeanList);
     @Delete
     void delete(CategoryBean entity);

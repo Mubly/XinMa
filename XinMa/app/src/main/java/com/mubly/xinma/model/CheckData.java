@@ -1,12 +1,15 @@
 package com.mubly.xinma.model;
 
+import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.mubly.xinma.base.BaseModel;
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.db.XinMaDatabase;
+import com.mubly.xinma.model.resbean.CheckCreateResBean;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
+import com.mubly.xinma.utils.CommUtil;
 
 import java.util.List;
 
@@ -108,6 +111,21 @@ public class CheckData extends BaseModel {
                     @Override
                     public void accept(Integer s) throws Exception {
                         callBack.callBack(s);
+                    }
+                });
+    }
+
+
+    public static void checkCreate(List<String> AssetID, CallBack<String> callBack) {
+        OkGo.<CheckCreateResBean>post(URLConstant.API_Check_InsertCheck_URL)
+                .params("AssetID", JSON.toJSONString(AssetID))
+                .execute(new JsonCallback<CheckCreateResBean>() {
+                    @Override
+                    public void onSuccess(Response<CheckCreateResBean> response) {
+                        if (response.body().getCode() == 1)
+                            callBack.callBack(response.body().CheckID);
+                        else
+                            CommUtil.ToastU.showToast(response.body().getMsg());
                     }
                 });
     }

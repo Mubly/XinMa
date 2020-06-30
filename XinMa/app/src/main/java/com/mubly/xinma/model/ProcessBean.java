@@ -1,25 +1,19 @@
 package com.mubly.xinma.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity(tableName = "processBean")
 public class ProcessBean {
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+    @NotNull
+    @PrimaryKey
     private String ProcessID;
     private String AssetID;
     private String AssetNo;
     private String AssetName;
     private String AssetModel;
     private String Headimg;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getProcessID() {
         return ProcessID;

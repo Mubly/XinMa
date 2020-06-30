@@ -17,8 +17,8 @@ public interface OperateBeanDao {
     @Query("SELECT * FROM operateBean")
     List<OperateBean> getAll();
 
-    @Query("SELECT * FROM operateBean WHERE id IN (:ids)")
-    List<OperateBean> getGroupBeanByIds(long[] ids);
+//    @Query("SELECT * FROM operateBean WHERE id IN (:ids)")
+//    List<OperateBean> getGroupBeanByIds(long[] ids);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(OperateBean... entities);

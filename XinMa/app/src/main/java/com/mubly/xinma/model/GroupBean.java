@@ -1,27 +1,21 @@
 package com.mubly.xinma.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "groupBean")
 public class GroupBean {
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+    @NotNull
+    @PrimaryKey
     private String DepartID;//部门id
     private String Depart;//部门名称
     private int ShowIndex;//排序	暂时首次使用
     private int Status;//状态	1/有效 0/关闭
     @Ignore
     private int staffCount;//下属员工数量
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public int getStaffCount() {
         return staffCount;

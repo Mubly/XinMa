@@ -17,8 +17,8 @@ public interface ProcessBeanDao {
     @Query("SELECT * FROM processBean")
     List<ProcessBean> getAll();
 
-    @Query("SELECT * FROM processBean WHERE id = :ids")
-    List<ProcessBean> getGroupBeanByIds(long ids);
+//    @Query("SELECT * FROM processBean WHERE id = :ids")
+//    List<ProcessBean> getGroupBeanByIds(long ids);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ProcessBean... entities);

@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.mubly.xinma.common.Constant;
 import com.mubly.xinma.utils.StringUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
 
 import androidx.room.Entity;
@@ -41,8 +43,8 @@ public class AssetBean implements Serializable {
      * Status : 1
      * StatusName : 闲置
      */
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+    @NotNull
+    @PrimaryKey
     private String AssetID;
     private String AssetNo;
     private String AssetName;
@@ -69,15 +71,6 @@ public class AssetBean implements Serializable {
     private String IsLock;
     private String Status;
     private String StatusName;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getAssetID() {
         return AssetID;
     }

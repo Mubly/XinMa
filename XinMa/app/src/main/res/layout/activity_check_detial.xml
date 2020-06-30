@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mubly.xinma.presenter.CheckDetialPresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        tools:context=".activity.CheckDetialActivity">
+
+        <include layout="@layout/top_bar_layout"></include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:gravity="center_vertical"
+            android:text="基本信息"
+            android:textColor="@color/color_919191"
+            android:textSize="@dimen/size_12sp"></TextView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_50dp"
+            android:background="@color/white">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/clr_gray_line">
+
+            </View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:gravity="center_vertical"
+                android:text="盘点时间"
+                android:textColor="@color/color_414141"
+                android:textSize="@dimen/size_14sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/check_create_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:background="@null"
+                android:enabled="false"
+                android:gravity="right|center_vertical"
+                android:paddingRight="@dimen/size_16dp"
+                android:text="@{vm.currentTime}">
+
+            </EditText>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@color/clr_gray_line">
+
+            </View>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:background="@drawable/shape_stroke_blue_bg">
+
+            <TextView
+                android:layout_width="@dimen/size_10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{vm.waitCheck}"
+                android:textColor="@color/select_tab_tv_color"
+                android:textSize="13sp"
+                tools:text="待盘点"></TextView>
+
+            <View
+                android:layout_width="@dimen/size_1dp"
+                android:layout_height="match_parent"
+                android:background="@color/main_blue"></View>
+
+            <TextView
+                android:layout_width="@dimen/size_10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{vm.goodOne}"
+                android:textColor="@color/select_tab_tv_color"
+                android:textSize="13sp"
+                tools:text="待盘点"></TextView>
+
+            <View
+                android:layout_width="@dimen/size_1dp"
+                android:layout_height="match_parent"
+                android:background="@color/main_blue"></View>
+
+            <TextView
+                android:layout_width="@dimen/size_10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{vm.diff}"
+                android:textColor="@color/select_tab_tv_color"
+                android:textSize="13sp"
+                tools:text="待盘点"></TextView>
+
+            <View
+                android:layout_width="@dimen/size_1dp"
+                android:layout_height="match_parent"
+                android:background="@color/main_blue"></View>
+
+            <TextView
+                android:layout_width="@dimen/size_10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{vm.less}"
+                android:textColor="@color/select_tab_tv_color"
+                android:textSize="13sp"
+                tools:text="待盘点"></TextView>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/inventory_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_10dp"></androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="删除盘点"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/size_14sp">
+
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bottom_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/scan_add"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{()->vm.scanAdd()}"
+                    android:text="扫码添加"
+                    android:textColor="@color/main_blue"
+                    android:textSize="13sp"></TextView>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:layout_marginBottom="@dimen/size_10dp"
+                    android:background="@color/clr_gray_line"></View>
+
+                <TextView
+                    android:id="@+id/manual_add"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{()->vm.manualAdd()}"
+                    android:text="手动添加"
+                    android:textColor="@color/main_blue"
+                    android:textSize="13sp"></TextView>
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
+</layout>

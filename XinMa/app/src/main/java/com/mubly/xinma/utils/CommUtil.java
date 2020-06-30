@@ -70,11 +70,11 @@ public class CommUtil {
      * @return
      */
     public static boolean isNetWorkConnected() {
-            ConnectivityManager mConnectivityManager = (ConnectivityManager) CrossApp.get().getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
-            if (mNetworkInfo != null) {
-                return mNetworkInfo.isAvailable() && mNetworkInfo.isConnected();
-            }
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) CrossApp.get().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+        if (mNetworkInfo != null) {
+            return mNetworkInfo.isAvailable() && mNetworkInfo.isConnected();
+        }
         return false;
     }
 
@@ -854,6 +854,10 @@ public class CommUtil {
         return sb.toString();
     }
 
+    public static String getCurrentTime() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return df.format(new Date());
+    }
 //    // 获取渠道号
 //    public static String getChannel(Context mContext) {
 //        String channel = "未知";

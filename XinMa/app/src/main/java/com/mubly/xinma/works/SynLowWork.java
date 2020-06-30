@@ -21,22 +21,28 @@ public class SynLowWork extends Worker {
         SynDataLowData.synData(new CallBack<SynDataLowData>() {
             @Override
             public void callBack(SynDataLowData obj) {
-                if (null != obj.getCategory())
-                    XinMaDatabase.getInstance().categoryDao().insertAll(obj.getCategory());
-                if (null!=obj.getCategoryInfo())
-                    XinMaDatabase.getInstance().categoryInfoDao().insertAll(obj.getCategoryInfo());
-                if (null!=obj.getCheck())
-                    XinMaDatabase.getInstance().checkBeanDao().insertAll(obj.getCheck());
-                if (null!=obj.getDepart())
-                    XinMaDatabase.getInstance().groupBeanDao().insertAll(obj.getDepart());
-                if (null!=obj.getInventory())
-                    XinMaDatabase.getInstance().inventoryBeanDao().insertAll(obj.getInventory());
-                if (null!=obj.getProperty())
-                    XinMaDatabase.getInstance().propertyBeanDao().insertAll(obj.getProperty());
-                if (null!=obj.getStaff())
-                    XinMaDatabase.getInstance().staffBeanDao().insertAll(obj.getStaff());
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (null != obj.getCategory())
+                            XinMaDatabase.getInstance().categoryDao().insertAll(obj.getCategory());
+                        if (null!=obj.getCategoryInfo())
+                            XinMaDatabase.getInstance().categoryInfoDao().insertAll(obj.getCategoryInfo());
+                        if (null!=obj.getCheck())
+                            XinMaDatabase.getInstance().checkBeanDao().insertAll(obj.getCheck());
+                        if (null!=obj.getDepart())
+                            XinMaDatabase.getInstance().groupBeanDao().insertAll(obj.getDepart());
+                        if (null!=obj.getInventory())
+                            XinMaDatabase.getInstance().inventoryBeanDao().insertAll(obj.getInventory());
+                        if (null!=obj.getProperty())
+                            XinMaDatabase.getInstance().propertyBeanDao().insertAll(obj.getProperty());
+                        if (null!=obj.getStaff())
+                            XinMaDatabase.getInstance().staffBeanDao().insertAll(obj.getStaff());
+                    }
+                }).start();
+
             }
         });
-        return null;
+        return Result.success();
     }
 }

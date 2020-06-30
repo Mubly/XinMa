@@ -18,403 +18,420 @@
 
         <include layout="@layout/top_bar_layout"></include>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
-                    android:background="@color/background"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size_16dp"
-                    android:text="资产图片"
-                    android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp"></TextView>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_90dp">
-
-                    <ImageView
-                        android:id="@+id/create_asset_img"
-                        android:layout_width="@dimen/size_60dp"
-                        android:layout_height="@dimen/size_60dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:src="@mipmap/img_defaut"></ImageView>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|right"
-                        android:layout_marginRight="@dimen/size_50dp"
-                        android:gravity="center_vertical"
-                        android:text="@{vm.currentStatus}"></TextView>
-
-                </FrameLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
-                    android:background="@color/background"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size_16dp"
-                    android:text="基本信息"
-                    android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp"></TextView>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="资产编码"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="资产名称"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="规格型号"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="计量单位"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="供应商"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="购置日期"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="购置价格(元)"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="损耗周期(月)"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="保修周期(月)"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
-                    android:background="@color/background"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size_16dp"
-                    android:text="使用信息"
-                    android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp"></TextView>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="所属部门-人员"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="存放地点"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
-                    android:background="@color/background"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size_16dp"
-                    android:text="资产分类"
-                    android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp"></TextView>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="资产分类"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:background="@color/clr_gray_line"></View>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="top"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
-                    android:background="@color/background"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/size_16dp"
-                    android:text="自定义参数"
-                    android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp"></TextView>
-
-                <LinearLayout
-                    android:id="@+id/dry_param_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/size_16dp"
-                        android:text="添加自定义参数"
-                        android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_14sp">
-
-                    </TextView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="bottom"
-                        android:background="@color/clr_gray_line"></View>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:layout_gravity="top"
-                        android:background="@color/clr_gray_line"></View>
-                </FrameLayout>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+          <androidx.core.widget.NestedScrollView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/white"
+                  android:paddingBottom="@dimen/size_50dp"
+                  android:orientation="vertical">
+
+                  <ViewStub
+                      android:id="@+id/check_detial_prompt_layout"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout="@layout/check_detial_prompt"></ViewStub>
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp"
+                      android:background="@color/background"
+                      android:gravity="center_vertical"
+                      android:paddingLeft="@dimen/size_16dp"
+                      android:text="资产图片"
+                      android:textColor="@color/color_919191"
+                      android:textSize="@dimen/size_12sp"></TextView>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_90dp">
+
+                      <ImageView
+                          android:id="@+id/create_asset_img"
+                          android:layout_width="@dimen/size_60dp"
+                          android:layout_height="@dimen/size_60dp"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:src="@mipmap/img_defaut"></ImageView>
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical|right"
+                          android:layout_marginRight="@dimen/size_50dp"
+                          android:gravity="center_vertical"
+                          android:text="@{vm.currentStatus}"></TextView>
+
+                  </FrameLayout>
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp"
+                      android:background="@color/background"
+                      android:gravity="center_vertical"
+                      android:paddingLeft="@dimen/size_16dp"
+                      android:text="基本信息"
+                      android:textColor="@color/color_919191"
+                      android:textSize="@dimen/size_12sp"></TextView>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="资产编码"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="资产名称"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="规格型号"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="计量单位"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="供应商"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="购置日期"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="购置价格(元)"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="损耗周期(月)"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="保修周期(月)"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp"
+                      android:background="@color/background"
+                      android:gravity="center_vertical"
+                      android:paddingLeft="@dimen/size_16dp"
+                      android:text="使用信息"
+                      android:textColor="@color/color_919191"
+                      android:textSize="@dimen/size_12sp"></TextView>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="所属部门-人员"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="存放地点"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp"
+                      android:background="@color/background"
+                      android:gravity="center_vertical"
+                      android:paddingLeft="@dimen/size_16dp"
+                      android:text="资产分类"
+                      android:textColor="@color/color_919191"
+                      android:textSize="@dimen/size_12sp"></TextView>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="资产分类"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:background="@color/clr_gray_line"></View>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="top"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp"
+                      android:background="@color/background"
+                      android:gravity="center_vertical"
+                      android:paddingLeft="@dimen/size_16dp"
+                      android:text="自定义参数"
+                      android:textColor="@color/color_919191"
+                      android:textSize="@dimen/size_12sp"></TextView>
+
+                  <LinearLayout
+                      android:id="@+id/dry_param_layout"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+                  </LinearLayout>
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/size_40dp">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="@dimen/size_16dp"
+                          android:text="添加自定义参数"
+                          android:textColor="@color/color_414141"
+                          android:textSize="@dimen/size_14sp">
+
+                      </TextView>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="bottom"
+                          android:background="@color/clr_gray_line"></View>
+
+                      <View
+                          android:layout_width="match_parent"
+                          android:layout_height="1px"
+                          android:layout_gravity="top"
+                          android:background="@color/clr_gray_line"></View>
+                  </FrameLayout>
+              </LinearLayout>
+          </androidx.core.widget.NestedScrollView>
+          <ViewStub
+              android:layout_width="match_parent"
+              android:layout="@layout/check_detial_bottom_layout"
+              android:layout_height="wrap_content">
+
+          </ViewStub>
+      </FrameLayout>
     </LinearLayout>
 </layout>

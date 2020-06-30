@@ -2,13 +2,15 @@ package com.mubly.xinma.model;
 
 import com.mubly.xinma.utils.StringUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "operateBean")
 public class OperateBean {
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+    @NotNull
+    @PrimaryKey
     private String OperateID;
     private String ProcessCate;
     private String ProcessTime;
@@ -17,14 +19,6 @@ public class OperateBean {
     private String Seat;
     private String Fee;
     private String Remark;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getOperateID() {
         return OperateID;

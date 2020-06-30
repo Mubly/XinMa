@@ -2,23 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "eb90d0c26e7200542f1338f01e30789e",
+    "identityHash": "bbfa95dfd61439ac0404009590f54140",
     "entities": [
       {
         "tableName": "asset",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `AssetName` TEXT, `Category` TEXT, `CategoryID` TEXT, `AssetModel` TEXT, `Headimg` TEXT, `Supply` TEXT, `PurchaseDate` TEXT, `ExpireDate` TEXT, `Unit` TEXT, `Original` TEXT, `Price` TEXT, `Guaranteed` TEXT, `Depreciated` TEXT, `Remainder` TEXT, `RFID` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Remark` TEXT, `LastProcessTime` TEXT, `LastInventoryTime` TEXT, `IsLock` TEXT, `Status` TEXT, `StatusName` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`AssetID` TEXT NOT NULL, `AssetNo` TEXT, `AssetName` TEXT, `Category` TEXT, `CategoryID` TEXT, `AssetModel` TEXT, `Headimg` TEXT, `Supply` TEXT, `PurchaseDate` TEXT, `ExpireDate` TEXT, `Unit` TEXT, `Original` TEXT, `Price` TEXT, `Guaranteed` TEXT, `Depreciated` TEXT, `Remainder` TEXT, `RFID` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Remark` TEXT, `LastProcessTime` TEXT, `LastInventoryTime` TEXT, `IsLock` TEXT, `Status` TEXT, `StatusName` TEXT, PRIMARY KEY(`AssetID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "AssetID",
             "columnName": "AssetID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "AssetNo",
@@ -173,28 +167,22 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "AssetID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "assetInfo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `AssetInfoID` TEXT, `AssetID` TEXT, `CategoryInfoID` TEXT, `InfoName` TEXT, `InfoValue` TEXT, `InfoType` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`AssetInfoID` TEXT NOT NULL, `AssetID` TEXT, `CategoryInfoID` TEXT, `InfoName` TEXT, `InfoValue` TEXT, `InfoType` TEXT, PRIMARY KEY(`AssetInfoID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "AssetInfoID",
             "columnName": "AssetInfoID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "AssetID",
@@ -229,28 +217,22 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "AssetInfoID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "categoryBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `CompanyID` TEXT, `CategoryID` TEXT, `Category` TEXT, `ShowIndex` TEXT, `Status` TEXT, `Stamp` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`CompanyID` TEXT NOT NULL, `CategoryID` TEXT, `Category` TEXT, `ShowIndex` TEXT, `Status` TEXT, `Stamp` TEXT, PRIMARY KEY(`CompanyID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "CompanyID",
             "columnName": "CompanyID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "CategoryID",
@@ -285,28 +267,22 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "CompanyID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "categroyInfo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `CategoryInfoID` TEXT, `CategoryID` TEXT, `Category` TEXT, `InfoName` TEXT, `InfoType` TEXT, `InfoValues` TEXT, `Status` TEXT, `Stamp` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`CategoryInfoID` TEXT NOT NULL, `CategoryID` TEXT, `Category` TEXT, `InfoName` TEXT, `InfoType` TEXT, `InfoValues` TEXT, `Status` TEXT, `Stamp` TEXT, PRIMARY KEY(`CategoryInfoID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "CategoryInfoID",
             "columnName": "CategoryInfoID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "CategoryID",
@@ -353,28 +329,22 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "CategoryInfoID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
       },
       {
         "tableName": "groupBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `DepartID` TEXT, `Depart` TEXT, `ShowIndex` INTEGER NOT NULL, `Status` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`DepartID` TEXT NOT NULL, `Depart` TEXT, `ShowIndex` INTEGER NOT NULL, `Status` INTEGER NOT NULL, PRIMARY KEY(`DepartID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "DepartID",
             "columnName": "DepartID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "Depart",
@@ -397,9 +367,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "DepartID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -586,19 +556,13 @@
       },
       {
         "tableName": "processBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ProcessID` TEXT, `AssetID` TEXT, `AssetNo` TEXT, `AssetName` TEXT, `AssetModel` TEXT, `Headimg` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ProcessID` TEXT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `AssetName` TEXT, `AssetModel` TEXT, `Headimg` TEXT, PRIMARY KEY(`ProcessID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "ProcessID",
             "columnName": "ProcessID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "AssetID",
@@ -633,9 +597,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "ProcessID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -680,19 +644,13 @@
       },
       {
         "tableName": "operateBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `OperateID` TEXT, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`OperateID` TEXT NOT NULL, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, PRIMARY KEY(`OperateID`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "OperateID",
             "columnName": "OperateID",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "ProcessCate",
@@ -739,9 +697,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "OperateID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -749,7 +707,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"eb90d0c26e7200542f1338f01e30789e\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"bbfa95dfd61439ac0404009590f54140\")"
     ]
   }
 }

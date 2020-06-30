@@ -14,6 +14,7 @@ import com.mubly.xinma.activity.ReturnActivity;
 import com.mubly.xinma.base.BasePresenter;
 import com.mubly.xinma.activity.BrrorowActivity;
 import com.mubly.xinma.activity.CheckListActivity;
+import com.mubly.xinma.base.CrossApp;
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.common.Constant;
 import com.mubly.xinma.activity.GetUseActivity;
@@ -26,11 +27,17 @@ import com.mubly.xinma.model.CompanyDataBean;
 import com.mubly.xinma.model.HomeMenuBean;
 import com.mubly.xinma.model.StaffDataBean;
 import com.mubly.xinma.utils.AppConfig;
+import com.mubly.xinma.works.SynFastWork;
+import com.mubly.xinma.works.SynLowWork;
 
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -98,6 +105,8 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         initData();
         gainStaffData();
         gainCheckData();
+        startFastSynData();
+        startLowSynData();
     }
 
     private void gainCheckData() {
@@ -166,5 +175,15 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
             }
         });
+    }
+
+    private void startFastSynData() {
+        PeriodicWorkRequest fastRequest = new PeriodicWorkRequest.Builder(SynFastWork.class, 20, TimeUnit.SECONDS).build();
+        WorkManager.getInstance(CrossApp.get()).enqueue(fastRequest);
+    }
+
+    private void startLowSynData() {
+        PeriodicWorkRequest lowWorkRequest = new PeriodicWorkRequest.Builder(SynLowWork.class, 60, TimeUnit.SECONDS).build();
+        WorkManager.getInstance(CrossApp.get()).enqueue(lowWorkRequest);
     }
 }

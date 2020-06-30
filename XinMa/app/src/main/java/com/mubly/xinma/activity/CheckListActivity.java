@@ -18,6 +18,7 @@ import com.mubly.xinma.adapter.MyPageAdapter;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityCheckListBinding;
 import com.mubly.xinma.iview.ICheckView;
+import com.mubly.xinma.presenter.CheckCreatePresenter;
 import com.mubly.xinma.presenter.CheckPresenter;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class CheckListActivity extends BaseActivity<CheckPresenter, ICheckView> 
     @Override
     public void onRightAddEvent(ImageView rightAddBtn) {
         super.onRightAddEvent(rightAddBtn);
-
+        startActivity(CheckCreateActivity.class);
     }
 
     @Override

@@ -3,6 +3,9 @@ package com.mubly.xinma.home;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,4 +66,6 @@ public class MainActivity extends BaseActivity<HomePresenter, IHomeView> impleme
         binding.menuRv.setLayoutManager(new GridLayoutManager(this, 3));
         binding.menuRv.setAdapter(adapter);
     }
+
+
 }
