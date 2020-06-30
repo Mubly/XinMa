@@ -20,7 +20,7 @@ public interface AssetBeanDao {
     int getCountByStatus(String status);
 
     @Query("SELECT * FROM asset WHERE Status LIKE :status")
-    List<AssetBean> getAllByStatus(String status);
+    List<AssetBean> getAllByStatus(String status,String age);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(AssetBean... entities);

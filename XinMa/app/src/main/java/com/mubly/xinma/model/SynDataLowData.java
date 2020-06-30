@@ -3,6 +3,7 @@ package com.mubly.xinma.model;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.mubly.xinma.base.BaseModel;
+import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
 import com.mubly.xinma.utils.CommUtil;
@@ -75,19 +76,14 @@ public class SynDataLowData extends BaseModel {
         Staff = staff;
     }
 
-    public static void synData() {
+    public static void synData(CallBack<SynDataLowData> callBack) {
         if (!CommUtil.isNetWorkConnected()) return;
         OkGo.<SynDataLowData>post(URLConstant.API_Sync_LOWSYNC_URL)
                 .execute(new JsonCallback<SynDataLowData>() {
                     @Override
                     public void onSuccess(Response<SynDataLowData> response) {
                         if (response.body().getCode() == 1) {
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                }
-                            }).start();
+                            callBack.callBack(response.body());
                         }
                     }
                 });
