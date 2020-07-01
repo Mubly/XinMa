@@ -2,8 +2,10 @@ package com.mubly.xinma.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,8 +15,10 @@ import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityCheckDetialBinding;
 import com.mubly.xinma.iview.ICheckDetialView;
+import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.presenter.CheckDetialPresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.LiveDataBus;
 import com.shehuan.nicedialog.BaseNiceDialog;
 import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
@@ -47,6 +51,14 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
         binding.goodCheckTv.setOnClickListener(this);
         binding.diffCheckTv.setOnClickListener(this);
         binding.lessCheckTv.setOnClickListener(this);
+        LiveDataBus.get().with("chekRefresh", Boolean.class).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                mPresenter.initdata(checkId, "0");
+                tabSelect(0);
+                mPresenter.initTab(checkId);
+            }
+        });
     }
 
     @Override
@@ -141,8 +153,8 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
                 .setConvertListener(new ViewConvertListener() {
                     @Override
                     protected void convertView(ViewHolder holder, BaseNiceDialog dialog) {
-                        holder.setText(R.id.dialog_tittle_tv,"提示");
-                        holder.setText(R.id.dialog_content_tv,"确定删除？");
+                        holder.setText(R.id.dialog_tittle_tv, "提示");
+                        holder.setText(R.id.dialog_content_tv, "确定删除？");
                         holder.getView(R.id.dialog_promapt_cancle).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -159,5 +171,14 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
                     }
                 }).setMargin(60)
                 .show(getSupportFragmentManager());
+    }
+
+    @Override
+    public void toAssetDesAct(AssetBean assetBean) {
+        Intent intent = new Intent(this, AssetsDetialActivity.class);
+        intent.putExtra("assetBean", assetBean);
+        intent.putExtra("from", "check");
+        intent.putExtra("checkId", checkId);
+        startActivity(intent);
     }
 }

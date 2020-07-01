@@ -246,6 +246,11 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     }
 
     @Override
+    public void closeCurrentAct() {
+        finish();
+    }
+
+    @Override
     public void closeAllAct() {
         CrossApp.get().closeAllAct();
     }

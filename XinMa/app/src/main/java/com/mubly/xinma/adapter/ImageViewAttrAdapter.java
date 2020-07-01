@@ -45,7 +45,7 @@ public class ImageViewAttrAdapter {
     public static void LoadResBg(ImageView imageView, int resIdImg, float imgRadious) {
         if (resIdImg != -1) {
             CornerTransform cornerTransform = new CornerTransform(imageView.getContext(), CommUtil.dipTopx(imageView.getContext(), 10));
-            cornerTransform.setExceptCorner(true, true, true, true);
+            cornerTransform.setExceptCorner(true, false, true, true);
             Glide.with(imageView.getContext()).
                     load(resIdImg)
                     .apply(RequestOptions.bitmapTransform(cornerTransform))

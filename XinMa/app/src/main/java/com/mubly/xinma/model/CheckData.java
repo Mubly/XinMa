@@ -7,6 +7,7 @@ import com.mubly.xinma.base.BaseModel;
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.model.resbean.CheckCreateResBean;
+import com.mubly.xinma.model.resbean.CheckOperateResData;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
 import com.mubly.xinma.utils.CommUtil;
@@ -125,6 +126,36 @@ public class CheckData extends BaseModel {
                             callBack.callBack(response.body().CheckID);
                         else
                             CommUtil.ToastU.showToast(response.body().getMsg());
+                    }
+                });
+    }
+
+    public static void checkOperate(String checkId, String status, String remark, String assetId, CallBack<Boolean> callBack) {
+        OkGo.<CheckOperateResData>post(URLConstant.API_Check_UpdateInventory_URL)
+                .params("CheckID", checkId)
+                .params("AssetID", assetId)
+                .params("Status", status)
+                .params("Remark", remark)
+                .execute(new JsonCallback<CheckOperateResData>() {
+                    @Override
+                    public void onSuccess(Response<CheckOperateResData> response) {
+                        if (response.body().getCode() == 1) {
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    XinMaDatabase.getInstance().checkBeanDao().update(response.body().getCheck().get(0));
+                                    List<InventoryBean> inventoryBeanList = XinMaDatabase.getInstance().inventoryBeanDao().getAllById(checkId, assetId);
+                                    if (inventoryBeanList.size()>0){
+                                        inventoryBeanList.get(0).setStatus(status);
+                                        XinMaDatabase.getInstance().inventoryBeanDao().update( inventoryBeanList.get(0));
+                                    }
+                                    callBack.callBack(true);
+                                }
+                            }).start();
+
+                        } else {
+                            CommUtil.ToastU.showToast(response.body().getMsg());
+                        }
                     }
                 });
     }

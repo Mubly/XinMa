@@ -1,5 +1,7 @@
 package com.mubly.xinma.presenter;
 
+import android.view.View;
+
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.mubly.xinma.R;
@@ -95,6 +97,12 @@ public class CheckDetialPresenter extends BasePresenter<ICheckDetialView> {
                 holder.setText(R.id.item_check_inventory_type, data.getAssetModel());
                 textView.setText(data.getStatusName());
                 holder.setLocalImg(R.id.item_check_inventory_type_img, imageUrlPersenter.getAssetIcon(data.getStatus()));
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getMvpView().toAssetDesAct(data);
+                    }
+                });
             }
         };
         getMvpView().showRv(adapter);
@@ -170,7 +178,8 @@ public class CheckDetialPresenter extends BasePresenter<ICheckDetialView> {
         getMvpView().showDelectpromapt();
 
     }
-    public void delectAck(){
+
+    public void delectAck() {
         OkGo.<BaseModel>post(URLConstant.API_Check_DELECT_URL)
                 .params("CheckId", checkId)
                 .execute(new JsonCallback<BaseModel>() {

@@ -40,7 +40,7 @@
             android:scaleType="fitXY"
             imgRadious="10"
             resIdImg="@{imgPersent.getAssetIcon(bean.status)}"
-            android:src="@drawable/ldle_icon_bg"></ImageView>
+            tools:src="@drawable/ldle_icon_bg"></ImageView>
 
         <com.mubly.xinma.common.weight.RotateTextView
             android:layout_width="@dimen/size_40dp"

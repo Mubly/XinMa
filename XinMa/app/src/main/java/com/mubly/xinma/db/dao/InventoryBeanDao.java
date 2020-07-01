@@ -27,6 +27,10 @@ public interface InventoryBeanDao {
     @Query("SELECT * FROM inventoryBean WHERE CheckID LIKE :checkId AND Status LIKE :status")
     List<InventoryBean> getAllByCheckId(String checkId, String status);
 
+
+    @Query("SELECT * FROM inventoryBean WHERE CheckID LIKE :checkId AND AssetID LIKE :assetId")
+    List<InventoryBean> getAllById(String checkId, String assetId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(InventoryBean... entities);
 

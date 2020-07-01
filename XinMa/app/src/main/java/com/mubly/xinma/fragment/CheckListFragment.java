@@ -63,7 +63,8 @@ public class CheckListFragment extends Fragment {
 
             @Override
             public void dealView(VH holder, CheckBean data, int position) {
-                holder.setText(R.id.item_check_tv, data.getStatusName() + "：" + data.getItems() + "条");
+                String statusName=data.getStatus().equals("0")?"待盘点":(data.getStatus().equals("1")?"盘点中":"已完成");
+                holder.setText(R.id.item_check_tv, statusName + "：" + data.getItems() + "条");
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

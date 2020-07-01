@@ -11,4 +11,5 @@ public interface BaseMvpView {
     void startActivity(Class<?>act);
     void startActivity(Class<?>act,boolean closeAct);
     void closeAllAct();
+    void closeCurrentAct();
 }
