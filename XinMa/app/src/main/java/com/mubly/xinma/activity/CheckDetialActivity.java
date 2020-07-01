@@ -141,6 +141,8 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
                 .setConvertListener(new ViewConvertListener() {
                     @Override
                     protected void convertView(ViewHolder holder, BaseNiceDialog dialog) {
+                        holder.setText(R.id.dialog_tittle_tv,"提示");
+                        holder.setText(R.id.dialog_content_tv,"确定删除？");
                         holder.getView(R.id.dialog_promapt_cancle).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
