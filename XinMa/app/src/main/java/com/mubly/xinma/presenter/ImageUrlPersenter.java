@@ -15,15 +15,15 @@ public class ImageUrlPersenter {
     public int getAssetIcon(String status) {
         if (TextUtils.isEmpty(status)) return -1;
         if (status.equals("1")) {
-            return R.drawable.ldle_icon_bg;
+            return R.drawable.ic_ldle_icon_bg;
         } else if (status.equals("3")) {
-            return R.drawable.using_icon_bg;
+            return R.drawable.ic_using_icon_bg;
         } else if (status.equals("5")) {
-            return R.drawable.brrorow_icon_bg;
+            return R.drawable.ic_brrorow_icon_bg;
         } else if (status.equals("6")) {
-            return R.drawable.repair_icon_bg;
+            return R.drawable.ic_repair_icon_bg;
         } else if (status.equals("8")) {
-            return R.drawable.dispose_icon_bg;
+            return R.drawable.ic_dispose_icon_bg;
         }
         return -1;
     }

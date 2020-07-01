@@ -60,6 +60,7 @@
                 android:layout_marginLeft="@dimen/size_100dp"
                 android:background="@null"
                 android:enabled="false"
+                android:textSize="@dimen/size_14sp"
                 android:gravity="right|center_vertical"
                 android:paddingRight="@dimen/size_16dp"
                 android:text="@{vm.currentTime}">
@@ -81,13 +82,16 @@
             android:layout_marginLeft="@dimen/size_16dp"
             android:layout_marginTop="@dimen/size_10dp"
             android:layout_marginRight="@dimen/size_16dp"
+         android:padding="@dimen/size_1dp"
             android:background="@drawable/shape_stroke_blue_bg">
 
             <TextView
+                android:id="@+id/wait_check_tv"
                 android:layout_width="@dimen/size_10dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@drawable/selector_check_tab_bg"
                 android:text="@{vm.waitCheck}"
                 android:textColor="@color/select_tab_tv_color"
                 android:textSize="13sp"
@@ -99,9 +103,11 @@
                 android:background="@color/main_blue"></View>
 
             <TextView
+                android:id="@+id/good_check_tv"
                 android:layout_width="@dimen/size_10dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/selector_check_tab_bg"
                 android:gravity="center"
                 android:text="@{vm.goodOne}"
                 android:textColor="@color/select_tab_tv_color"
@@ -114,10 +120,12 @@
                 android:background="@color/main_blue"></View>
 
             <TextView
+                android:id="@+id/diff_check_tv"
                 android:layout_width="@dimen/size_10dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@drawable/selector_check_tab_bg"
                 android:text="@{vm.diff}"
                 android:textColor="@color/select_tab_tv_color"
                 android:textSize="13sp"
@@ -129,11 +137,13 @@
                 android:background="@color/main_blue"></View>
 
             <TextView
+                android:id="@+id/less_check_tv"
                 android:layout_width="@dimen/size_10dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@{vm.less}"
+                android:background="@drawable/selector_check_tab_bg"
                 android:textColor="@color/select_tab_tv_color"
                 android:textSize="13sp"
                 tools:text="待盘点"></TextView>
@@ -161,6 +171,7 @@
                     android:background="@color/white"
                     android:gravity="center"
                     android:text="删除盘点"
+                    android:onClick="@{()->vm.delect()}"
                     android:textColor="@color/main_blue"
                     android:textSize="@dimen/size_14sp">
 

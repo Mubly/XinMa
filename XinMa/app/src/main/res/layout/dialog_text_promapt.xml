@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_radius_10_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_tittle_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_30dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:gravity="center"
+        android:text="盘点步骤"
+        android:textColor="@color/color_414141"
+        android:textSize="@dimen/size_18sp"></TextView>
+
+    <TextView
+        android:id="@+id/dialog_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_6dp"
+        android:lineSpacingMultiplier="1.2"
+        android:paddingRight="@dimen/size_16dp"
+        android:textColor="@color/color_414141"
+        android:paddingLeft="@dimen/size_16dp"
+        android:text="@string/check_assets_info"
+        android:textSize="@dimen/size_14sp"></TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:background="@color/clr_gray_line">
+    </View>
+    <TextView
+        android:id="@+id/dialog_promapt_ack"
+        android:layout_width="match_parent"
+        android:textColor="@color/main_blue"
+        android:textSize="@dimen/size_20sp"
+        android:text="确定"
+        android:gravity="center"
+        android:layout_height="@dimen/size_40dp">
+    </TextView>
+</LinearLayout>

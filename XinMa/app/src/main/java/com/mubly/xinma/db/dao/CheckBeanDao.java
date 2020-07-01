@@ -32,6 +32,9 @@ public interface CheckBeanDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<CheckBean> checkBeanList);
 
+    @Query("DELETE FROM CHECKBEAN WHERE CheckID = (:id)")
+    void deleteById(String id);
+
     @Delete
     void delete(CheckBean entity);
 

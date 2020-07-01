@@ -28,6 +28,7 @@ import com.mubly.xinma.utils.CommUtil;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -197,6 +198,11 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
 
     public void setRightAddBtnEnable(Boolean enable) {
         rightAddBtn.setVisibility(enable ? View.VISIBLE : View.GONE);
+    }
+
+    public void setRightBtnResId(int imgRsId) {
+        rightAddBtn.setVisibility(View.VISIBLE);
+        rightAddBtn.setImageResource(imgRsId);
     }
 
     public void setBackBtnEnable(Boolean enable) {

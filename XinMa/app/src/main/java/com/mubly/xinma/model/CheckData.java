@@ -71,7 +71,6 @@ public class CheckData extends BaseModel {
                                 public void run() {
                                     XinMaDatabase.getInstance().inventoryBeanDao().insertAll(checkData.getInventory());
                                     XinMaDatabase.getInstance().checkBeanDao().insertAll(checkData.getCheck());
-//                                    getCheckDatabyStatus(status, callBack);
                                 }
                             }).start();
                         }

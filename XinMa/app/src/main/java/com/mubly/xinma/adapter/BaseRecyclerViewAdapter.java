@@ -131,9 +131,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
 //            ImagelodersUtils.glideLoadCircleImage(context,imgUrl,view);
         }
 
-        public void setLocalImg(Context context, int id, int imgUrl) {
+        public void setLocalImg( int id, int imgUrl) {
             ImageView view = getView(id);
-            Glide.with(context).load(imgUrl).apply(new RequestOptions() //占位图
+            Glide.with(view.getContext()).load(imgUrl).apply(new RequestOptions() //占位图
                     .centerCrop())
                     .into(view);
         }
@@ -145,9 +145,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
                     .into(view);
         }
 
-        public void setNetImage(Context context, int id, String value) {
+        public void setNetImage( int id, String value) {
             ImageView view = getView(id);
-            Glide.with(context).load(value).
+            Glide.with(view.getContext()).load(value).
                     apply(new RequestOptions().placeholder(R.mipmap.img_defaut)//占位图
                             .error(R.mipmap.img_defaut)
                             .centerCrop())

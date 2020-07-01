@@ -3,8 +3,10 @@ package com.mubly.xinma.model;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Date;
+import java.util.List;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "inventoryBean")
@@ -18,6 +20,16 @@ public class InventoryBean {
     private String StatusName;
     private String InventoryTime;
     private String CreateTime;
+    @Ignore
+    private List<AssetBean>assetBeanList;
+
+    public List<AssetBean> getAssetBeanList() {
+        return assetBeanList;
+    }
+
+    public void setAssetBeanList(List<AssetBean> assetBeanList) {
+        this.assetBeanList = assetBeanList;
+    }
 
     public String getInventoryID() {
         return InventoryID;

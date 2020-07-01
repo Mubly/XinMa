@@ -24,10 +24,17 @@ public interface InventoryBeanDao {
     @Query("SELECT * FROM inventoryBean WHERE Status LIKE :status")
     List<InventoryBean> getAllByStatus(String status);
 
+    @Query("SELECT * FROM inventoryBean WHERE CheckID LIKE :checkId AND Status LIKE :status")
+    List<InventoryBean> getAllByCheckId(String checkId, String status);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(InventoryBean... entities);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<InventoryBean> inventoryBeanList);
+
+    @Query("DELETE FROM inventoryBean WHERE CheckID = (:id)")
+    void deleteByCheckId(String id);
     @Delete
     void delete(InventoryBean entity);
 

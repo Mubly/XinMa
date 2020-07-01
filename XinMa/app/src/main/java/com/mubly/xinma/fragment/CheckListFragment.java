@@ -1,5 +1,6 @@
 package com.mubly.xinma.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mubly.xinma.R;
+import com.mubly.xinma.activity.CheckDetialActivity;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.databinding.FragmentCheckListBinding;
 import com.mubly.xinma.db.XinMaDatabase;
@@ -62,6 +64,15 @@ public class CheckListFragment extends Fragment {
             @Override
             public void dealView(VH holder, CheckBean data, int position) {
                 holder.setText(R.id.item_check_tv, data.getStatusName() + "：" + data.getItems() + "条");
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(getContext(), CheckDetialActivity.class);
+                        intent.putExtra("checkId",data.getCheckID());
+                        intent.putExtra("checkTime",data.getCreateTime());
+                        startActivity(intent);
+                    }
+                });
             }
         };
         binding.checkListRv.setLayoutManager(new LinearLayoutManager(getContext()));

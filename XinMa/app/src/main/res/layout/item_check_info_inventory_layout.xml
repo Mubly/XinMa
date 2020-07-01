@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_70dp">
+    android:layout_height="@dimen/size_70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/item_check_inventory_img"
@@ -34,18 +35,32 @@
         tools:text="食品">
 
     </TextView>
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_gravity="right"
+    android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/item_check_inventory_type_img"
         android:layout_width="@dimen/size_60dp"
-        android:src="@drawable/ldle_icon_bg"
+        android:layout_height="@dimen/size_60dp"
+        app:srcCompat="@drawable/ic_ldle_icon_bg"></ImageView>
+    <com.mubly.xinma.common.weight.RotateTextView
+        android:id="@+id/status_name"
+        android:layout_width="@dimen/size_40dp"
+        tools:text="闲置"
+        android:gravity="center"
         android:layout_gravity="right"
-        android:layout_height="@dimen/size_60dp">
-    </ImageView>
+        android:textSize="@dimen/size_10sp"
+        android:textColor="@color/white"
+        android:layout_height="@dimen/size_40dp">
+    </com.mubly.xinma.common.weight.RotateTextView>
+</FrameLayout>
+
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/clr_gray_line"
+        android:layout_height="1px"
         android:layout_gravity="bottom"
         android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_height="1px">
-    </View>
+        android:background="@color/clr_gray_line"></View>
 </FrameLayout>

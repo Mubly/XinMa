@@ -91,6 +91,9 @@ public class URLConstant {
     //盘点操作
     public static final String API_Check_UpdateInventory_URL = BASE_URL + "/API_Check/UpdateInventory";
 
+    //盘点删除
+    public static final String API_Check_DELECT_URL = BASE_URL + "/API_Check/DelCheck";
+
     //    主题数据
     public static final String API_Company_SelectCompany_Url = BASE_URL + "/API_Company/SelectCompany";
 
