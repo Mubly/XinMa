@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.mubly.xinma.R;
 import com.mubly.xinma.activity.AssetSelectActivity;
+import com.mubly.xinma.activity.AssetsDetialActivity;
 import com.mubly.xinma.activity.AssetsListActivity;
 import com.mubly.xinma.adapter.AssetsListAdapter;
 import com.mubly.xinma.adapter.SmartAdapter;
@@ -56,12 +57,19 @@ public class AssetsListFragment extends Fragment {
         adapter.setOnItemClickListener(new AssetsListAdapter.OnItemClickListener() {
             @Override
             public void itemClick(AssetBean data, int index) {
-                startActivity(new Intent(getActivity(), AssetSelectActivity.class));
+                toAssestDetial(data);
             }
         });
         binding.assetsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.assetsRv.setAdapter(adapter);
         initData();
+    }
+
+    private void toAssestDetial(AssetBean data) {
+        Intent intent = new Intent(getContext(), AssetsDetialActivity.class);
+        intent.putExtra("assetBean",data);
+        intent.putExtra("from","assetsList");
+        startActivity(intent);
     }
 
     private void initData() {

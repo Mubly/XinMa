@@ -53,9 +53,11 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
     @Override
     public void initEvent() {
         super.initEvent();
-        normalTv.setOnClickListener(this);
-        diffTv.setOnClickListener(this);
-        lessTV.setOnClickListener(this);
+     if (from.equals("check")){
+         normalTv.setOnClickListener(this);
+         diffTv.setOnClickListener(this);
+         lessTV.setOnClickListener(this);
+     }
     }
 
     @Override
