@@ -1,7 +1,10 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
 import org.jetbrains.annotations.NotNull;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -55,5 +58,11 @@ public class GroupBean {
 
     public void setStatus(int status) {
         Status = status;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return TextUtils.isEmpty(Depart)?"--":Depart;
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/print_mode_layout"
+    android:background="@drawable/selector_print_mode_item_bg"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/print_model_name"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_40dp"
+        tools:text="固资434"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:gravity="center_vertical">
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/clr_gray_line">
+    </View>
+    <ImageView
+        android:id="@+id/print_model_img"
+        android:layout_width="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:minHeight="@dimen/size_80dp"
+        android:maxHeight="@dimen/size_120dp"
+        android:layout_height="wrap_content">
+    </ImageView>
+</LinearLayout>

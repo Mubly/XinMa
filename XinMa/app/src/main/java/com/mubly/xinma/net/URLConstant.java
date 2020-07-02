@@ -18,6 +18,8 @@ public class URLConstant {
     public static String ENTER_SERVICE = "";
     //图片服务器
     public static String BASE_IMG_URL = "http://asset.ymade.cn/";
+    //模板服务器地址
+    public static String PRINT_MODE_BASE_URL = "http://api.ezc365.cn/";
 
     static {
         if (EnvironmentType.DEVELOP.equal(Constant.flag)) {

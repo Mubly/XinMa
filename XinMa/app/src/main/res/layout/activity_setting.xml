@@ -242,6 +242,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
+                        android:onClick="toJumpAct"
                         android:layout_height="@dimen/size_50dp">
 
                         <TextView

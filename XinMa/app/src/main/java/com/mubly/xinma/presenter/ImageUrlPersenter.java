@@ -9,7 +9,12 @@ import com.mubly.xinma.common.Constant;
 public class ImageUrlPersenter {
     public String getAssetListUrl(String headUrl) {
 
-        return TextUtils.isEmpty(headUrl)?null:Constant.ASSET_HRADIMG_LITTLE_URL + headUrl;
+        return TextUtils.isEmpty(headUrl) ? null : Constant.ASSET_HRADIMG_LITTLE_URL + headUrl;
+    }
+
+    public static String getPrintModeurl(String imgUrl) {
+//        return "https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg";
+        return TextUtils.isEmpty(imgUrl) ? null : Constant.PRINT_MODE_IMG_SCAN_URL + imgUrl;
     }
 
     public int getAssetIcon(String status) {

@@ -1,9 +1,9 @@
 package com.mubly.xinma.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
 
 import com.mubly.xinma.R;
 import com.mubly.xinma.base.BaseActivity;
@@ -33,5 +33,10 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting);
+    }
+
+    public void toJumpAct(View view) {
+        Intent intent = new Intent(this, PrintModelActivity.class);
+        startActivity(intent);
     }
 }

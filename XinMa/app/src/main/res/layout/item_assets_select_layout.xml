@@ -35,8 +35,7 @@
                 android:layout_width="@dimen/size_60dp"
                 android:layout_height="@dimen/size_60dp"
                 android:layout_alignParentRight="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/ldle_icon_bg"></ImageView>
+                android:scaleType="fitXY"></ImageView>
 
             <com.mubly.xinma.common.weight.RotateTextView
                 android:id="@+id/flag_tv"

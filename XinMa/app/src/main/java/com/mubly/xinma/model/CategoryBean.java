@@ -1,7 +1,10 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
 import org.jetbrains.annotations.NotNull;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -71,5 +74,11 @@ public class CategoryBean {
 
     public void setStamp(String Stamp) {
         this.Stamp = Stamp;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return TextUtils.isEmpty(Category) ? "--" : Category;
     }
 }

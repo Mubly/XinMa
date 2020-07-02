@@ -1,9 +1,12 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
 import com.mubly.xinma.utils.StringUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -86,7 +89,12 @@ public class StaffBean {
         Status = status;
     }
 
-//    public long getId() {
+    @NonNull
+    @Override
+    public String toString() {
+        return TextUtils.isEmpty(Staff)?"--":Staff;
+    }
+    //    public long getId() {
 //        return id;
 //    }
 //

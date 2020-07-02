@@ -146,12 +146,16 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Ba
         }
 
         public void setNetImage( int id, String value) {
-            ImageView view = getView(id);
-            Glide.with(view.getContext()).load(value).
-                    apply(new RequestOptions().placeholder(R.mipmap.img_defaut)//占位图
-                            .error(R.mipmap.img_defaut)
-                            .centerCrop())
-                    .into(view);
+            if (TextUtils.isEmpty(value)){
+                setLocalImg(id,R.mipmap.img_defaut);
+            }else {
+                ImageView view = getView(id);
+                Glide.with(view.getContext()).load(value).
+                        apply(new RequestOptions().placeholder(R.mipmap.img_defaut)//占位图
+                                .error(R.mipmap.img_defaut)
+                                .centerCrop())
+                        .into(view);
+            }
         }
 
         public void setNetImage(Context context, int id, String value, int placeholder) {

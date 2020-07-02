@@ -50,14 +50,15 @@
                         android:onClick="clickEvent"
                         android:src="@mipmap/sort_icon"></ImageView>
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/asset_select_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
-            <include layout="@layout/filter_layout"></include>
+            <include
+                layout="@layout/filter_layout"></include>
         </FrameLayout>
     </LinearLayout>
 </layout>

@@ -4,6 +4,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.base.BasePresenter;
@@ -12,6 +14,8 @@ import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IAssetSelectView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.SelectAssetsBean;
+import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.CornerTransform;
 import com.mubly.xinma.utils.ImageUtils;
 
 import java.util.ArrayList;
@@ -48,6 +52,7 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
             @Override
             public void dealView(VH holder, final AssetBean data, int position) {
                 final ImageView selectModel = (ImageView) holder.getChildView(R.id.asset_select_icon);
+                ImageView iconImg=(ImageView) holder.getChildView(R.id.right_img_icon);
                 if (null != localSelectBean && localSelectBean.getSelectBean().size() > 0) {
                     for (AssetBean assetBean : localSelectBean.getSelectBean()) {
                         if (assetBean.getAssetID().equals(data.getAssetID()))
@@ -60,7 +65,13 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
 
                 holder.setNetImage(selectModel.getContext(), R.id.assets_img, imageUrlPersenter.getAssetListUrl(data.getHeadimg()), R.mipmap.img_defaut);
                 if (imageUrlPersenter.getAssetIcon(data.getStatus()) != -1) {
-                    holder.setImageBg(R.id.right_img_icon, imageUrlPersenter.getAssetIcon(data.getStatus()));
+                    CornerTransform cornerTransform = new CornerTransform(iconImg.getContext(), CommUtil.dipTopx(iconImg.getContext(), 10));
+                    cornerTransform.setExceptCorner(true, false, true, true);
+                    Glide.with(iconImg.getContext()).
+                            load(imageUrlPersenter.getAssetIcon(data.getStatus()))
+                            .apply(RequestOptions.bitmapTransform(cornerTransform))
+                            .into(iconImg);
+//                    holder.setLocalImg(R.id.right_img_icon, imageUrlPersenter.getAssetIcon(data.getStatus()));
                 }
                 RotateTextView flagTv = (RotateTextView) holder.getChildView(R.id.flag_tv);
                 flagTv.setText(data.getStatusName());
