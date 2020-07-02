@@ -65,6 +65,9 @@ public class URLConstant {
     //资产数据
     public static final String ASSET_DATA_DOWNLOAD_URL = BASE_URL + "/API_Asset/ListAsset";
 
+    //图片上传
+    public static final String ASSET_DATA_IMAGE_UPLOAD_URL = BASE_URL + "/APP/UploadHeadimg";
+
     //资产添加修改
     public static final String ASSET_DATA_UpdateAsset_URL = BASE_URL + "/API_Asset/UpdateAsset";
 

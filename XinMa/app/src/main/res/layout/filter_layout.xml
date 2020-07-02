@@ -298,6 +298,7 @@
                     android:layout_height="@dimen/size_40dp">
 
                     <TextView
+                        android:id="@+id/reset_filter_param"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -308,6 +309,7 @@
                         android:textSize="@dimen/size_12sp"></TextView>
 
                     <TextView
+                        android:id="@+id/filter_ack"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

@@ -71,6 +71,16 @@ public class AssetBean implements Serializable {
     private String IsLock;
     private String Status;
     private String StatusName;
+    private String CreateTime;
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
+
     public String getAssetID() {
         return AssetID;
     }
@@ -264,7 +274,7 @@ public class AssetBean implements Serializable {
     }
 
     public String getStatus() {
-        return Status;
+        return TextUtils.isEmpty(Status) ? "1" : Status;
     }
 
     public void setStatus(String Status) {
@@ -277,6 +287,7 @@ public class AssetBean implements Serializable {
 
     public String getSeatLabel() {
         String label = "--";
+        if (null == Status) return "存放地点";
         if (Status.equals("1")) {
             label = "存放地点";
         } else if (Status.equals("3")) {

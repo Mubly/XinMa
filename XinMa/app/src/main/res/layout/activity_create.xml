@@ -94,12 +94,29 @@
 
                     </TextView>
 
+                    <EditText
+                        android:id="@+id/asset_create_asset_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:hint="请输入资产编码"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
+
                     <ImageView
-                        android:layout_width="@dimen/size_20dp"
-                        android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
+                        android:layout_width="@dimen/size_30dp"
+                        android:layout_height="@dimen/size_30dp"
                         android:layout_gravity="center_vertical|right"
-                        android:layout_marginRight="@dimen/size_20dp">
+                        android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
+                        android:src="@mipmap/scan_mini_icon">
 
                     </ImageView>
 
@@ -125,13 +142,27 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_asset_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:hint="请输入资产名称"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -158,13 +189,27 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_asset_model"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:hint="请输入规格型号"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -191,13 +236,27 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:hint="请输入计量单位"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -224,13 +283,27 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_supply"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:hint="请输入供应商"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -261,9 +334,9 @@
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -290,13 +363,28 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_original"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:hint="请输入购置价格"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -323,13 +411,28 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_depreciated"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:hint="请输入损耗周期"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -356,13 +459,28 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_Guaranteed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:inputType="number"
+                        android:hint="请输入保修周期"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -402,9 +520,9 @@
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -431,13 +549,27 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
-
+                    <EditText
+                        android:id="@+id/asset_create_Seat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/size_13sp"
+                        android:textColor="@color/color_414141"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:hint="请输入存放地点"
+                        android:background="@null"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="center_vertical|right">
+                    </EditText>
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -477,9 +609,9 @@
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>
@@ -517,8 +649,8 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:onClick="@{()->vm.customeParam()}"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_40dp"
+                    android:onClick="@{()->vm.customeParam()}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -534,9 +666,9 @@
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:padding="@dimen/size_2dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
                         android:src="@mipmap/arrow_right_gray">
 
                     </ImageView>

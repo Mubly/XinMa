@@ -22,11 +22,13 @@ import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.luck.picture.lib.style.PictureCropParameterStyle;
 import com.mubly.xinma.R;
 import com.mubly.xinma.base.BaseActivity;
+import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.databinding.ActivityCreateBinding;
 import com.mubly.xinma.iview.ICreateView;
 import com.mubly.xinma.presenter.CreatePresenter;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.GlideEngine;
+import com.mubly.xinma.utils.ImageUtils;
 import com.shehuan.nicedialog.BaseNiceDialog;
 import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
@@ -39,6 +41,7 @@ import java.util.List;
  */
 public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> implements ICreateView {
     ActivityCreateBinding binding = null;
+    private String headimg;
 
     @Override
     public void initView() {
@@ -56,8 +59,32 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        CommUtil.ToastU.showToast("保存成功");
-        finish();
+        String assetNo = binding.assetCreateAssetNo.getText().toString();
+        String assetName = binding.assetCreateAssetName.getText().toString();
+        String assetModel = binding.assetCreateAssetModel.getText().toString();
+        String assetUnit = binding.assetCreateUnit.getText().toString();
+        String assetSupply = binding.assetCreateSupply.getText().toString();
+        String PurchaseDate = binding.assetCreateAssetName.getText().toString();//购置日期
+        String original = binding.assetCreateOriginal.getText().toString();
+        String depreciated = binding.assetCreateDepreciated.getText().toString();
+        String guaranteed = binding.assetCreateGuaranteed.getText().toString();
+        String Depart = binding.assetCreateAssetName.getText().toString();//所属部门
+        String Staff = binding.assetCreateAssetName.getText().toString();//保管人
+        String seat = binding.assetCreateSeat.getText().toString();
+        String Category = binding.assetCreateAssetName.getText().toString();//资产分类
+        String CategoryId = binding.assetCreateAssetName.getText().toString();//资产分类Id
+
+        if (TextUtils.isEmpty(assetName)) {
+            CommUtil.ToastU.showToast("请输入资产名称");
+            return;
+        }
+        mPresenter.createAssets(headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
+                , Staff, seat, Category, CategoryId, new CallBack<Boolean>() {
+                    @Override
+                    public void callBack(Boolean obj) {
+                        finish();
+                    }
+                });
     }
 
     @Override
@@ -72,6 +99,8 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
                 .maxSelectNum(1)
                 .isEnableCrop(true)
                 .freeStyleCropEnabled(true)
+                .compressQuality(60)
+                .isCompress(true)
                 .imageEngine(GlideEngine.createGlideEngine())
                 .cropWH(100, 100)
                 .cropImageWideHigh(100, 100)
@@ -81,6 +110,12 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
                         if (null != result && result.size() > 0) {
                             Glide.with(CreateActivity.this).load(result.get(0).getCutPath())
                                     .apply(RequestOptions.centerCropTransform()).into(binding.createAssetImg);
+                            mPresenter.imageUpload(ImageUtils.imageToBase64(result.get(0).isCompressed() ? result.get(0).getCompressPath() : result.get(0).getCutPath()), new CallBack<String>() {
+                                @Override
+                                public void callBack(String obj) {
+                                    headimg = obj;
+                                }
+                            });
                         }
                     }
 
@@ -120,7 +155,7 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
                                     return;
                                 }
                                 View itemView = View.inflate(CreateActivity.this, R.layout.custom_param_layout, null);
-                                LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
+                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
                                 TextView paramKeyTv = itemView.findViewById(R.id.custom_param_key);
                                 TextView paramValueTv = itemView.findViewById(R.id.custom_param_value);
                                 paramKeyTv.setText(paramKeyStr);

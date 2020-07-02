@@ -45,11 +45,14 @@ import com.mubly.xinma.utils.CommUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -65,8 +68,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     //    返回码
     public static final int RESULT_OK_CODE = 10010;//数据返回成功
     public static final int RESULT_NULL_CODE = 10011;//无数据返回成功
-    ConstraintLayout filterLayout;
-    LinearLayout filterContentLayout;
+
     //记录之前选中的
     private SelectAssetsBean selectBean;
     //资产的状态 默认全部
@@ -74,10 +76,11 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
 
 
     //    筛选区
+    ConstraintLayout filterLayout;
+    LinearLayout filterContentLayout;
     TimePickerView pvTime;
     TextView selectTv;
-    private OptionsPickerView pvOptions, departMentPicker;
-    private List<String> options1Items = new ArrayList<>();
+    private OptionsPickerView catoryPicker, periodPicker, departMentPicker;
 
     private List<GroupBean> groupBeanList = new ArrayList<>();
     private List<List<StaffBean>> staffBeanList = new ArrayList<>();
@@ -85,7 +88,8 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     private boolean filterInit;
 
     private List<CategoryBean> categoryBeanList = new ArrayList<>();
-
+    private List<String> periodList = new ArrayList<>();
+    private Map<String, String> filterMap = new HashMap<>();
 
     @Override
     public void initView() {
@@ -93,7 +97,6 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
         setRightTv("确认");
         mPresenter.init(selectBean, status);
         initfilterData();
-        initFilter();
     }
 
     @Override
@@ -157,8 +160,8 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                 .subscribeOn(Schedulers.io())
                 .map(new Function<List<GroupBean>, List<List<StaffBean>>>() {
                     @Override
-                    public List<List<StaffBean>> apply(List<GroupBean> groupBeanList) throws Exception {
-                        groupBeanList.addAll(groupBeanList);
+                    public List<List<StaffBean>> apply(List<GroupBean> groupBeans) throws Exception {
+                        groupBeanList.addAll(groupBeans);
                         List<List<StaffBean>> staffArr = new ArrayList<>();
                         List<StaffBean> topStaff = new ArrayList<>();
                         StaffBean staffBean = new StaffBean();
@@ -170,15 +173,22 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                         }
                         return staffArr;
                     }
-                }).subscribe(new Consumer<List<List<StaffBean>>>() {
-            @Override
-            public void accept(List<List<StaffBean>> lists) throws Exception {
-                GroupBean groupBean = new GroupBean();
-                groupBean.setDepart("无限制");
-                groupBeanList.add(0, groupBean);
-                filterInit = true;
-            }
-        });
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<List<StaffBean>>>() {
+                    @Override
+                    public void accept(List<List<StaffBean>> lists) throws Exception {
+                        staffBeanList.addAll(lists);
+                        GroupBean groupBean = new GroupBean();
+                        groupBean.setDepart("无限制");
+                        groupBeanList.add(0, groupBean);
+                        filterInit = true;
+                        periodList.add("无限制");
+                        periodList.add("已到期");
+                        periodList.add("30天到期");
+                        initFilter();
+                    }
+                });
     }
 
     @Override
@@ -200,14 +210,17 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
         binding.assetSelectRv.setAdapter(adapter);
     }
 
+    //筛选模块
     private void initFilter() {
         initTimePicker();
+        initPeriodPicker();
         initCategoryPicker();
         initDepartmentPicker();
         FilterLayoutBinding filterBinding = DataBindingUtil.bind(filterLayout);
         filterBinding.filterDepartmentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectTv = filterBinding.filterDepartmentTv;
                 departMentPicker.show();
             }
         });
@@ -215,7 +228,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             @Override
             public void onClick(View v) {
                 selectTv = filterBinding.filterCategoryTv;
-                pvOptions.show();
+                catoryPicker.show();
             }
         });
         filterBinding.filterStartdateLayout.setOnClickListener(new View.OnClickListener() {
@@ -236,11 +249,30 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             @Override
             public void onClick(View v) {
                 selectTv = filterBinding.filterMaturityTv;
-                pvTime.show(filterBinding.filterMaturityTv);
+                periodPicker.show();
+            }
+        });
+        filterBinding.resetFilterParam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectTv = null;
+                filterMap.clear();
+                filterBinding.filterDepartmentTv.setText("无限制");
+                filterBinding.filterCategoryTv.setText("无限制");
+                filterBinding.filterStartdateTv.setText("无限制");
+                filterBinding.filterEnddateTv.setText("无限制");
+                filterBinding.filterMaturityTv.setText("无限制");
+            }
+        });
+        filterBinding.filterAck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterLayout.setVisibility(View.GONE);
             }
         });
     }
 
+    //时间选择器
     private void initTimePicker() {//Dialog 模式下，在底部弹出
         pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
@@ -277,12 +309,32 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
         }
     }
 
-
-    private void initCategoryPicker() {//分类选择
-        pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+    //时间段选择器
+    private void initPeriodPicker() {//分类选择
+        periodPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
+                String tx = periodList.get(options1);
+                selectTv.setText(tx);
+
+            }
+        })
+                .setTitleText("请选择")
+                .setContentTextSize(20)//设置滚轮文字大小
+                .setDividerColor(Color.LTGRAY)//设置分割线的颜色
+                .setSelectOptions(0, 1)//默认选中项
+                .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .setOutSideColor(0x00000000) //设置外部遮罩颜色
+                .build();
+        periodPicker.setPicker(periodList);
+    }
+
+    //初始化分类选择器
+    private void initCategoryPicker() {//分类选择
+        catoryPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = categoryBeanList.get(options1).toString();
                 selectTv.setText(tx);
 
@@ -292,37 +344,19 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                 .setContentTextSize(20)//设置滚轮文字大小
                 .setDividerColor(Color.LTGRAY)//设置分割线的颜色
                 .setSelectOptions(0, 1)//默认选中项
-//                .setBgColor(Color.BLACK)
-//                .setTitleBgColor(Color.DKGRAY)
-//                .setTitleColor(Color.LTGRAY)
-//                .setCancelColor(Color.YELLOW)
-//                .setSubmitColor(Color.YELLOW)
-//                .setTextColorCenter(Color.LTGRAY)
                 .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-//                .setLabels("省", "市", "区")
                 .setOutSideColor(0x00000000) //设置外部遮罩颜色
-//                .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
-//                    @Override
-//                    public void onOptionsSelectChanged(int options1, int options2, int options3) {
-//
-//                    }
-//                })
                 .build();
-
-//        pvOptions.setSelectOptions(1,1);
-        pvOptions.setPicker(categoryBeanList);//一级选择器*/
-//        pvOptions.setPicker(options1Items, options2Items);//二级选择器
-//        /*pvOptions.setPicker(options1Items, options2Items,options3Items);//三级选择器*/
+        catoryPicker.setPicker(categoryBeanList);
     }
 
-
-    private void initDepartmentPicker() {//部门选择
+    //部门选择
+    private void initDepartmentPicker() {
         departMentPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                String tx = groupBeanList.get(options1).toString() + staffBeanList.get(options1).get(options2).toString();
+                String tx = groupBeanList.get(options1).toString() + " — " + staffBeanList.get(options1).get(options2).toString();
                 selectTv.setText(tx);
 
             }
@@ -331,25 +365,10 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                 .setContentTextSize(20)//设置滚轮文字大小
                 .setDividerColor(Color.LTGRAY)//设置分割线的颜色
                 .setSelectOptions(0, 1)//默认选中项
-//                .setBgColor(Color.BLACK)
-//                .setTitleBgColor(Color.DKGRAY)
-//                .setTitleColor(Color.LTGRAY)
-//                .setCancelColor(Color.YELLOW)
-//                .setSubmitColor(Color.YELLOW)
-//                .setTextColorCenter(Color.LTGRAY)
                 .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-//                .setLabels("省", "市", "区")
                 .setOutSideColor(0x00000000) //设置外部遮罩颜色
-//                .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
-//                    @Override
-//                    public void onOptionsSelectChanged(int options1, int options2, int options3) {
-//
-//                    }
-//                })
                 .build();
-
-//        pvOptions.setSelectOptions(1,1);
         departMentPicker.setPicker(groupBeanList, staffBeanList);
     }
 }

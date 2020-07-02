@@ -48,6 +48,7 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
         binding.setLifecycleOwner(this);
         mPresenter.init(selectAssetsBean);
 
+
     }
 
     @Override
