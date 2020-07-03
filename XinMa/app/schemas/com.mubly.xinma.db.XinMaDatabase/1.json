@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bbfa95dfd61439ac0404009590f54140",
+    "identityHash": "195582326d59e881e7ce46659b9504e8",
     "entities": [
       {
         "tableName": "asset",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`AssetID` TEXT NOT NULL, `AssetNo` TEXT, `AssetName` TEXT, `Category` TEXT, `CategoryID` TEXT, `AssetModel` TEXT, `Headimg` TEXT, `Supply` TEXT, `PurchaseDate` TEXT, `ExpireDate` TEXT, `Unit` TEXT, `Original` TEXT, `Price` TEXT, `Guaranteed` TEXT, `Depreciated` TEXT, `Remainder` TEXT, `RFID` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Remark` TEXT, `LastProcessTime` TEXT, `LastInventoryTime` TEXT, `IsLock` TEXT, `Status` TEXT, `StatusName` TEXT, PRIMARY KEY(`AssetID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`AssetID` TEXT NOT NULL, `AssetNo` TEXT, `AssetName` TEXT, `Category` TEXT, `CategoryID` TEXT, `AssetModel` TEXT, `Headimg` TEXT, `Supply` TEXT, `PurchaseDate` TEXT, `ExpireDate` TEXT, `Unit` TEXT, `Original` TEXT, `Price` TEXT, `Guaranteed` TEXT, `Depreciated` TEXT, `Remainder` TEXT, `RFID` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Remark` TEXT, `LastProcessTime` TEXT, `LastInventoryTime` TEXT, `IsLock` TEXT, `Status` TEXT, `StatusName` TEXT, `CreateTime` TEXT, PRIMARY KEY(`AssetID`))",
         "fields": [
           {
             "fieldPath": "AssetID",
@@ -161,6 +161,12 @@
           {
             "fieldPath": "StatusName",
             "columnName": "StatusName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CreateTime",
+            "columnName": "CreateTime",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -707,7 +713,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"bbfa95dfd61439ac0404009590f54140\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"195582326d59e881e7ce46659b9504e8\")"
     ]
   }
 }

@@ -100,6 +100,7 @@
                         android:orientation="vertical">
 
                         <FrameLayout
+                            android:id="@+id/get_use_time_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -113,6 +114,7 @@
                                 android:textSize="@dimen/size_15sp"></TextView>
 
                             <TextView
+                                android:id="@+id/get_use_time_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -138,6 +140,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/get_use_depart_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -156,6 +159,7 @@
                                     android:textSize="@dimen/size_15sp"></TextView>
 
                                 <TextView
+
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/size_3dp"
@@ -164,6 +168,7 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/get_use_depart_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -189,6 +194,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/get_use_staff_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -207,6 +213,7 @@
                                     android:textSize="@dimen/size_15sp"></TextView>
 
                                 <TextView
+
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/size_3dp"
@@ -215,6 +222,7 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/get_use_staff_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -240,6 +248,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/get_use_address_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -253,6 +262,7 @@
                                 android:textSize="@dimen/size_15sp"></TextView>
 
                             <TextView
+                                android:id="@+id/get_use_address_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -278,6 +288,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/get_use_reason_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -291,6 +302,7 @@
                                 android:textSize="@dimen/size_15sp"></TextView>
 
                             <TextView
+                                android:id="@+id/get_use_reason_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"

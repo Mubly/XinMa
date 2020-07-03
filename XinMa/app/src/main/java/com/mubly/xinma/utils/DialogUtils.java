@@ -30,13 +30,13 @@ import io.reactivex.schedulers.Schedulers;
 
 public class DialogUtils {
     //    分类选择弹窗
-    public static OptionsPickerView categoryChooseDialog(Context mContext, CallBack<String> callBack) {
+    public static OptionsPickerView categoryChooseDialog(Context mContext, SelectListener callBack) {
 
         return new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
 
-                callBack.callBack(String.valueOf(options1) + "#" + String.valueOf(options2));
+                callBack.selected(options1,options2,options3,v);
             }
         })
                 .setTitleText("请选择")
