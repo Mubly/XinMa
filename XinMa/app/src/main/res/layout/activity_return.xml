@@ -101,6 +101,7 @@
                         android:orientation="vertical">
 
                         <FrameLayout
+                            android:id="@+id/return_time_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -114,6 +115,7 @@
                                 android:textSize="@dimen/size_15sp"></TextView>
 
                             <TextView
+                                android:id="@+id/return_time_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -139,6 +141,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/return_depart_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -166,6 +169,7 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/return_depart_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -217,6 +221,7 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/return_staff_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -254,14 +259,15 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <TextView
+                            <EditText
+                                android:id="@+id/return_address_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
-                                tools:text="小刘"></TextView>
+                                tools:text="小刘"></EditText>
 
                             <ImageView
                                 android:layout_width="@dimen/size_20dp"
@@ -280,6 +286,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/return_status_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -293,8 +300,10 @@
                                 android:textSize="@dimen/size_15sp"></TextView>
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:id="@+id/return_status_tv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical|right"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"

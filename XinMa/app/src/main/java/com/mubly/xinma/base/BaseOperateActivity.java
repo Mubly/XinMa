@@ -14,9 +14,11 @@ import com.mubly.xinma.model.CategoryBean;
 import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.model.GroupSelectBean;
 import com.mubly.xinma.model.StaffBean;
+import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.DialogUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -80,10 +82,16 @@ public abstract class BaseOperateActivity<P extends BasePresenter<V>, V extends 
 
 
     private void initTimeSelect() {
-        timePickerView = DialogUtils.getTimeSelect(this, new CallBack<String>() {
+        timePickerView = DialogUtils.getTimeSelect(this, showSecond(), new CallBack<Date>() {
             @Override
-            public void callBack(String obj) {
-                timeSelectCallBack.callBack(obj);
+            public void callBack(Date obj) {
+                if (showSecond()) {
+                    timeSelectCallBack.callBack(CommUtil.getTimeHMS(obj));
+                } else {
+
+                    timeSelectCallBack.callBack(CommUtil.getTime(obj));
+                }
+
             }
         });
     }
@@ -142,6 +150,8 @@ public abstract class BaseOperateActivity<P extends BasePresenter<V>, V extends 
     }
 
     public abstract boolean isTimeSelectInit();
+
+    public abstract boolean showSecond();
 
     public abstract boolean isCategorySelectInit();
 

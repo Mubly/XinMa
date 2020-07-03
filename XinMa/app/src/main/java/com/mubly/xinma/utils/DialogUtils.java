@@ -70,14 +70,14 @@ public class DialogUtils {
     }
 
     //时间选择
-    public static TimePickerView getTimeSelect(Context mContext, CallBack<String> callBack) {
+    public static TimePickerView getTimeSelect(Context mContext,boolean showSecond, CallBack<Date> callBack) {
         TimePickerView pvTime = new TimePickerBuilder(mContext, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                callBack.callBack(CommUtil.getTime(date));
+                callBack.callBack(date);
             }
         })
-                .setType(new boolean[]{true, true, true, false, false, false})
+                .setType(new boolean[]{true, true, true, showSecond, showSecond, showSecond})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .setItemVisibleCount(5) //若设置偶数，实际值会加1（比如设置6，则最大可见条目为7）
                 .setLineSpacingMultiplier(2.0f)

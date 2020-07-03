@@ -16,6 +16,7 @@
 package com.mubly.xinma.net;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.lzy.okgo.callback.AbsCallback;
 import com.lzy.okgo.request.base.Request;
@@ -54,10 +55,11 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         // 使用的设备信息
         // 可以随意添加,也可以什么都不传
         // 还可以在这里对所有的参数进行加密，均在这里实现
-//        request.headers("Content-Type", "application/json");
+//        request.headers("Content-Type", "application/json;charset=utf-8");
         if (!TextUtils.isEmpty(AppConfig.token.get())) {
             request.headers("Token", AppConfig.token.get());
         }
+        Log.i("OkGo",request.getParams().toString()+"");
 //        if (!TextUtils.isEmpty(CommUtil.getMyUUID(CrossApp.get()))) {
 //            request.headers("x-device-uuid", CommUtil.getMyUUID(CrossApp.get()));
 //        }

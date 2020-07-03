@@ -100,6 +100,7 @@
                         android:orientation="vertical">
 
                         <FrameLayout
+                            android:id="@+id/repair_time_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -113,6 +114,7 @@
                                 android:textSize="@dimen/size_15sp"></TextView>
 
                             <TextView
+                                android:id="@+id/repair_time_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -138,6 +140,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/repair_depart_layout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/size_50dp">
 
@@ -165,6 +168,7 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/repair_depart_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -216,6 +220,7 @@
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/repair_staff_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -254,8 +259,12 @@
                                 android:textSize="@dimen/size_15sp"></TextView>
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:id="@+id/repair_fee_tv"
+                                android:layout_width="match_parent"
+                                android:background="@null"
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:layout_height="match_parent"
+                                android:gravity="right|center_vertical"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
@@ -291,14 +300,18 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <EditText
+                                android:id="@+id/repair_address_tv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical|right"
+                                android:background="@null"
+                                android:layout_marginLeft="@dimen/size_100dp"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
-                                tools:text="小刘"></TextView>
+                                tools:text="小刘"></EditText>
 
                             <ImageView
                                 android:layout_width="@dimen/size_20dp"
@@ -329,14 +342,18 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <EditText
+                                android:id="@+id/repair_reason_et"
+                                android:layout_width="match_parent"
+                                android:gravity="right|center_vertical"
+                                android:background="@null"
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
-                                tools:text="155876839755"></TextView>
+                                tools:text="155876839755"></EditText>
 
                             <ImageView
                                 android:layout_width="@dimen/size_20dp"

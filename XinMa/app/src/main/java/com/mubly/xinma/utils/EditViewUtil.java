@@ -12,7 +12,7 @@ import com.mubly.xinma.common.CallBack;
  */
 
 public class EditViewUtil {
-    public static void EditDatachangeLister(EditText editText, final CallBack callBack) {
+    public static void EditDatachangeLister(EditText editText, final CallBack<String> callBack) {
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

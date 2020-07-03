@@ -12,6 +12,7 @@ import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.SPCookieStore;
+import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 
@@ -56,11 +57,12 @@ public class CrossApp extends Application {
         builder.readTimeout(12000, TimeUnit.MILLISECONDS);      //全局的读取超时时间
         builder.writeTimeout(12000, TimeUnit.MILLISECONDS);     //全局的写入超时时间
         builder.connectTimeout(12000, TimeUnit.MILLISECONDS);   //全局的连接超时时间
+
+        HttpsUtils.SSLParams sslParams1 = HttpsUtils.getSslSocketFactory();
+        builder.sslSocketFactory(sslParams1.sSLSocketFactory, sslParams1.trustManager);
         OkGo.getInstance()
                 .init(this)
-                .addCommonHeaders(new HttpHeaders("Content-Type", "application/json"))
-//                .addCommonHeaders(new HttpHeaders("x-qomolangma-wx-token", AppConfig.token.get()))
-//                .addCommonParams(new HttpParams("x-qomolangma-wx-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NSJ9.KqqDkqyz07FC0k5eDzr1Yy2qbeKTgCevo9ZpCcqU2n4"))
+                .addCommonHeaders(new HttpHeaders())
                 .setOkHttpClient(builder.build()) //设置OkHttpClient，不设置将使用默认的
                 .setCacheMode(CacheMode.NO_CACHE)
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
