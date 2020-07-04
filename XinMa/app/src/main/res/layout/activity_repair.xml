@@ -121,6 +121,7 @@
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:text="@{presenter.creatDate}"
                                 tools:text="2020-0607 24:33"></TextView>
 
                             <ImageView
@@ -173,6 +174,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
+                                android:hint="请选择送修部门与人员"
+                                android:gravity="center_vertical|right"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
                                 tools:text="小刘"></TextView>
@@ -258,18 +261,20 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <TextView
+                            <EditText
                                 android:id="@+id/repair_fee_tv"
                                 android:layout_width="match_parent"
-                                android:background="@null"
-                                android:layout_marginLeft="@dimen/size_100dp"
-                                android:layout_height="match_parent"
-                                android:gravity="right|center_vertical"
+                                android:layout_height="35dp"
                                 android:layout_gravity="right|center_vertical"
+                                android:layout_marginLeft="@dimen/size_100dp"
                                 android:layout_marginRight="@dimen/size_40dp"
+                                android:background="@null"
+                                android:gravity="right|center_vertical"
+                                android:hint="请输入维修费用"
+                                android:inputType="numberDecimal"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
-                                tools:text="小刘"></TextView>
+                                tools:text="小刘"></EditText>
 
                             <ImageView
                                 android:layout_width="@dimen/size_20dp"
@@ -306,6 +311,7 @@
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical|right"
                                 android:background="@null"
+                                android:hint="请输入维修地点"
                                 android:layout_marginLeft="@dimen/size_100dp"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
@@ -353,6 +359,7 @@
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:hint="请输入维修原因"
                                 tools:text="155876839755"></EditText>
 
                             <ImageView

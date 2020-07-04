@@ -122,6 +122,7 @@
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:hint="@{presenter.creatDate}"
                                 tools:text="2020-0607 24:33"></TextView>
 
                             <ImageView
@@ -176,6 +177,7 @@
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:hint="请选择保管部门与人员"
                                 tools:text="小刘"></TextView>
 
                             <ImageView
@@ -261,8 +263,11 @@
 
                             <EditText
                                 android:id="@+id/return_address_tv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:gravity="right|center_vertical"
+                                android:hint="请输入存放地点"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
@@ -308,6 +313,7 @@
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:hint="请选择资产状况"
                                 tools:text="155876839755"></TextView>
 
                             <ImageView

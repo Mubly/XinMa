@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.AssetsListCallBackAdapter;
 import com.mubly.xinma.base.BaseActivity;
@@ -29,7 +30,12 @@ import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.resbean.OperateDataRes;
 import com.mubly.xinma.presenter.ReturnPresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.DialogUtils;
 import com.mubly.xinma.utils.EditViewUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +48,8 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
 
     ActivityReturnBinding binding = null;
     SelectAssetsBean selectAssetsBean = null;
-
+    private OptionsPickerView assetStatusDialog;
+    private List<String> returnStatusList = new ArrayList<>();
     private String ProcessCate = "归还";
     private String Depart;
 
@@ -50,7 +57,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     private String Seat;
 
     private String Remark;
-    private List<AssetParam> AssetIDList = new ArrayList<>();
+    private JSONArray AssetIDList = new JSONArray();
     @Override
     protected ReturnPresenter createPresenter() {
         return new ReturnPresenter();
@@ -63,24 +70,32 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
         mPresenter.init();
+        initReturnStatus();
     }
 
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart)) {
-            CommUtil.ToastU.showToast("请添加领用部门");
+        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat)) {
+            CommUtil.ToastU.showToast("请完善归还信息");
             return;
         }
         if (null == selectAssetsBean || selectAssetsBean.getSelectBean() == null || selectAssetsBean.getSelectBean().size() < 1) {
             CommUtil.ToastU.showToast("请添加要领用的资产");
             return;
         } else {
+            AssetIDList = new JSONArray();
             for (AssetBean bean : selectAssetsBean.getSelectBean()) {
-                AssetIDList.add(new AssetParam(bean.getAssetID()));
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("AssetID", bean.getAssetID());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                AssetIDList.put(object);
             }
         }
-        mPresenter.operate(ProcessCate, mPresenter.getCreatDate().getValue(), Depart, Staff, Seat, Remark, AssetIDList, null, new CallBack<OperateDataRes>() {
+        mPresenter.operate(ProcessCate, mPresenter.getCreatDate().getValue(), Depart, Staff, Seat, Remark, AssetIDList.toString(), null, new CallBack<OperateDataRes>() {
             @Override
             public void callBack(OperateDataRes obj) {
                 CommUtil.ToastU.showToast("归还成功");
@@ -93,7 +108,6 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                             bean.setDepart(Depart);
                             bean.setStaff(Staff);
                             bean.setSeat(Seat);
-                            bean.setRemark(Remark);
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
@@ -131,18 +145,18 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                 });
             }
         });
+        binding.returnStatusLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                assetStatusDialog.show();
+            }
+        });
         EditViewUtil.EditDatachangeLister(binding.returnAddressTv, new CallBack<String>() {
             @Override
             public void callBack(String obj) {
                 Seat = obj;
             }
         });
-//        EditViewUtil.EditDatachangeLister(binding.getUseReasonTv, new CallBack<String>() {
-//            @Override
-//            public void callBack(String obj) {
-//                Remark = obj;
-//            }
-//        });
     }
     @Override
     protected void getLayoutId() {
@@ -192,5 +206,22 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     @Override
     public boolean isGroupSelectInit() {
         return true;
+    }
+
+    private void initReturnStatus() {
+        returnStatusList.clear();
+        returnStatusList.add("外观及功能完好");
+        returnStatusList.add("外观破损");
+        returnStatusList.add("功能异常");
+        returnStatusList.add("外观破损且功能异常");
+
+        assetStatusDialog = DialogUtils.showSelectDialog(this, new DialogUtils.SelectListener() {
+            @Override
+            public void selected(int index1, int index2, int index3, View v) {
+                Seat = returnStatusList.get(index1);
+                binding.returnStatusTv.setText(Seat);
+            }
+        });
+        assetStatusDialog.setPicker(returnStatusList);
     }
 }

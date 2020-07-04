@@ -121,6 +121,7 @@
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:text="@{presenter.creatDate}"
                                 tools:text="2020-0607 24:33"></TextView>
 
                             <ImageView
@@ -163,6 +164,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/size_3dp"
                                     android:text="*"
+                                    android:visibility="gone"
                                     android:textColor="@color/red"></TextView>
                             </LinearLayout>
 
@@ -174,6 +176,7 @@
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:hint="请选择借用部门与人员"
                                 tools:text="小刘"></TextView>
 
                             <ImageView
@@ -214,6 +217,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/size_3dp"
                                     android:text="*"
+                                    android:visibility="gone"
                                     android:textColor="@color/red"></TextView>
                             </LinearLayout>
 
@@ -263,6 +267,7 @@
                                 android:background="@null"
                                 android:layout_marginLeft="@dimen/size_100dp"
                                 android:gravity="right|center_vertical"
+                                android:hint="请输入存放地点"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_40dp"
                                 android:textColor="@color/color_919191"
@@ -303,6 +308,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@null"
+                                android:hint="请输入借用原因"
                                 android:layout_marginLeft="@dimen/size_100dp"
                                 android:gravity="right|center_vertical"
                                 android:layout_gravity="right|center_vertical"

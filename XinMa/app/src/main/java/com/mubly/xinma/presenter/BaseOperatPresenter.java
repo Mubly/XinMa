@@ -21,7 +21,7 @@ public abstract class BaseOperatPresenter<V extends BaseMvpView> extends BasePre
 
     //领用操作
     public void operate(String ProcessCate, String ProcessTime, String Depart, String Staff, String Seat, String Remark
-            , List<AssetParam> AssetID, String Fee, CallBack<OperateDataRes> callBack) {
+            , String AssetID, String Fee, CallBack<OperateDataRes> callBack) {
         OperateData.operate(ProcessCate, ProcessTime, Depart, Staff, Seat, Remark, AssetID, Fee, callBack);
     }
 }

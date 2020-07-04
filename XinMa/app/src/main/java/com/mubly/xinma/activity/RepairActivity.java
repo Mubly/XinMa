@@ -31,6 +31,10 @@ import com.mubly.xinma.presenter.RepairPresenter;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.EditViewUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,12 +50,14 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
 
     private String Staff;
     private String Seat;
-
+    private String Fee;
     private String Remark;
-    private List<AssetParam> AssetIDList = new ArrayList<>();
+    private JSONArray AssetIDList=new JSONArray();
+
     @Override
     public void initView() {
         setTitle(R.string.repair_name);
+        setRightTv("保存");
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
         mPresenter.init();
@@ -64,27 +70,35 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
 
     @Override
     protected void getLayoutId() {
-       binding= DataBindingUtil.setContentView(this, R.layout.activity_repair);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_repair);
     }
+
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart)) {
-            CommUtil.ToastU.showToast("请添加领用部门");
+        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat) || TextUtils.isEmpty(Remark)||TextUtils.isEmpty(Fee)) {
+            CommUtil.ToastU.showToast("请完善维修信息");
             return;
         }
         if (null == selectAssetsBean || selectAssetsBean.getSelectBean() == null || selectAssetsBean.getSelectBean().size() < 1) {
-            CommUtil.ToastU.showToast("请添加要领用的资产");
+            CommUtil.ToastU.showToast("请添加要维修的资产");
             return;
         } else {
+            AssetIDList=new JSONArray();
             for (AssetBean bean : selectAssetsBean.getSelectBean()) {
-                AssetIDList.add(new AssetParam(bean.getAssetID()));
+                JSONObject object=new JSONObject();
+                try {
+                    object.put("AssetID",bean.getAssetID());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                AssetIDList.put(object);
             }
         }
-        mPresenter.operate(ProcessCate, mPresenter.getCreatDate().getValue(), Depart, Staff, Seat, Remark, AssetIDList, null, new CallBack<OperateDataRes>() {
+        mPresenter.operate(ProcessCate, mPresenter.getCreatDate().getValue(), Depart, Staff, Seat, Remark, AssetIDList.toString(), Fee, new CallBack<OperateDataRes>() {
             @Override
             public void callBack(OperateDataRes obj) {
-                CommUtil.ToastU.showToast("领用成功");
+                CommUtil.ToastU.showToast("添加维修成功");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -98,12 +112,13 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
-                        closeAllAct();
+                      closeCurrentAct();
                     }
                 }).start();
             }
         });
     }
+
     @Override
     public void toSelectAssetsAct() {
         Intent intent = new Intent(this, AssetSelectActivity.class);
@@ -113,6 +128,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
         }
         startActivityForResult(intent, REPAIR_REQUEST_CODE);
     }
+
     @Override
     public void initEvent() {
         super.initEvent();
@@ -141,6 +157,12 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
                 });
             }
         });
+        EditViewUtil.EditDatachangeLister(binding.repairFeeTv, new CallBack<String>() {
+            @Override
+            public void callBack(String obj) {
+                Fee = obj;
+            }
+        });
         EditViewUtil.EditDatachangeLister(binding.repairAddressTv, new CallBack<String>() {
             @Override
             public void callBack(String obj) {
@@ -154,6 +176,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
             }
         });
     }
+
     @Override
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.repairRv.setLayoutManager(new LinearLayoutManager(this));

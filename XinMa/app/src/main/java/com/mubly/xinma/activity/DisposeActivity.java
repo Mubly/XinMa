@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.fastjson.JSON;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.AssetsListCallBackAdapter;
 import com.mubly.xinma.base.BaseActivity;
@@ -27,7 +28,12 @@ import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.resbean.OperateDataRes;
 import com.mubly.xinma.presenter.DisposePresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.DialogUtils;
 import com.mubly.xinma.utils.EditViewUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +47,8 @@ import static com.mubly.xinma.activity.AssetSelectActivity.RESULT_OK_CODE;
 public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisposeView> implements IDisposeView {
     ActivityDisposeBinding binding = null;
     SelectAssetsBean selectAssetsBean = null;
+    private OptionsPickerView disposeTypeDialog;
+    private List<String> selectTypeList = new ArrayList<>();
     private String ProcessCate = "处置";
     private String Depart;
 
@@ -48,7 +56,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     private String Seat;
     private String fee;
     private String Remark;
-    private List<AssetParam> AssetIDList = new ArrayList<>();
+    private JSONArray AssetIDList = new JSONArray();
 
     @Override
     public void initView() {
@@ -57,33 +65,41 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
         mPresenter.init();
+        initDisopseType();
     }
 
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart)) {
-            CommUtil.ToastU.showToast("请添加领用部门");
+        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat) || TextUtils.isEmpty(Remark)) {
+            CommUtil.ToastU.showToast("请完善处置信息");
             return;
         }
         if (null == selectAssetsBean || selectAssetsBean.getSelectBean() == null || selectAssetsBean.getSelectBean().size() < 1) {
-            CommUtil.ToastU.showToast("请添加要领用的资产");
+            CommUtil.ToastU.showToast("请添加要处置的资产");
             return;
         } else {
+            AssetIDList = new JSONArray();
             for (AssetBean bean : selectAssetsBean.getSelectBean()) {
-                AssetIDList.add(new AssetParam(bean.getAssetID()));
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("AssetID", bean.getAssetID());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                AssetIDList.put(object);
             }
         }
-        mPresenter.operate(ProcessCate, mPresenter.getCreatDate().getValue(), Depart, Staff, Seat, Remark, AssetIDList, fee, new CallBack<OperateDataRes>() {
+        mPresenter.operate(ProcessCate, mPresenter.getCreatDate().getValue(), Depart, Staff, Seat, Remark, AssetIDList.toString(), fee, new CallBack<OperateDataRes>() {
             @Override
             public void callBack(OperateDataRes obj) {
-                CommUtil.ToastU.showToast("领用成功");
+                CommUtil.ToastU.showToast("处置成功");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         for (AssetBean bean : selectAssetsBean.getSelectBean()) {
-                            bean.setStatusName("维修");
-                            bean.setStatus("6");
+                            bean.setStatusName("处置");
+                            bean.setStatus("8");
                             bean.setDepart(Depart);
                             bean.setStaff(Staff);
                             bean.setSeat(Seat);
@@ -91,7 +107,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
-                        closeAllAct();
+                        closeCurrentAct();
                     }
                 }).start();
             }
@@ -134,6 +150,12 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
                         binding.disposeStaffTv.setText(staffBean.getStaff());
                     }
                 });
+            }
+        });
+        binding.disposeTypeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                disposeTypeDialog.show();
             }
         });
         EditViewUtil.EditDatachangeLister(binding.disposeFeeTv, new CallBack<String>() {
@@ -193,5 +215,19 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     @Override
     public boolean isGroupSelectInit() {
         return true;
+    }
+
+    private void initDisopseType() {
+        selectTypeList.clear();
+        selectTypeList.add("其他");
+        selectTypeList.add("变卖");
+        disposeTypeDialog = DialogUtils.showSelectDialog(this, new DialogUtils.SelectListener() {
+            @Override
+            public void selected(int index1, int index2, int index3, View v) {
+                Seat = selectTypeList.get(index1);
+                binding.disposeTypeTv.setText(Seat);
+            }
+        });
+        disposeTypeDialog.setPicker(selectTypeList);
     }
 }
