@@ -1,5 +1,6 @@
 package com.mubly.xinma.presenter;
 
+import com.mubly.xinma.activity.ScannerActivity;
 import com.mubly.xinma.adapter.AssetsListCallBackAdapter;
 import com.mubly.xinma.iview.IDisposeView;
 import com.mubly.xinma.model.AssetBean;
@@ -28,6 +29,7 @@ public class DisposePresenter extends BaseOperatPresenter<IDisposeView> {
 
     @Override
     public void scanAdd() {
+        getMvpView().startActivityForResult(ScannerActivity.class,666);
     }
 
     @Override

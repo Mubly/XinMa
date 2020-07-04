@@ -77,7 +77,7 @@ public class DialogUtils {
                 callBack.callBack(date);
             }
         })
-                .setType(new boolean[]{true, true, true, showSecond, showSecond, showSecond})
+                .setType(new boolean[]{true, true, true, showSecond, showSecond, false})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。
                 .setItemVisibleCount(5) //若设置偶数，实际值会加1（比如设置6，则最大可见条目为7）
                 .setLineSpacingMultiplier(2.0f)

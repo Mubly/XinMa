@@ -80,6 +80,7 @@
                 android:textSize="@dimen/size_14sp"></TextView>
 
             <EditText
+                android:id="@+id/department_edit_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_414141"

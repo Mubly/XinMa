@@ -13,7 +13,7 @@ import androidx.room.Update;
 
 @Dao
 public interface AssetBeanDao {
-    @Query("SELECT * FROM asset")
+    @Query("SELECT * FROM asset ORDER BY Stamp DESC")
     List<AssetBean> getAll();
 
     @Query("SELECT COUNT(*) FROM asset WHERE Status like :status")
@@ -21,6 +21,9 @@ public interface AssetBeanDao {
 
     @Query("SELECT * FROM asset WHERE Status LIKE :status")
     List<AssetBean> getAllByStatus(String status);
+
+    @Query("SELECT * FROM asset WHERE AssetNo LIKE :assetNo LIMIT 1")
+    AssetBean getAssetBeanByNo(String assetNo);
 
     @Query("SELECT * FROM asset WHERE AssetID LIKE :assetId")
     List<AssetBean> getAllById(String assetId);

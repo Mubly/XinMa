@@ -8,6 +8,7 @@ import androidx.work.WorkerParameters;
 
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.db.XinMaDatabase;
+import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.SynDataLowData;
 
 public class SynLowWork extends Worker {
@@ -26,18 +27,31 @@ public class SynLowWork extends Worker {
                     public void run() {
                         if (null != obj.getCategory())
                             XinMaDatabase.getInstance().categoryDao().insertAll(obj.getCategory());
-                        if (null!=obj.getCategoryInfo())
+                        if (null != obj.getCategoryInfo())
                             XinMaDatabase.getInstance().categoryInfoDao().insertAll(obj.getCategoryInfo());
-                        if (null!=obj.getCheck())
+                        if (null != obj.getCheck())
                             XinMaDatabase.getInstance().checkBeanDao().insertAll(obj.getCheck());
-                        if (null!=obj.getDepart())
+                        if (null != obj.getDepart())
                             XinMaDatabase.getInstance().groupBeanDao().insertAll(obj.getDepart());
-                        if (null!=obj.getInventory())
+                        if (null != obj.getInventory())
                             XinMaDatabase.getInstance().inventoryBeanDao().insertAll(obj.getInventory());
-                        if (null!=obj.getProperty())
+                        if (null != obj.getProperty())
                             XinMaDatabase.getInstance().propertyBeanDao().insertAll(obj.getProperty());
-                        if (null!=obj.getStaff())
-                            XinMaDatabase.getInstance().staffBeanDao().insertAll(obj.getStaff());
+                        if (null != obj.getStaff()) {
+                            for (StaffBean staffBean : obj.getStaff()) {
+                                StaffBean localStaff = XinMaDatabase.getInstance().staffBeanDao().getStaffById(staffBean.getStaffID());
+                                if (null != localStaff) {
+                                    if (staffBean.getEnable() == 0)
+                                        XinMaDatabase.getInstance().staffBeanDao().delete(localStaff);
+                                    else
+                                        XinMaDatabase.getInstance().staffBeanDao().update(staffBean);
+                                } else {
+                                    if (staffBean.getEnable() == 1)
+                                        XinMaDatabase.getInstance().staffBeanDao().insert(staffBean);
+                                }
+                            }
+                        }
+
                     }
                 }).start();
 

@@ -4,6 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +20,7 @@ import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityCheckDetialBinding;
+import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.ICheckDetialView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.presenter.CheckDetialPresenter;
@@ -28,6 +35,7 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
     ActivityCheckDetialBinding binding = null;
     private String checkId;
     private String checkTime;
+    private int currentTap;
 
 
     @Override
@@ -42,6 +50,8 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
         mPresenter.initdata(checkId, "0");
         tabSelect(0);
         mPresenter.initTab(checkId);
+
+        binding.bottomLayout.setVisibility(View.GONE);
     }
 
     @Override
@@ -114,15 +124,19 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
         binding.lessCheckTv.setSelected(false);
         switch (i) {
             case 0:
+                currentTap = 0;
                 binding.waitCheckTv.setSelected(true);
                 break;
             case 1:
+                currentTap = 1;
                 binding.goodCheckTv.setSelected(true);
                 break;
             case 2:
+                currentTap = 2;
                 binding.diffCheckTv.setSelected(true);
                 break;
             case 3:
+                currentTap = 3;
                 binding.lessCheckTv.setSelected(true);
                 break;
         }
@@ -180,5 +194,23 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
         intent.putExtra("from", "check");
         intent.putExtra("checkId", checkId);
         startActivity(intent);
+    }
+
+    @Override
+    public void forScanResult(String code) {
+        super.forScanResult(code);
+        Observable.create(new ObservableOnSubscribe<AssetBean>() {
+            @Override
+            public void subscribe(ObservableEmitter<AssetBean> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAssetBeanByNo(code));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<AssetBean>() {
+                    @Override
+                    public void accept(AssetBean assetBean) throws Exception {
+                        mPresenter.refreshData(assetBean, currentTap);
+                    }
+                });
     }
 }

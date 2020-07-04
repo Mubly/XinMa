@@ -72,6 +72,16 @@ public class AssetBean implements Serializable {
     private String Status;
     private String StatusName;
     private String CreateTime;
+    private double Stamp;
+
+
+    public double getStamp() {
+        return Stamp;
+    }
+
+    public void setStamp(double stamp) {
+        Stamp = stamp;
+    }
 
     public String getCreateTime() {
         return CreateTime;

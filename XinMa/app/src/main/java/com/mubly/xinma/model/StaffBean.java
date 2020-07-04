@@ -6,12 +6,14 @@ import com.mubly.xinma.utils.StringUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "staffBean")
-public class StaffBean {
+public class StaffBean implements Serializable {
     //    @PrimaryKey(autoGenerate = true)
 //    private long id;
     @NotNull
@@ -24,6 +26,16 @@ public class StaffBean {
     private String Phone;
     private String AssetQty;//资产数量
     private String Status;//状态
+    private int Enable;//0:删除本地，1，查找本地，有则更新无则插入
+
+
+    public int getEnable() {
+        return Enable;
+    }
+
+    public void setEnable(int enable) {
+        Enable = enable;
+    }
 
     public String getStaffID() {
         return StaffID;

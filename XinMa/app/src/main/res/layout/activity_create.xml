@@ -99,18 +99,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:hint="请输入资产编码"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入资产编码"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
 
                     <ImageView
+                        android:id="@+id/asset_create_no_scan"
                         android:layout_width="@dimen/size_30dp"
                         android:layout_height="@dimen/size_30dp"
                         android:layout_gravity="center_vertical|right"
@@ -142,21 +142,22 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_asset_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:hint="请输入资产名称"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入资产名称"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -189,21 +190,22 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_asset_model"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:hint="请输入规格型号"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入规格型号"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -236,21 +238,22 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_unit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:hint="请输入计量单位"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入计量单位"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -283,21 +286,22 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_supply"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:hint="请输入供应商"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入供应商"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -317,6 +321,7 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/create_asset_time_label"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_40dp">
 
@@ -330,6 +335,16 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
+                    <TextView
+                        android:id="@+id/create_asset_time_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="right|center_vertical"
+                        android:hint="请选择购置日期"></TextView>
 
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
@@ -363,22 +378,23 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_original"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:inputType="numberDecimal"
-                        android:hint="请输入购置价格"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入购置价格"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -411,22 +427,23 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_depreciated"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:inputType="number"
-                        android:hint="请输入损耗周期"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入损耗周期"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -459,22 +476,23 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_Guaranteed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:inputType="number"
-                        android:hint="请输入保修周期"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入保修周期"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -503,6 +521,7 @@
                     android:textSize="@dimen/size_12sp"></TextView>
 
                 <FrameLayout
+                    android:id="@+id/create_depart_select_layout"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_40dp">
 
@@ -514,6 +533,19 @@
                         android:text="所属部门-人员"
                         android:textColor="@color/color_414141"
                         android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/create_depart_select_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:gravity="right|center_vertical"
+                        android:hint="请选择部门与人员"
+                        android:textSize="@dimen/size_13sp">
 
                     </TextView>
 
@@ -549,21 +581,22 @@
                         android:textSize="@dimen/size_14sp">
 
                     </TextView>
+
                     <EditText
                         android:id="@+id/asset_create_Seat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textSize="@dimen/size_13sp"
-                        android:textColor="@color/color_414141"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:hint="请输入存放地点"
-                        android:background="@null"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
-                        android:gravity="center_vertical|right">
-                    </EditText>
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入存放地点"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_13sp"></EditText>
+
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
@@ -592,6 +625,7 @@
                     android:textSize="@dimen/size_12sp"></TextView>
 
                 <FrameLayout
+                    android:id="@+id/create_asset_category_layout"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_40dp">
 
@@ -603,6 +637,19 @@
                         android:text="资产分类"
                         android:textColor="@color/color_414141"
                         android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/create_asset_category_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:hint="请选择资产分类"
+                        android:gravity="right|center_vertical"
+                        android:textSize="@dimen/size_13sp">
 
                     </TextView>
 

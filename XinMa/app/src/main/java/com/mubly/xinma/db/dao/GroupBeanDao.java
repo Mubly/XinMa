@@ -17,8 +17,8 @@ public interface GroupBeanDao {
     @Query("SELECT * FROM groupBean")
     List<GroupBean> getAll();
 
-//    @Query("SELECT * FROM groupBean WHERE id IN (:ids)")
-//    List<GroupBean> getGroupBeanByIds(long[] ids);
+    @Query("SELECT * FROM groupBean WHERE DepartID LIKE :ids LIMIT 1")
+    GroupBean getGroupBeanById(String ids);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(GroupBean... entities);

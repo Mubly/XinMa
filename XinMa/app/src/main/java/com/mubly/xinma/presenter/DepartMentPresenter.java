@@ -5,10 +5,15 @@ import android.view.View;
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.base.BasePresenter;
+import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IDepartmentView;
+import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.GroupData;
 import com.mubly.xinma.model.StaffBean;
+import com.mubly.xinma.model.resbean.DepartDataRes;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.LiveDataBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +33,13 @@ public class DepartMentPresenter extends BasePresenter<IDepartmentView> {
         return topTitle;
     }
 
+    private String departId, departName;
     SmartAdapter<StaffBean> adapter;
     List<StaffBean> dataList = new ArrayList<>();
 
-    public void init(String departId) {
+    public void init(String departId, String departName) {
+        this.departId = departId;
+        this.departName = departName;
         topTitle.setValue("暂无员工");
         adapter = new SmartAdapter<StaffBean>(dataList) {
             @Override
@@ -47,6 +55,12 @@ public class DepartMentPresenter extends BasePresenter<IDepartmentView> {
                 } else {
                     holder.getChildView(R.id.item_staff_bottom_line).setVisibility(View.VISIBLE);
                 }
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getMvpView().toStaffInfo(data);
+                    }
+                });
             }
         };
         getMvpView().showRv(adapter);
@@ -66,7 +80,7 @@ public class DepartMentPresenter extends BasePresenter<IDepartmentView> {
                     public void accept(List<StaffBean> staffBeanList) throws Exception {
                         dataList.clear();
                         if (null != staffBeanList) {
-                            if (staffBeanList.size()>0){
+                            if (staffBeanList.size() > 0) {
                                 topTitle.setValue("员工列表");
                             }
                             dataList.addAll(staffBeanList);
@@ -77,8 +91,29 @@ public class DepartMentPresenter extends BasePresenter<IDepartmentView> {
     }
 
     public void delectDepartMent() {
+        if (dataList.size() > 0) {
+            CommUtil.ToastU.showToast("请先删除员工");
+            return;
+        }
+
+        GroupData.dele(departId, new CallBack<DepartDataRes>() {
+            @Override
+            public void callBack(DepartDataRes obj) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GroupBean groupBean = XinMaDatabase.getInstance().groupBeanDao().getGroupBeanById(departId);
+                        XinMaDatabase.getInstance().groupBeanDao().delete(groupBean);
+                        getMvpView().deletDepartMent();
+                    }
+                }).start();
+
+            }
+        });
+
     }
 
     public void edtDepartMent() {
+        getMvpView().editDepartMent();
     }
 }

@@ -4,6 +4,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -115,6 +121,34 @@ public class CheckCreateActivity extends BaseActivity<CheckCreatePresenter, IChe
         if (resultCode == RESULT_OK_CODE) {
             selectAssetsBean = (SelectAssetsBean) data.getSerializableExtra("selectData");
             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
+    }
+
+    @Override
+    public void forScanResult(String code) {
+        super.forScanResult(code);
+        Observable.create(new ObservableOnSubscribe<AssetBean>() {
+            @Override
+            public void subscribe(ObservableEmitter<AssetBean> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAssetBeanByNo(code));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<AssetBean>() {
+                    @Override
+                    public void accept(AssetBean assetBean) throws Exception {
+                        initSelectAssetsBean();
+                        selectAssetsBean.getSelectBean().add(assetBean);
+                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                    }
+                });
+    }
+
+    private void initSelectAssetsBean() {
+        if (null == selectAssetsBean) {
+            selectAssetsBean = new SelectAssetsBean();
+            List<AssetBean> assetBeans = new ArrayList<>();
+            selectAssetsBean.setSelectBean(assetBeans);
         }
     }
 }

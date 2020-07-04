@@ -4,6 +4,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,9 +60,9 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     private String Depart;
 
     private String Staff;
-    private String Seat;
+    private String Seat="";
 
-    private String Remark;
+    private String Remark="";
     private JSONArray AssetIDList = new JSONArray();
     @Override
     protected ReturnPresenter createPresenter() {
@@ -111,7 +117,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
-                        closeAllAct();
+                       closeCurrentAct();
                     }
                 }).start();
             }
@@ -189,6 +195,33 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     }
 
     @Override
+    public void forScanResult(String code) {
+        super.forScanResult(code);
+        Observable.create(new ObservableOnSubscribe<AssetBean>() {
+            @Override
+            public void subscribe(ObservableEmitter<AssetBean> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAssetBeanByNo(code));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<AssetBean>() {
+                    @Override
+                    public void accept(AssetBean assetBean) throws Exception {
+                        initSelectAssetsBean();
+                        selectAssetsBean.getSelectBean().add(assetBean);
+                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                    }
+                });
+    }
+
+    private void initSelectAssetsBean() {
+        if (null == selectAssetsBean) {
+            selectAssetsBean = new SelectAssetsBean();
+            List<AssetBean> assetBeans = new ArrayList<>();
+            selectAssetsBean.setSelectBean(assetBeans);
+        }
+    }
+    @Override
     public boolean isTimeSelectInit() {
         return true;
     }
@@ -218,8 +251,8 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         assetStatusDialog = DialogUtils.showSelectDialog(this, new DialogUtils.SelectListener() {
             @Override
             public void selected(int index1, int index2, int index3, View v) {
-                Seat = returnStatusList.get(index1);
-                binding.returnStatusTv.setText(Seat);
+                Remark = returnStatusList.get(index1);
+                binding.returnStatusTv.setText(Remark);
             }
         });
         assetStatusDialog.setPicker(returnStatusList);

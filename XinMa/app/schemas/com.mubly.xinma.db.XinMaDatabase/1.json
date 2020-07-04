@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "195582326d59e881e7ce46659b9504e8",
+    "identityHash": "dbaed01010bf13cd1016d744fbf16e44",
     "entities": [
       {
         "tableName": "asset",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`AssetID` TEXT NOT NULL, `AssetNo` TEXT, `AssetName` TEXT, `Category` TEXT, `CategoryID` TEXT, `AssetModel` TEXT, `Headimg` TEXT, `Supply` TEXT, `PurchaseDate` TEXT, `ExpireDate` TEXT, `Unit` TEXT, `Original` TEXT, `Price` TEXT, `Guaranteed` TEXT, `Depreciated` TEXT, `Remainder` TEXT, `RFID` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Remark` TEXT, `LastProcessTime` TEXT, `LastInventoryTime` TEXT, `IsLock` TEXT, `Status` TEXT, `StatusName` TEXT, `CreateTime` TEXT, PRIMARY KEY(`AssetID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`AssetID` TEXT NOT NULL, `AssetNo` TEXT, `AssetName` TEXT, `Category` TEXT, `CategoryID` TEXT, `AssetModel` TEXT, `Headimg` TEXT, `Supply` TEXT, `PurchaseDate` TEXT, `ExpireDate` TEXT, `Unit` TEXT, `Original` TEXT, `Price` TEXT, `Guaranteed` TEXT, `Depreciated` TEXT, `Remainder` TEXT, `RFID` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Remark` TEXT, `LastProcessTime` TEXT, `LastInventoryTime` TEXT, `IsLock` TEXT, `Status` TEXT, `StatusName` TEXT, `CreateTime` TEXT, `Stamp` REAL NOT NULL, PRIMARY KEY(`AssetID`))",
         "fields": [
           {
             "fieldPath": "AssetID",
@@ -169,6 +169,12 @@
             "columnName": "CreateTime",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "Stamp",
+            "columnName": "Stamp",
+            "affinity": "REAL",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -382,7 +388,7 @@
       },
       {
         "tableName": "staffBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`StaffID` TEXT NOT NULL, `DepartID` TEXT, `Depart` TEXT, `Staff` TEXT, `Position` TEXT, `Phone` TEXT, `AssetQty` TEXT, `Status` TEXT, PRIMARY KEY(`StaffID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`StaffID` TEXT NOT NULL, `DepartID` TEXT, `Depart` TEXT, `Staff` TEXT, `Position` TEXT, `Phone` TEXT, `AssetQty` TEXT, `Status` TEXT, `Enable` INTEGER NOT NULL, PRIMARY KEY(`StaffID`))",
         "fields": [
           {
             "fieldPath": "StaffID",
@@ -431,6 +437,12 @@
             "columnName": "Status",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "Enable",
+            "columnName": "Enable",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -713,7 +725,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"195582326d59e881e7ce46659b9504e8\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"dbaed01010bf13cd1016d744fbf16e44\")"
     ]
   }
 }

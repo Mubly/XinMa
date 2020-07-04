@@ -97,8 +97,11 @@ public class ScannerActivity extends BaseActivity<ScannerPresenter, IScannerView
 
 
         if (!TextUtils.isEmpty(result)) {
-            CommUtil.ToastU.showToast(result);
+            Intent intent = new Intent();
+            intent.putExtra(SCAN_RESULT, result);
+            setResult(DEF_RESULT_CODE,intent);
         }
+
         finish();
 
     }
@@ -119,6 +122,8 @@ public class ScannerActivity extends BaseActivity<ScannerPresenter, IScannerView
      */
     @Override
     public void onCameraAmbientBrightnessChanged(boolean isDark) {
+        if (isDark)
+        CommUtil.ToastU.showToast("环境过暗，建议打开手电");
     }
 
     /**

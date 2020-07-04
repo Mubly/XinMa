@@ -108,10 +108,7 @@ public class URLConstant {
     //部门列表
     public static final String API_Depart_ListDepart_URL = BASE_URL + "/API_Depart/ListDepart";
 
-    //部门删除
-    public static final String API_Depart_DELETE_URL = BASE_URL + "/API_Depart/UpdateDepart";
-
-    //部门新增修改
+    //部门新增修改删除
     public static final String API_Depart_UPDATE_URL = BASE_URL + "/API_Depart/UpdateDepart";
 
     //分类删除
@@ -141,7 +138,7 @@ public class URLConstant {
     public static final String API_Template_ListTemplate_URL = BASE_URL + "/API_Template/ListTemplate";
 
     //模板打印记录
-    public static final String API_Template_Select_URL = BASE_URL + "/API_Template/Select";
+//    public static final String API_Template_Select_URL = BASE_URL + "/API_Template/Select";
 
     //高频同步数据
     public static final String API_Sync_SYNC_URL = BASE_URL + "/API_Sync/Sync";
@@ -152,8 +149,8 @@ public class URLConstant {
     //同步用户数据
     public static final String APPUSER_SYNCDATA_URL = BASE_URL + "/AppUser/SyncData";
 
-    //打印机记录
-    public static final String APP_Printer_url = BASE_URL + "/APP/Printer";
+//    //打印机记录
+//    public static final String APP_Printer_url = BASE_URL + "/APP/Printer";
 
 
 }

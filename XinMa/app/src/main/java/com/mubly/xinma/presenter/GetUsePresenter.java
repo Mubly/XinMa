@@ -1,5 +1,6 @@
 package com.mubly.xinma.presenter;
 
+import com.mubly.xinma.activity.ScannerActivity;
 import com.mubly.xinma.adapter.AssetsListAdapter;
 import com.mubly.xinma.adapter.AssetsListCallBackAdapter;
 import com.mubly.xinma.base.BasePresenter;
@@ -32,6 +33,7 @@ public class GetUsePresenter extends BaseOperatPresenter<IGetUseVIew> {
 
     @Override
     public void scanAdd() {
+        getMvpView().startActivityForResult(ScannerActivity.class,666);
     }
     @Override
     public void manualAdd() {

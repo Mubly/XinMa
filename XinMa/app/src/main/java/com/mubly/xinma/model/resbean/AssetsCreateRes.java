@@ -1,10 +1,22 @@
 package com.mubly.xinma.model.resbean;
 
 import com.mubly.xinma.base.BaseModel;
+import com.mubly.xinma.model.AssetBean;
+
+import java.util.List;
 
 public class AssetsCreateRes extends BaseModel {
     private String AssetID;
-    private String Stamp;
+    private double Stamp;
+    private List<AssetBean>Asset;
+
+    public List<AssetBean> getAsset() {
+        return Asset;
+    }
+
+    public void setAsset(List<AssetBean> asset) {
+        Asset = asset;
+    }
 
     public String getAssetID() {
         return AssetID;
@@ -14,11 +26,11 @@ public class AssetsCreateRes extends BaseModel {
         AssetID = assetID;
     }
 
-    public String getStamp() {
+    public double getStamp() {
         return Stamp;
     }
 
-    public void setStamp(String stamp) {
+    public void setStamp(double stamp) {
         Stamp = stamp;
     }
 }

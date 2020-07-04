@@ -22,10 +22,15 @@ public interface StaffBeanDao {
     @Query("SELECT * FROM staffBean WHERE DepartID LIKE :departId")
     List<StaffBean> getAllByDepartId(String departId);
 
+    @Query("SELECT * FROM staffBean WHERE StaffID LIKE :id LIMIT 1")
+    StaffBean getStaffById(String id);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(StaffBean... entities);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<StaffBean> staffBeanList);
+
     @Delete
     void delete(StaffBean entity);
 

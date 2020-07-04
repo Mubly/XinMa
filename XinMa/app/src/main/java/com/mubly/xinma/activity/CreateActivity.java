@@ -3,6 +3,7 @@ package com.mubly.xinma.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,9 +23,14 @@ import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.luck.picture.lib.style.PictureCropParameterStyle;
 import com.mubly.xinma.R;
 import com.mubly.xinma.base.BaseActivity;
+import com.mubly.xinma.base.BaseOperateActivity;
 import com.mubly.xinma.common.CallBack;
+import com.mubly.xinma.common.GroupSelectCallBack;
 import com.mubly.xinma.databinding.ActivityCreateBinding;
 import com.mubly.xinma.iview.ICreateView;
+import com.mubly.xinma.model.CategoryBean;
+import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.presenter.CreatePresenter;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.GlideEngine;
@@ -34,14 +40,24 @@ import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
 import com.shehuan.nicedialog.ViewHolder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
  * 资产创建
  */
-public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> implements ICreateView {
+public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreateView> implements ICreateView {
     ActivityCreateBinding binding = null;
     private String headimg;
+    private JSONArray paramArray = new JSONArray();
+    private String selectDepart;
+    private String selectStaff;
+    private String selectCategory;
+    private String selectCategoryId;
+    private String selectTime;
 
     @Override
     public void initView() {
@@ -64,22 +80,22 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
         String assetModel = binding.assetCreateAssetModel.getText().toString();
         String assetUnit = binding.assetCreateUnit.getText().toString();
         String assetSupply = binding.assetCreateSupply.getText().toString();
-        String PurchaseDate = binding.assetCreateAssetName.getText().toString();//购置日期
+        String PurchaseDate = selectTime;
         String original = binding.assetCreateOriginal.getText().toString();
         String depreciated = binding.assetCreateDepreciated.getText().toString();
         String guaranteed = binding.assetCreateGuaranteed.getText().toString();
-        String Depart = binding.assetCreateAssetName.getText().toString();//所属部门
-        String Staff = binding.assetCreateAssetName.getText().toString();//保管人
+        String Depart = selectDepart;
+        String Staff = selectStaff;
         String seat = binding.assetCreateSeat.getText().toString();
-        String Category = binding.assetCreateAssetName.getText().toString();//资产分类
-        String CategoryId = binding.assetCreateAssetName.getText().toString();//资产分类Id
+        String Category = selectCategory;//资产分类
+        String CategoryId = selectCategoryId;//资产分类Id
 
         if (TextUtils.isEmpty(assetName)) {
             CommUtil.ToastU.showToast("请输入资产名称");
             return;
         }
         mPresenter.createAssets(headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
-                , Staff, seat, Category, CategoryId, new CallBack<Boolean>() {
+                , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<Boolean>() {
                     @Override
                     public void callBack(Boolean obj) {
                         finish();
@@ -128,6 +144,61 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
     }
 
     @Override
+    public void initEvent() {
+        super.initEvent();
+        binding.assetCreateNoScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(CreateActivity.this, ScannerActivity.class), 666);
+            }
+        });
+        binding.createAssetTimeLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimeSelectDialog(new CallBack<String>() {
+                    @Override
+                    public void callBack(String obj) {
+                        selectTime = obj;
+                        binding.createAssetTimeTv.setText(obj);
+                    }
+                });
+            }
+        });
+        binding.createAssetCategoryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCategorySelectDialog(new CallBack<CategoryBean>() {
+                    @Override
+                    public void callBack(CategoryBean obj) {
+                        selectCategory = obj.getCategory();
+                        selectCategoryId = obj.getCategoryID();
+                        binding.createAssetCategoryTv.setText(obj.getCategory());
+                    }
+                });
+            }
+        });
+        binding.createDepartSelectLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showGroupStaffDialog(new GroupSelectCallBack() {
+                    @Override
+                    public void callback(GroupBean groupBean, StaffBean staffBean) {
+                        selectStaff = staffBean.getStaff();
+                        selectDepart = groupBean.getDepart();
+                        binding.createDepartSelectTv.setText(groupBean.getDepart() + "-" + staffBean.getStaff());
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void forScanResult(String code) {
+        super.forScanResult(code);
+        binding.assetCreateAssetNo.setText(code);
+    }
+
+    @Override
     public void customeParam() {
         NiceDialog.init().setLayoutId(R.layout.dialog_custom_param_layout)
                 .setConvertListener(new ViewConvertListener() {
@@ -162,6 +233,16 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
                                 paramValueTv.setText(paramValueStr);
                                 itemView.setLayoutParams(layoutParams);
                                 binding.dryParamLayout.addView(itemView);
+                                JSONObject jsonObject = new JSONObject();
+                                try {
+                                    jsonObject.put("InfoName", paramKeyStr);
+                                    jsonObject.put("InfoValue", paramValueStr);
+                                    jsonObject.put("InfoType", "Text");
+                                    paramArray.put(jsonObject);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
                                 dialog.dismiss();
                             }
                         });
@@ -171,5 +252,26 @@ public class CreateActivity extends BaseActivity<CreatePresenter, ICreateView> i
                 .setOutCancel(false)
                 .show(getSupportFragmentManager());
 
+    }
+
+
+    @Override
+    public boolean isTimeSelectInit() {
+        return true;
+    }
+
+    @Override
+    public boolean showSecond() {
+        return true;
+    }
+
+    @Override
+    public boolean isCategorySelectInit() {
+        return true;
+    }
+
+    @Override
+    public boolean isGroupSelectInit() {
+        return true;
     }
 }

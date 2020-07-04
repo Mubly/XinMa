@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.mubly.xinma.R;
 import com.mubly.xinma.activity.PrintActivity;
+import com.mubly.xinma.activity.ScannerActivity;
 import com.mubly.xinma.activity.SettingActivity;
 import com.mubly.xinma.utils.AdaptScreenUtils;
 import com.mubly.xinma.utils.AppConfig;
@@ -173,6 +174,12 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     }
 
     @Override
+    public void startActivityForResult(Class<?> act, int requstCode) {
+        Intent intent = new Intent(this, ScannerActivity.class);
+        startActivityForResult(intent, requstCode);
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.root_back_btn:
@@ -253,5 +260,17 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     @Override
     public void closeAllAct() {
         CrossApp.get().closeAllAct();
+    }
+
+    public void forScanResult(String code) {
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 999) {
+            String code = data.getStringExtra("result");
+            forScanResult(code);
+        }
     }
 }

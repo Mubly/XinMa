@@ -105,7 +105,7 @@ public abstract class BaseOperateActivity<P extends BasePresenter<V>, V extends 
         Observable.create(new ObservableOnSubscribe<List<CategoryBean>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CategoryBean>> emitter) throws Exception {
-
+                emitter.onNext(XinMaDatabase.getInstance().categoryDao().getAll());
             }
         })
                 .subscribeOn(Schedulers.io())

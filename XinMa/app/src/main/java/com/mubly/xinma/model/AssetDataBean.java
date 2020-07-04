@@ -43,7 +43,7 @@ public class AssetDataBean extends BaseModel {
 
     public static void assetsCreate(String headimg, String assetNo, String assetName, String assetModel, String assetUnit
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
-            , String Staff, String seat, String Category, String CategoryId, CallBack<Boolean> callBack) {
+            , String Staff, String seat, String Category, String CategoryId, String param, CallBack<Boolean> callBack) {
         OkGo.<AssetsCreateRes>post(URLConstant.ASSET_DATA_UpdateAsset_URL)
                 .params("Headimg", headimg)
                 .params("AssetNo", assetNo)
@@ -62,6 +62,7 @@ public class AssetDataBean extends BaseModel {
                 .params("Seat", seat)
                 .params("Status", "1")
                 .params("StatusName", "闲置")
+                .params("Param", param)
 
                 .execute(new JsonCallback<AssetsCreateRes>() {
                     @Override
@@ -72,8 +73,12 @@ public class AssetDataBean extends BaseModel {
                                 if (response.body().getCode() == 1) {
                                     AssetBean assetBean = new AssetBean();
                                     assetBean.setAssetID(response.body().getAssetID());
+                                    assetBean.setStamp(response.body().getStamp());
+                                    assetBean.setPrice(response.body().getAsset().get(0).getPrice());
+                                    assetBean.setRemainder(response.body().getAsset().get(0).getRemainder());
+                                    assetBean.setExpireDate(response.body().getAsset().get(0).getExpireDate());
                                     assetBean.setHeadimg(headimg);
-                                    assetBean.setAssetNo(assetNo);
+                                    assetBean.setAssetNo(response.body().getAsset().get(0).getAssetNo());
                                     assetBean.setAssetName(assetName);
                                     assetBean.setCategory(Category);
                                     assetBean.setCategoryID(CategoryId);
@@ -88,7 +93,7 @@ public class AssetDataBean extends BaseModel {
                                     assetBean.setSeat(seat);
                                     assetBean.setStatus("1");
                                     assetBean.setStatusName("闲置");
-                                    assetBean.setCreateTime(response.body().getStamp());
+                                    assetBean.setCreateTime(CommUtil.getCurrentTime());
                                     XinMaDatabase.getInstance().assetBeanDao().insert(assetBean);
                                     callBack.callBack(true);
                                 }

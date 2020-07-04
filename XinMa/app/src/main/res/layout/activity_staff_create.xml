@@ -87,6 +87,7 @@
                 android:textSize="@dimen/size_15sp"></TextView>
 
             <EditText
+                android:id="@+id/staff_info_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
@@ -131,6 +132,7 @@
                 android:textSize="@dimen/size_15sp"></TextView>
 
             <EditText
+                android:id="@+id/staff_info_position"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
@@ -175,6 +177,7 @@
                 android:textSize="@dimen/size_15sp"></TextView>
 
             <EditText
+                android:id="@+id/staff_info_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
@@ -228,10 +231,41 @@
                 android:textSize="@dimen/size_15sp"></TextView>
 
             <Switch
+                android:id="@+id/staff_info_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/size_10dp"></Switch>
+                android:layout_marginRight="@dimen/size_10dp"
+                android:checked="true"></Switch>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/staff_delet_layout"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_marginTop="@dimen/size_20dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="bottom"
+                android:background="@color/clr_gray_line"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="删除"
+                android:textColor="@color/main_blue"
+                android:textSize="@dimen/size_14sp"></TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="top"
+                android:background="@color/clr_gray_line"></View>
         </FrameLayout>
     </LinearLayout>
 </layout>

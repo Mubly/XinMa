@@ -60,6 +60,7 @@ public class GroupPresenter extends BasePresenter<IGroupView> {
     }
 
     public void getData() {
+        dataList.clear();
         Observable.create(new ObservableOnSubscribe<List<GroupBean>>() {
             @Override
             public void subscribe(ObservableEmitter<List<GroupBean>> emitter) throws Exception {

@@ -5,6 +5,7 @@ import android.view.View;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.mubly.xinma.R;
+import com.mubly.xinma.activity.ScannerActivity;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.base.BaseModel;
 import com.mubly.xinma.base.BasePresenter;
@@ -79,6 +80,7 @@ public class CheckDetialPresenter extends BasePresenter<ICheckDetialView> {
     }
 
     public void scanAdd() {
+        getMvpView().startActivityForResult(ScannerActivity.class, 666);
     }
 
     public void init() {
@@ -208,5 +210,19 @@ public class CheckDetialPresenter extends BasePresenter<ICheckDetialView> {
                         getMvpView().delectSuc();
                     }
                 });
+    }
+
+    public void refreshData(AssetBean assetBean,int tabIndex) {
+//        if (tabIndex==0) {
+//            waitCheck.setValue("待盘点(" + dataList.size() + ")");
+//        } else if (tabIndex==1) {
+//            goodOne.setValue("正常(" + dataList.size() + ")");
+//        } else if (tabIndex==2) {
+//            diff.setValue("差异(" + dataList.size() + ")");
+//        } else if (tabIndex==3) {
+//            less.setValue("亏损(" + dataList.size() + ")");
+//        }
+//        dataList.add(assetBean);
+//        adapter.notifyDataSetChanged();
     }
 }

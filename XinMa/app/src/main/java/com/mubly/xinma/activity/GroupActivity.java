@@ -13,8 +13,10 @@ import com.mubly.xinma.iview.IGroupView;
 import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.presenter.GroupPresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.LiveDataBus;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class GroupActivity extends BaseActivity<GroupPresenter, IGroupView> implements IGroupView {
@@ -57,5 +59,17 @@ public class GroupActivity extends BaseActivity<GroupPresenter, IGroupView> impl
         super.onRightAddEvent(rightAddBtn);
         Intent intent = new Intent(this, DepartMentCreateActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void initEvent() {
+        super.initEvent();
+        LiveDataBus.get().with("refreshGroup", Boolean.class).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean)
+                    mPresenter.getData();
+            }
+        });
     }
 }

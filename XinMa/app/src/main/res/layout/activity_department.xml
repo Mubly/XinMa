@@ -56,13 +56,13 @@
                     android:textSize="@dimen/size_15sp"></TextView>
 
                 <TextView
+                    android:id="@+id/department_delet_tv"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_40dp"
                     android:layout_marginTop="@dimen/size_20dp"
                     android:layout_marginBottom="@dimen/size_50dp"
                     android:background="@color/white"
                     android:gravity="center"
-                    android:onClick="@{()->persenter.delectDepartMent()}"
                     android:text="删除部门"
                     android:textColor="@color/main_blue"
                     android:textSize="@dimen/size_15sp"></TextView>

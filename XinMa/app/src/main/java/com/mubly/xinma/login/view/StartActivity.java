@@ -32,7 +32,8 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         rxPermissions = new RxPermissions(this);
         rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION).subscribe(new Consumer<Boolean>() {
             @Override
             public void accept(Boolean permission) throws Exception {
                 if (permission) {

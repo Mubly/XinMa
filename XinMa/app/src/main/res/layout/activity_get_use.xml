@@ -165,6 +165,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/size_3dp"
                                     android:text="*"
+                                    android:visibility="gone"
                                     android:textColor="@color/red"></TextView>
                             </LinearLayout>
 
@@ -219,6 +220,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/size_3dp"
                                     android:text="*"
+                                    android:visibility="gone"
                                     android:textColor="@color/red"></TextView>
                             </LinearLayout>
 

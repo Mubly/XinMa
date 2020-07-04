@@ -1,5 +1,6 @@
 package com.mubly.xinma.presenter;
 
+import com.mubly.xinma.activity.ScannerActivity;
 import com.mubly.xinma.adapter.AssetsListCallBackAdapter;
 import com.mubly.xinma.base.BasePresenter;
 import com.mubly.xinma.iview.IBrrorowView;
@@ -31,7 +32,7 @@ public class BrrorowPresenter extends BaseOperatPresenter<IBrrorowView> {
 
     @Override
     public void scanAdd() {
-
+        getMvpView().startActivityForResult(ScannerActivity.class,666);
     }
 
     @Override
