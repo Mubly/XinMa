@@ -180,7 +180,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
     @Override
     public void toSelectAssetsAct() {
         Intent intent = new Intent(this, AssetSelectActivity.class);
-        intent.putExtra("status", "1");
+        intent.putExtra("from", BRROROW_REQUEST_CODE);
         if (null != selectAssetsBean) {
             intent.putExtra("selectedData", selectAssetsBean);
         }

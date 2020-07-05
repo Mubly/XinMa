@@ -9,11 +9,13 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,17 +32,21 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.base.BaseActivity;
+import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.databinding.ActivityAssetSelectBinding;
 import com.mubly.xinma.databinding.FilterLayoutBinding;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IAssetSelectView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CategoryBean;
+import com.mubly.xinma.model.FilterBean;
 import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.presenter.AssetSelectPresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.EditViewUtil;
+import com.mubly.xinma.utils.LiveDataBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,7 +70,8 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     public static final int RETURN_REQUEST_CODE = 1003;//归还
     public static final int REPAIR_REQUEST_CODE = 1004;//维修
     public static final int CHECK_CREATE_REQUEST_CODE = 1005;//盘点创建
-
+    public static final int DISPOSE_REQUEST_CODE = 1006;//处置
+    private int from;//对应如上code
     //    返回码
     public static final int RESULT_OK_CODE = 10010;//数据返回成功
     public static final int RESULT_NULL_CODE = 10011;//无数据返回成功
@@ -72,8 +79,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     //记录之前选中的
     private SelectAssetsBean selectBean;
     //资产的状态 默认全部
-    private String status = null;
-
+    private String[] statusData = null;
 
     //    筛选区
     ConstraintLayout filterLayout;
@@ -91,12 +97,40 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     private List<String> periodList = new ArrayList<>();
     private Map<String, String> filterMap = new HashMap<>();
 
+    private EditText searchEt;
+    private String departMentId, departMent, staff, staffId, categroyId;
+    private String startTime, endTime, peroidTime;
+    TextView startTv, endTv;
+
     @Override
     public void initView() {
         setTitle(R.string.assets_name);
         setRightTv("确认");
-        mPresenter.init(selectBean, status);
+        initStatus();
+        mPresenter.init(selectBean, statusData);
         initfilterData();
+    }
+
+    private void initStatus() {
+        switch (from) {
+            case GET_USE_REQUEST_CODE://领用
+            case DISPOSE_REQUEST_CODE://处置
+            case BRROROW_REQUEST_CODE://借用
+                statusData = new String[]{"1"};
+                break;
+            case RETURN_REQUEST_CODE://归还
+                statusData = new String[]{"3", "5", "6"};
+                break;
+            case REPAIR_REQUEST_CODE://维修
+                statusData = new String[]{"1", "3", "5"};
+                break;
+
+            case CHECK_CREATE_REQUEST_CODE://盘点
+                statusData = new String[]{"1", "3", "5", "6", "8"};
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + from);
+        }
     }
 
     @Override
@@ -108,9 +142,10 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_asset_select);
         selectBean = (SelectAssetsBean) getIntent().getSerializableExtra("selectedData");
-        status = getIntent().getStringExtra("status");
+        from = getIntent().getIntExtra("from", GET_USE_REQUEST_CODE);
         filterLayout = findViewById(R.id.filter_layout);
         filterContentLayout = findViewById(R.id.filter_content_layout);
+        searchEt = findViewById(R.id.search_et);
         filterLayout.setOnClickListener(this);
         filterContentLayout.setOnClickListener(this);
         binding.sortAssetBtn.setOnClickListener(this);
@@ -129,6 +164,18 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                 filterLayout.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    @Override
+    public void initEvent() {
+        super.initEvent();
+        EditViewUtil.EditActionListener(searchEt, new CallBack<String>() {
+            @Override
+            public void callBack(String obj) {
+                if (TextUtils.isEmpty(obj)) return;
+                mPresenter.searchDataEt(obj);
+            }
+        });
     }
 
     private void initfilterData() {
@@ -169,7 +216,9 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                         topStaff.add(staffBean);
                         staffArr.add(topStaff);
                         for (GroupBean groupBean : groupBeanList) {
-                            staffArr.add(XinMaDatabase.getInstance().staffBeanDao().getAllByDepartId(groupBean.getDepartID()));
+                            List<StaffBean> localStaffs = XinMaDatabase.getInstance().staffBeanDao().getAllByDepartId(groupBean.getDepartID());
+                            localStaffs.add(0, new StaffBean("无限制"));
+                            staffArr.add(localStaffs);
                         }
                         return staffArr;
                     }
@@ -210,6 +259,11 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
         binding.assetSelectRv.setAdapter(adapter);
     }
 
+    @Override
+    public void isEmpty(boolean isEmpty) {
+        binding.assetSelectEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
+    }
+
     //筛选模块
     private void initFilter() {
         initTimePicker();
@@ -236,6 +290,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             public void onClick(View v) {
                 selectTv = filterBinding.filterStartdateTv;
                 pvTime.show(filterBinding.filterStartdateTv);
+                startTv = selectTv;
             }
         });
         filterBinding.filterEnddateLayout.setOnClickListener(new View.OnClickListener() {
@@ -243,6 +298,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             public void onClick(View v) {
                 selectTv = filterBinding.filterEnddateTv;
                 pvTime.show(filterBinding.filterEnddateTv);
+                endTv = selectTv;
             }
         });
         filterBinding.filterMaturityLayout.setOnClickListener(new View.OnClickListener() {
@@ -262,12 +318,30 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                 filterBinding.filterStartdateTv.setText("无限制");
                 filterBinding.filterEnddateTv.setText("无限制");
                 filterBinding.filterMaturityTv.setText("无限制");
+                categroyId = null;
+                departMent = null;
+                departMentId = null;
+                staff = null;
+                staffId = null;
+                startTime = null;
+                endTime = null;
+                peroidTime = null;
             }
         });
         filterBinding.filterAck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FilterBean filterBean = new FilterBean();
+                filterBean.setCategoryID(categroyId);
+                filterBean.setDepart(departMent);
+                filterBean.setDepartID(departMentId);
+                filterBean.setStaff(staff);
+                filterBean.setStaffID(staffId);
+                filterBean.setPurchaseDate(startTime);
+                filterBean.setExpireDate(endTime);
+                filterBean.setRemainder(peroidTime);
                 filterLayout.setVisibility(View.GONE);
+                mPresenter.filterData(filterBean);
             }
         });
     }
@@ -278,7 +352,10 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             @Override
             public void onTimeSelect(Date date, View v) {
                 selectTv.setText(CommUtil.getTime(date));
-
+                if (selectTv == startTv)
+                    startTime = CommUtil.getTime(date);
+                else if (selectTv == endTv)
+                    endTime = CommUtil.getTime(date);
             }
         })
                 .setType(new boolean[]{true, true, true, false, false, false})
@@ -315,8 +392,14 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = periodList.get(options1);
-                selectTv.setText(tx);
-
+                selectTv.setText(tx);//TODO 期限需要重新处理一下
+                if (options1 == 0) {//无限期
+                    peroidTime = "0";
+                } else if (options1 == 1) {//已到期
+                    peroidTime = "0";
+                } else if (options1 == 2) {//30天
+                    peroidTime = "0";
+                }
             }
         })
                 .setTitleText("请选择")
@@ -337,7 +420,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = categoryBeanList.get(options1).toString();
                 selectTv.setText(tx);
-
+                categroyId = categoryBeanList.get(options1).getCategoryID();
             }
         })
                 .setTitleText("请选择")
@@ -358,7 +441,10 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = groupBeanList.get(options1).toString() + " — " + staffBeanList.get(options1).get(options2).toString();
                 selectTv.setText(tx);
-
+                departMent = groupBeanList.get(options1).getDepart();
+                departMentId = groupBeanList.get(options1).getDepartID();
+                staff = staffBeanList.get(options1).get(options2).getStaff();
+                staffId = staffBeanList.get(options1).get(options2).getStaffID();
             }
         })
                 .setTitleText("请选择")

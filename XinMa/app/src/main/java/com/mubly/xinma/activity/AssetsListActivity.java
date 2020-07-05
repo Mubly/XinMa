@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -15,10 +16,12 @@ import io.reactivex.schedulers.Schedulers;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,19 +32,24 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.google.android.material.tabs.TabLayout;
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.AssetsListPageAdapter;
 import com.mubly.xinma.base.BaseActivity;
+import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.databinding.ActivityAssetsListBinding;
 import com.mubly.xinma.databinding.FilterLayoutBinding;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IAssetListView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CategoryBean;
+import com.mubly.xinma.model.FilterBean;
 import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.presenter.AssetsListPresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.EditViewUtil;
+import com.mubly.xinma.utils.LiveDataBus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,6 +66,7 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
     //筛选相关
     TimePickerView pvTime;
     TextView selectTv;
+    TextView startTv, endTv;
     ConstraintLayout filterLayout;
     LinearLayout filterContentLayout;
     private OptionsPickerView catoryPicker, periodPicker, departMentPicker;
@@ -70,7 +79,11 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
     private List<String> periodList = new ArrayList<>();
     private Map<String, String> filterMap = new HashMap<>();
 
-
+    private EditText searchEt;
+    private int currentTabIndex = 0;
+    private String searchKey;
+    private String departMentId, departMent, staff, staffId, categroyId;
+    private String startTime, endTime, peroidTime;
 
 
     @Override
@@ -90,8 +103,27 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
         binding = DataBindingUtil.setContentView(this, R.layout.activity_assets_list);
         filterLayout = findViewById(R.id.filter_layout);
         filterContentLayout = findViewById(R.id.filter_content_layout);
+        searchEt = findViewById(R.id.search_et);
         filterLayout.setOnClickListener(this);
         filterContentLayout.setOnClickListener(this);
+    }
+
+    @Override
+    public void initEvent() {
+        super.initEvent();
+        EditViewUtil.EditActionListener(searchEt, new CallBack<String>() {
+            @Override
+            public void callBack(String obj) {
+                searchKey = obj;
+                if (TextUtils.isEmpty(obj)) return;
+                LiveDataBus.get().with("searchAsset").setValue(currentTabIndex);
+            }
+        });
+
+    }
+
+    public String getSearchKey() {
+        return searchKey;
     }
 
     @Override
@@ -116,10 +148,22 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
         binding.mViewPager.setOffscreenPageLimit(5);
         binding.mViewPager.setAdapter(pageAdapter);
         binding.mTabLayout.setupWithViewPager(binding.mViewPager);
-    }
+        binding.mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    public List<AssetBean> getAllAssetBeanList() {
-        return mPresenter.getAllAssetBeanList();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                currentTabIndex = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     public void refreshTab(int index, String count) {
@@ -168,7 +212,9 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
                         topStaff.add(staffBean);
                         staffArr.add(topStaff);
                         for (GroupBean groupBean : groupBeanList) {
-                            staffArr.add(XinMaDatabase.getInstance().staffBeanDao().getAllByDepartId(groupBean.getDepartID()));
+                            List<StaffBean> localStaffs = XinMaDatabase.getInstance().staffBeanDao().getAllByDepartId(groupBean.getDepartID());
+                            localStaffs.add(0, new StaffBean("无限制"));
+                            staffArr.add(localStaffs);
                         }
                         return staffArr;
                     }
@@ -199,6 +245,7 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
         filterBinding.filterDepartmentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 selectTv = filterBinding.filterDepartmentTv;
                 departMentPicker.show();
             }
@@ -214,6 +261,7 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
             @Override
             public void onClick(View v) {
                 selectTv = filterBinding.filterStartdateTv;
+                startTv = selectTv;
                 pvTime.show(filterBinding.filterStartdateTv);
             }
         });
@@ -222,6 +270,7 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
             public void onClick(View v) {
                 selectTv = filterBinding.filterEnddateTv;
                 pvTime.show(filterBinding.filterEnddateTv);
+                endTv = selectTv;
             }
         });
         filterBinding.filterMaturityLayout.setOnClickListener(new View.OnClickListener() {
@@ -241,12 +290,31 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
                 filterBinding.filterStartdateTv.setText("无限制");
                 filterBinding.filterEnddateTv.setText("无限制");
                 filterBinding.filterMaturityTv.setText("无限制");
+                categroyId = null;
+                departMent = null;
+                departMentId = null;
+                staff = null;
+                staffId = null;
+                startTime = null;
+                endTime = null;
+                peroidTime = null;
             }
         });
         filterBinding.filterAck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 filterLayout.setVisibility(View.GONE);
+                FilterBean filterBean = new FilterBean();
+                filterBean.setIndex(currentTabIndex);
+                filterBean.setCategoryID(categroyId);
+                filterBean.setDepart(departMent);
+                filterBean.setDepartID(departMentId);
+                filterBean.setStaff(staff);
+                filterBean.setStaffID(staffId);
+                filterBean.setPurchaseDate(startTime);
+                filterBean.setExpireDate(endTime);
+                filterBean.setRemainder(peroidTime);
+                LiveDataBus.get().with("filterAsset").setValue(filterBean);
             }
         });
     }
@@ -257,7 +325,10 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
             @Override
             public void onTimeSelect(Date date, View v) {
                 selectTv.setText(CommUtil.getTime(date));
-
+                if (selectTv == startTv)
+                    startTime = CommUtil.getTime(date);
+                else if (selectTv == endTv)
+                    endTime = CommUtil.getTime(date);
             }
         })
                 .setType(new boolean[]{true, true, true, false, false, false})
@@ -289,13 +360,19 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
     }
 
     //时间段选择器
-    private void initPeriodPicker() {//分类选择
+    private void initPeriodPicker() {
         periodPicker = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = periodList.get(options1);
-                selectTv.setText(tx);
-
+                selectTv.setText(tx);//TODO 期限需要重新处理一下
+                if (options1 == 0) {//无限期
+                    peroidTime = "0";
+                } else if (options1 == 1) {//已到期
+                    peroidTime = "0";
+                } else if (options1 == 2) {//30天
+                    peroidTime = "0";
+                }
             }
         })
                 .setTitleText("请选择")
@@ -316,6 +393,7 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = categoryBeanList.get(options1).toString();
                 selectTv.setText(tx);
+                categroyId = categoryBeanList.get(options1).getCategoryID();
 
             }
         })
@@ -337,6 +415,10 @@ public class AssetsListActivity extends BaseActivity<AssetsListPresenter, IAsset
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 String tx = groupBeanList.get(options1).toString() + " — " + staffBeanList.get(options1).get(options2).toString();
                 selectTv.setText(tx);
+                departMent = groupBeanList.get(options1).getDepart();
+                departMentId = groupBeanList.get(options1).getDepartID();
+                staff = staffBeanList.get(options1).get(options2).getStaff();
+                staffId = staffBeanList.get(options1).get(options2).getStaffID();
 
             }
         })

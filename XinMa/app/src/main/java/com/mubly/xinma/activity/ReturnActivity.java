@@ -181,7 +181,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     @Override
     public void toSelectAssetsAct() {
         Intent intent = new Intent(this, AssetSelectActivity.class);
-        intent.putExtra("status", "1");
+        intent.putExtra("from", RETURN_REQUEST_CODE);
         if (null != selectAssetsBean) {
             intent.putExtra("selectedData", selectAssetsBean);
         }

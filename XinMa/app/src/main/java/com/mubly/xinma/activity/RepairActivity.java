@@ -128,7 +128,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
     @Override
     public void toSelectAssetsAct() {
         Intent intent = new Intent(this, AssetSelectActivity.class);
-        intent.putExtra("status", "1");
+        intent.putExtra("from", REPAIR_REQUEST_CODE);
         if (null != selectAssetsBean) {
             intent.putExtra("selectedData", selectAssetsBean);
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,12 +12,41 @@
         android:layout_height="match_parent"
         tools:context=".fragment.AssetsListFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/assets_rv"
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/asset_load_more"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:srlEnableRefresh="false">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/assets_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/asset_list_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:text="—— 暂无数据 ——"
+                    android:textColor="@color/color_919191">
+
+                </TextView>
+            </FrameLayout>
+
+
+            <com.scwang.smart.refresh.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.scwang.smart.refresh.footer.ClassicsFooter>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
 
     </FrameLayout>
 </layout>

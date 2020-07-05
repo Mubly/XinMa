@@ -5,5 +5,6 @@ import com.mubly.xinma.base.BaseMvpView;
 
 public interface ICategoryCreateView extends BaseMvpView {
     void showRv(SmartAdapter adapter);
-    void openSelect();
+    void openSelect(String InfoValues,int index);
+    void delectParate();
 }

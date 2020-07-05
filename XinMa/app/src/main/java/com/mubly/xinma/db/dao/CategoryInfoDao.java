@@ -26,6 +26,12 @@ public interface CategoryInfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<CategoryInfoBean> categoryInfoBeanList);
 
+    @Query("DELETE FROM categroyInfo WHERE CategoryID LIKE :categoryId")
+    void deleteById(String categoryId);
+
+    @Query("SELECT * FROM categroyInfo WHERE CategoryID LIKE :categoryId LIMIT 1")
+    CategoryInfoBean getCategoryInfoById(String categoryId);
+
     @Delete
     void delete(CategoryInfoBean entity);
 

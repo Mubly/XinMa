@@ -46,7 +46,7 @@ public class SortClassPresenter extends BasePresenter<ISortClassView> {
         initData();
     }
 
-    private void initData() {
+    public void initData() {
         Observable.create(new ObservableOnSubscribe<List<CategoryBean>>() {
             @Override
             public void subscribe(ObservableEmitter<List<CategoryBean>> emitter) throws Exception {

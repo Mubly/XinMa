@@ -21,13 +21,12 @@ public class AssetsListPageAdapter extends FragmentPagerAdapter {
 
     private void getFragments() {
         listFragments.clear();
-        listFragments.add(AssetsListFragment.getInstance(0));
-        listFragments.add(AssetsListFragment.getInstance(1));
-        listFragments.add(AssetsListFragment.getInstance(2));
-        listFragments.add(AssetsListFragment.getInstance(3));
-        listFragments.add(AssetsListFragment.getInstance(4));
-        listFragments.add(AssetsListFragment.getInstance(5));
-        listFragments.add(AssetsListFragment.getInstance(6));
+        listFragments.add(AssetsListFragment.getInstance("0",0));
+        listFragments.add(AssetsListFragment.getInstance("1",1));
+        listFragments.add(AssetsListFragment.getInstance("3",2));
+        listFragments.add(AssetsListFragment.getInstance("5",3));
+        listFragments.add(AssetsListFragment.getInstance("6",4));
+        listFragments.add(AssetsListFragment.getInstance("8",5));
     }
 
     @Override

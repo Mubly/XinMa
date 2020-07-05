@@ -31,13 +31,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/size_40dp"
+                    android:layout_marginTop="@dimen/size_5dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
                     android:text="基本信息"
-                    android:layout_marginTop="@dimen/size_5dp"
                     android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp">
-                </TextView>
+                    android:textSize="@dimen/size_12sp"></TextView>
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -60,33 +59,35 @@
                         android:textColor="@color/color_414141"
                         android:textSize="@dimen/size_14sp"></TextView>
 
-                  <ImageView
-                      android:layout_width="@dimen/size_20dp"
-                      android:src="@mipmap/arrow_right_gray"
-                      android:padding="@dimen/size_2dp"
-                      android:layout_gravity="center_vertical|right"
-                      android:layout_marginRight="@dimen/size_20dp"
-                      android:layout_height="@dimen/size_20dp">
-                  </ImageView>
+                    <ImageView
+                        android:layout_width="@dimen/size_20dp"
+                        android:layout_height="@dimen/size_20dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="@dimen/size_20dp"
+                        android:padding="@dimen/size_2dp"
+                        android:src="@mipmap/arrow_right_gray"></ImageView>
+
                     <EditText
+                        android:id="@+id/category_name_et"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="right"
                         android:hint="请输入分类名称"
-                        android:textColor="@color/color_919191"
-                        android:textSize="@dimen/size_14sp"
                         android:text="@{vm.categoryName}"
-                        android:layout_marginRight="@dimen/size_50dp"
-                        android:layout_height="wrap_content">
-                    </EditText>
+                        android:textColor="@color/color_919191"
+                        android:textSize="@dimen/size_14sp"></EditText>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:layout_gravity="bottom"
                         android:background="@color/clr_gray_line"></View>
                 </FrameLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/size_40dp"
@@ -94,13 +95,13 @@
                     android:paddingLeft="@dimen/size_16dp"
                     android:text="自定义参数"
                     android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp">
-                </TextView>
+                    android:textSize="@dimen/size_12sp"></TextView>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/param_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/size_40dp"
@@ -108,46 +109,75 @@
                     android:paddingLeft="@dimen/size_16dp"
                     android:text="参数项"
                     android:textColor="@color/color_919191"
-                    android:textSize="@dimen/size_12sp">
-                </TextView>
+                    android:textSize="@dimen/size_12sp"></TextView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:paddingTop="@dimen/size_10dp"
-                    android:paddingBottom="@dimen/size_10dp"
-                    android:layout_height="wrap_content">
+                    android:paddingBottom="@dimen/size_10dp">
+
                     <Button
                         android:layout_width="wrap_content"
-                        android:background="@color/main_blue"
-                        android:textSize="@dimen/size_14sp"
-                        android:textColor="@color/white"
-                        android:text="文本"
-                        android:onClick="@{()->vm.creatText()}"
+                        android:layout_height="@dimen/size_40dp"
                         android:layout_marginRight="@dimen/size_40dp"
-                        android:layout_height="wrap_content">
-                    </Button>
+                        android:background="@color/main_blue"
+                        android:onClick="@{()->vm.creatText()}"
+                        android:text="文本"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_14sp"></Button>
+
                     <Button
                         android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_40dp"
                         android:background="@color/main_blue"
-                        android:textSize="@dimen/size_14sp"
-                        android:textColor="@color/white"
-                        android:text="选择项"
                         android:onClick="@{()->vm.creatSelect()}"
-                        android:layout_height="wrap_content">
-                    </Button>
+                        android:text="选择项"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_14sp"></Button>
+
                     <Button
                         android:layout_width="wrap_content"
-                        android:background="@color/main_blue"
-                        android:textSize="@dimen/size_14sp"
-                        android:textColor="@color/white"
-                        android:text="时间"
-                        android:onClick="@{()->vm.creatTime()}"
+                        android:layout_height="@dimen/size_40dp"
                         android:layout_marginLeft="@dimen/size_40dp"
-                        android:layout_height="wrap_content">
-                    </Button>
+                        android:background="@color/main_blue"
+                        android:onClick="@{()->vm.creatTime()}"
+                        android:text="时间"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_14sp"></Button>
                 </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/category_delect"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_marginTop="@dimen/size_20dp"
+                    android:background="@color/white"
+                    android:onClick="@{()->vm.delectOperate()}"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="删除"
+                        android:textColor="@color/main_blue"></TextView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_gravity="bottom"
+                        android:background="@color/clr_gray_line"></View>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_gravity="top"
+                        android:background="@color/clr_gray_line"></View>
+                </FrameLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

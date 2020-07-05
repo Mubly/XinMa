@@ -2,6 +2,7 @@ package com.mubly.xinma.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -15,7 +16,11 @@ import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivitySortClassBinding;
 import com.mubly.xinma.iview.ISortClassView;
 import com.mubly.xinma.presenter.SortClassPresenter;
+import com.mubly.xinma.utils.LiveDataBus;
 
+/**
+ * 资产分类
+ */
 public class SortClassActivity extends BaseActivity<SortClassPresenter, ISortClassView> implements ISortClassView {
     ActivitySortClassBinding binding = null;
 
@@ -40,6 +45,17 @@ public class SortClassActivity extends BaseActivity<SortClassPresenter, ISortCla
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sort_class);
+    }
+
+    @Override
+    public void initEvent() {
+        super.initEvent();
+        LiveDataBus.get().with("SortClass", Boolean.class).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                mPresenter.initData();
+            }
+        });
     }
 
     @Override

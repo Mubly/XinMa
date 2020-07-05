@@ -21,8 +21,8 @@ public class CategoryBean {
      */
     @NotNull
     @PrimaryKey
-    private String CompanyID;
     private String CategoryID;
+    private String CompanyID;
     private String Category;
     private String ShowIndex;
     private String Status;

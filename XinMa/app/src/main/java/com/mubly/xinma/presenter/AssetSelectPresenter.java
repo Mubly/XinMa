@@ -7,12 +7,14 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.mubly.xinma.R;
+import com.mubly.xinma.activity.AssetsListActivity;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.base.BasePresenter;
 import com.mubly.xinma.common.weight.RotateTextView;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IAssetSelectView;
 import com.mubly.xinma.model.AssetBean;
+import com.mubly.xinma.model.FilterBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.CornerTransform;
@@ -33,14 +35,14 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
     SmartAdapter<AssetBean> adapter = null;
     List<AssetBean> showDataList = new ArrayList<>();
     ImageUrlPersenter imageUrlPersenter = null;
-    private List<AssetBean> allDataList = new ArrayList<>();
-    private String status = null;
+    //    private List<AssetBean> allDataList = new ArrayList<>();
+    private String[] status = null;
 
     public AssetSelectPresenter() {
         imageUrlPersenter = new ImageUrlPersenter();
     }
 
-    public void init(final SelectAssetsBean selecBean, String status) {
+    public void init(final SelectAssetsBean selecBean, String[] status) {
         this.localSelectBean = selecBean;
         this.status = status;
         adapter = new SmartAdapter<AssetBean>(showDataList) {
@@ -52,7 +54,7 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
             @Override
             public void dealView(VH holder, final AssetBean data, int position) {
                 final ImageView selectModel = (ImageView) holder.getChildView(R.id.asset_select_icon);
-                ImageView iconImg=(ImageView) holder.getChildView(R.id.right_img_icon);
+                ImageView iconImg = (ImageView) holder.getChildView(R.id.right_img_icon);
                 if (null != localSelectBean && localSelectBean.getSelectBean().size() > 0) {
                     for (AssetBean assetBean : localSelectBean.getSelectBean()) {
                         if (assetBean.getAssetID().equals(data.getAssetID()))
@@ -113,15 +115,11 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
     }
 
     //根据状态查询 默认
-    public void searchData(final String status) {
+    public void searchData(final String[] status) {
         Observable.create(new ObservableOnSubscribe<List<AssetBean>>() {
             @Override
             public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
-                if (TextUtils.isEmpty(status)) {
-                    emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAll());
-                } else {
-                    emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAllByStatus(status));
-                }
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAllByInStatus(status));
             }
         })
                 .subscribeOn(Schedulers.io())
@@ -130,7 +128,7 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
                     @Override
                     public void accept(List<AssetBean> assetBeanList) throws Exception {
                         if (null != assetBeanList) {
-                            allDataList.addAll(assetBeanList);//保存一份此状态下的所有数据
+//                            allDataList.addAll(assetBeanList);//保存一份此状态下的所有数据
                             showDataList.addAll(assetBeanList);
                         }
                         adapter.notifyDataSetChanged();
@@ -139,8 +137,24 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
     }
 
     //多条件查询
-    public void SearchM() {
-
+    public void filterData(FilterBean filterBean) {
+        showDataList.clear();
+        Observable.create(new ObservableOnSubscribe<List<AssetBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getSelectFilterAssets(status, filterBean.getCategoryID(), filterBean.getDepartID(), filterBean.getDepart(),
+                        filterBean.getStaffID(), filterBean.getStaff(), filterBean.getPurchaseDate(), filterBean.getExpireDate(), filterBean.getRemainder()));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AssetBean>>() {
+                    @Override
+                    public void accept(List<AssetBean> assetBeanList) throws Exception {
+                        showDataList.addAll(assetBeanList);
+                        adapter.notifyDataSetChanged();
+                        getMvpView().isEmpty(assetBeanList.size() == 0);
+                    }
+                });
     }
 
     public SelectAssetsBean getLocalSelectBean() {
@@ -149,6 +163,27 @@ public class AssetSelectPresenter extends BasePresenter<IAssetSelectView> {
         } else {
             return localSelectBean;
         }
+    }
+
+    //搜索框搜索
+    public void searchDataEt(String searchKey) {
+        showDataList.clear();
+        Observable.create(new ObservableOnSubscribe<List<AssetBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getStaAssetBySeachKey(status, searchKey));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AssetBean>>() {
+                    @Override
+                    public void accept(List<AssetBean> assetBeanList) throws Exception {
+                        showDataList.addAll(assetBeanList);
+                        adapter.notifyDataSetChanged();
+                        getMvpView().isEmpty(assetBeanList.size() == 0);
+                    }
+                });
+
     }
 
 }

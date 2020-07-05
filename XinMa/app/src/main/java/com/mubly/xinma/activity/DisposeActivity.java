@@ -44,7 +44,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mubly.xinma.activity.AssetSelectActivity.BRROROW_REQUEST_CODE;
+import static com.mubly.xinma.activity.AssetSelectActivity.DISPOSE_REQUEST_CODE;
 import static com.mubly.xinma.activity.AssetSelectActivity.RESULT_OK_CODE;
 
 /**
@@ -190,11 +190,11 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     @Override
     public void toSelectAssetsAct() {
         Intent intent = new Intent(this, AssetSelectActivity.class);
-        intent.putExtra("status", "1");
+        intent.putExtra("from", DISPOSE_REQUEST_CODE);
         if (null != selectAssetsBean) {
             intent.putExtra("selectedData", selectAssetsBean);
         }
-        startActivityForResult(intent, BRROROW_REQUEST_CODE);
+        startActivityForResult(intent, DISPOSE_REQUEST_CODE);
     }
 
     @Override

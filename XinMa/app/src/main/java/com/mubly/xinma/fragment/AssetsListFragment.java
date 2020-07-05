@@ -3,9 +3,17 @@ package com.mubly.xinma.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +29,10 @@ import com.mubly.xinma.databinding.FragmentAssetsListBinding;
 import com.mubly.xinma.db.DataBaseUtils;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.model.AssetBean;
+import com.mubly.xinma.model.FilterBean;
+import com.mubly.xinma.utils.LiveDataBus;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +41,18 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class AssetsListFragment extends Fragment {
-    private int type;
+    private String type;
+    private int index;
     FragmentAssetsListBinding binding = null;
-    List<AssetBean> assetBeanList = new ArrayList<>();
+    List<AssetBean> dataList = new ArrayList<>();
     AssetsListAdapter adapter = null;
+    private int pageIndex = 0, pageSize = 40;
 
-    public static AssetsListFragment getInstance(int type) {
+    public static AssetsListFragment getInstance(String type, int index) {
         AssetsListFragment fragment = new AssetsListFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("type", type);
+        bundle.putString("type", type);
+        bundle.putInt("index", index);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -47,13 +62,15 @@ public class AssetsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_assets_list, container, false);
         binding = DataBindingUtil.bind(view);
-        type = getArguments().getInt("type");
+        type = getArguments().getString("type");
+        index = getArguments().getInt("index");
+        dataList.clear();
         init();
         return view;
     }
 
     private void init() {
-        adapter = new AssetsListAdapter(assetBeanList);
+        adapter = new AssetsListAdapter(dataList);
         adapter.setOnItemClickListener(new AssetsListAdapter.OnItemClickListener() {
             @Override
             public void itemClick(AssetBean data, int index) {
@@ -63,44 +80,138 @@ public class AssetsListFragment extends Fragment {
         binding.assetsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.assetsRv.setAdapter(adapter);
         initData();
+        initEvent();
     }
+
+    private void initEvent() {
+        binding.assetLoadMore.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                pageIndex = pageIndex + pageSize;
+                initData();
+            }
+        });
+
+        LiveDataBus.get().with("searchAsset", Integer.class).observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (index == integer)
+                    searchData(integer);
+            }
+        });
+        LiveDataBus.get().with("filterAsset", FilterBean.class).observe(getViewLifecycleOwner(), new Observer<FilterBean>() {
+            @Override
+            public void onChanged(FilterBean filterBean) {
+                if (index == filterBean.getIndex())
+                    filterData(filterBean);
+            }
+        });
+    }
+
+    private void searchData(Integer integer) {
+        String status = getStatus(integer);
+        String searchKey = ((AssetsListActivity) getActivity()).getSearchKey();
+        dataList.clear();
+        Observable.create(new ObservableOnSubscribe<List<AssetBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
+                if (null == status) {
+                    emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAssetAllBySeachKey(searchKey));
+                } else {
+                    emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getStatusAssetBySeachKey(status, searchKey));
+                }
+
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AssetBean>>() {
+                    @Override
+                    public void accept(List<AssetBean> assetBeanList) throws Exception {
+                        binding.assetLoadMore.setEnableLoadMore(false);
+                        dataList.addAll(assetBeanList);
+                        adapter.notifyDataSetChanged();
+                        if (binding.assetLoadMore.getState().isFooter) {
+                            binding.assetLoadMore.finishLoadMore();
+                        }
+                        if (assetBeanList.size() == 0) {
+                            binding.assetLoadMore.setNoMoreData(true);
+                        }
+                        isEmpty(assetBeanList.size() == 0);
+                        ((AssetsListActivity) getActivity()).refreshTab(index, getTabStr(index, assetBeanList.size()));
+                    }
+                });
+
+    }
+
+    private void filterData(FilterBean filterBean) {
+        dataList.clear();
+        Observable.create(new ObservableOnSubscribe<List<AssetBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getFilterAssets(getStatus(filterBean.getIndex()), filterBean.getCategoryID(), filterBean.getDepartID(), filterBean.getDepart(),
+                        filterBean.getStaffID(), filterBean.getStaff(),filterBean.getPurchaseDate(),filterBean.getExpireDate(),filterBean.getRemainder()));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AssetBean>>() {
+                    @Override
+                    public void accept(List<AssetBean> assetBeanList) throws Exception {
+                        binding.assetLoadMore.setEnableLoadMore(false);
+                        dataList.addAll(assetBeanList);
+                        adapter.notifyDataSetChanged();
+                        if (binding.assetLoadMore.getState().isFooter) {
+                            binding.assetLoadMore.finishLoadMore();
+                        }
+                        if (assetBeanList.size() == 0) {
+                            binding.assetLoadMore.setNoMoreData(true);
+                        }
+                        isEmpty(assetBeanList.size() == 0);
+                        ((AssetsListActivity) getActivity()).refreshTab(index, getTabStr(index, assetBeanList.size()));
+                    }
+                });
+    }
+
 
     private void toAssestDetial(AssetBean data) {
         Intent intent = new Intent(getContext(), AssetsDetialActivity.class);
-        intent.putExtra("assetBean",data);
-        intent.putExtra("from","assetsList");
+        intent.putExtra("assetBean", data);
+        intent.putExtra("from", "assetsList");
         startActivity(intent);
     }
 
     private void initData() {
-        assetBeanList.clear();
-        new Thread(new Runnable() {
+        Observable.create(new ObservableOnSubscribe<List<AssetBean>>() {
             @Override
-            public void run() {
-                if (null == getStatus()) {
-//                    assetBeanList.addAll(DataBaseUtils.getInstance().getAssetBeanList());
-                    assetBeanList.addAll(((AssetsListActivity) getActivity()).getAllAssetBeanList());
+            public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
+                if (type.equals("0")) {
+                    emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAllByPage(pageIndex, pageSize));
                 } else {
-                    for (AssetBean assetBean : ((AssetsListActivity) getActivity()).getAllAssetBeanList()) {
-                        if (assetBean.getStatus().equals(getStatus())) {
-                            assetBeanList.add(assetBean);
-                        }
-                    }
-//                    assetBeanList.addAll(XinMaDatabase.getInstance().assetBeanDao().getAllByStatus(getStatus()));
+                    emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAllByStatusPage(pageIndex, pageSize, type));
                 }
-                getActivity().runOnUiThread(new Runnable() {
+
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AssetBean>>() {
                     @Override
-                    public void run() {
+                    public void accept(List<AssetBean> assetBeanList) throws Exception {
+                        dataList.addAll(assetBeanList);
                         adapter.notifyDataSetChanged();
+                        if (binding.assetLoadMore.getState().isFooter) {
+                            binding.assetLoadMore.finishLoadMore();
+                        }
+                        if (assetBeanList.size() == 0) {
+                            binding.assetLoadMore.setNoMoreData(true);
+                        }
+                        isEmpty(dataList.size() == 0);
                     }
                 });
-            }
-        }).start();
     }
 
-    private String getStatus() {
+
+    private String getStatus(int currentIndex) {
         String status = null;
-        switch (type) {
+        switch (currentIndex) {
             case 0:
                 status = null;
                 break;
@@ -123,4 +234,25 @@ public class AssetsListFragment extends Fragment {
         return status;
     }
 
+
+    private String getTabStr(int index, int searchCount) {
+        if (index == 0)
+            return "全部(" + searchCount + ")";
+        else if (index == 1)
+            return "闲置(" + searchCount + ")";
+        else if (index == 2)
+            return "在用(" + searchCount + ")";
+        else if (index == 3)
+            return "借用(" + searchCount + ")";
+        else if (index == 4)
+            return "维修(" + searchCount + ")";
+        else if (index == 5)
+            return "处置(" + searchCount + ")";
+        else
+            return "全部(" + searchCount + ")";
+    }
+
+    private void isEmpty(boolean isVisiable) {
+        binding.assetListEmpty.setVisibility(isVisiable ? View.VISIBLE : View.GONE);
+    }
 }

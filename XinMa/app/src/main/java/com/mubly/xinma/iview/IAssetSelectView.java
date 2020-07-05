@@ -6,4 +6,5 @@ import com.mubly.xinma.base.BaseMvpView;
 public interface IAssetSelectView extends BaseMvpView {
     void showRv(SmartAdapter adapter);
 
+    void isEmpty(boolean isEmpty);
 }

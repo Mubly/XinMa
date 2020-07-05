@@ -28,6 +28,12 @@ public class StaffBean implements Serializable {
     private String Status;//状态
     private int Enable;//0:删除本地，1，查找本地，有则更新无则插入
 
+    public StaffBean(String staff) {
+        Staff = staff;
+    }
+
+    public StaffBean() {
+    }
 
     public int getEnable() {
         return Enable;

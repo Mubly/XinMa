@@ -20,50 +20,42 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class AssetsListPresenter extends BasePresenter<IAssetListView> {
-    List<AssetBean> allAssetBeanList = new ArrayList<>();
+    //    List<AssetBean> allAssetBeanList = new ArrayList<>();
     List<String> titleList = new ArrayList<>();
     AssetsListPageAdapter pageAdapter = null;
 
     public void init() {
-        Observable.create(new ObservableOnSubscribe<List<AssetBean>>() {
+        Observable.create(new ObservableOnSubscribe<List<String>>() {
             @Override
-            public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
-                emitter.onNext(DataBaseUtils.getInstance().getAssetBeanList());
+            public void subscribe(ObservableEmitter<List<String>> emitter) throws Exception {
+                int allCount = 0;
+                int ldleCount = 0;
+                int usingCount = 0;
+                int brrorowCount = 0;
+                int repairCount = 0;
+                int disposeCount = 0;
+                List<String> titleData = new ArrayList<>();
+                allCount = XinMaDatabase.getInstance().assetBeanDao().getAllCount();
+                ldleCount = XinMaDatabase.getInstance().assetBeanDao().getCountByStatus("1");
+                usingCount = XinMaDatabase.getInstance().assetBeanDao().getCountByStatus("3");
+                brrorowCount = XinMaDatabase.getInstance().assetBeanDao().getCountByStatus("5");
+                repairCount = XinMaDatabase.getInstance().assetBeanDao().getCountByStatus("6");
+                disposeCount = XinMaDatabase.getInstance().assetBeanDao().getCountByStatus("8");
+                titleData.add("全部(" + allCount + ")");
+                titleData.add("闲置(" + ldleCount + ")");
+                titleData.add("在用(" + usingCount + ")");
+                titleData.add("借用(" + brrorowCount + ")");
+                titleData.add("维修(" + repairCount + ")");
+                titleData.add("处置(" + disposeCount + ")");
+                emitter.onNext(titleData);
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<AssetBean>>() {
+                .subscribe(new Consumer<List<String>>() {
                     @Override
-                    public void accept(List<AssetBean> assetBeanList) throws Exception {
-                        int allCount = 0;
-                        int ldleCount = 0;
-                        int usingCount = 0;
-                        int brrorowCount = 0;
-                        int repairCount = 0;
-                        int disposeCount = 0;
-                        if (null != assetBeanList) {
-                            allCount = assetBeanList.size();
-                            for (AssetBean assetBean : assetBeanList) {
-                                if (assetBean.getStatus().equals("1")) {
-                                    ldleCount++;
-                                } else if (assetBean.getStatus().equals("3")) {
-                                    usingCount++;
-                                } else if (assetBean.getStatus().equals("5")) {
-                                    brrorowCount++;
-                                } else if (assetBean.getStatus().equals("6")) {
-                                    repairCount++;
-                                } else if (assetBean.getStatus().equals("8")) {
-                                    disposeCount++;
-                                }
-                            }
-                            allAssetBeanList.addAll(assetBeanList);
-                        }
-                        titleList.add("全部(" + allCount + ")");
-                        titleList.add("闲置(" + ldleCount + ")");
-                        titleList.add("在用(" + usingCount + ")");
-                        titleList.add("借用(" + brrorowCount + ")");
-                        titleList.add("维修(" + repairCount + ")");
-                        titleList.add("处置(" + disposeCount + ")");
+                    public void accept(List<String> assetBeanList) throws Exception {
+                        titleList.clear();
+                        titleList.addAll(assetBeanList);
                         pageAdapter = new AssetsListPageAdapter(getMvpView().getFgManager(), titleList);
                         getMvpView().showPageView(pageAdapter);
                     }
@@ -72,7 +64,4 @@ public class AssetsListPresenter extends BasePresenter<IAssetListView> {
 
     }
 
-    public List<AssetBean> getAllAssetBeanList() {
-        return allAssetBeanList;
-    }
 }
