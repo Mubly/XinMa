@@ -26,6 +26,17 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
     }
 
     @Override
+    public void initEvent() {
+        super.initEvent();
+        binding.userAgreementContentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(UserAgreeActivity.class);
+            }
+        });
+    }
+
+    @Override
     protected SettingPresenter createPresenter() {
         return new SettingPresenter();
     }

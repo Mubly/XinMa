@@ -22,6 +22,8 @@
             <TextView
                 android:id="@+id/user_agreement_content"
                 android:layout_width="match_parent"
+                android:padding="@dimen/size_16dp"
+                android:lineSpacingMultiplier="1.2"
                 android:layout_height="match_parent"></TextView>
         </ScrollView>
     </LinearLayout>

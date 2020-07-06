@@ -332,7 +332,7 @@ public class CommUtil {
             is.read(buffer);
             is.close();
             // Convert the buffer into a string.
-            String text = new String(buffer, "utf-8");
+            String text = new String(buffer,"Unicode");
             // Finally stick the string into the text view.
             return text;
         } catch (IOException e) {

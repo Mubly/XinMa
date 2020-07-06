@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.lzy.okgo.OkGo;
 import com.mubly.xinma.R;
+import com.mubly.xinma.activity.UserAgreeActivity;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.base.BasePresenter;
 import com.mubly.xinma.common.CallBack;
@@ -45,6 +46,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, IRegisterV
         super.initEvent();
         binding.registerPhoneCodeGainBtn.setOnClickListener(this);
         binding.registerAck.setOnClickListener(this);
+        binding.userAgreement.setOnClickListener(this);
         EditViewUtil.EditDatachangeLister(binding.registerPhoneInputEt, new CallBack<String>() {
             @Override
             public void callBack(String obj) {
@@ -133,6 +135,9 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, IRegisterV
                     CommUtil.ToastU.showToast("请填写完整的注册信息");
                 }
 
+                break;
+            case R.id.user_agreement:
+                startActivity(UserAgreeActivity.class);
                 break;
         }
     }

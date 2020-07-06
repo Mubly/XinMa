@@ -197,6 +197,7 @@
                     android:orientation="vertical">
 
                     <FrameLayout
+                        android:id="@+id/user_agreement_content_layout"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_50dp">
 

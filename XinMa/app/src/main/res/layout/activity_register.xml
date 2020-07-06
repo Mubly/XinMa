@@ -209,12 +209,14 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/user_agreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_8dp">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
+                    android:checked="true"
                     android:layout_height="wrap_content"
                     android:text="我已阅读并同意用户协议"></androidx.appcompat.widget.AppCompatCheckBox>
             </FrameLayout>
