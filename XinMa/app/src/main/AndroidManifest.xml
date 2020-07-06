@@ -9,13 +9,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 话筒 -->
-
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
         android:name=".base.CrossApp"
         android:allowBackup="true"
@@ -25,7 +23,8 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme_App">
-        <activity android:name=".activity.PrintOperateActivity"></activity>
+        <activity android:name=".activity.UserAgreeActivity"></activity>
+        <activity android:name=".activity.PrintOperateActivity" />
         <activity android:name=".activity.PrintModelActivity" />
         <activity android:name=".activity.CheckDetialActivity" />
         <activity android:name=".activity.CheckCreateActivity" />

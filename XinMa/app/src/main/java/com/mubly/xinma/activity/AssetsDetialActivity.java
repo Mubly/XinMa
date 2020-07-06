@@ -22,6 +22,7 @@ import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
 import com.shehuan.nicedialog.ViewHolder;
 
+import java.io.IOException;
 import java.util.List;
 
 /**

@@ -42,6 +42,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -313,6 +314,33 @@ public class CommUtil {
         //int screenWidth = (int) (width / density);  // 屏幕宽度(dp)
         int screenHeight = (int) (height / density);// 屏幕高度(dp)
         return screenHeight;
+    }
+
+    /**
+     * 打开本地assetTxt文件
+     * @param context
+     * @param fileName
+     * @return
+     */
+    public static String readAssetsTxt(Context context,String fileName){
+        try {
+            //Return an AssetManager instance for your application's package
+            InputStream is = context.getAssets().open(fileName+".txt");
+            int size = is.available();
+            // Read the entire asset into a local byte buffer.
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            // Convert the buffer into a string.
+            String text = new String(buffer, "utf-8");
+            // Finally stick the string into the text view.
+            return text;
+        } catch (IOException e) {
+            // Should never happen!
+//            throw new RuntimeException(e);
+            e.printStackTrace();
+        }
+        return "读取错误，请检查文件名";
     }
 
     /**

@@ -102,10 +102,10 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.assetNo}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
 
@@ -131,17 +131,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.assetName}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -164,17 +166,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.assetModel}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -197,17 +201,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.unit}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -230,17 +236,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.supply}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -263,17 +271,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.purchaseDate}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -296,17 +306,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.original}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -329,17 +341,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.depreciated}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -362,17 +376,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.guaranteed}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -404,17 +420,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.depart}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -437,17 +455,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.seat}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -479,17 +499,19 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_16dp"
-                            tools:text="资产编码"
                             android:text="@{vm.assetsBean.category}"
                             android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
 
                         </TextView>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
@@ -524,8 +546,8 @@
                     <FrameLayout
                         android:id="@+id/add_custom_param"
                         android:layout_width="match_parent"
-                        android:visibility="gone"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_40dp"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -552,12 +574,20 @@
                     </FrameLayout>
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
+            <ViewStub
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_height="@dimen/size_50dp">
+
+            </ViewStub>
+
+            <include layout="@layout/bottom_asset_detail_layout"></include>
 
             <ViewStub
                 android:id="@+id/check_detial_bottom"
                 android:layout_width="match_parent"
-                android:layout_gravity="bottom"
                 android:layout_height="@dimen/size_40dp"
+                android:layout_gravity="bottom"
                 android:layout="@layout/check_detial_bottom_layout"></ViewStub>
         </FrameLayout>
     </LinearLayout>
