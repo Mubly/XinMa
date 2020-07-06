@@ -59,7 +59,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
     private String Fee;
     private String Remark;
     private JSONArray AssetIDList=new JSONArray();
-
+    private AssetBean operaAsset = null;
     @Override
     public void initView() {
         setTitle(R.string.repair_name);
@@ -67,6 +67,11 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
         mPresenter.init();
+        if (null!=operaAsset){
+            initSelectAssetsBean();
+            selectAssetsBean.getSelectBean().add(operaAsset);
+            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
     }
 
     @Override
@@ -77,6 +82,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repair);
+        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
     }
 
     @Override

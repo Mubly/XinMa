@@ -60,7 +60,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
 
     private String Remark;
     private JSONArray AssetIDList=new JSONArray();
-
+    private AssetBean operaAsset = null;
     @Override
     public void initView() {
         setTitle(R.string.brrorow_name);
@@ -68,6 +68,11 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
         mPresenter.init();
+        if (null!=operaAsset){
+            initSelectAssetsBean();
+            selectAssetsBean.getSelectBean().add(operaAsset);
+            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
     }
 
     @Override
@@ -124,6 +129,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_brrorow);
+        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
     }
 
     @Override

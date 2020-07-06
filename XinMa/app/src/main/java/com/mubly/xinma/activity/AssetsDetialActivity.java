@@ -3,15 +3,20 @@ package com.mubly.xinma.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mubly.xinma.R;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityAssetsDetialBinding;
+import com.mubly.xinma.databinding.BottomAssetDetailLayoutBinding;
 import com.mubly.xinma.iview.IAssetsDetialView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetInfoBean;
@@ -35,6 +40,8 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
     private View checkBottomLayout;
     private TextView normalTv, diffTv, lessTV;
 
+    BottomAssetDetailLayoutBinding assetOperateBind = null;
+
     @Override
     public void initView() {
         setTitle("资产详情");
@@ -45,21 +52,37 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
             diffTv = checkBottomLayout.findViewById(R.id.check_diff_tv);
             lessTV = checkBottomLayout.findViewById(R.id.check_less_tv);
         }
+        if (from.equals("assetsList")) {
+            View assetOperate = binding.assetDetailBottomOperate.getViewStub().inflate();
+            assetOperateBind = DataBindingUtil.bind(assetOperate);
+        }
         binding.setVm(mPresenter);
         binding.setLifecycleOwner(this);
         mPresenter.init(selectAssetsBean);
+        if (null != selectAssetsBean)
+            initBottomoperate();
+    }
 
+    private void initBottomoperate() {
 
     }
 
     @Override
     public void initEvent() {
         super.initEvent();
-     if (from.equals("check")){
-         normalTv.setOnClickListener(this);
-         diffTv.setOnClickListener(this);
-         lessTV.setOnClickListener(this);
-     }
+        if (from.equals("check")) {
+            normalTv.setOnClickListener(this);
+            diffTv.setOnClickListener(this);
+            lessTV.setOnClickListener(this);
+        }
+        if (null != assetOperateBind) {
+            assetOperateBind.assetDetailBottomChange.setOnClickListener(this);
+            assetOperateBind.assetDetailBottomGetuse.setOnClickListener(this);
+            assetOperateBind.assetDetailBottomBorrow.setOnClickListener(this);
+            assetOperateBind.assetDetailBottomRapir.setOnClickListener(this);
+            assetOperateBind.assetDetailBottomDispose.setOnClickListener(this);
+            assetOperateBind.assetDetailBottomCopy.setOnClickListener(this);
+        }
     }
 
     @Override
@@ -74,6 +97,24 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
                 break;
             case R.id.check_less_tv:
                 checkOperate("3");
+                break;
+            case R.id.asset_detail_bottom_change:
+                toPeratePage(ChangeActivity.class);
+                break;
+            case R.id.asset_detail_bottom_getuse:
+                toPeratePage(GetUseActivity.class);
+                break;
+            case R.id.asset_detail_bottom_borrow:
+                toPeratePage(BrrorowActivity.class);
+                break;
+            case R.id.asset_detail_bottom_rapir:
+                toPeratePage(RepairActivity.class);
+                break;
+            case R.id.asset_detail_bottom_dispose:
+                toPeratePage(DisposeActivity.class);
+                break;
+            case R.id.asset_detail_bottom_copy:
+                toPeratePage(CreateActivity.class);
                 break;
         }
     }
@@ -128,16 +169,26 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
         if (null != infoBeans && infoBeans.size() > 0) {
             for (AssetInfoBean assetInfoBean : infoBeans) {
                 View view = View.inflate(this, R.layout.custom_param_layout, null);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
                 TextView leftTv = view.findViewById(R.id.custom_param_key);
                 leftTv.setText(assetInfoBean.getInfoName());
+                view.setLayoutParams(layoutParams);
                 binding.dryParamLayout.addView(view);
             }
         } else {
             View view = View.inflate(this, R.layout.custom_param_layout, null);
             TextView leftTv = view.findViewById(R.id.custom_param_key);
             leftTv.setText("无");
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
+            view.setLayoutParams(layoutParams);
             binding.dryParamLayout.addView(view);
         }
 
+    }
+
+    private void toPeratePage(Class<?> className) {
+        Intent intent = new Intent(this, className);
+        intent.putExtra("assetBean", selectAssetsBean);
+        startActivity(intent);
     }
 }

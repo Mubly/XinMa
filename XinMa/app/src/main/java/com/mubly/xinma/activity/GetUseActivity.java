@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -62,7 +63,8 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     private String Seat;
 
     private String Remark;
-    private JSONArray AssetIDList=new JSONArray();
+    private JSONArray AssetIDList = new JSONArray();
+    private AssetBean operaAsset = null;
 
     @Override
     public void initView() {
@@ -71,6 +73,11 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
         binding.setPersent(mPresenter);
         binding.setLifecycleOwner(this);
         mPresenter.init();
+        if (null!=operaAsset){
+            initSelectAssetsBean();
+            selectAssetsBean.getSelectBean().add(operaAsset);
+            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
     }
 
     @Override
@@ -81,6 +88,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_get_use);
+        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
     }
 
     @Override
@@ -102,7 +110,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart)||TextUtils.isEmpty(Seat)||TextUtils.isEmpty(Remark)) {
+        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat) || TextUtils.isEmpty(Remark)) {
             CommUtil.ToastU.showToast("请完善领用信息");
             return;
         }
@@ -110,11 +118,11 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
             CommUtil.ToastU.showToast("请添加要领用的资产");
             return;
         } else {
-            AssetIDList=new JSONArray();
+            AssetIDList = new JSONArray();
             for (AssetBean bean : selectAssetsBean.getSelectBean()) {
-                JSONObject object=new JSONObject();
+                JSONObject object = new JSONObject();
                 try {
-                    object.put("AssetID",bean.getAssetID());
+                    object.put("AssetID", bean.getAssetID());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -138,7 +146,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
-                      closeCurrentAct();
+                        closeCurrentAct();
                     }
                 }).start();
             }
@@ -195,6 +203,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
             }
         });
     }
+
     @Override
     public void forScanResult(String code) {
         super.forScanResult(code);
@@ -222,6 +231,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
             selectAssetsBean.setSelectBean(assetBeans);
         }
     }
+
     @Override
     public boolean isTimeSelectInit() {
         return true;

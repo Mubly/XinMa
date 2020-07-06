@@ -63,7 +63,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     private String fee;
     private String Remark;
     private JSONArray AssetIDList = new JSONArray();
-
+    private AssetBean operaAsset = null;
     @Override
     public void initView() {
         setTitle(R.string.dispose_name);
@@ -72,6 +72,11 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
         binding.setLifecycleOwner(this);
         mPresenter.init();
         initDisopseType();
+        if (null!=operaAsset){
+            initSelectAssetsBean();
+            selectAssetsBean.getSelectBean().add(operaAsset);
+            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
     }
 
     @Override
@@ -128,6 +133,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dispose);
+        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
     }
 
     @Override

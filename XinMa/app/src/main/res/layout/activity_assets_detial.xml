@@ -575,13 +575,12 @@
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
             <ViewStub
+                android:id="@+id/asset_detail_bottom_operate"
                 android:layout_width="match_parent"
                 android:layout_gravity="bottom"
+                android:layout="@layout/bottom_asset_detail_layout"
                 android:layout_height="@dimen/size_50dp">
-
             </ViewStub>
-
-            <include layout="@layout/bottom_asset_detail_layout"></include>
 
             <ViewStub
                 android:id="@+id/check_detial_bottom"
