@@ -36,6 +36,7 @@
                     android:orientation="vertical">
 
                     <FrameLayout
+                        android:id="@+id/change_company_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_50dp">
 
@@ -75,6 +76,7 @@
                     </FrameLayout>
 
                     <FrameLayout
+                        android:id="@+id/change_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_50dp">
 

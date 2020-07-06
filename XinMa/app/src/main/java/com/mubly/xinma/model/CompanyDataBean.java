@@ -12,9 +12,50 @@ import com.mubly.xinma.utils.AppConfig;
 import java.util.List;
 
 public class CompanyDataBean extends BaseModel {
-    List<CompanyBean>Company;
+    List<CompanyBean> Company;
+
     public static void getCompanyInfo(final CallBack<CompanyDataBean> callBack) {
         OkGo.<CompanyDataBean>post(URLConstant.API_Company_SelectCompany_Url)
+                .execute(new JsonCallback<CompanyDataBean>() {
+                    @Override
+                    public void onSuccess(final Response<CompanyDataBean> response) {
+                        if (response.body().getCode() == 1) {
+                            AppConfig.companyInfo.put(JSON.toJSONString(response.body().Company.get(0)));
+                            callBack.callBack(response.body());
+                        }
+                    }
+                });
+    }
+
+
+    public static void changeCompanyName(String companyName, final CallBack<BaseModel> callBack) {
+        OkGo.<BaseModel>post(URLConstant.API_Company_UpdateCompany_Url)
+                .params("Company", companyName)
+                .execute(new JsonCallback<BaseModel>() {
+                    @Override
+                    public void onSuccess(final Response<BaseModel> response) {
+                        if (response.body().getCode() == 1) {
+                            callBack.callBack(response.body());
+                        }
+                    }
+                });
+    }
+
+    public static void changeUserName(String userName, final CallBack<BaseModel> callBack) {
+        OkGo.<BaseModel>post(URLConstant.API_USER_NAME_CHANGE_Url)
+                .params("FullName", userName)
+                .execute(new JsonCallback<BaseModel>() {
+                    @Override
+                    public void onSuccess(final Response<BaseModel> response) {
+                        if (response.body().getCode() == 1) {
+                            callBack.callBack(response.body());
+                        }
+                    }
+                });
+    }
+
+    public static void changePhoneNo(String phoneNo, final CallBack<CompanyDataBean> callBack) {
+        OkGo.<CompanyDataBean>post(URLConstant.API_PHONE_NO_CHANGE_Url)
                 .execute(new JsonCallback<CompanyDataBean>() {
                     @Override
                     public void onSuccess(final Response<CompanyDataBean> response) {

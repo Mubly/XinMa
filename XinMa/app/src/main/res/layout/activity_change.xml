@@ -5,6 +5,17 @@
 
     <data>
 
+        <variable
+            name="bean"
+            type="com.mubly.xinma.model.AssetBean" />
+
+        <variable
+            name="imagePresenter"
+            type="com.mubly.xinma.presenter.ImageUrlPersenter" />
+
+        <variable
+            name="vm"
+            type="com.mubly.xinma.presenter.ChangePresenter" />
     </data>
 
     <LinearLayout
@@ -14,5 +25,403 @@
         tools:context=".activity.ChangeActivity">
 
         <include layout="@layout/top_bar_layout"></include>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:background="@color/background"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="资产"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_90dp">
+
+                    <ImageView
+                        android:id="@+id/create_asset_img"
+                        imageUrl="@{imagePresenter.getAssetListUrl(bean.Headimg)}"
+                        android:layout_width="@dimen/size_60dp"
+                        android:layout_height="@dimen/size_60dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/img_defaut"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_80dp"
+                        android:text="@{bean.assetName}"
+                        android:layout_marginTop="@dimen/size_14dp"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:textSize="@dimen/size_12sp"
+                        android:textColor="@color/color_919191"
+                        android:layout_marginBottom="@dimen/size_10dp"
+                        android:text="@{bean.assetModel}"
+                        android:layout_marginLeft="@dimen/size_80dp">
+
+                    </TextView>
+
+                    <ImageView
+                        imgRadious="10"
+                        resIdImg="@{imagePresenter.getAssetIcon(bean.status)}"
+                        android:layout_width="@dimen/size_60dp"
+                        android:layout_height="@dimen/size_60dp"
+                        android:layout_gravity="right"
+                        android:scaleType="fitXY"
+                        tools:src="@drawable/ldle_icon_bg"></ImageView>
+
+                    <com.mubly.xinma.common.weight.RotateTextView
+                        android:layout_width="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_40dp"
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:text="@{bean.statusName}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_12dp"></com.mubly.xinma.common.weight.RotateTextView>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:background="@color/background"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="变更信息"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--                    <view-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="1px"-->
+                    <!--                        android:background="@color/clr_gray_line"></view>-->
+
+                    <FrameLayout
+                        android:id="@+id/change_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="变更时间"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="@dimen/size_50dp"
+                            android:text="@{vm.changeTime}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20dp"
+                            android:layout_height="@dimen/size_20dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/size_20dp"
+                            android:padding="@dimen/size_2dp"
+                            android:src="@mipmap/arrow_right_gray"></ImageView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/depart_change"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="新的所属"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="@dimen/size_50dp"
+                            android:gravity="right"
+                            android:hint="请选择部门与人员"
+                            android:text="@{vm.departStaff}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20dp"
+                            android:layout_height="@dimen/size_20dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/size_20dp"
+                            android:padding="@dimen/size_2dp"
+                            android:src="@mipmap/arrow_right_gray"></ImageView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="新的存放地"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <EditText
+                            android:id="@+id/change_new_seat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="@dimen/size_50dp"
+                            android:background="@null"
+                            android:gravity="right"
+                            android:hint="请输入新的存放地"
+                            android:text="@{bean.seat}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp">
+
+                        </EditText>
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20dp"
+                            android:layout_height="@dimen/size_20dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/size_20dp"
+                            android:padding="@dimen/size_2dp"
+                            android:src="@mipmap/arrow_right_gray"></ImageView>
+                    </FrameLayout>
+
+                    <!--                    <view-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="1px"-->
+                    <!--                        android:background="@color/clr_gray_line"></view>-->
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:background="@color/background"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="减值信息(请核实后填写)"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--                    <view-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="1px"-->
+                    <!--                        android:background="@color/clr_gray_line"></view>-->
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="剩余价值(元)"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <EditText
+                            android:id="@+id/change_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:layout_marginRight="@dimen/size_50dp"
+                            android:background="@null"
+                            android:gravity="right"
+                            android:hint="请输入剩余价值"
+                            android:inputType="numberDecimal"
+                            android:text="@{bean.price}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp">
+
+                        </EditText>
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20dp"
+                            android:layout_height="@dimen/size_20dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/size_20dp"
+                            android:padding="@dimen/size_2dp"
+                            android:src="@mipmap/arrow_right_gray"></ImageView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="剩余周期(月)"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <EditText
+                            android:id="@+id/changet_Remainder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="@dimen/size_50dp"
+                            android:gravity="right|center_vertical"
+                            android:hint="请输入剩余周期"
+                            android:inputType="number"
+                            android:background="@null"
+                            android:text="@{bean.remainder}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp">
+
+                        </EditText>
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20dp"
+                            android:layout_height="@dimen/size_20dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/size_20dp"
+                            android:padding="@dimen/size_2dp"
+                            android:src="@mipmap/arrow_right_gray"></ImageView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="备注"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <EditText
+                            android:id="@+id/change_remark"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="@dimen/size_50dp"
+                            android:background="@null"
+                            android:gravity="right|center_vertical"
+                            android:hint="请输入变更备注"
+                            android:text="@{bean.remark}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp"></EditText>
+
+                        <ImageView
+                            android:layout_width="@dimen/size_20dp"
+                            android:layout_height="@dimen/size_20dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/size_20dp"
+                            android:padding="@dimen/size_2dp"
+                            android:src="@mipmap/arrow_right_gray"></ImageView>
+
+                    </FrameLayout>
+
+                    <!--                    <view-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="1px"-->
+                    <!--                        android:background="@color/clr_gray_line"></view>-->
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </layout>

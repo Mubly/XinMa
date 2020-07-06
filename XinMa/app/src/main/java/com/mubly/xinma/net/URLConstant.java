@@ -105,6 +105,12 @@ public class URLConstant {
     //    主题修改
     public static final String API_Company_UpdateCompany_Url = BASE_URL + "/API_Company/UpdateCompany";
 
+    //    电话修改
+    public static final String API_PHONE_NO_CHANGE_Url = BASE_URL + "/AppUser/UpdatePhone";
+
+    //    姓名修改
+    public static final String API_USER_NAME_CHANGE_Url = BASE_URL + "/AppUser/UpdateFullName";
+
     //部门列表
     public static final String API_Depart_ListDepart_URL = BASE_URL + "/API_Depart/ListDepart";
 

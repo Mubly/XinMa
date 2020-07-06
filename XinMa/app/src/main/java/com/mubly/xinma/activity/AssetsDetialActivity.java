@@ -65,6 +65,25 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
 
     private void initBottomoperate() {
 
+        if (TextUtils.isEmpty(selectAssetsBean.getStatus()) || null == assetOperateBind) return;
+        assetOperateBind.assetDetailBottomCopy.setVisibility(View.GONE);
+        if (selectAssetsBean.getStatus().equals("1")) {
+
+        } else if (selectAssetsBean.getStatus().equals("3")) {
+            assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
+            assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
+        } else if (selectAssetsBean.getStatus().equals("5")) {
+            assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
+            assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
+        } else if (selectAssetsBean.getStatus().equals("6")) {
+            assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
+            assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
+            assetOperateBind.assetDetailBottomRapir.setVisibility(View.GONE);
+        } else if (selectAssetsBean.getStatus().equals("8")) {
+            assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
+            assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
+            assetOperateBind.assetDetailBottomDispose.setVisibility(View.GONE);
+        }
     }
 
     @Override
