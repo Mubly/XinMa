@@ -26,6 +26,10 @@ import com.mubly.xinma.activity.SettingActivity;
 import com.mubly.xinma.utils.AdaptScreenUtils;
 import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
+import com.shehuan.nicedialog.BaseNiceDialog;
+import com.shehuan.nicedialog.NiceDialog;
+import com.shehuan.nicedialog.ViewConvertListener;
+import com.shehuan.nicedialog.ViewHolder;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +52,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     private ImageView backBtn, rightAddBtn, printBtn, settingBtn;
     private TextView titleTv, rightTv;
     private LinearLayout rightImgLayout;
+    private BaseNiceDialog loadDialog = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,6 +148,10 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
         if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
             mHandler = null;
+        }
+        if (null != loadDialog) {
+            if (loadDialog.isVisible())
+                loadDialog.dismiss();
         }
         CrossApp.get().deAct(this);
         ImmersionBar.with(this).destroy();
@@ -272,5 +281,28 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
             String code = data.getStringExtra("result");
             forScanResult(code);
         }
+    }
+
+
+    public void showLoading(String msg) {
+        if (null == loadDialog) {
+            loadDialog = NiceDialog.init().setLayoutId(R.layout.toast_style_view)
+                    .setConvertListener(new ViewConvertListener() {
+                        @Override
+                        protected void convertView(ViewHolder holder, BaseNiceDialog dialog) {
+                            holder.setText(R.id.progress_message, msg);
+                        }
+                    })
+                    .setWidth(90)
+                    .setHeight(90)
+                    .show(getSupportFragmentManager());
+        } else {
+            loadDialog.show(getSupportFragmentManager());
+        }
+
+    }
+
+    public void hideLoading() {
+        loadDialog.dismiss();
     }
 }
