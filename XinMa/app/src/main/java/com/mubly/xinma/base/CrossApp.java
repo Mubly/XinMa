@@ -15,6 +15,7 @@ import com.lzy.okgo.cookie.store.SPCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
+import com.mubly.xinma.utils.PrintCenterManager;
 
 
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ public class CrossApp extends Application {
         super.onCreate();
         sCrossApp = this;
         initOkGo();
-
+//        初始化打印机
+        PrintCenterManager.getInstance();
     }
 
     public void initOkGo() {

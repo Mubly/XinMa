@@ -139,6 +139,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
             intent.putExtra("selectedData", selectAssetsBean);
         }
         startActivityForResult(intent, REPAIR_REQUEST_CODE);
+        startPage();
     }
 
     @Override

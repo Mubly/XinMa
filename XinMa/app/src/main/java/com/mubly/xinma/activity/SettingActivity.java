@@ -13,6 +13,7 @@ import com.mubly.xinma.databinding.ActivitySettingBinding;
 import com.mubly.xinma.iview.ISettingView;
 import com.mubly.xinma.presenter.SettingPresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.PrintCenterManager;
 import com.shehuan.nicedialog.BaseNiceDialog;
 import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
@@ -56,6 +57,12 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
                 showPromat();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.getPrnitStatus().setValue(PrintCenterManager.getInstance().isPrinterConnected() ? PrintCenterManager.getInstance().getCurrentPrint().shownName : "未连接");
     }
 
     @Override

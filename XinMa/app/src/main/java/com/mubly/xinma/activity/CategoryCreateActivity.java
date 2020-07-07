@@ -96,6 +96,7 @@ public class CategoryCreateActivity extends BaseActivity<CategoryCreatePresenter
         Intent intent = new Intent(this, CategoryInfoSelectActivity.class);
         intent.putExtra("selectParam", InfoValues);
         startActivity(intent);
+        startPage();
     }
 
     @Override

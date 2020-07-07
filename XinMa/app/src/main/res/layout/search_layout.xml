@@ -2,6 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/size_40dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="@drawable/shape_radious5_gray_bg">
 
     <ImageView

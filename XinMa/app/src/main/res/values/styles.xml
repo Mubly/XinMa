@@ -19,6 +19,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="android:activityOpenEnterAnimation">@anim/anim_alpha_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_alpha_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_alpha_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_alpha_exit</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 </resources>

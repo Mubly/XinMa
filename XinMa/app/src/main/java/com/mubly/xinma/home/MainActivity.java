@@ -90,7 +90,6 @@ public class MainActivity extends BaseActivity<HomePresenter, IHomeView> impleme
         binding.setLifecycleOwner(this);
         mPresenter.init();
         setBackBtnEnable(false);
-        setRightImgLayoutEnable(true);
         setTitle(R.string.app_name_title);
 
     }

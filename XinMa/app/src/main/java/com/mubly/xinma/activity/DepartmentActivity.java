@@ -76,6 +76,7 @@ public class DepartmentActivity extends BaseActivity<DepartMentPresenter, IDepar
         intent.putExtra("departName", departName);
         intent.putExtra("departId", departId);
         startActivity(intent);
+        startPage();
     }
 
     @Override
@@ -111,6 +112,7 @@ public class DepartmentActivity extends BaseActivity<DepartMentPresenter, IDepar
         Intent intent = new Intent(this, StaffCreateActivity.class);
         intent.putExtra("staffBean", staffBean);
         startActivity(intent);
+        startPage();
     }
 
 

@@ -23,6 +23,8 @@ import com.mubly.xinma.R;
 import com.mubly.xinma.activity.PrintActivity;
 import com.mubly.xinma.activity.ScannerActivity;
 import com.mubly.xinma.activity.SettingActivity;
+import com.mubly.xinma.login.view.LoginActivity;
+import com.mubly.xinma.login.view.StartActivity;
 import com.mubly.xinma.utils.AdaptScreenUtils;
 import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
@@ -166,16 +168,11 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
     @Override
     public void checkNetCode(int code, String msg) {
         switch (code) {
-            case 401: //nast-token 失效或过期
-                CommUtil.ToastU.showToast(msg);
+            case 0: //nast-token 失效或过期
+                closeAllAct();
+                startActivity(LoginActivity.class);
                 AppConfig.token.remove();
                 break;
-//            case USERFORBID:// 账号禁用
-//                OffsiteLanding("账号已被禁用");
-//                break;
-//            case UUIDERROR://多端登陆
-//                OffsiteLanding("账号已经在别处登录,请重新登录");
-//                break;
             default:
                 CommUtil.ToastU.showToast(msg);
                 break;
@@ -247,11 +244,17 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
 
     public void startActivity(Class<?> act) {
         startActivity(new Intent(this, act));
+        startPage();
+    }
+
+    public void startPage() {
+        overridePendingTransition(R.anim.anim_alpha_enter, R.anim.anim_alpha_exit);
     }
 
     @Override
     public void startActivity(Class<?> act, boolean closeAct) {
         startActivity(act);
+        startPage();
         if (closeAct)
             finish();
     }

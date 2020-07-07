@@ -14,6 +14,7 @@ import com.mubly.xinma.login.view.RegisterActivity;
 import com.mubly.xinma.model.AssetDataBean;
 import com.mubly.xinma.model.CategoryDataBean;
 import com.mubly.xinma.model.GroupData;
+import com.mubly.xinma.model.ParamBeanData;
 import com.mubly.xinma.model.UserInfoData;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
@@ -54,33 +55,18 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                 public void callBack(UserInfoData obj) {//获取用户信息信息
                                     if (obj.getCode() == 1) {
                                         CommUtil.ToastU.showToast(CrossApp.get(), "获取分类信息…");
-                                        CategoryDataBean.getCateGoryData(new CallBack<CategoryDataBean>() {
+                                        AssetDataBean.pullAssetData(new CallBack<AssetDataBean>() {
                                             @Override
-                                            public void callBack(CategoryDataBean obj) {//同步分类信息
-                                                if (obj.getCode() == 1) {
-                                                    CommUtil.ToastU.showToast(CrossApp.get(), "获取组织信息…");
-                                                    GroupData.getGroupData(new CallBack<GroupData>() {
-                                                        @Override
-                                                        public void callBack(GroupData obj) {//同步组织信息
-                                                            if (obj.getCode() == 1) {
-                                                                CommUtil.ToastU.showToast(CrossApp.get(), "获取资产信息…");
-                                                                AssetDataBean.pullAssetData(new CallBack<AssetDataBean>() {
-                                                                    @Override
-                                                                    public void callBack(AssetDataBean obj) {
-                                                                        if (obj.getCode() == 1) {//获取资产信息
-                                                                            getMvpView().startActivity(MainActivity.class, true);//跳转首页
-                                                                        } else
-                                                                            CommUtil.ToastU.showToast(obj.getMsg());
-                                                                    }
-                                                                });
-                                                            } else
-                                                                CommUtil.ToastU.showToast(obj.getMsg());
-
-                                                        }
-                                                    });
-                                                } else CommUtil.ToastU.showToast(obj.getMsg());
+                                            public void callBack(AssetDataBean obj) {
+                                                ParamBeanData.synData(new CallBack<ParamBeanData>() {
+                                                    @Override
+                                                    public void callBack(ParamBeanData obj) {
+                                                        getMvpView().startActivity(MainActivity.class, true);//跳转首页
+                                                    }
+                                                });
                                             }
                                         });
+
                                     } else
                                         CommUtil.ToastU.showToast(obj.getMsg());
                                 }

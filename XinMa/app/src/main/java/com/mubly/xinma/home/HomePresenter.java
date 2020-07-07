@@ -5,6 +5,7 @@ import android.util.Log;
 import com.mubly.xinma.activity.AnalysisActivity;
 import com.mubly.xinma.activity.DisposeActivity;
 import com.mubly.xinma.activity.GroupActivity;
+import com.mubly.xinma.activity.SettingActivity;
 import com.mubly.xinma.activity.SortClassActivity;
 import com.mubly.xinma.adapter.HomeMenuAdapter;
 import com.mubly.xinma.activity.AssetsListActivity;
@@ -98,6 +99,9 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     case 11:
                         getMvpView().startActivity(GroupActivity.class);
                         break;
+                    case 12:
+                        getMvpView().startActivity(SettingActivity.class);
+                        break;
                 }
 
             }
@@ -163,7 +167,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     }
 
     private void initMenuData() {
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 12; i++) {
             homeMenuBeanList.add(new HomeMenuBean(Constant.menuName[i], Constant.menuIconResId[i], i + 1));
         }
     }

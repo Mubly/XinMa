@@ -194,6 +194,7 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
         intent.putExtra("from", "check");
         intent.putExtra("checkId", checkId);
         startActivity(intent);
+        startPage();
     }
 
     @Override

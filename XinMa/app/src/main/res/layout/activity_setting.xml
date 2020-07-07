@@ -54,9 +54,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
                             android:layout_marginRight="@dimen/size_40dp"
+                            android:text="@{persenter.userInfo.company}"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
-                            android:text="@{persenter.userInfo.company}"
                             tools:text="上海登元信息科技有限公司"></TextView>
 
                         <ImageView
@@ -94,9 +94,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
                             android:layout_marginRight="@dimen/size_40dp"
+                            android:text="@{persenter.userInfo.fullName}"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
-                            android:text="@{persenter.userInfo.fullName}"
                             tools:text="小刘"></TextView>
 
                         <ImageView
@@ -133,9 +133,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
                             android:layout_marginRight="@dimen/size_40dp"
+                            android:text="@{persenter.userInfo.phone}"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
-                            android:text="@{persenter.userInfo.phone}"
                             tools:text="155876839755"></TextView>
 
                         <ImageView
@@ -154,10 +154,58 @@
                     </FrameLayout>
                 </LinearLayout>
 
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_50dp"
                     android:layout_marginTop="@dimen/size_12dp"
+                    android:background="@color/white">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="top"
+                        android:background="@color/clr_gray_line"></View>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:text="打印机"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_15sp"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="@dimen/size_40dp"
+                        android:onClick="@{()->persenter.toPrintPage()}"
+                        android:text="@{persenter.prnitStatus}"
+                        android:textColor="@color/color_919191"
+                        android:textSize="@dimen/size_14sp"
+                        tools:text=""></TextView>
+
+                    <ImageView
+                        android:layout_width="@dimen/size_20dp"
+                        android:layout_height="@dimen/size_20dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="@dimen/size_16dp"
+                        android:padding="@dimen/size_2dp"
+                        android:src="@mipmap/arrow_right_gray"></ImageView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:background="@color/clr_gray_line"></View>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_50dp"
                     android:layout_marginBottom="@dimen/size_12dp"
                     android:background="@color/white">
 
@@ -245,8 +293,8 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:onClick="toJumpAct"
-                        android:layout_height="@dimen/size_50dp">
+                        android:layout_height="@dimen/size_50dp"
+                        android:onClick="toJumpAct">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -262,9 +310,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center_vertical"
                             android:layout_marginRight="@dimen/size_40dp"
+                            android:text="@{persenter.versionCode}"
                             android:textColor="@color/color_919191"
                             android:textSize="@dimen/size_14sp"
-                            android:text="@{persenter.versionCode}"
                             tools:text="v1.0"></TextView>
 
                         <ImageView
@@ -287,9 +335,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_50dp"
                     android:layout_marginTop="@dimen/size_16dp"
-                    android:onClick="@{()->persenter.loginOut()}"
                     android:layout_marginBottom="@dimen/size_12dp"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:onClick="@{()->persenter.loginOut()}">
 
                     <View
                         android:layout_width="match_parent"

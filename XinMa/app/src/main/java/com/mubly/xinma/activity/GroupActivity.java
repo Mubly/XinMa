@@ -51,7 +51,7 @@ public class GroupActivity extends BaseActivity<GroupPresenter, IGroupView> impl
         intent.putExtra("departId", groupBean.getDepartID());
         intent.putExtra("departName", groupBean.getDepart());
         startActivity(intent);
-
+        startPage();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.mubly.xinma.base.BaseModel;
@@ -96,11 +98,21 @@ public class AssetDataBean extends BaseModel {
                                     assetBean.setCreateTime(CommUtil.getCurrentTime());
                                     XinMaDatabase.getInstance().assetBeanDao().insert(assetBean);
                                     callBack.callBack(true);
+                                } else if (response.body().getCode() == 0) {
+
+                                } else {
+                                    CommUtil.ToastU.showToast("资产数据获取失败");
                                 }
 
                             }
                         }).start();
 
+                    }
+
+                    @Override
+                    public void onError(Response<AssetsCreateRes> response) {
+                        super.onError(response);
+                        TextUtils.isEmpty("网络异常");
                     }
                 });
     }

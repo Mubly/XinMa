@@ -3,6 +3,7 @@ package com.mubly.xinma.presenter;
 import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.mubly.xinma.activity.PrintActivity;
 import com.mubly.xinma.base.BaseModel;
 import com.mubly.xinma.base.BasePresenter;
 import com.mubly.xinma.base.ResponseData;
@@ -23,6 +24,11 @@ import androidx.lifecycle.MutableLiveData;
 
 public class SettingPresenter extends BasePresenter<ISettingView> {
     private MutableLiveData<UserInfoBean> userInfo = new MutableLiveData<>();
+    private MutableLiveData<String> prnitStatus = new MutableLiveData<>();
+
+    public MutableLiveData<String> getPrnitStatus() {
+        return prnitStatus;
+    }
 
     public void loginOut() {
         AppConfig.clearAll();
@@ -68,6 +74,7 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
             }
         });
     }
+
     public void changeUserName(String userName) {
         CompanyDataBean.changeUserName(userName, new CallBack<BaseModel>() {
             @Override
@@ -77,6 +84,11 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
             }
         });
     }
+
     public void changePhoneName(String phoneName) {
+    }
+
+    public void toPrintPage() {
+        getMvpView().startActivity(PrintActivity.class);
     }
 }

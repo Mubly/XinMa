@@ -19,8 +19,8 @@
             android:layout_centerHorizontal="true"
             app:imgResId="@{bean.iconResId}"
             android:padding="@dimen/size_5dp"
-            android:layout_width="@dimen/size_40dp"
-            android:layout_height="@dimen/size_40dp">
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp">
         </ImageView>
 
         <TextView
