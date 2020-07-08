@@ -8,7 +8,7 @@ import com.mubly.xinma.common.Constant;
 
 public class ImageUrlPersenter {
     public String getAssetListUrl(String headUrl) {
-
+        Log.i("imgUrl", Constant.ASSET_HRADIMG_LITTLE_URL + headUrl);
         return TextUtils.isEmpty(headUrl) ? null : Constant.ASSET_HRADIMG_LITTLE_URL + headUrl;
     }
 
