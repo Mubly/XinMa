@@ -462,33 +462,6 @@ public class CommUtil {
         return dialog;
     }
 
-//    public static void showSingleListDialog(Context context, int indexDef, String titleStr, final List<String> dataList, final CallBackObject callBackObject) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        if (!TextUtils.isEmpty(titleStr)) {
-//            builder.setTitle(titleStr);
-//        }
-//        final int[] index = {0};
-//        String[] singleList = new String[dataList.size()];
-//        dataList.toArray(singleList);
-//        builder.setSingleChoiceItems(singleList, indexDef, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                index[0] = which;
-//            }
-//        });
-//        builder.setNegativeButton("取消", null);
-//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                if (null != callBackObject) {
-//                    callBackObject.callBack(index[0]);
-//                }
-//            }
-//        });
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//    }
 
 
     /**

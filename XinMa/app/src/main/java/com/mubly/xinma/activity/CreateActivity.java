@@ -28,10 +28,13 @@ import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.common.GroupSelectCallBack;
 import com.mubly.xinma.databinding.ActivityCreateBinding;
 import com.mubly.xinma.iview.ICreateView;
+import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CategoryBean;
+import com.mubly.xinma.model.CategoryInfoBean;
 import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.presenter.CreatePresenter;
+import com.mubly.xinma.presenter.ImageUrlPersenter;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.GlideEngine;
 import com.mubly.xinma.utils.ImageUtils;
@@ -51,6 +54,8 @@ import java.util.List;
  */
 public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreateView> implements ICreateView {
     ActivityCreateBinding binding = null;
+    private AssetBean selectAssetBean;
+    private int type;//;1编辑2复制
     private String headimg;
     private JSONArray paramArray = new JSONArray();
     private String selectDepart;
@@ -58,6 +63,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
     private String selectCategory;
     private String selectCategoryId;
     private String selectTime;
+    private String assetsId;
 
     @Override
     public void initView() {
@@ -65,6 +71,40 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         setRightTv("保存");
         binding.setVm(mPresenter);
         binding.setLifecycleOwner(this);
+        if (type == 1) {//编辑
+            setTitle("编辑");
+            selectTime = selectAssetBean.getPurchaseDate();
+            assetsId = selectAssetBean.getAssetID();
+            initCopyView();
+        } else if (type == 2) {
+            selectTime = CommUtil.getCurrentTimeHM();
+            binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeHM());
+            initCopyView();
+        } else {
+            selectTime = CommUtil.getCurrentTimeHM();
+            binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeHM());
+        }
+    }
+
+    private void initCopyView() {
+        headimg = selectAssetBean.getHeadimg();
+        Glide.with(CreateActivity.this).load(new ImageUrlPersenter().getAssetListUrl(selectAssetBean.getHeadimg()))
+                .apply(RequestOptions.centerCropTransform().placeholder(R.mipmap.img_defaut).error(R.mipmap.img_defaut)).into(binding.createAssetImg);
+        binding.assetCreateAssetName.setText(selectAssetBean.getAssetName());
+        binding.assetCreateAssetNo.setText(selectAssetBean.getAssetNo());
+        binding.assetCreateAssetModel.setText(selectAssetBean.getAssetModel());
+        binding.assetCreateUnit.setText(selectAssetBean.getUnit());
+        binding.assetCreateSupply.setText(selectAssetBean.getSupply());
+        binding.assetCreateOriginal.setText(selectAssetBean.getOriginal());
+        binding.assetCreateDepreciated.setText(selectAssetBean.getDepreciated());
+        binding.assetCreateGuaranteed.setText(selectAssetBean.getGuaranteed());
+        binding.assetCreateSeat.setText(selectAssetBean.getSeat());
+        binding.createAssetTimeTv.setText(selectAssetBean.getPurchaseDate());
+        binding.createAssetCategoryTv.setText(selectAssetBean.getCategory());
+        binding.createDepartSelectTv.setText(selectAssetBean.getDepart() + "-" + selectAssetBean.getStaff());
+        selectCategory = selectAssetBean.getCategory();
+        selectDepart = selectAssetBean.getDepart();
+        selectStaff = selectAssetBean.getStaff();
     }
 
     @Override
@@ -94,7 +134,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             CommUtil.ToastU.showToast("请输入资产名称");
             return;
         }
-        mPresenter.createAssets(headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
+        mPresenter.createAssets(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
                 , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<Boolean>() {
                     @Override
                     public void callBack(Boolean obj) {
@@ -106,6 +146,8 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create);
+        selectAssetBean = (AssetBean) getIntent().getSerializableExtra("assetsBean");
+        type = getIntent().getIntExtra("type", 0);
     }
 
     @Override
@@ -173,6 +215,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                         selectCategory = obj.getCategory();
                         selectCategoryId = obj.getCategoryID();
                         binding.createAssetCategoryTv.setText(obj.getCategory());
+                        mPresenter.getCategoryInfo(selectCategoryId);
                     }
                 });
             }
@@ -206,6 +249,23 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                     protected void convertView(ViewHolder holder, BaseNiceDialog dialog) {
                         EditText paramKey = holder.getView(R.id.dialog_custom_param_key);
                         EditText paramValue = holder.getView(R.id.dialog_custom_param_value);
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                super.run();
+                                try {
+                                    Thread.sleep(300);
+                                    CreateActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            CommUtil.showKeyboard(paramKey);
+                                        }
+                                    });
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }.start();
                         holder.getView(R.id.dialog_custom_param_cancle).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -225,24 +285,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                                     CommUtil.ToastU.showToast("请输入参数内容");
                                     return;
                                 }
-                                View itemView = View.inflate(CreateActivity.this, R.layout.custom_param_layout, null);
-                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
-                                TextView paramKeyTv = itemView.findViewById(R.id.custom_param_key);
-                                TextView paramValueTv = itemView.findViewById(R.id.custom_param_value);
-                                paramKeyTv.setText(paramKeyStr);
-                                paramValueTv.setText(paramValueStr);
-                                itemView.setLayoutParams(layoutParams);
-                                binding.dryParamLayout.addView(itemView);
-                                JSONObject jsonObject = new JSONObject();
-                                try {
-                                    jsonObject.put("InfoName", paramKeyStr);
-                                    jsonObject.put("InfoValue", paramValueStr);
-                                    jsonObject.put("InfoType", "Text");
-                                    paramArray.put(jsonObject);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
+                                createCustomParam(paramKeyStr, paramValueStr, "Text");
                                 dialog.dismiss();
                             }
                         });
@@ -254,6 +297,32 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
 
     }
 
+    @Override
+    public void createCustomerParam(List<CategoryInfoBean> categoryInfoBeans) {
+        for (CategoryInfoBean categoryInfoBean : categoryInfoBeans) {
+            createCustomParam(categoryInfoBean.getInfoName(), categoryInfoBean.getInfoValues(), categoryInfoBean.getInfoType());
+        }
+    }
+
+    private void createCustomParam(String key, String value, String type) {
+        View itemView = View.inflate(CreateActivity.this, R.layout.custom_param_layout, null);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
+        TextView paramKeyTv = itemView.findViewById(R.id.custom_param_key);
+        TextView paramValueTv = itemView.findViewById(R.id.custom_param_value);
+        paramKeyTv.setText(key);
+        paramValueTv.setText(value);
+        itemView.setLayoutParams(layoutParams);
+        binding.dryParamLayout.addView(itemView);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("InfoName", key);
+            jsonObject.put("InfoValue", value);
+            jsonObject.put("InfoType", type);
+            paramArray.put(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public boolean isTimeSelectInit() {

@@ -18,19 +18,23 @@
 
     <EditText
         android:id="@+id/dialog_custom_param_key"
-        android:layout_width="@dimen/size_200dp"
+        android:layout_width="@dimen/size_180dp"
         android:layout_height="@dimen/size_40dp"
         android:layout_marginTop="@dimen/size_10dp"
         android:background="@drawable/shape_storke_input_bg"
         android:hint="请输入参数名称"
         android:paddingLeft="@dimen/size_5dp"
+        android:layout_marginRight="@dimen/size_10dp"
+        android:layout_marginLeft="@dimen/size_10dp"
         android:textColor="@color/color_414141"
         android:textSize="@dimen/size_14sp"></EditText>
 
     <EditText
         android:id="@+id/dialog_custom_param_value"
-        android:layout_width="@dimen/size_200dp"
+        android:layout_width="@dimen/size_180dp"
         android:layout_height="@dimen/size_40dp"
+        android:layout_marginRight="@dimen/size_10dp"
+        android:layout_marginLeft="@dimen/size_10dp"
         android:layout_marginTop="@dimen/size_10dp"
         android:background="@drawable/shape_storke_input_bg"
         android:hint=" 请输入参数内容"
@@ -53,7 +57,7 @@
         <TextView
             android:id="@+id/dialog_custom_param_cancle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="取消"
@@ -69,7 +73,7 @@
         <TextView
             android:id="@+id/dialog_custom_param_ack"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="确定"

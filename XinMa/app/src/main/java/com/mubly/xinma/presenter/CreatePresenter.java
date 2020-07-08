@@ -5,11 +5,23 @@ import com.lzy.okgo.model.Response;
 import com.mubly.xinma.base.BaseModel;
 import com.mubly.xinma.base.BasePresenter;
 import com.mubly.xinma.common.CallBack;
+import com.mubly.xinma.db.XinMaDatabase;
+import com.mubly.xinma.db.dao.CategoryInfoDao;
 import com.mubly.xinma.iview.ICreateView;
 import com.mubly.xinma.iview.IReturnView;
 import com.mubly.xinma.model.AssetDataBean;
+import com.mubly.xinma.model.CategoryInfoBean;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
+
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class CreatePresenter extends BasePresenter<ICreateView> {
     public void choosePhoto() {
@@ -36,14 +48,30 @@ public class CreatePresenter extends BasePresenter<ICreateView> {
                 });
     }
 
-    public void createAssets(String headimg, String assetNo, String assetName, String assetModel, String assetUnit
+    public void createAssets(String assetsId, String headimg, String assetNo, String assetName, String assetModel, String assetUnit
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
             , String Staff, String seat, String Category, String CategoryId, String param, CallBack<Boolean> callBack) {
-        AssetDataBean.assetsCreate(headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original,
+        AssetDataBean.assetsCreate(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original,
                 depreciated, guaranteed, Depart, Staff, seat, Category, CategoryId, param, new CallBack<Boolean>() {
                     @Override
                     public void callBack(Boolean obj) {
                         callBack.callBack(obj);
+                    }
+                });
+    }
+
+    public void getCategoryInfo(String selectCategoryId) {
+        Observable.create(new ObservableOnSubscribe<List<CategoryInfoBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<CategoryInfoBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().categoryInfoDao().getAllById(selectCategoryId));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<CategoryInfoBean>>() {
+                    @Override
+                    public void accept(List<CategoryInfoBean> categoryInfoDaos) throws Exception {
+                        getMvpView().createCustomerParam(categoryInfoDaos);
                     }
                 });
     }

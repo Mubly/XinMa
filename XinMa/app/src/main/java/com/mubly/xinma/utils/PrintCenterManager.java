@@ -147,7 +147,7 @@ public class PrintCenterManager {
 
         // 打印机未连接
         if (state == null || state.equals(IDzPrinter.PrinterState.Disconnected)) {
-            CommUtil.ToastU.showToast("打印机未连接，请先连接打印机！");
+//            CommUtil.ToastU.showToast("打印机未连接，请先连接打印机！");
             return false;
         }
 

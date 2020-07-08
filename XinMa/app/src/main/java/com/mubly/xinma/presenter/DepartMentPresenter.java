@@ -50,6 +50,7 @@ public class DepartMentPresenter extends BasePresenter<IDepartmentView> {
             @Override
             public void dealView(VH holder, StaffBean data, int position) {
                 holder.setText(R.id.item_staff_name, data.getStaff());
+                holder.setText(R.id.item_staff_status,data.getStatus().equals("1")?"在职":"离职");
                 if ((position + 1) == dataList.size()) {
                     holder.getChildView(R.id.item_staff_bottom_line).setVisibility(View.GONE);
                 } else {

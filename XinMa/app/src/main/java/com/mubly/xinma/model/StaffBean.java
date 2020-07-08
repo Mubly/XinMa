@@ -100,7 +100,7 @@ public class StaffBean implements Serializable {
     }
 
     public String getStatus() {
-        return Status;
+        return TextUtils.isEmpty(Status) ? "" : Status;
     }
 
     public void setStatus(String status) {
@@ -110,7 +110,7 @@ public class StaffBean implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return TextUtils.isEmpty(Staff)?"--":Staff;
+        return TextUtils.isEmpty(Staff) ? "--" : Staff;
     }
     //    public long getId() {
 //        return id;

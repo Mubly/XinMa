@@ -96,11 +96,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                     CategoryDataBean.getCateGoryData(new CallBack<CategoryDataBean>() {
                                         @Override
                                         public void callBack(CategoryDataBean obj) {//获取分类信息
-                                            CommUtil.ToastU.showToast(CrossApp.get(), "同步组织…");
+//                                            CommUtil.ToastU.showToast(CrossApp.get(), "同步组织…");
                                             GroupData.getGroupData(new CallBack<GroupData>() {
                                                 @Override
                                                 public void callBack(GroupData obj) {//获取组织信息
-                                                    CommUtil.ToastU.showToast(CrossApp.get(), "同步资产…");
+//                                                    CommUtil.ToastU.showToast(CrossApp.get(), "同步资产…");
                                                     AssetDataBean.pullAssetData(new CallBack() {
                                                         @Override
                                                         public void callBack(Object obj) {//获取资产

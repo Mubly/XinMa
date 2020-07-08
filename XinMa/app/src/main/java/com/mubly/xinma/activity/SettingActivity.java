@@ -19,6 +19,8 @@ import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
 import com.shehuan.nicedialog.ViewHolder;
 
+import java.util.logging.Handler;
+
 /**
  * 设置页面
  */
@@ -125,6 +127,23 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
                             inputEdt.setHint("请输入姓名");
                         if (editIndex == 3)
                             inputEdt.setHint("请输入电话号码");
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                super.run();
+                                try {
+                                    Thread.sleep(300);
+                                    SettingActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            CommUtil.showKeyboard(inputEdt);
+                                        }
+                                    });
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }.start();
                         holder.getView(R.id.input_one_cancle).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

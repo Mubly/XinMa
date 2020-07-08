@@ -43,11 +43,12 @@ public class AssetDataBean extends BaseModel {
     }
 
 
-    public static void assetsCreate(String headimg, String assetNo, String assetName, String assetModel, String assetUnit
+    public static void assetsCreate(String assetsId, String headimg, String assetNo, String assetName, String assetModel, String assetUnit
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
             , String Staff, String seat, String Category, String CategoryId, String param, CallBack<Boolean> callBack) {
         OkGo.<AssetsCreateRes>post(URLConstant.ASSET_DATA_UpdateAsset_URL)
                 .params("Headimg", headimg)
+                .params("AssetID",assetsId)
                 .params("AssetNo", assetNo)
                 .params("AssetName", assetName)
                 .params("CategoryID", CategoryId)

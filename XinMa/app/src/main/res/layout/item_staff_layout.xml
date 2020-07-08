@@ -15,6 +15,15 @@
         android:textSize="@dimen/size_14sp"
         tools:text="青奥"></TextView>
 
+    <TextView
+        android:id="@+id/item_staff_status"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/size_40dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+    </TextView>
+
     <ImageView
         android:layout_width="@dimen/size_20dp"
         android:layout_height="@dimen/size_20dp"

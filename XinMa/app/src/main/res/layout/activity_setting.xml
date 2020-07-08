@@ -227,6 +227,7 @@
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
+                        android:visibility="gone"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_16dp"
                         android:padding="@dimen/size_2dp"

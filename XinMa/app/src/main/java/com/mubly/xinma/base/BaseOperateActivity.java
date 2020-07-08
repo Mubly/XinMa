@@ -53,14 +53,14 @@ public abstract class BaseOperateActivity<P extends BasePresenter<V>, V extends 
                 GroupSelectBean groupSelectBean = new GroupSelectBean();
                 List<GroupBean> groupBeanList = XinMaDatabase.getInstance().groupBeanDao().getAll();
                 List<List<StaffBean>> staffArrData = new ArrayList<>();
-                GroupBean groupBean = new GroupBean();
-                groupBean.setDepart("无限制");
-                groupBeanList.add(0, groupBean);
+//                GroupBean groupBean = new GroupBean();
+//                groupBean.setDepart("无限制");
+//                groupBeanList.add(0, groupBean);
                 for (GroupBean g : groupBeanList) {
                     List<StaffBean> staffBeanList = new ArrayList<>();
-                    StaffBean staffBean = new StaffBean();
-                    staffBean.setStaff("无限制");
-                    staffBeanList.add(staffBean);
+//                    StaffBean staffBean = new StaffBean();
+//                    staffBean.setStaff("无限制");
+//                    staffBeanList.add(staffBean);
                     staffBeanList.addAll(XinMaDatabase.getInstance().staffBeanDao().getAllByDepartId(g.getDepartID()));
                     staffArrData.add(staffBeanList);
                 }

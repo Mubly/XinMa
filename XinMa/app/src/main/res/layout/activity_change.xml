@@ -231,12 +231,13 @@
 
                         <EditText
                             android:id="@+id/change_new_seat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_50dp"
                             android:background="@null"
-                            android:gravity="right"
+                            android:gravity="right|center_vertical"
                             android:hint="请输入新的存放地"
                             android:text="@{bean.seat}"
                             android:textColor="@color/color_919191"
@@ -299,12 +300,12 @@
                         <EditText
                             android:id="@+id/change_price"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginLeft="@dimen/size_100dp"
                             android:layout_marginRight="@dimen/size_50dp"
                             android:background="@null"
-                            android:gravity="right"
+                            android:gravity="right|center_vertical"
                             android:hint="请输入剩余价值"
                             android:inputType="numberDecimal"
                             android:text="@{bean.price}"
@@ -347,8 +348,9 @@
 
                         <EditText
                             android:id="@+id/changet_Remainder"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="@dimen/size_50dp"
                             android:gravity="right|center_vertical"

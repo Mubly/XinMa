@@ -198,12 +198,18 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
                 onRightAddEvent(rightAddBtn);
                 break;
             case R.id.print_icon:
-                startActivity(PrintActivity.class);
+                onPrint();
                 break;
             case R.id.setting_icon:
-                startActivity(SettingActivity.class);
+                onEdit();
                 break;
         }
+    }
+
+    public void onPrint() {
+    }
+
+    public void onEdit() {
     }
 
     public void onRightAddEvent(ImageView rightAddBtn) {

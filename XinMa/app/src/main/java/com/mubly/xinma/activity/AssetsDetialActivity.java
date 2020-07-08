@@ -53,6 +53,7 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
             lessTV = checkBottomLayout.findViewById(R.id.check_less_tv);
         }
         if (from.equals("assetsList")) {
+            setRightImgLayoutEnable(true);
             View assetOperate = binding.assetDetailBottomOperate.getViewStub().inflate();
             assetOperateBind = DataBindingUtil.bind(assetOperate);
         }
@@ -63,10 +64,26 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
             initBottomoperate();
     }
 
+    @Override
+    public void onPrint() {
+        super.onPrint();
+        Intent intent = new Intent(this, PrintOperateActivity.class);
+        intent.putExtra("assetsBean", selectAssetsBean);
+        startActivity(intent);
+        startPage();
+    }
+
+    @Override
+    public void onEdit() {
+        super.onEdit();
+        toCreateAssets(1);
+
+    }
+
     private void initBottomoperate() {
 
         if (TextUtils.isEmpty(selectAssetsBean.getStatus()) || null == assetOperateBind) return;
-        assetOperateBind.assetDetailBottomCopy.setVisibility(View.GONE);
+//        assetOperateBind.assetDetailBottomCopy.setVisibility(View.GONE);
         if (selectAssetsBean.getStatus().equals("1")) {
 
         } else if (selectAssetsBean.getStatus().equals("3")) {
@@ -133,9 +150,17 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
                 toPeratePage(DisposeActivity.class);
                 break;
             case R.id.asset_detail_bottom_copy:
-                toPeratePage(CreateActivity.class);
+                toCreateAssets(2);
                 break;
         }
+    }
+
+    private void toCreateAssets(int type) {
+        Intent intent = new Intent(this, CreateActivity.class);
+        intent.putExtra("assetsBean", selectAssetsBean);
+        intent.putExtra("type", type);
+        startActivity(intent);
+        startPage();
     }
 
     private void checkOperate(String s) {

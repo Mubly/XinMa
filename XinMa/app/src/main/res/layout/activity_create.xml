@@ -99,7 +99,7 @@
                     <EditText
                         android:id="@+id/asset_create_asset_no"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
@@ -148,7 +148,7 @@
                     <EditText
                         android:id="@+id/asset_create_asset_name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
@@ -196,7 +196,7 @@
                     <EditText
                         android:id="@+id/asset_create_asset_model"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
@@ -292,7 +292,7 @@
                     <EditText
                         android:id="@+id/asset_create_supply"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
@@ -384,7 +384,7 @@
                     <EditText
                         android:id="@+id/asset_create_original"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
@@ -433,7 +433,7 @@
                     <EditText
                         android:id="@+id/asset_create_depreciated"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
@@ -482,7 +482,7 @@
                     <EditText
                         android:id="@+id/asset_create_Guaranteed"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"
@@ -587,7 +587,7 @@
                     <EditText
                         android:id="@+id/asset_create_Seat"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_70dp"

@@ -109,7 +109,7 @@
                         <EditText
                             android:id="@+id/check_create_date"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/size_100dp"
                             android:background="@null"
                             android:enabled="false"
