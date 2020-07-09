@@ -110,7 +110,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat) || TextUtils.isEmpty(Remark)) {
+        if (TextUtils.isEmpty(Depart)) {
             CommUtil.ToastU.showToast("请完善领用信息");
             return;
         }
