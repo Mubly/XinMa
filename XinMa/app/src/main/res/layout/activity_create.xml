@@ -82,8 +82,9 @@
                     android:textSize="@dimen/size_12sp"></TextView>
 
                 <FrameLayout
+                    android:id="@+id/auto_create_no_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -102,11 +103,12 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
                         android:hint="请输入资产编码"
                         android:maxLines="1"
+                        android:digits="0123456789abcdefABCDEF"
                         android:singleLine="true"
                         android:textColor="@color/color_414141"
                         android:textSize="@dimen/size_13sp"></EditText>
@@ -132,7 +134,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -151,7 +153,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
                         android:hint="请输入资产名称"
@@ -180,7 +182,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -199,7 +201,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
                         android:hint="请输入规格型号"
@@ -228,7 +230,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -241,20 +243,20 @@
 
                     </TextView>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/asset_create_unit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
-                        android:hint="请输入计量单位"
+                        android:hint="请选择计量单位"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textColor="@color/color_414141"
-                        android:textSize="@dimen/size_13sp"></EditText>
+                        android:textSize="@dimen/size_13sp"></TextView>
 
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
@@ -276,7 +278,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -295,7 +297,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
                         android:hint="请输入供应商"
@@ -325,7 +327,7 @@
                 <FrameLayout
                     android:id="@+id/create_asset_time_label"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -344,7 +346,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:gravity="right|center_vertical"
                         android:hint="请选择购置日期"></TextView>
 
@@ -368,7 +370,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -387,8 +389,9 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
+                        android:text="0"
                         android:gravity="center_vertical|right"
                         android:hint="请输入购置价格"
                         android:inputType="numberDecimal"
@@ -417,7 +420,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -436,10 +439,11 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
                         android:hint="请输入损耗周期"
+                        android:text="0"
                         android:inputType="number"
                         android:maxLines="1"
                         android:singleLine="true"
@@ -466,7 +470,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -485,12 +489,13 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
                         android:hint="请输入保修周期"
                         android:inputType="number"
                         android:maxLines="1"
+                        android:text="0"
                         android:singleLine="true"
                         android:textColor="@color/color_414141"
                         android:textSize="@dimen/size_13sp"></EditText>
@@ -514,7 +519,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:background="@color/background"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
@@ -525,7 +530,7 @@
                 <FrameLayout
                     android:id="@+id/create_depart_select_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -544,7 +549,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:gravity="right|center_vertical"
                         android:hint="请选择部门与人员"
                         android:textSize="@dimen/size_13sp">
@@ -571,7 +576,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -590,7 +595,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
                         android:gravity="center_vertical|right"
                         android:hint="请输入存放地点"
@@ -618,7 +623,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:background="@color/background"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
@@ -629,7 +634,7 @@
                 <FrameLayout
                     android:id="@+id/create_asset_category_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp">
+                    android:layout_height="@dimen/size_50dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -648,7 +653,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginLeft="@dimen/size_100dp"
-                        android:layout_marginRight="@dimen/size_70dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:hint="请选择资产分类"
                         android:gravity="right|center_vertical"
                         android:textSize="@dimen/size_13sp">
@@ -680,7 +685,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:background="@color/background"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
@@ -698,7 +703,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:onClick="@{()->vm.customeParam()}">
 
                     <TextView

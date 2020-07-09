@@ -13,6 +13,7 @@ import com.mubly.xinma.model.resbean.AssetsCreateRes;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.StringUtils;
 
 import java.util.List;
 
@@ -47,25 +48,25 @@ public class AssetDataBean extends BaseModel {
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
             , String Staff, String seat, String Category, String CategoryId, String param, CallBack<Boolean> callBack) {
         OkGo.<AssetsCreateRes>post(URLConstant.ASSET_DATA_UpdateAsset_URL)
-                .params("Headimg", headimg)
-                .params("AssetID",assetsId)
-                .params("AssetNo", assetNo)
-                .params("AssetName", assetName)
-                .params("CategoryID", CategoryId)
-                .params("Category", Category)
-                .params("AssetModel", assetModel)
-                .params("Unit", assetUnit)
-                .params("Supply", assetSupply)
-                .params("PurchaseDate", PurchaseDate)
-                .params("Guaranteed", guaranteed)
-                .params("Original", original)
-                .params("Depreciated", depreciated)
-                .params("Depart", Depart)
-                .params("Staff", Staff)
-                .params("Seat", seat)
+                .params("Headimg", StringUtils.notNull(headimg))
+                .params("AssetID",StringUtils.notNull(assetsId))
+                .params("AssetNo", StringUtils.notNull(assetNo))
+                .params("AssetName", StringUtils.notNull(assetName))
+                .params("CategoryID", StringUtils.notNull(CategoryId))
+                .params("Category", StringUtils.notNull(Category))
+                .params("AssetModel", StringUtils.notNull(assetModel))
+                .params("Unit", StringUtils.notNull(assetUnit))
+                .params("Supply", StringUtils.notNull(assetSupply))
+                .params("PurchaseDate", StringUtils.notNull(PurchaseDate))
+                .params("Guaranteed", StringUtils.notNull(guaranteed))
+                .params("Original", StringUtils.notNull(original))
+                .params("Depreciated", StringUtils.notNull(depreciated))
+                .params("Depart", StringUtils.notNull(Depart))
+                .params("Staff", StringUtils.notNull(Staff))
+                .params("Seat", StringUtils.notNull(seat))
                 .params("Status", "1")
                 .params("StatusName", "闲置")
-                .params("Param", param)
+                .params("Param", StringUtils.notNull(param))
 
                 .execute(new JsonCallback<AssetsCreateRes>() {
                     @Override

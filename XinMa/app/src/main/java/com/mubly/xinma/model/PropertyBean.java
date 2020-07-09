@@ -1,7 +1,10 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
 import org.jetbrains.annotations.NotNull;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -45,5 +48,10 @@ public class PropertyBean {
 
     public void setShowIndex(int showIndex) {
         ShowIndex = showIndex;
+    }
+    @NonNull
+    @Override
+    public String toString() {
+        return TextUtils.isEmpty(Property) ? "" : Property;
     }
 }

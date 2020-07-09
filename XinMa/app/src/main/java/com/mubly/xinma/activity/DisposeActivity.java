@@ -82,12 +82,12 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat) || TextUtils.isEmpty(Remark)) {
+        if (TextUtils.isEmpty(Depart) ) {
             CommUtil.ToastU.showToast("请完善处置信息");
             return;
         }
         if (null == selectAssetsBean || selectAssetsBean.getSelectBean() == null || selectAssetsBean.getSelectBean().size() < 1) {
-            CommUtil.ToastU.showToast("请添加要处置的资产");
+            CommUtil.ToastU.showToast("请先选择资产");
             return;
         } else {
             AssetIDList = new JSONArray();

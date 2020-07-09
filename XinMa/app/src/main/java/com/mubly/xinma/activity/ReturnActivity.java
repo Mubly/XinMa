@@ -82,12 +82,12 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat)) {
+        if (TextUtils.isEmpty(Depart)) {
             CommUtil.ToastU.showToast("请完善归还信息");
             return;
         }
         if (null == selectAssetsBean || selectAssetsBean.getSelectBean() == null || selectAssetsBean.getSelectBean().size() < 1) {
-            CommUtil.ToastU.showToast("请添加要领用的资产");
+            CommUtil.ToastU.showToast("请先选择资产");
             return;
         } else {
             AssetIDList = new JSONArray();

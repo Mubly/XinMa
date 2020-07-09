@@ -2,6 +2,12 @@ package com.mubly.xinma.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.luck.picture.lib.PictureSelector;
@@ -27,15 +34,19 @@ import com.mubly.xinma.base.BaseOperateActivity;
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.common.GroupSelectCallBack;
 import com.mubly.xinma.databinding.ActivityCreateBinding;
+import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.ICreateView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CategoryBean;
 import com.mubly.xinma.model.CategoryInfoBean;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.PropertyBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.presenter.CreatePresenter;
 import com.mubly.xinma.presenter.ImageUrlPersenter;
+import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.DialogUtils;
 import com.mubly.xinma.utils.GlideEngine;
 import com.mubly.xinma.utils.ImageUtils;
 import com.shehuan.nicedialog.BaseNiceDialog;
@@ -54,6 +65,7 @@ import java.util.List;
  */
 public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreateView> implements ICreateView {
     ActivityCreateBinding binding = null;
+    private OptionsPickerView unitSelectDialog;
     private AssetBean selectAssetBean;
     private int type;//;1编辑2复制
     private String headimg;
@@ -71,12 +83,14 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         setRightTv("保存");
         binding.setVm(mPresenter);
         binding.setLifecycleOwner(this);
+        initCreatNoView();
         if (type == 1) {//编辑
             setTitle("编辑");
             selectTime = selectAssetBean.getPurchaseDate();
             assetsId = selectAssetBean.getAssetID();
             initCopyView();
         } else if (type == 2) {
+
             selectTime = CommUtil.getCurrentTimeHM();
             binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeHM());
             initCopyView();
@@ -84,6 +98,42 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             selectTime = CommUtil.getCurrentTimeHM();
             binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeHM());
         }
+        initUnitSelectData();
+    }
+
+    private void initUnitSelectData() {
+        Observable.create(new ObservableOnSubscribe<List<PropertyBean>>() {
+
+            @Override
+            public void subscribe(ObservableEmitter<List<PropertyBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().propertyBeanDao().getGetAllByCode("Unit"));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<PropertyBean>>() {
+                    @Override
+                    public void accept(List<PropertyBean> propertyBeans) throws Exception {
+                        initUnitSelectDialog(propertyBeans);
+                    }
+                });
+    }
+
+    private void initUnitSelectDialog(List<PropertyBean> propertyBeans) {
+        unitSelectDialog = DialogUtils.showSelectDialog(this, new DialogUtils.SelectListener() {
+            @Override
+            public void selected(int index1, int index2, int index3, View v) {
+                binding.assetCreateUnit.setText(propertyBeans.get(index1).toString());
+            }
+        });
+        unitSelectDialog.setPicker(propertyBeans);
+    }
+
+    private void initCreatNoView() {
+        String isAutoNo = AppConfig.isAutoNo.get();
+        if (isAutoNo.equals("1"))
+            binding.autoCreateNoLayout.setVisibility(View.VISIBLE);
+        else
+            binding.autoCreateNoLayout.setVisibility(View.GONE);
     }
 
     private void initCopyView() {
@@ -138,6 +188,12 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                 , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<Boolean>() {
                     @Override
                     public void callBack(Boolean obj) {
+                        if (type == 1) {
+                            CommUtil.ToastU.showToast("编辑成功");
+                        } else {
+                            CommUtil.ToastU.showToast("创建成功");
+                        }
+
                         finish();
                     }
                 });
@@ -233,11 +289,18 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                 });
             }
         });
+        binding.assetCreateUnit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                unitSelectDialog.show();
+            }
+        });
     }
 
     @Override
     public void forScanResult(String code) {
         super.forScanResult(code);
+        mPresenter.searchCode(code);
         binding.assetCreateAssetNo.setText(code);
     }
 
@@ -306,7 +369,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
 
     private void createCustomParam(String key, String value, String type) {
         View itemView = View.inflate(CreateActivity.this, R.layout.custom_param_layout, null);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(50));
         TextView paramKeyTv = itemView.findViewById(R.id.custom_param_key);
         TextView paramValueTv = itemView.findViewById(R.id.custom_param_value);
         paramKeyTv.setText(key);

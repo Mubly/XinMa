@@ -13,6 +13,7 @@ import com.mubly.xinma.model.AssetDataBean;
 import com.mubly.xinma.model.CategoryInfoBean;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
+import com.mubly.xinma.utils.CommUtil;
 
 import java.util.List;
 
@@ -72,6 +73,24 @@ public class CreatePresenter extends BasePresenter<ICreateView> {
                     @Override
                     public void accept(List<CategoryInfoBean> categoryInfoDaos) throws Exception {
                         getMvpView().createCustomerParam(categoryInfoDaos);
+                    }
+                });
+    }
+
+    public void searchCode(String code) {
+
+        Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAssetBeanByNo(code) == null);
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        if (!aBoolean)
+                            CommUtil.ToastU.showToast("该资产已添加");
                     }
                 });
     }

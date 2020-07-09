@@ -110,8 +110,8 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart)) {
-            CommUtil.ToastU.showToast("请完善领用信息");
+        if (TextUtils.isEmpty(Depart) ) {
+            CommUtil.ToastU.showToast("请先选择资产");
             return;
         }
         if (null == selectAssetsBean || selectAssetsBean.getSelectBean() == null || selectAssetsBean.getSelectBean().size() < 1) {

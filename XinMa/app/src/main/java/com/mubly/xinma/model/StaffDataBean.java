@@ -13,6 +13,7 @@ import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
 import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.StringUtils;
 
 import java.util.List;
 
@@ -52,12 +53,12 @@ public class StaffDataBean extends BaseModel {
 
     public static void upDateStaff(String staffId, String depart, String staff, String postion, String phone, String status, String DepartID, CallBack<StaffDataRes> callBack) {
         OkGo.<StaffDataRes>post(URLConstant.API_Staff_UpdateStaff_URL)
-                .params("Depart", depart)
-                .params("DepartID", DepartID)
-                .params("StaffID", staffId)
-                .params("Staff", staff)
-                .params("Position", postion)
-                .params("Phone", phone)
+                .params("Depart", StringUtils.notNull(depart))
+                .params("DepartID", StringUtils.notNull(DepartID))
+                .params("StaffID", StringUtils.notNull(staffId))
+                .params("Staff", StringUtils.notNull(staff))
+                .params("Position", StringUtils.notNull(postion))
+                .params("Phone", StringUtils.notNull(phone))
                 .execute(new JsonCallback<StaffDataRes>() {
                     @Override
                     public void onSuccess(Response<StaffDataRes> response) {
@@ -96,7 +97,7 @@ public class StaffDataBean extends BaseModel {
                 .execute(new JsonCallback<BaseModel>() {
                     @Override
                     public void onSuccess(Response<BaseModel> response) {
-                        if (response.body().getCode()==1)
+                        if (response.body().getCode() == 1)
                             callBack.callBack(true);
                         else
                             CommUtil.ToastU.showToast(response.body().getMsg());

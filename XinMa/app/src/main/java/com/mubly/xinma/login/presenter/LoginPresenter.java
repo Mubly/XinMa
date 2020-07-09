@@ -54,7 +54,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                                 @Override
                                 public void callBack(UserInfoData obj) {//获取用户信息信息
                                     if (obj.getCode() == 1) {
-                                        CommUtil.ToastU.showToast(CrossApp.get(), "获取分类信息…");
+                                        CommUtil.ToastU.showToast(CrossApp.get(), "获取资产信息…");
                                         AssetDataBean.pullAssetData(new CallBack<AssetDataBean>() {
                                             @Override
                                             public void callBack(AssetDataBean obj) {
@@ -92,26 +92,19 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                             UserInfoData.getUserInfo(new CallBack<UserInfoData>() {
                                 @Override
                                 public void callBack(UserInfoData obj) {//获取用户信息
-                                    CommUtil.ToastU.showToast(CrossApp.get(), "同步分类…");
-                                    CategoryDataBean.getCateGoryData(new CallBack<CategoryDataBean>() {
+                                    CommUtil.ToastU.showToast(CrossApp.get(), "同步资产信息…");
+                                    AssetDataBean.pullAssetData(new CallBack() {
                                         @Override
-                                        public void callBack(CategoryDataBean obj) {//获取分类信息
-//                                            CommUtil.ToastU.showToast(CrossApp.get(), "同步组织…");
-                                            GroupData.getGroupData(new CallBack<GroupData>() {
+                                        public void callBack(Object obj) {//获取资产
+                                            ParamBeanData.synData(new CallBack<ParamBeanData>() {
                                                 @Override
-                                                public void callBack(GroupData obj) {//获取组织信息
-//                                                    CommUtil.ToastU.showToast(CrossApp.get(), "同步资产…");
-                                                    AssetDataBean.pullAssetData(new CallBack() {
-                                                        @Override
-                                                        public void callBack(Object obj) {//获取资产
-                                                            getMvpView().startActivity(MainActivity.class, true);//跳转首页
-                                                        }
-                                                    });
+                                                public void callBack(ParamBeanData obj) {
+                                                    getMvpView().startActivity(MainActivity.class, true);//跳转首页
                                                 }
                                             });
                                         }
                                     });
-//
+
                                 }
                             });
 

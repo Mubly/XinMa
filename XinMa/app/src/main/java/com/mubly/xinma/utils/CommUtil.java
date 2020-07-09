@@ -31,6 +31,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -214,16 +215,21 @@ public class CommUtil {
                 toast.setText(text);
                 toast.setDuration(Toast.LENGTH_SHORT);
             }
+
             toast.show();
         }
 
         public static void showToast(String text) {
             if (toast == null) {
                 toast = Toast.makeText(CrossApp.get(), text, Toast.LENGTH_SHORT);
-            } else {
-                toast.setText(text);
-                toast.setDuration(Toast.LENGTH_SHORT);
             }
+            toast.setText(text);
+            toast.setDuration(Toast.LENGTH_SHORT);
+
+            LinearLayout linearLayout = (LinearLayout) toast.getView();
+            TextView messageTextView = (TextView) linearLayout.getChildAt(0);
+            messageTextView.setTextSize(20);
+            toast.setGravity(Gravity.CENTER, 12, 20);
             toast.show();
         }
 
@@ -318,21 +324,22 @@ public class CommUtil {
 
     /**
      * 打开本地assetTxt文件
+     *
      * @param context
      * @param fileName
      * @return
      */
-    public static String readAssetsTxt(Context context,String fileName){
+    public static String readAssetsTxt(Context context, String fileName) {
         try {
             //Return an AssetManager instance for your application's package
-            InputStream is = context.getAssets().open(fileName+".txt");
+            InputStream is = context.getAssets().open(fileName + ".txt");
             int size = is.available();
             // Read the entire asset into a local byte buffer.
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
             // Convert the buffer into a string.
-            String text = new String(buffer,"Unicode");
+            String text = new String(buffer, "Unicode");
             // Finally stick the string into the text view.
             return text;
         } catch (IOException e) {
@@ -360,6 +367,7 @@ public class CommUtil {
         }
         return formatStr;
     }
+
     public static String getTime(Date date) {//可根据需要自行截取数据显示
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
@@ -369,6 +377,7 @@ public class CommUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         return format.format(date);
     }
+
     /**
      * 编辑对话框
      *
@@ -461,7 +470,6 @@ public class CommUtil {
         dialog.getWindow().setAttributes(p);     //设置生效
         return dialog;
     }
-
 
 
     /**
@@ -868,6 +876,7 @@ public class CommUtil {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(new Date());
     }
+
     public static String getCurrentTimeHM() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return df.format(new Date());

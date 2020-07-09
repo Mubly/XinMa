@@ -219,19 +219,21 @@
                         android:textSize="@dimen/size_15sp"></TextView>
 
                     <Switch
+                        android:id="@+id/auto_create_no_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="@dimen/size_40dp"></Switch>
+                        android:layout_marginRight="@dimen/size_40dp"
+                        android:checked="@{persenter.isAutoNo(persenter.userInfo.isAutoNo)}"></Switch>
 
                     <ImageView
                         android:layout_width="@dimen/size_20dp"
                         android:layout_height="@dimen/size_20dp"
-                        android:visibility="gone"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/size_16dp"
                         android:padding="@dimen/size_2dp"
-                        android:src="@mipmap/arrow_right_gray"></ImageView>
+                        android:src="@mipmap/arrow_right_gray"
+                        android:visibility="gone"></ImageView>
 
                     <View
                         android:layout_width="match_parent"

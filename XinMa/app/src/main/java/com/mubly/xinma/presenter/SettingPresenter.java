@@ -25,6 +25,7 @@ import androidx.lifecycle.MutableLiveData;
 public class SettingPresenter extends BasePresenter<ISettingView> {
     private MutableLiveData<UserInfoBean> userInfo = new MutableLiveData<>();
     private MutableLiveData<String> prnitStatus = new MutableLiveData<>();
+    private UserInfoBean userInfoBean = null;
 
     public MutableLiveData<String> getPrnitStatus() {
         return prnitStatus;
@@ -56,9 +57,10 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
     }
 
     public void init() {
-        UserInfoBean userInfoBean = (UserInfoBean) JSON.parseObject(AppConfig.userInfo.get(), UserInfoBean.class);
+        userInfoBean = (UserInfoBean) JSON.parseObject(AppConfig.userInfo.get(), UserInfoBean.class);
         userInfo.setValue(userInfoBean);
     }
+
 
     public String getVersionCode() {
         return CommUtil.getPackageName();
@@ -69,8 +71,16 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
         CompanyDataBean.changeCompanyName(companyName, new CallBack<BaseModel>() {
             @Override
             public void callBack(BaseModel obj) {
-                userInfo.getValue().setCompany(companyName);
-                AppConfig.companyInfo.put(JSON.toJSONString(userInfo.getValue()));
+                if (null == obj) {
+                    CommUtil.ToastU.showToast("网络连接异常");
+                } else if (obj.getCode() == 1) {
+                    userInfoBean.setCompany(companyName);
+                    userInfo.setValue(userInfoBean);
+                    AppConfig.companyInfo.put(JSON.toJSONString(userInfoBean));
+                }else {
+                    getMvpView().checkNetCode(obj.getCode(), obj.getMsg());
+                }
+
             }
         });
     }
@@ -79,8 +89,16 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
         CompanyDataBean.changeUserName(userName, new CallBack<BaseModel>() {
             @Override
             public void callBack(BaseModel obj) {
-                userInfo.getValue().setFullName(userName);
-                AppConfig.companyInfo.put(JSON.toJSONString(userInfo.getValue()));
+                if (null == obj) {
+                    CommUtil.ToastU.showToast("网络连接异常");
+                } else if (obj.getCode() == 1) {
+                    userInfoBean.setFullName(userName);
+                    userInfo.setValue(userInfoBean);
+                    AppConfig.userInfo.put(JSON.toJSONString(userInfoBean));
+                } else {
+                    getMvpView().checkNetCode(obj.getCode(), obj.getMsg());
+                }
+
             }
         });
     }
@@ -90,5 +108,9 @@ public class SettingPresenter extends BasePresenter<ISettingView> {
 
     public void toPrintPage() {
         getMvpView().startActivity(PrintActivity.class);
+    }
+
+    public boolean isAutoNo(int status) {
+        return status == 1;
     }
 }

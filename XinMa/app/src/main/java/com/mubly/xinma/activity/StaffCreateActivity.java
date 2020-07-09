@@ -63,8 +63,8 @@ public class StaffCreateActivity extends BaseActivity<DepartAndStaffCreatePresen
         staff = binding.staffInfoName.getText().toString();
         postion = binding.staffInfoPosition.getText().toString();
         phone = binding.staffInfoPhone.getText().toString();
-        if (TextUtils.isEmpty(staff) || TextUtils.isEmpty(postion) || TextUtils.isEmpty(phone)) {
-            CommUtil.ToastU.showToast("请完善员工信息");
+        if (TextUtils.isEmpty(staff)) {
+            CommUtil.ToastU.showToast("请输入员工姓名");
             return;
         }
         mPresenter.initStaffCreate(departName, departId, staffID, staff, postion, phone, status);

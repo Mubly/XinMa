@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.mubly.xinma.R;
 import com.mubly.xinma.activity.AssetsDetialActivity;
 import com.mubly.xinma.activity.ScannerActivity;
@@ -28,6 +29,10 @@ import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityMainBinding;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.model.AssetBean;
+import com.mubly.xinma.model.CompanyBean;
+import com.mubly.xinma.model.UserInfoBean;
+import com.mubly.xinma.utils.AppConfig;
+import com.mubly.xinma.utils.StringUtils;
 
 public class MainActivity extends BaseActivity<HomePresenter, IHomeView> implements IHomeView {
     ActivityMainBinding binding = null;
@@ -90,7 +95,9 @@ public class MainActivity extends BaseActivity<HomePresenter, IHomeView> impleme
         binding.setLifecycleOwner(this);
         mPresenter.init();
         setBackBtnEnable(false);
-        setTitle(R.string.app_name_title);
+
+        UserInfoBean companyBean = JSON.parseObject(AppConfig.userInfo.get(), UserInfoBean.class);
+        setTitle(companyBean!=null? StringUtils.notNull2(companyBean.getCompany()):"欣码固定资产");
 
     }
 

@@ -41,7 +41,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:background="@color/white"
                     android:paddingLeft="@dimen/size_16dp">
 

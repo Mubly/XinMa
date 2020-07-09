@@ -86,7 +86,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -226,7 +226,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -261,7 +261,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -296,7 +296,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -331,7 +331,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -366,7 +366,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -400,7 +400,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_50dp"
                         android:background="@color/background"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/size_16dp"
@@ -410,7 +410,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -445,7 +445,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -479,7 +479,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_50dp"
                         android:background="@color/background"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/size_16dp"
@@ -489,7 +489,7 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp">
+                        android:layout_height="@dimen/size_50dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -529,7 +529,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_50dp"
                         android:background="@color/background"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/size_16dp"
@@ -548,7 +548,7 @@
                     <FrameLayout
                         android:id="@+id/add_custom_param"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_50dp"
                         android:visibility="gone">
 
                         <TextView
@@ -587,7 +587,7 @@
             <ViewStub
                 android:id="@+id/check_detial_bottom"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40dp"
+                android:layout_height="@dimen/size_50dp"
                 android:layout_gravity="bottom"
                 android:layout="@layout/check_detial_bottom_layout"></ViewStub>
         </FrameLayout>

@@ -86,6 +86,7 @@ public class UserInfoBean {
         return Status;
     }
 
+
     public void setStatus(int status) {
         Status = status;
     }

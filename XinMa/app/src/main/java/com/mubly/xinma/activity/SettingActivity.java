@@ -5,13 +5,16 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import com.alibaba.fastjson.JSON;
 import com.mubly.xinma.R;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivitySettingBinding;
 import com.mubly.xinma.iview.ISettingView;
 import com.mubly.xinma.presenter.SettingPresenter;
+import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.PrintCenterManager;
 import com.shehuan.nicedialog.BaseNiceDialog;
@@ -31,14 +34,29 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
     @Override
     public void initView() {
         setTitle("设置");
+        mPresenter.init();
         binding.setPersenter(mPresenter);
         binding.setLifecycleOwner(this);
-        mPresenter.init();
+
     }
 
     @Override
     public void initEvent() {
         super.initEvent();
+        binding.autoCreateNoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    mPresenter.getUserInfo().getValue().setIsAutoNo(1);
+                    AppConfig.isAutoNo.put("1");
+                } else {
+                    mPresenter.getUserInfo().getValue().setIsAutoNo(0);
+                    AppConfig.isAutoNo.put("0");
+                }
+
+                AppConfig.userInfo.put(JSON.toJSONString(mPresenter.getUserInfo().getValue()));
+            }
+        });
         binding.userAgreementContentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

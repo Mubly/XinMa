@@ -34,9 +34,15 @@ public class CompanyDataBean extends BaseModel {
                 .execute(new JsonCallback<BaseModel>() {
                     @Override
                     public void onSuccess(final Response<BaseModel> response) {
-                        if (response.body().getCode() == 1) {
-                            callBack.callBack(response.body());
-                        }
+
+                        callBack.callBack(response.body());
+
+                    }
+
+                    @Override
+                    public void onError(Response<BaseModel> response) {
+                        super.onError(response);
+                        callBack.callBack(response.body());
                     }
                 });
     }
@@ -47,9 +53,14 @@ public class CompanyDataBean extends BaseModel {
                 .execute(new JsonCallback<BaseModel>() {
                     @Override
                     public void onSuccess(final Response<BaseModel> response) {
-                        if (response.body().getCode() == 1) {
-                            callBack.callBack(response.body());
-                        }
+                        callBack.callBack(response.body());
+
+                    }
+
+                    @Override
+                    public void onError(Response<BaseModel> response) {
+                        super.onError(response);
+                        callBack.callBack(response.body());
                     }
                 });
     }

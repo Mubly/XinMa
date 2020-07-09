@@ -30,6 +30,12 @@ public class CheckListActivity extends BaseActivity<CheckPresenter, ICheckView> 
     public void initView() {
         setTitle(R.string.check_name);
         setRightAddBtnEnable(true);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mPresenter.init();
     }
 
@@ -58,6 +64,7 @@ public class CheckListActivity extends BaseActivity<CheckPresenter, ICheckView> 
     public void showView(MyPageAdapter pageAdapter, List<String> tabStrList) {
         binding.checkVp.setOffscreenPageLimit(2);
         binding.checkVp.setAdapter(pageAdapter);
+        binding.checkTabLayout.removeAllTabs();
         for (int i = 0; i < tabStrList.size(); i++) {
             TabLayout.Tab tab = binding.checkTabLayout.newTab();
             tab.setCustomView(R.layout.tab_check_layout);

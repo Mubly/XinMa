@@ -103,7 +103,7 @@ public class URLConstant {
     public static final String API_Company_SelectCompany_Url = BASE_URL + "/API_Company/SelectCompany";
 
     //    主题修改
-    public static final String API_Company_UpdateCompany_Url = BASE_URL + "/API_Company/UpdateCompany";
+    public static final String API_Company_UpdateCompany_Url = BASE_URL + "/AppUser/UpdateCompany";
 
     //    电话修改
     public static final String API_PHONE_NO_CHANGE_Url = BASE_URL + "/AppUser/UpdatePhone";

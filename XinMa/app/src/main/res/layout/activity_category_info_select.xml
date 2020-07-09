@@ -30,7 +30,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
                     android:text="选择项信息"

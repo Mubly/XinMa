@@ -22,7 +22,7 @@
         <include layout="@layout/top_bar_layout"></include>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_30dp"
+            android:layout_height="@dimen/size_40dp"
             android:layout_marginTop="@dimen/size_6dp"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/size_16dp"
@@ -32,7 +32,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40dp"
+            android:layout_height="@dimen/size_50dp"
             android:background="@color/white">
 
             <TextView
@@ -68,7 +68,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40dp"
+            android:layout_height="@dimen/size_50dp"
             android:background="@color/white">
 
             <TextView

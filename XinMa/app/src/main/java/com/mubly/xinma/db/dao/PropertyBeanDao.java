@@ -17,8 +17,8 @@ public interface PropertyBeanDao {
     @Query("SELECT * FROM propertyBean")
     List<PropertyBean> getAll();
 
-    @Query("SELECT * FROM propertyBean WHERE PropertyID like :ids")
-    List<PropertyBean> getGroupBeanByIds(String ids);
+    @Query("SELECT * FROM propertyBean WHERE Code like :code")
+    List<PropertyBean> getGetAllByCode(String code);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(PropertyBean... entities);

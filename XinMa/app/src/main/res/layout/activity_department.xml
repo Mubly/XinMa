@@ -46,7 +46,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:layout_marginTop="@dimen/size_20dp"
                     android:background="@color/white"
                     android:gravity="center"
@@ -58,7 +58,7 @@
                 <TextView
                     android:id="@+id/department_delet_tv"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:layout_marginTop="@dimen/size_20dp"
                     android:layout_marginBottom="@dimen/size_50dp"
                     android:background="@color/white"

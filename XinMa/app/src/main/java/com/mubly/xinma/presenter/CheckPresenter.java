@@ -41,6 +41,8 @@ public class CheckPresenter extends BasePresenter<ICheckView> {
                 .subscribe(new Consumer<List<String>>() {
                     @Override
                     public void accept(List<String> tabs) throws Exception {
+                        tabStrList.clear();
+                        fragmentList.clear();
                         tabStrList.addAll(tabs);
                         fragmentList.add(CheckListFragment.getInstance("0"));
                         fragmentList.add(CheckListFragment.getInstance("1"));

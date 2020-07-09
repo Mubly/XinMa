@@ -27,7 +27,7 @@
             <LinearLayout
                 android:id="@+id/bottom_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_40dp"
+                android:layout_height="@dimen/size_50dp"
                 android:layout_alignParentBottom="true"
                 android:background="@color/white"
                 android:orientation="horizontal">
@@ -120,7 +120,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_40dp"
+                                android:layout_marginRight="@dimen/size_50dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
                                 android:text="@{presenter.creatDate}"
@@ -175,7 +175,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_40dp"
+                                android:layout_marginRight="@dimen/size_50dp"
                                 android:hint="请选择送修部门与人员"
                                 android:gravity="center_vertical|right"
                                 android:textColor="@color/color_919191"
@@ -229,7 +229,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_40dp"
+                                android:layout_marginRight="@dimen/size_50dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
                                 tools:text="小刘"></TextView>
@@ -269,13 +269,16 @@
                                 android:layout_height="35dp"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginLeft="@dimen/size_100dp"
-                                android:layout_marginRight="@dimen/size_40dp"
+                                android:layout_marginRight="@dimen/size_50dp"
                                 android:background="@null"
                                 android:gravity="right|center_vertical"
                                 android:hint="请输入维修费用"
+                                android:text="0.00"
                                 android:inputType="numberDecimal"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:maxLines="1"
+                                android:singleLine="true"
                                 tools:text="小刘"></EditText>
 
                             <ImageView
@@ -316,9 +319,11 @@
                                 android:hint="请输入维修地点"
                                 android:layout_marginLeft="@dimen/size_100dp"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_40dp"
+                                android:layout_marginRight="@dimen/size_50dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
+                                android:maxLines="1"
+                                android:singleLine="true"
                                 tools:text="小刘"></EditText>
 
                             <ImageView
@@ -356,9 +361,11 @@
                                 android:gravity="right|center_vertical"
                                 android:background="@null"
                                 android:layout_marginLeft="@dimen/size_100dp"
+                                android:maxLines="1"
+                                android:singleLine="true"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_40dp"
+                                android:layout_marginRight="@dimen/size_50dp"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
                                 android:hint="请输入维修原因"

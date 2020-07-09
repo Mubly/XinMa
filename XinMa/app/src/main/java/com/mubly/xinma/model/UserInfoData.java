@@ -23,7 +23,8 @@ public class UserInfoData extends BaseModel {
                     public void onSuccess(final Response<UserInfoData> response) {
 
                         if (response.body().getCode() == 1) {
-                            if (null!=response.body().UserInfo&&response.body().UserInfo.size()>0){
+                            if (null != response.body().UserInfo && response.body().UserInfo.size() > 0) {
+                                AppConfig.isAutoNo.put(response.body().UserInfo.get(0).getIsAutoNo() == 1 ? "1" : "0");
                                 AppConfig.companyId.put(response.body().UserInfo.get(0).getCompanyID());
                                 AppConfig.userInfo.put(JSON.toJSONString(response.body().UserInfo.get(0)));
                             }

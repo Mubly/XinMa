@@ -56,7 +56,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
 
     private String Staff;
     private String Seat;
-    private String Fee;
+    private String Fee="0.00";
     private String Remark;
     private JSONArray AssetIDList=new JSONArray();
     private AssetBean operaAsset = null;
@@ -88,12 +88,12 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart) || TextUtils.isEmpty(Seat) || TextUtils.isEmpty(Remark)||TextUtils.isEmpty(Fee)) {
+        if (TextUtils.isEmpty(Depart)) {
             CommUtil.ToastU.showToast("请完善维修信息");
             return;
         }
         if (null == selectAssetsBean || selectAssetsBean.getSelectBean() == null || selectAssetsBean.getSelectBean().size() < 1) {
-            CommUtil.ToastU.showToast("请添加要维修的资产");
+            CommUtil.ToastU.showToast("请先选择资产");
             return;
         } else {
             AssetIDList=new JSONArray();
@@ -110,7 +110,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
         mPresenter.operate(ProcessCate, mPresenter.getCreatDate().getValue(), Depart, Staff, Seat, Remark, AssetIDList.toString(), Fee, new CallBack<OperateDataRes>() {
             @Override
             public void callBack(OperateDataRes obj) {
-                CommUtil.ToastU.showToast("添加维修成功");
+                CommUtil.ToastU.showToast("维修成功");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

@@ -32,7 +32,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:layout_marginTop="@dimen/size_5dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
@@ -72,12 +72,14 @@
                     <EditText
                         android:id="@+id/category_name_et"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_100dp"
                         android:layout_marginRight="@dimen/size_50dp"
                         android:background="@null"
-                        android:gravity="right"
+                        android:gravity="right|center_vertical"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:hint="请输入分类名称"
                         android:text="@{vm.categoryName}"
                         android:textColor="@color/color_919191"
@@ -92,7 +94,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
                     android:text="自定义参数"
@@ -106,7 +108,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/size_16dp"
                     android:text="参数项"
@@ -124,8 +126,8 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/size_40dp"
-                        android:layout_marginRight="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_50dp"
+                        android:layout_marginRight="@dimen/size_50dp"
                         android:background="@color/main_blue"
                         android:onClick="@{()->vm.creatText()}"
                         android:text="文本"
@@ -134,7 +136,7 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_50dp"
                         android:background="@color/main_blue"
                         android:onClick="@{()->vm.creatSelect()}"
                         android:text="选择项"
@@ -143,8 +145,8 @@
 
                     <Button
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/size_40dp"
-                        android:layout_marginLeft="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_50dp"
+                        android:layout_marginLeft="@dimen/size_50dp"
                         android:background="@color/main_blue"
                         android:onClick="@{()->vm.creatTime()}"
                         android:text="时间"
@@ -155,7 +157,7 @@
                 <FrameLayout
                     android:id="@+id/category_delect"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_50dp"
                     android:layout_marginTop="@dimen/size_20dp"
                     android:background="@color/white"
                     android:onClick="@{()->vm.delectOperate()}"
