@@ -12,12 +12,15 @@ import com.dothantech.lpapi.LPAPI;
 import com.dothantech.printer.IDzPrinter;
 import com.mubly.xinma.base.CrossApp;
 import com.mubly.xinma.common.CallBack;
+import com.mubly.xinma.model.PrintContentBean;
 import com.mubly.xinma.model.PrinterData;
+import com.mubly.xinma.model.TemplateBean;
 
 
 import java.util.List;
 
 import static android.hardware.usb.UsbManager.ACTION_USB_DEVICE_DETACHED;
+import static com.dothantech.lpapi.IAtBitmap.DrawParamName.FONT_NAME;
 
 /**
  * 打印中心管理类
@@ -45,8 +48,8 @@ public class PrintCenterManager {
             switch (arg1) {
                 case Connected:
                 case Connected2:
-                    if (null!=connectIngPrint){
-                        mPrinterAddress=connectIngPrint;
+                    if (null != connectIngPrint) {
+                        mPrinterAddress = connectIngPrint;
                     }
                     PrinterData.saveCurrentPrint(mPrinterAddress);
                     LiveDataBus.get().with("printConnect").postValue(true);
@@ -158,5 +161,66 @@ public class PrintCenterManager {
         }
         // 打印机已连接
         return true;
+    }
+
+    private int fontStyle = 0;  //字体
+    private double fontHeight = 0;  //字体
+
+    public void prnit(TemplateBean prnitBean) {
+        if (null == prnitBean) return;
+        api.startJob(prnitBean.getWidth(), prnitBean.getHeight(), prnitBean.getOrientation());
+        if (TextUtils.isEmpty(prnitBean.getPrintArray())) return;
+        PrintContentBean printContent=JSON.parseObject(prnitBean.getPrintArray(),PrintContentBean.class);
+
+        List<PrintContentBean.TextBean> texts = printContent.getText();
+        if (printContent.getText() != null) {
+            for (PrintContentBean.TextBean textBean : texts) {
+                if (!TextUtils.isEmpty(textBean.getOrientation()))
+                    api.setItemOrientation(Integer.parseInt(textBean.getOrientation()));  //设置旋转角度
+                if (!TextUtils.isEmpty(textBean.getHorizontalAlignment()))
+                    api.setItemHorizontalAlignment(Integer.parseInt(textBean.getHorizontalAlignment())); //对齐方式   水平
+                if (!TextUtils.isEmpty(textBean.getVerticalAlignment()))
+                    api.setItemVerticalAlignment(Integer.parseInt(textBean.getVerticalAlignment())); //对齐方式  垂直
+//				绘制文字
+                if (!TextUtils.isEmpty(textBean.getFontName()))   //设置字体  如果没有打印机会使用上一次设置的
+                    api.setDrawParam(FONT_NAME, textBean.getFontName());
+                if (!TextUtils.isEmpty(textBean.getFontStyle()))   //字体风格
+                    fontStyle = Integer.parseInt(textBean.getFontStyle());
+                if (!TextUtils.isEmpty(textBean.getFontHeight()))    //字体高
+                    fontHeight = Double.parseDouble(textBean.getFontHeight());
+
+                api.drawTextRegular(textBean.getContent(), Double.parseDouble(textBean.getX()),
+                        Double.parseDouble(textBean.getY()), Double.parseDouble(textBean.getWidth()),
+                        Double.parseDouble(textBean.getHeight()), fontHeight,
+                        fontStyle, 1);
+            }
+        }
+        //二维码
+        List<PrintContentBean.QRCodeBean> qrcodes = printContent.getQRCode();
+        if (qrcodes != null) {
+            for (PrintContentBean.QRCodeBean qrcodeBean : qrcodes) {
+                api.draw2DQRCode(qrcodeBean.getContent(), Double.valueOf(qrcodeBean.getX()),
+                        Double.valueOf(qrcodeBean.getY()), Double.valueOf(qrcodeBean.getWidth()));
+            }
+        }
+        //直线
+        List<PrintContentBean.LineBean> lines = printContent.getLine();
+        if (lines != null) {
+            for (PrintContentBean.LineBean lineBean : lines) {
+                api.drawLine(Double.valueOf(lineBean.getX1()), Double.valueOf(lineBean.getY1()),
+                        Double.valueOf(lineBean.getX2()), Double.valueOf(lineBean.getY2())
+                        , Double.valueOf(lineBean.getLineWidth()));
+            }
+        }
+        //框
+        List<PrintContentBean.RectangleBean> rectangles = printContent.getRectangle();
+        if (rectangles != null) {
+            for (PrintContentBean.RectangleBean rectangleBean : rectangles) {
+                api.drawRectangle(Double.valueOf(rectangleBean.getX()), Double.valueOf(rectangleBean.getY()),
+                        Double.valueOf(rectangleBean.getWidth()), Double.valueOf(rectangleBean.getHeight())
+                        , Double.valueOf(rectangleBean.getLineWidth()));
+            }
+        }
+        api.commitJob();
     }
 }

@@ -95,10 +95,6 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting);
     }
 
-    public void toJumpAct(View view) {
-        Intent intent = new Intent(this, PrintModelActivity.class);
-        startActivity(intent);
-    }
 
     private void showPromat() {
         NiceDialog.init().setLayoutId(R.layout.dialog_text_chose_promapt)

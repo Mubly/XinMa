@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ec766c2a5b6821cec96883090d3c9f09",
+    "identityHash": "08eddd991473e092af6de4442967957d",
     "entities": [
       {
         "tableName": "asset",
@@ -574,7 +574,7 @@
       },
       {
         "tableName": "processBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ProcessID` TEXT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `AssetName` TEXT, `AssetModel` TEXT, `Headimg` TEXT, PRIMARY KEY(`ProcessID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ProcessID` TEXT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `OperateID` TEXT, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, `CreateTime` TEXT, PRIMARY KEY(`ProcessID`))",
         "fields": [
           {
             "fieldPath": "ProcessID",
@@ -595,20 +595,56 @@
             "notNull": false
           },
           {
-            "fieldPath": "AssetName",
-            "columnName": "AssetName",
+            "fieldPath": "OperateID",
+            "columnName": "OperateID",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "AssetModel",
-            "columnName": "AssetModel",
+            "fieldPath": "ProcessCate",
+            "columnName": "ProcessCate",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "Headimg",
-            "columnName": "Headimg",
+            "fieldPath": "ProcessTime",
+            "columnName": "ProcessTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Depart",
+            "columnName": "Depart",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Staff",
+            "columnName": "Staff",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Seat",
+            "columnName": "Seat",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Fee",
+            "columnName": "Fee",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Remark",
+            "columnName": "Remark",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CreateTime",
+            "columnName": "CreateTime",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -662,7 +698,7 @@
       },
       {
         "tableName": "operateBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`OperateID` TEXT NOT NULL, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, PRIMARY KEY(`OperateID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`OperateID` TEXT NOT NULL, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, `CreateTime` TEXT, PRIMARY KEY(`OperateID`))",
         "fields": [
           {
             "fieldPath": "OperateID",
@@ -711,6 +747,12 @@
             "columnName": "Remark",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "CreateTime",
+            "columnName": "CreateTime",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -725,7 +767,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ec766c2a5b6821cec96883090d3c9f09\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"08eddd991473e092af6de4442967957d\")"
     ]
   }
 }

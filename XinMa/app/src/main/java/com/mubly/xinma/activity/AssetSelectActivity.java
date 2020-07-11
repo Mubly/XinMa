@@ -71,6 +71,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     public static final int REPAIR_REQUEST_CODE = 1004;//维修
     public static final int CHECK_CREATE_REQUEST_CODE = 1005;//盘点创建
     public static final int DISPOSE_REQUEST_CODE = 1006;//处置
+    public static final int PRINT_REQUEST_CODE = 1007;//打印
     private int from;//对应如上code
     //    返回码
     public static final int RESULT_OK_CODE = 10010;//数据返回成功
@@ -128,8 +129,11 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
             case CHECK_CREATE_REQUEST_CODE://盘点
                 statusData = new String[]{"1", "3", "5", "6", "8"};
                 break;
+            case PRINT_REQUEST_CODE://打印
+                statusData = new String[]{"1", "3", "5", "6", "8"};
             default:
-                throw new IllegalStateException("Unexpected value: " + from);
+                statusData = new String[]{"1"};
+                break;
         }
     }
 

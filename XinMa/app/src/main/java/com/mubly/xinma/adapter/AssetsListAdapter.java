@@ -32,16 +32,22 @@ public class AssetsListAdapter extends NBaseBindingAdapter<List<AssetBean>, Item
         ((ItemAssetsLayoutBinding) holder.getBind()).setBean(data.get(position));
         ((ItemAssetsLayoutBinding) holder.getBind()).setImgPersent(new ImageUrlPersenter());
         holder.getBind().executePendingBindings();
+        ((ItemAssetsLayoutBinding) holder.getBind()).toAssetsLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.itemClick(data.get(position), true, position);
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (null != onItemClickListener)
-                    onItemClickListener.itemClick(data.get(position), position);
+                    onItemClickListener.itemClick(data.get(position), false, position);
             }
         });
     }
 
     public static interface OnItemClickListener {
-        void itemClick(AssetBean data, int index);
+        void itemClick(AssetBean data, boolean isLog, int index);
     }
 }

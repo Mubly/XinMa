@@ -18,6 +18,26 @@ import java.util.List;
 import java.util.Map;
 
 public class OperateData extends BaseModel {
+    private List<OperateBean>Operate;
+    private List<ProcessBean>Process;
+
+
+    public List<OperateBean> getOperate() {
+        return Operate;
+    }
+
+    public void setOperate(List<OperateBean> operate) {
+        Operate = operate;
+    }
+
+    public List<ProcessBean> getProcess() {
+        return Process;
+    }
+
+    public void setProcess(List<ProcessBean> process) {
+        Process = process;
+    }
+
     public static void operate(String ProcessCate, String ProcessTime, String Depart, String Staff, String Seat, String Remark
             , String AssetID, String Fee, CallBack<OperateDataRes> callBack) {
 
@@ -38,6 +58,23 @@ public class OperateData extends BaseModel {
                         } else {
                             CommUtil.ToastU.showToast(response.body().getMsg());
                         }
+                    }
+                });
+    }
+
+
+    public static void getOperateLog(CallBack<OperateData> callBack) {
+        OkGo.<OperateData>post(URLConstant.API_Operate_ListOperate_Url)
+                .execute(new JsonCallback<OperateData>() {
+                    @Override
+                    public void onSuccess(Response<OperateData> response) {
+                        callBack.callBack(response.body());
+                    }
+
+                    @Override
+                    public void onError(Response<OperateData> response) {
+                        super.onError(response);
+                        CommUtil.ToastU.showToast("网络连接异常");
                     }
                 });
     }

@@ -19,6 +19,15 @@ public class OperateBean {
     private String Seat;
     private String Fee;
     private String Remark;
+    private String CreateTime;
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
 
     public String getOperateID() {
         return OperateID;

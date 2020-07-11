@@ -184,6 +184,11 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             CommUtil.ToastU.showToast("请输入资产名称");
             return;
         }
+
+        if (null!=AppConfig.isAutoNo.get()&&AppConfig.isAutoNo.get().equals("1")&&TextUtils.isEmpty(assetNo)){
+            CommUtil.ToastU.showToast("请输入资产编码");
+            return;
+        }
         mPresenter.createAssets(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
                 , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<Boolean>() {
                     @Override
@@ -394,7 +399,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
 
     @Override
     public boolean showSecond() {
-        return true;
+        return false;
     }
 
     @Override

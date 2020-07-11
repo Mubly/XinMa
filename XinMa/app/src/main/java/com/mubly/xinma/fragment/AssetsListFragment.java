@@ -23,6 +23,7 @@ import com.mubly.xinma.R;
 import com.mubly.xinma.activity.AssetSelectActivity;
 import com.mubly.xinma.activity.AssetsDetialActivity;
 import com.mubly.xinma.activity.AssetsListActivity;
+import com.mubly.xinma.activity.OperateLogListActivity;
 import com.mubly.xinma.adapter.AssetsListAdapter;
 import com.mubly.xinma.adapter.SmartAdapter;
 import com.mubly.xinma.databinding.FragmentAssetsListBinding;
@@ -73,14 +74,24 @@ public class AssetsListFragment extends Fragment {
         adapter = new AssetsListAdapter(dataList);
         adapter.setOnItemClickListener(new AssetsListAdapter.OnItemClickListener() {
             @Override
-            public void itemClick(AssetBean data, int index) {
-                toAssestDetial(data);
+            public void itemClick(AssetBean data, boolean isLog, int index) {
+                if (isLog)
+                    toAssestLog(data);
+                else
+                    toAssestDetial(data);
             }
         });
         binding.assetsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.assetsRv.setAdapter(adapter);
         initData();
         initEvent();
+    }
+
+    private void toAssestLog(AssetBean data) {
+        Intent intent=new Intent(getContext(), OperateLogListActivity.class);
+        intent.putExtra("assetBean",data);
+        startActivity(intent);
+        ((AssetsListActivity)getActivity()).startPage();
     }
 
     private void initEvent() {
@@ -149,7 +160,7 @@ public class AssetsListFragment extends Fragment {
             @Override
             public void subscribe(ObservableEmitter<List<AssetBean>> emitter) throws Exception {
                 emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getFilterAssets(getStatus(filterBean.getIndex()), filterBean.getCategoryID(), filterBean.getDepartID(), filterBean.getDepart(),
-                        filterBean.getStaffID(), filterBean.getStaff(),filterBean.getPurchaseDate(),filterBean.getExpireDate(),filterBean.getRemainder()));
+                        filterBean.getStaffID(), filterBean.getStaff(), filterBean.getPurchaseDate(), filterBean.getExpireDate(), filterBean.getRemainder()));
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

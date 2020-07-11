@@ -1,5 +1,7 @@
 package com.mubly.xinma.model;
 
+import com.mubly.xinma.utils.StringUtils;
+
 import java.io.Serializable;
 
 public class TemplateBean implements Serializable {
@@ -20,15 +22,23 @@ public class TemplateBean implements Serializable {
 
     private String TemplateID;
     private String TemplateName;
-    private String Width;
-    private String Height;
-    private String Orientation;
+    private double Width;
+    private double Height;
+    private int Orientation;
     private String ViewHtml;
     private String Views;
-    private String PrStringArray;
+    private String PrintArray;
     private String ShowIndex;
     private String Stamp;
     private String Status;
+
+    public String getPrintArray() {
+        return PrintArray;
+    }
+
+    public void setPrintArray(String printArray) {
+        PrintArray = printArray;
+    }
 
     public String getTemplateID() {
         return TemplateID;
@@ -46,28 +56,28 @@ public class TemplateBean implements Serializable {
         this.TemplateName = TemplateName;
     }
 
-    public String getWidth() {
+    public double getWidth() {
         return Width;
     }
 
-    public void setWidth(String Width) {
-        this.Width = Width;
+    public void setWidth(double width) {
+        Width = width;
     }
 
-    public String getHeight() {
+    public double getHeight() {
         return Height;
     }
 
-    public void setHeight(String Height) {
-        this.Height = Height;
+    public void setHeight(double height) {
+        Height = height;
     }
 
-    public String getOrientation() {
+    public int getOrientation() {
         return Orientation;
     }
 
-    public void setOrientation(String Orientation) {
-        this.Orientation = Orientation;
+    public void setOrientation(int orientation) {
+        Orientation = orientation;
     }
 
     public String getViewHtml() {
@@ -86,13 +96,7 @@ public class TemplateBean implements Serializable {
         this.Views = Views;
     }
 
-    public String getPrStringArray() {
-        return PrStringArray;
-    }
 
-    public void setPrStringArray(String PrStringArray) {
-        this.PrStringArray = PrStringArray;
-    }
 
     public String getShowIndex() {
         return ShowIndex;

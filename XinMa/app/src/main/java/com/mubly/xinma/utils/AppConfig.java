@@ -32,6 +32,14 @@ public final class AppConfig {
     public static SharedPreference<String> printName = sPrefs.value("printName", (String) null);
     public static SharedPreference<String> printType = sPrefs.value("printType", (String) null);
     public static SharedPreference<String> isAutoNo = sPrefs.value("isAutoNo", (String) null);
+    public static SharedPreference<String> printModel = sPrefs.value("printModel", (String) null);
+
+
+
+
+
+
+
     public static void clearAll() {
         sPrefs.clearAll();
     }
