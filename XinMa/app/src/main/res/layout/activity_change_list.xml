@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mubly.xinma.presenter.ChangeListPresenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        tools:context=".activity.OperateLogListActivity">
+
+        <include layout="@layout/top_bar_layout"></include>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:paddingLeft="@dimen/size_12dp"
+                    android:paddingRight="@dimen/size_12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="购置价格(元)"
+                        android:textColor="@color/color_919191"
+                        android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:gravity="center_vertical"
+                        android:text="@{vm.originalPrice}"
+                        android:textColor="@color/color_919191"
+                        android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/change_log_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"></androidx.recyclerview.widget.RecyclerView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:paddingLeft="@dimen/size_12dp"
+                    android:paddingRight="@dimen/size_12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="当前剩余价值(元)"
+                        android:textColor="@color/color_919191"
+                        android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:gravity="center_vertical"
+                        android:text="@{vm.currentPrice}"
+                        android:textColor="@color/color_919191"
+                        android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+                </FrameLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>

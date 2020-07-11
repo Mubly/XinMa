@@ -26,7 +26,7 @@ public class GetUsePresenter extends BaseOperatPresenter<IGetUseVIew> {
 
     @Override
     public void init() {
-        creatDate.setValue(CommUtil.getCurrentTime());
+        creatDate.setValue(CommUtil.getCurrentTimeYMD());
         adapter = new AssetsListCallBackAdapter(selectDataList);
         getMvpView().showRv(adapter);
     }

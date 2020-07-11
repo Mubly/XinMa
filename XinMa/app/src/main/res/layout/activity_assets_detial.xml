@@ -398,6 +398,73 @@
                             android:background="@color/clr_gray_line"></View>
                     </FrameLayout>
 
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="剩余价值(元)"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="@dimen/size_16dp"
+                            android:text="@{vm.assetsBean.price}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
+
+                        </TextView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_gravity="bottom"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="剩余周期(月)"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="@dimen/size_16dp"
+                            android:text="@{vm.assetsBean.remainder}"
+                            android:textColor="@color/color_919191"
+                            android:textSize="@dimen/size_13sp"
+                            tools:text="资产编码">
+
+                        </TextView>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:layout_gravity="bottom"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_50dp"

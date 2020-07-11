@@ -37,6 +37,7 @@ public abstract class BaseOperateActivity<P extends BasePresenter<V>, V extends 
     private GroupSelectCallBack groupSelectCallBack;
     private CallBack<String> timeSelectCallBack;
     private CallBack<CategoryBean> categorySelectCallBack;
+    public List<CategoryBean> categoryBeanList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,6 +114,7 @@ public abstract class BaseOperateActivity<P extends BasePresenter<V>, V extends 
                 .subscribe(new Consumer<List<CategoryBean>>() {
                     @Override
                     public void accept(List<CategoryBean> categoryBeans) throws Exception {
+                        categoryBeanList = categoryBeans;
                         initCategoryDialog(categoryBeans);
                     }
                 });

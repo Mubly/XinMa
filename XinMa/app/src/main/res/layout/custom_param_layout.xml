@@ -16,18 +16,23 @@
 
     </TextView>
 
-    <TextView
+    <EditText
         android:id="@+id/custom_param_value"
         android:layout_width="wrap_content"
+        android:minWidth="@dimen/size_150dp"
         android:layout_gravity="center_vertical|right"
         android:textColor="@color/color_414141"
         android:textSize="@dimen/size_14sp"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:gravity="center_vertical|right"
+        android:background="@null"
         android:layout_marginRight="@dimen/size_50dp"
         tools:text="参数value"
         android:layout_marginLeft="@dimen/size_16dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-    </TextView>
+    </EditText>
     <ImageView
         android:id="@+id/custom_param_arrow_icon"
         android:layout_width="@dimen/size_20dp"

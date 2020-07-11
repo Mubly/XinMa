@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_50dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/size_16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/change_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/size_14sp"
+            android:gravity="center_vertical"
+            tools:text="2020-12-12"
+            android:textColor="@color/color_919191">
+        </TextView>
+
+        <TextView
+            android:id="@+id/change_create_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/size_14sp"
+            android:gravity="center"
+            tools:text="变更"
+            android:textColor="@color/color_919191"></TextView>
+
+        <TextView
+            android:id="@+id/change_create_count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/size_14sp"
+            android:gravity="center_vertical|right"
+            tools:text="-12.88"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:textColor="@color/color_919191"></TextView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_gravity="bottom"
+        android:background="@color/clr_gray_line"></View>
+</FrameLayout>

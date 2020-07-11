@@ -5,15 +5,25 @@ import android.util.Log;
 
 import com.mubly.xinma.R;
 import com.mubly.xinma.common.Constant;
+import com.mubly.xinma.utils.AppConfig;
 
 public class ImageUrlPersenter {
+    private String companyId;
+
+    public ImageUrlPersenter(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public ImageUrlPersenter() {
+        companyId = AppConfig.companyId.get();
+    }
+
     public String getAssetListUrl(String headUrl) {
         Log.i("imgUrl", Constant.ASSET_HRADIMG_LITTLE_URL + headUrl);
-        return TextUtils.isEmpty(headUrl) ? null : Constant.ASSET_HRADIMG_LITTLE_URL + headUrl;
+        return TextUtils.isEmpty(headUrl) ? null : Constant.ASSET_HRADIMG_LITTLE_URL + companyId + "/" + headUrl;
     }
 
     public static String getPrintModeurl(String imgUrl) {
-//        return "https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg";
         return TextUtils.isEmpty(imgUrl) ? null : Constant.PRINT_MODE_IMG_SCAN_URL + imgUrl;
     }
 

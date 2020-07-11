@@ -12,10 +12,12 @@
         android:layout_height="match_parent"
         app:bgColor="@color/main_blue">
     </com.mubly.xinma.common.weight.TimeLineView>
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/size_16dp"
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <TextView
@@ -82,8 +84,10 @@
         android:layout_width="@dimen/size_20dp"
         android:src="@mipmap/arrow_right_gray"
         android:padding="@dimen/size_2dp"
+        android:layout_gravity="right"
         android:layout_marginTop="@dimen/size_30dp"
         android:layout_marginRight="@dimen/size_16dp"
         android:layout_height="@dimen/size_20dp">
     </ImageView>
+</FrameLayout>
 </LinearLayout>

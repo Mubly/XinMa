@@ -29,6 +29,7 @@ import com.mubly.xinma.iview.IDisposeView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetParam;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.PropertyBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.resbean.OperateDataRes;
@@ -54,7 +55,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     ActivityDisposeBinding binding = null;
     SelectAssetsBean selectAssetsBean = null;
     private OptionsPickerView disposeTypeDialog;
-    private List<String> selectTypeList = new ArrayList<>();
+    private List<PropertyBean> selectTypeList = new ArrayList<>();
     private String ProcessCate = "处置";
     private String Depart;
 
@@ -139,6 +140,22 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     @Override
     public void initEvent() {
         super.initEvent();
+        binding.disposeFeeTv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String eGuaranteed = binding.disposeFeeTv.getText().toString();
+                double dGuaranteed = Double.valueOf(TextUtils.isEmpty(eGuaranteed)?"0.00":eGuaranteed);
+                if (b){
+                    if (dGuaranteed==0){
+                        binding.disposeFeeTv.setText("");
+                    }
+                }else {
+                    if (TextUtils.isEmpty(eGuaranteed)){
+                        binding.disposeFeeTv.setText("0.00");
+                    }
+                }
+            }
+        });
         binding.disposeTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,16 +273,32 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     }
 
     private void initDisopseType() {
-        selectTypeList.clear();
-        selectTypeList.add("其他");
-        selectTypeList.add("变卖");
-        disposeTypeDialog = DialogUtils.showSelectDialog(this, new DialogUtils.SelectListener() {
+//
+        Observable.create(new ObservableOnSubscribe<List<PropertyBean>>() {
             @Override
-            public void selected(int index1, int index2, int index3, View v) {
-                Seat = selectTypeList.get(index1);
-                binding.disposeTypeTv.setText(Seat);
+            public void subscribe(ObservableEmitter<List<PropertyBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().propertyBeanDao().getGetAllByCode("Disposal"));
             }
-        });
-        disposeTypeDialog.setPicker(selectTypeList);
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<PropertyBean>>() {
+                    @Override
+                    public void accept(List<PropertyBean> propertyBeans) throws Exception {
+                        if (propertyBeans.size() > 0){
+                            binding.disposeTypeTv.setText(propertyBeans.get(0).getProperty());
+                        }
+
+                        selectTypeList.clear();
+                        selectTypeList.addAll(propertyBeans);
+                        disposeTypeDialog = DialogUtils.showSelectDialog(DisposeActivity.this, new DialogUtils.SelectListener() {
+                            @Override
+                            public void selected(int index1, int index2, int index3, View v) {
+                                Seat = selectTypeList.get(index1).getProperty();
+                                binding.disposeTypeTv.setText(Seat);
+                            }
+                        });
+                        disposeTypeDialog.setPicker(selectTypeList);
+                    }
+                });
     }
 }

@@ -881,6 +881,11 @@ public class CommUtil {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return df.format(new Date());
     }
+
+    public static String getCurrentTimeYMD() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(new Date());
+    }
 //    // 获取渠道号
 //    public static String getChannel(Context mContext) {
 //        String channel = "未知";

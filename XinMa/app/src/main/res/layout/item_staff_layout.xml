@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
-    android:layout_height="@dimen/size_40dp">
+    android:layout_height="@dimen/size_50dp">
 
     <TextView
         android:id="@+id/item_staff_name"
@@ -29,7 +29,8 @@
         android:layout_height="@dimen/size_20dp"
         android:layout_gravity="right|center_vertical"
         android:layout_marginRight="@dimen/size_20dp"
-        android:src="@mipmap/arrow_right_gray"></ImageView>
+        android:src="@mipmap/arrow_right_gray">
+    </ImageView>
 
     <View
         android:id="@+id/item_staff_bottom_line"

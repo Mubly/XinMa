@@ -24,7 +24,7 @@ public class RepairPresenter extends BaseOperatPresenter<IRepairView> {
 
     @Override
     public void init() {
-        creatDate.setValue(CommUtil.getCurrentTime());
+        creatDate.setValue(CommUtil.getCurrentTimeYMD());
         adapter = new AssetsListCallBackAdapter(selectDataList);
         getMvpView().showRv(adapter);
     }

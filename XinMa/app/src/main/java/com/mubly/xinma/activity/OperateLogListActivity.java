@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.SmartAdapter;
@@ -22,6 +24,16 @@ public class OperateLogListActivity extends BaseActivity<OperateLogListPresenter
     public void initView() {
         setTitle("日志");
         mPresenter.init(assetBean.getAssetID());
+        setRightBtnResId(R.drawable.wallet_white_icon);
+    }
+
+    @Override
+    public void onRightAddEvent(ImageView rightAddBtn) {
+        super.onRightAddEvent(rightAddBtn);
+        Intent intent = new Intent(this, ChangeListActivity.class);
+        intent.putExtra("assetBean", assetBean);
+        startActivity(intent);
+        startPage();
     }
 
     @Override

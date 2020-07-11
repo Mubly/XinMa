@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     package="com.mubly.xinma">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -26,44 +27,115 @@
         android:networkSecurityConfig="@xml/network_security_config_debug"
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme_App">
-        <activity android:name=".activity.OperateLogListActivity"></activity>
-        <activity android:name=".activity.UserAgreeActivity" />
-        <activity android:name=".activity.PrintOperateActivity" />
-        <activity android:name=".activity.PrintModelActivity" />
-        <activity android:name=".activity.CheckDetialActivity" />
-        <activity android:name=".activity.CheckCreateActivity" />
-        <activity android:name=".activity.CategoryInfoSelectActivity" />
-        <activity android:name=".activity.CategoryCreateActivity" />
-        <activity android:name=".activity.DepartMentCreateActivity" />
-        <activity android:name=".activity.StaffCreateActivity" />
-        <activity android:name=".activity.AssetSelectActivity" />
-        <activity android:name=".activity.GroupActivity" />
-        <activity android:name=".activity.DepartmentActivity" />
-        <activity android:name=".activity.EditStaffActivity" />
-        <activity android:name=".activity.DisposeActivity" />
-        <activity android:name=".activity.AnalysisActivity" />
-        <activity android:name=".activity.SortClassActivity" />
-        <activity android:name=".activity.BrrorowActivity" />
-        <activity android:name=".activity.GetUseActivity" />
-        <activity android:name=".activity.CheckListActivity" />
-        <activity android:name=".activity.CreateActivity" />
-        <activity android:name=".activity.RepairActivity" />
-        <activity android:name=".activity.ReturnActivity" />
-        <activity android:name=".activity.ChangeActivity" />
-        <activity android:name=".activity.AssetsDetialActivity" />
-        <activity android:name=".activity.PrintActivity" />
-        <activity android:name=".activity.AssetsListActivity" />
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".login.view.LostPassWordActivity" />
-        <activity android:name=".login.view.RegisterActivity" />
-        <activity android:name=".login.view.LoginActivity" />
-        <activity android:name=".home.MainActivity" />
+        android:theme="@style/AppTheme_App"
+        tool:ignore="LockedOrientationActivity">
+        <activity
+            android:name=".activity.OperateLogListActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.UserAgreeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PrintOperateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PrintModelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CheckDetialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CheckCreateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChangeListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.CategoryInfoSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CategoryCreateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DepartMentCreateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.StaffCreateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AssetSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DepartmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditStaffActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DisposeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AnalysisActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SortClassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BrrorowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GetUseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CheckListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CreateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RepairActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ReturnActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChangeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AssetsDetialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PrintActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AssetsListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.view.LostPassWordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.view.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.view.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".home.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ScannerActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".login.view.StartActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/splash_theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

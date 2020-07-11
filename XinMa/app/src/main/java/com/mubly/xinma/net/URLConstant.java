@@ -77,6 +77,9 @@ public class URLConstant {
     //操作资产列表
     public static final String API_Process_SelectOperate_URL = BASE_URL + "/API_Process/SelectOperate";
 
+    //变更列表
+    public static final String CHANGE_GAIN_URL = BASE_URL + "/API_Change/SelectChange";
+
     //操作数据
     public static final String API_Operate_ListOperate_Url = BASE_URL + "/API_Operate/ListOperate";
 

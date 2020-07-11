@@ -13,6 +13,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.luck.picture.lib.PictureSelector;
 import com.mubly.xinma.R;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityAssetsDetialBinding;
@@ -22,6 +24,7 @@ import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetInfoBean;
 import com.mubly.xinma.presenter.AssetsDetialPresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.GlideEngine;
 import com.shehuan.nicedialog.BaseNiceDialog;
 import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
@@ -235,4 +238,5 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
         intent.putExtra("assetBean", selectAssetsBean);
         startActivity(intent);
     }
+
 }

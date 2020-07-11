@@ -47,8 +47,10 @@ import com.mubly.xinma.presenter.ImageUrlPersenter;
 import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.DialogUtils;
+import com.mubly.xinma.utils.EditViewUtil;
 import com.mubly.xinma.utils.GlideEngine;
 import com.mubly.xinma.utils.ImageUtils;
+import com.mubly.xinma.utils.StringUtils;
 import com.shehuan.nicedialog.BaseNiceDialog;
 import com.shehuan.nicedialog.NiceDialog;
 import com.shehuan.nicedialog.ViewConvertListener;
@@ -58,7 +60,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 资产创建
@@ -77,6 +82,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
     private String selectTime;
     private String assetsId;
 
+
     @Override
     public void initView() {
         setTitle(R.string.create_name);
@@ -91,12 +97,12 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             initCopyView();
         } else if (type == 2) {
 
-            selectTime = CommUtil.getCurrentTimeHM();
-            binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeHM());
+            selectTime = CommUtil.getCurrentTimeYMD();
+            binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeYMD());
             initCopyView();
         } else {
-            selectTime = CommUtil.getCurrentTimeHM();
-            binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeHM());
+            selectTime = CommUtil.getCurrentTimeYMD();
+            binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeYMD());
         }
         initUnitSelectData();
     }
@@ -185,10 +191,11 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             return;
         }
 
-        if (null!=AppConfig.isAutoNo.get()&&AppConfig.isAutoNo.get().equals("1")&&TextUtils.isEmpty(assetNo)){
+        if (null != AppConfig.isAutoNo.get() && AppConfig.isAutoNo.get().equals("1") && TextUtils.isEmpty(assetNo)) {
             CommUtil.ToastU.showToast("请输入资产编码");
             return;
         }
+        gainCustomParam();
         mPresenter.createAssets(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
                 , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<Boolean>() {
                     @Override
@@ -300,6 +307,55 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                 unitSelectDialog.show();
             }
         });
+        binding.assetCreateGuaranteed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String eGuaranteed = binding.assetCreateGuaranteed.getText().toString();
+                double dGuaranteed = Double.valueOf(TextUtils.isEmpty(eGuaranteed) ? "0.00" : eGuaranteed);
+                if (b) {
+                    if (dGuaranteed == 0) {
+                        binding.assetCreateGuaranteed.setText("");
+                    }
+                } else {
+                    if (TextUtils.isEmpty(eGuaranteed)) {
+                        binding.assetCreateGuaranteed.setText("0.00");
+                    }
+                }
+            }
+        });
+        binding.assetCreateDepreciated.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String eGuaranteed = binding.assetCreateDepreciated.getText().toString();
+                double dGuaranteed = Double.valueOf(TextUtils.isEmpty(eGuaranteed) ? "0.00" : eGuaranteed);
+                if (b) {
+                    if (dGuaranteed == 0) {
+                        binding.assetCreateDepreciated.setText("");
+                    }
+                } else {
+                    if (TextUtils.isEmpty(eGuaranteed)) {
+                        binding.assetCreateDepreciated.setText("0.00");
+                    }
+                }
+            }
+        });
+        binding.assetCreateOriginal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String eGuaranteed = binding.assetCreateOriginal.getText().toString();
+                double dGuaranteed = Double.valueOf(TextUtils.isEmpty(eGuaranteed) ? "0.00" : eGuaranteed);
+                if (b) {
+                    if (dGuaranteed == 0) {
+                        binding.assetCreateOriginal.setText("");
+                    }
+                } else {
+                    if (TextUtils.isEmpty(eGuaranteed)) {
+                        binding.assetCreateOriginal.setText("0.00");
+                    }
+                }
+            }
+        });
+
     }
 
     @Override
@@ -376,21 +432,101 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         View itemView = View.inflate(CreateActivity.this, R.layout.custom_param_layout, null);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(50));
         TextView paramKeyTv = itemView.findViewById(R.id.custom_param_key);
-        TextView paramValueTv = itemView.findViewById(R.id.custom_param_value);
+        EditText paramValueTv = itemView.findViewById(R.id.custom_param_value);
         paramKeyTv.setText(key);
-        paramValueTv.setText(value);
+        if (value.contains("#")) {
+            String[] valueSpl = value.split("#");
+            paramValueTv.setText(valueSpl[0]);
+        } else {
+            paramValueTv.setText(value);
+        }
+        if (type.equals("Select") || type.equals("Date")) {
+            paramValueTv.setFocusableInTouchMode(false);
+            paramValueTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (type.equals("Date")) {
+                        showTimeSelectDialog(new CallBack<String>() {
+                            @Override
+                            public void callBack(String obj) {
+                                paramValueTv.setText(obj);
+                            }
+                        });
+                    } else if (type.equals("Select")) {
+                        setSelectCategoryParam(paramValueTv, value);
+                    }
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (type.equals("Date")) {
+                        showTimeSelectDialog(new CallBack<String>() {
+                            @Override
+                            public void callBack(String obj) {
+                                paramValueTv.setText(obj);
+                            }
+                        });
+                    } else if (type.equals("Select")) {
+                        setSelectCategoryParam(paramValueTv, value);
+                    }
+                }
+            });
+        }
         itemView.setLayoutParams(layoutParams);
         binding.dryParamLayout.addView(itemView);
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("InfoName", key);
-            jsonObject.put("InfoValue", value);
-            jsonObject.put("InfoType", type);
-            paramArray.put(jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        valueArrList.add(itemView);
+        typeArrList.add(type);
     }
+
+    private void setSelectCategoryParam(EditText edtView, String valueStr) {
+        if (TextUtils.isEmpty(valueStr)) return;
+        List<String> paramList = new ArrayList<>();
+
+        if (valueStr.contains("#")) {
+            String[] paramArr = valueStr.split("#");
+            for (int i = 0; i < paramArr.length; i++) {
+                paramList.add(paramArr[i]);
+            }
+        } else {
+            paramList.add(valueStr);
+        }
+
+        OptionsPickerView categoryParamDialog = DialogUtils.showSelectDialog(CreateActivity.this, new DialogUtils.SelectListener() {
+            @Override
+            public void selected(int index1, int index2, int index3, View v) {
+                edtView.setText(paramList.get(index1));
+            }
+        });
+        categoryParamDialog.setPicker(paramList);
+
+        categoryParamDialog.show();
+    }
+
+    private void gainCustomParam() {
+        for (int i = 0; i < valueArrList.size(); i++) {
+            View view = valueArrList.get(i);
+            TextView paramKeyTv = view.findViewById(R.id.custom_param_key);
+            EditText paramValueTv = view.findViewById(R.id.custom_param_value);
+            if (!TextUtils.isEmpty(paramValueTv.getText().toString())) {
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("InfoName", paramKeyTv.getText().toString());
+                    jsonObject.put("InfoValue", paramValueTv.getText().toString());
+                    jsonObject.put("InfoType", typeArrList.get(i));
+                    paramArray.put(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
+    }
+
+    private List<View> valueArrList = new ArrayList<>();
+    private List<String> typeArrList = new ArrayList<>();
 
     @Override
     public boolean isTimeSelectInit() {

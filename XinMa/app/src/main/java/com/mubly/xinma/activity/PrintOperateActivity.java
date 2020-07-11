@@ -96,8 +96,15 @@ public class PrintOperateActivity extends BaseActivity<PrintOperatePresenter, IP
     }
 
     private void initPrintbean() {
-        PrintContentBean contentBean = JSON.parseObject(printMode.getPrintArray(), PrintContentBean.class);
+
         for (AssetBean assetBean : selectAssetsBean.getSelectBean()) {
+            TemplateBean current = new TemplateBean();
+            current.setPrintArray(printMode.getPrintArray());
+            current.setHeight(printMode.getHeight());
+            current.setOrientation(printMode.getOrientation());
+            current.setWidth(printMode.getWidth());
+
+            PrintContentBean contentBean = JSON.parseObject(current.getPrintArray(), PrintContentBean.class);
             if (null != contentBean && null != contentBean.getText()) {
                 for (PrintContentBean.TextBean textBean : contentBean.getText()) {
                     if (textBean.getContent().contains("CompanyName"))
@@ -128,9 +135,9 @@ public class PrintOperateActivity extends BaseActivity<PrintOperatePresenter, IP
                     else if (textBean.getContent().contains("Unit"))
                         textBean.setContent(assetBean.getAssetModel());
                 }
-                printMode.setPrintArray(JSON.toJSONString(contentBean));
+                current.setPrintArray(JSON.toJSONString(contentBean));
             }
-            PrintCenterManager.getInstance().prnit(printMode);
+            PrintCenterManager.getInstance().prnit(current);
         }
     }
 

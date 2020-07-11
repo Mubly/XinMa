@@ -22,7 +22,7 @@ public class DisposePresenter extends BaseOperatPresenter<IDisposeView> {
 
     @Override
     public void init() {
-        creatDate.setValue(CommUtil.getCurrentTime());
+        creatDate.setValue(CommUtil.getCurrentTimeYMD());
         adapter = new AssetsListCallBackAdapter(selectDataList);
         getMvpView().showRv(adapter);
     }

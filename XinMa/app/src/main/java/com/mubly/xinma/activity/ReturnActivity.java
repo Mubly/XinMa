@@ -31,6 +31,7 @@ import com.mubly.xinma.iview.IReturnView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetParam;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.PropertyBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.resbean.OperateDataRes;
@@ -55,15 +56,16 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     ActivityReturnBinding binding = null;
     SelectAssetsBean selectAssetsBean = null;
     private OptionsPickerView assetStatusDialog;
-    private List<String> returnStatusList = new ArrayList<>();
+    private List<PropertyBean> returnStatusList = new ArrayList<>();
     private String ProcessCate = "归还";
     private String Depart;
 
     private String Staff;
-    private String Seat="";
+    private String Seat = "";
 
-    private String Remark="";
+    private String Remark = "";
     private JSONArray AssetIDList = new JSONArray();
+
     @Override
     protected ReturnPresenter createPresenter() {
         return new ReturnPresenter();
@@ -77,6 +79,9 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         binding.setLifecycleOwner(this);
         mPresenter.init();
         initReturnStatus();
+
+
+
     }
 
     @Override
@@ -117,12 +122,13 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
-                       closeCurrentAct();
+                        closeCurrentAct();
                     }
                 }).start();
             }
         });
     }
+
     @Override
     public void initEvent() {
         super.initEvent();
@@ -164,6 +170,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
             }
         });
     }
+
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_return);
@@ -221,6 +228,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
             selectAssetsBean.setSelectBean(assetBeans);
         }
     }
+
     @Override
     public boolean isTimeSelectInit() {
         return true;
@@ -242,19 +250,34 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     }
 
     private void initReturnStatus() {
-        returnStatusList.clear();
-        returnStatusList.add("外观及功能完好");
-        returnStatusList.add("外观破损");
-        returnStatusList.add("功能异常");
-        returnStatusList.add("外观破损且功能异常");
 
-        assetStatusDialog = DialogUtils.showSelectDialog(this, new DialogUtils.SelectListener() {
+
+        Observable.create(new ObservableOnSubscribe<List<PropertyBean>>() {
             @Override
-            public void selected(int index1, int index2, int index3, View v) {
-                Remark = returnStatusList.get(index1);
-                binding.returnStatusTv.setText(Remark);
+            public void subscribe(ObservableEmitter<List<PropertyBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().propertyBeanDao().getGetAllByCode("AssetStatus"));
             }
-        });
-        assetStatusDialog.setPicker(returnStatusList);
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<PropertyBean>>() {
+                    @Override
+                    public void accept(List<PropertyBean> propertyBeans) throws Exception {
+                        if (propertyBeans.size() > 0){
+                            binding.returnStatusTv.setText(propertyBeans.get(0).getProperty());
+                        }
+
+                        returnStatusList.clear();
+                        returnStatusList.addAll(propertyBeans);
+                        assetStatusDialog = DialogUtils.showSelectDialog(ReturnActivity.this, new DialogUtils.SelectListener() {
+                            @Override
+                            public void selected(int index1, int index2, int index3, View v) {
+                                Remark = returnStatusList.get(index1).getProperty();
+                                binding.returnStatusTv.setText(Remark);
+                            }
+                        });
+                        assetStatusDialog.setPicker(returnStatusList);
+                    }
+                });
+
     }
 }

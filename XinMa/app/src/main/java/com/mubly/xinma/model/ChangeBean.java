@@ -9,7 +9,7 @@ public class ChangeBean {
     private String FirstRemainder;
     private String Price;
     private int Remainder;
-    private int Decrease;
+    private String Decrease;
     private String Remark;
     private int Status;
 
@@ -61,11 +61,11 @@ public class ChangeBean {
         Remainder = remainder;
     }
 
-    public int getDecrease() {
-        return Decrease;
+    public String getDecrease() {
+        return StringUtils.notNullf0(Decrease);
     }
 
-    public void setDecrease(int decrease) {
+    public void setDecrease(String decrease) {
         Decrease = decrease;
     }
 
