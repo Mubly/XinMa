@@ -163,8 +163,8 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.brrorowDepartTv.setText(groupBean.getDepart());
-                        binding.brrorowStaffTv.setText(staffBean.getStaff());
+                        binding.brrorowDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+//                        binding.brrorowStaffTv.setText(staffBean.getStaff());
                     }
                 });
             }

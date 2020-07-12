@@ -29,9 +29,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme_App"
         tool:ignore="LockedOrientationActivity">
+        <activity android:name=".activity.ChangePhoneActivity"></activity>
         <activity
             android:name=".activity.OperateLogListActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.UserAgreeActivity"
             android:screenOrientation="portrait" />
@@ -49,8 +50,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ChangeListActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activity.CategoryInfoSelectActivity"
             android:screenOrientation="portrait" />

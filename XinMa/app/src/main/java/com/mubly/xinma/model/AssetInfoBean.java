@@ -1,5 +1,9 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
+import com.mubly.xinma.utils.StringUtils;
+
 import org.jetbrains.annotations.NotNull;
 
 import androidx.room.Entity;
@@ -33,7 +37,7 @@ public class AssetInfoBean {
     }
 
     public String getCategoryInfoID() {
-        return CategoryInfoID;
+        return TextUtils.isEmpty(CategoryInfoID) ? "xm" + System.currentTimeMillis() : CategoryInfoID;
     }
 
     public void setCategoryInfoID(String categoryInfoID) {
@@ -57,7 +61,7 @@ public class AssetInfoBean {
     }
 
     public String getInfoType() {
-        return InfoType;
+        return TextUtils.isEmpty(InfoType) ? "Text" : InfoType;
     }
 
     public void setInfoType(String infoType) {

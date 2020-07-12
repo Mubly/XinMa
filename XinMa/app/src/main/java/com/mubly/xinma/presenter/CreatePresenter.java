@@ -11,6 +11,7 @@ import com.mubly.xinma.iview.ICreateView;
 import com.mubly.xinma.iview.IReturnView;
 import com.mubly.xinma.model.AssetDataBean;
 import com.mubly.xinma.model.CategoryInfoBean;
+import com.mubly.xinma.model.resbean.AssetsCreateRes;
 import com.mubly.xinma.net.JsonCallback;
 import com.mubly.xinma.net.URLConstant;
 import com.mubly.xinma.utils.CommUtil;
@@ -51,11 +52,11 @@ public class CreatePresenter extends BasePresenter<ICreateView> {
 
     public void createAssets(String assetsId, String headimg, String assetNo, String assetName, String assetModel, String assetUnit
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
-            , String Staff, String seat, String Category, String CategoryId, String param, CallBack<Boolean> callBack) {
+            , String Staff, String seat, String Category, String CategoryId, String param, CallBack<AssetsCreateRes> callBack) {
         AssetDataBean.assetsCreate(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original,
-                depreciated, guaranteed, Depart, Staff, seat, Category, CategoryId, param, new CallBack<Boolean>() {
+                depreciated, guaranteed, Depart, Staff, seat, Category, CategoryId, param, new CallBack<AssetsCreateRes>() {
                     @Override
-                    public void callBack(Boolean obj) {
+                    public void callBack(AssetsCreateRes obj) {
                         callBack.callBack(obj);
                     }
                 });

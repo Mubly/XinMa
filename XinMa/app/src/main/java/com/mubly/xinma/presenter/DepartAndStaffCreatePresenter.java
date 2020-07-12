@@ -13,6 +13,7 @@ import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.model.GroupData;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.StaffDataBean;
+import com.mubly.xinma.model.UserInfoBean;
 import com.mubly.xinma.model.resbean.DepartDataRes;
 import com.mubly.xinma.model.resbean.StaffDataRes;
 import com.mubly.xinma.utils.AppConfig;
@@ -34,10 +35,10 @@ public class DepartAndStaffCreatePresenter extends BasePresenter<IDepartAndStaff
 
     public void initDeportMentCreate() {
         try {
-            String companyInfo = AppConfig.companyInfo.get();
-            CompanyBean company = JSON.parseObject(companyInfo, CompanyBean.class);
-            if (null != company)
-                companyName.setValue(company.getCompany());
+            String userInfo = AppConfig.userInfo.get();
+            UserInfoBean userInfoBean = JSON.parseObject(userInfo, UserInfoBean.class);
+            if (null != userInfoBean)
+                companyName.setValue(userInfoBean.getCompany());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package com.mubly.xinma.activity;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -16,6 +17,7 @@ import com.mubly.xinma.iview.ISettingView;
 import com.mubly.xinma.presenter.SettingPresenter;
 import com.mubly.xinma.utils.AppConfig;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.LiveDataBus;
 import com.mubly.xinma.utils.PrintCenterManager;
 import com.shehuan.nicedialog.BaseNiceDialog;
 import com.shehuan.nicedialog.NiceDialog;
@@ -77,6 +79,19 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
                 showPromat();
             }
         });
+        binding.changeUserPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editIndex = 3;
+                showPromat();
+            }
+        });
+        LiveDataBus.get().with("refreshPhone", String.class).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mPresenter.getUserInfo().getValue().setPhone(s);
+            }
+        });
     }
 
     @Override
@@ -119,7 +134,10 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
                             @Override
                             public void onClick(View view) {
                                 dialog.dismiss();
-                                getEditContentDialog();
+                                if (editIndex == 3)
+                                    startActivity(ChangePhoneActivity.class);
+                                else
+                                    getEditContentDialog();
                             }
                         });
                     }

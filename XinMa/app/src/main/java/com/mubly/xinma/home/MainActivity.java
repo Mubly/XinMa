@@ -66,6 +66,12 @@ public class MainActivity extends BaseActivity<HomePresenter, IHomeView> impleme
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.initData();
+    }
+
+    @Override
     public void forScanResult(String code) {
         super.forScanResult(code);
         if (!TextUtils.isEmpty(code)) {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -170,7 +171,7 @@ public class PrintCenterManager {
         if (null == prnitBean) return;
         api.startJob(prnitBean.getWidth(), prnitBean.getHeight(), prnitBean.getOrientation());
         if (TextUtils.isEmpty(prnitBean.getPrintArray())) return;
-        PrintContentBean printContent=JSON.parseObject(prnitBean.getPrintArray(),PrintContentBean.class);
+        PrintContentBean printContent = JSON.parseObject(prnitBean.getPrintArray(), PrintContentBean.class);
 
         List<PrintContentBean.TextBean> texts = printContent.getText();
         if (printContent.getText() != null) {
@@ -222,5 +223,9 @@ public class PrintCenterManager {
             }
         }
         api.commitJob();
+    }
+
+    public List<Bitmap> getPages() {
+        return api.getJobPages();
     }
 }

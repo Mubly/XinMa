@@ -1,5 +1,7 @@
 package com.mubly.xinma.model;
 
+import android.text.TextUtils;
+
 import org.jetbrains.annotations.NotNull;
 
 import androidx.room.Entity;
@@ -76,7 +78,7 @@ public class CategoryInfoBean {
     }
 
     public String getInfoType() {
-        return InfoType;
+        return TextUtils.isEmpty(InfoType)?"Text":InfoType;
     }
 
     public void setInfoType(String InfoType) {

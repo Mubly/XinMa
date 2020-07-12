@@ -32,6 +32,9 @@ public interface AssetBeanDao {
     @Query("SELECT * FROM asset WHERE AssetNo LIKE :assetNo LIMIT 1")
     AssetBean getAssetBeanByNo(String assetNo);
 
+    @Query("SELECT * FROM asset WHERE AssetID LIKE :assetNo LIMIT 1")
+    AssetBean getAssetBeanByAssetId(String assetNo);
+
     @Query("SELECT * FROM asset WHERE AssetID LIKE :assetId")
     List<AssetBean> getAllById(String assetId);
 

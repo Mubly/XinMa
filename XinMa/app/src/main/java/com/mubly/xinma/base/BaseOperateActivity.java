@@ -143,6 +143,7 @@ public abstract class BaseOperateActivity<P extends BasePresenter<V>, V extends 
                 groupSelectCallBack.callback(groupSelectBean.getGroupDataList().get(index1), groupSelectBean.getStaffDataList().get(index1).get(index2));
             }
         });
+        groupDialog.setSelectOptions(0, 0);
         groupDialog.setPicker(groupSelectBean.getGroupDataList(), groupSelectBean.getStaffDataList());
     }
 

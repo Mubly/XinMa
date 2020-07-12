@@ -184,8 +184,8 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.getUseDepartTv.setText(groupBean.getDepart());
-                        binding.getUseStaffTv.setText(staffBean.getStaff());
+                        binding.getUseDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+//                        binding.getUseStaffTv.setText(staffBean.getStaff());
                     }
                 });
             }

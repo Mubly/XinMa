@@ -130,7 +130,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         return repair;
     }
 
-    private void initData() {
+    public void initData() {
         Observable.create(new ObservableOnSubscribe<List<String>>() {
 
             @Override
@@ -165,6 +165,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
             }
         });
     }
+
 
     private void initMenuData() {
         for (int i = 0; i < 12; i++) {

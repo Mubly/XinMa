@@ -151,8 +151,8 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.returnDepartTv.setText(groupBean.getDepart());
-                        binding.returnStaffTv.setText(staffBean.getStaff());
+                        binding.returnDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+//                        binding.returnStaffTv.setText(staffBean.getStaff());
                     }
                 });
             }

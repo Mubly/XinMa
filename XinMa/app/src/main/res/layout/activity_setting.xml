@@ -45,7 +45,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/size_16dp"
-                            android:text="主题名称"
+                            android:text="主体名称"
                             android:textColor="@color/color_414141"
                             android:textSize="@dimen/size_15sp"></TextView>
 
@@ -116,6 +116,7 @@
                     </FrameLayout>
 
                     <FrameLayout
+                        android:id="@+id/change_user_phone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_50dp">
 

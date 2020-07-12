@@ -37,11 +37,13 @@ import com.mubly.xinma.databinding.ActivityCreateBinding;
 import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.ICreateView;
 import com.mubly.xinma.model.AssetBean;
+import com.mubly.xinma.model.AssetInfoBean;
 import com.mubly.xinma.model.CategoryBean;
 import com.mubly.xinma.model.CategoryInfoBean;
 import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.model.PropertyBean;
 import com.mubly.xinma.model.StaffBean;
+import com.mubly.xinma.model.resbean.AssetsCreateRes;
 import com.mubly.xinma.presenter.CreatePresenter;
 import com.mubly.xinma.presenter.ImageUrlPersenter;
 import com.mubly.xinma.utils.AppConfig;
@@ -81,7 +83,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
     private String selectCategoryId;
     private String selectTime;
     private String assetsId;
-
+    private String isAutoNo;
 
     @Override
     public void initView() {
@@ -95,8 +97,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             selectTime = selectAssetBean.getPurchaseDate();
             assetsId = selectAssetBean.getAssetID();
             initCopyView();
-        } else if (type == 2) {
-
+        } else if (type == 2) {//复制
             selectTime = CommUtil.getCurrentTimeYMD();
             binding.createAssetTimeTv.setText(CommUtil.getCurrentTimeYMD());
             initCopyView();
@@ -135,8 +136,8 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
     }
 
     private void initCreatNoView() {
-        String isAutoNo = AppConfig.isAutoNo.get();
-        if (isAutoNo.equals("1"))
+        isAutoNo = AppConfig.isAutoNo.get();
+        if (isAutoNo.equals("0"))//显示-不自动生成
             binding.autoCreateNoLayout.setVisibility(View.VISIBLE);
         else
             binding.autoCreateNoLayout.setVisibility(View.GONE);
@@ -147,7 +148,9 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         Glide.with(CreateActivity.this).load(new ImageUrlPersenter().getAssetListUrl(selectAssetBean.getHeadimg()))
                 .apply(RequestOptions.centerCropTransform().placeholder(R.mipmap.img_defaut).error(R.mipmap.img_defaut)).into(binding.createAssetImg);
         binding.assetCreateAssetName.setText(selectAssetBean.getAssetName());
-        binding.assetCreateAssetNo.setText(selectAssetBean.getAssetNo());
+        if (isAutoNo.equals("0") && type == 1) {//编辑，自动填充
+            binding.assetCreateAssetNo.setText(selectAssetBean.getAssetNo());
+        }
         binding.assetCreateAssetModel.setText(selectAssetBean.getAssetModel());
         binding.assetCreateUnit.setText(selectAssetBean.getUnit());
         binding.assetCreateSupply.setText(selectAssetBean.getSupply());
@@ -161,6 +164,26 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         selectCategory = selectAssetBean.getCategory();
         selectDepart = selectAssetBean.getDepart();
         selectStaff = selectAssetBean.getStaff();
+        initCustomParam();
+    }
+
+    private void initCustomParam() {
+        Observable.create(new ObservableOnSubscribe<List<AssetInfoBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AssetInfoBean>> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetInfoBeanDao().getAllByAssetsId(selectAssetBean.getAssetID()));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<AssetInfoBean>>() {
+                    @Override
+                    public void accept(List<AssetInfoBean> infoBeans) throws Exception {
+                        for (AssetInfoBean categoryInfoBean : infoBeans) {
+                            categoryArrList.add(categoryInfoBean.getCategoryInfoID());//暂时以这个作为标识，其实只是判别是否为null
+                            createCustomParam(categoryInfoBean.getInfoName(), categoryInfoBean.getInfoValue(), categoryInfoBean.getInfoType());
+                        }
+                    }
+                });
     }
 
     @Override
@@ -191,25 +214,32 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             return;
         }
 
-        if (null != AppConfig.isAutoNo.get() && AppConfig.isAutoNo.get().equals("1") && TextUtils.isEmpty(assetNo)) {
+        if (null != AppConfig.isAutoNo.get() && AppConfig.isAutoNo.get().equals("0") && TextUtils.isEmpty(assetNo)) {
             CommUtil.ToastU.showToast("请输入资产编码");
             return;
         }
         gainCustomParam();
         mPresenter.createAssets(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
-                , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<Boolean>() {
+                , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<AssetsCreateRes>() {
                     @Override
-                    public void callBack(Boolean obj) {
-                        if (type == 1) {
-                            CommUtil.ToastU.showToast("编辑成功");
-                        } else {
-                            CommUtil.ToastU.showToast("创建成功");
-                        }
+                    public void callBack(AssetsCreateRes obj) {
+                        saveCategoryInfoData(obj.getAssetID());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (type == 1) {
+                                    CommUtil.ToastU.showToast("编辑成功");
+                                } else {
+                                    CommUtil.ToastU.showToast("创建成功");
+                                }
+                                finish();
+                            }
+                        });
 
-                        finish();
                     }
                 });
     }
+
 
     @Override
     protected void getLayoutId() {
@@ -224,12 +254,14 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                 .openGallery(PictureMimeType.ofImage())
                 .maxSelectNum(1)
                 .isEnableCrop(true)
-                .freeStyleCropEnabled(true)
-                .compressQuality(60)
+                .freeStyleCropEnabled(false)
+                .isDragFrame(false)
+                .withAspectRatio(1, 1)
+                .minimumCompressSize(300)
+                .cropImageWideHigh(640,640)
+                .compressQuality(90)
                 .isCompress(true)
                 .imageEngine(GlideEngine.createGlideEngine())
-                .cropWH(100, 100)
-                .cropImageWideHigh(100, 100)
                 .forResult(new OnResultCallbackListener<LocalMedia>() {
                     @Override
                     public void onResult(List<LocalMedia> result) {
@@ -265,6 +297,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         binding.createAssetTimeLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommUtil.hideKeyboard(binding.createAssetTimeLabel);
                 showTimeSelectDialog(new CallBack<String>() {
                     @Override
                     public void callBack(String obj) {
@@ -277,6 +310,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         binding.createAssetCategoryLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommUtil.hideKeyboard(binding.createAssetTimeLabel);
                 showCategorySelectDialog(new CallBack<CategoryBean>() {
                     @Override
                     public void callBack(CategoryBean obj) {
@@ -291,6 +325,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         binding.createDepartSelectLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommUtil.hideKeyboard(binding.createAssetTimeLabel);
                 showGroupStaffDialog(new GroupSelectCallBack() {
                     @Override
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
@@ -304,6 +339,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         binding.assetCreateUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommUtil.hideKeyboard(binding.createAssetTimeLabel);
                 unitSelectDialog.show();
             }
         });
@@ -409,6 +445,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                                     CommUtil.ToastU.showToast("请输入参数内容");
                                     return;
                                 }
+                                categoryArrList.add("null");
                                 createCustomParam(paramKeyStr, paramValueStr, "Text");
                                 dialog.dismiss();
                             }
@@ -423,7 +460,19 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
 
     @Override
     public void createCustomerParam(List<CategoryInfoBean> categoryInfoBeans) {
+        if (categoryArrList.size() > 0) {
+            for (int i = (categoryArrList.size() - 1); i >= 0; i--) {//清除之前的
+                if (!categoryArrList.get(i).equals("null")) {
+                    categoryArrList.remove(i);
+                    valueArrList.remove(i);
+                    typeArrList.remove(i);
+                    binding.dryParamLayout.removeViewAt(i);
+                }
+            }
+        }
+
         for (CategoryInfoBean categoryInfoBean : categoryInfoBeans) {
+            categoryArrList.add(categoryInfoBean.getCategoryID());
             createCustomParam(categoryInfoBean.getInfoName(), categoryInfoBean.getInfoValues(), categoryInfoBean.getInfoType());
         }
     }
@@ -521,12 +570,38 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
             }
 
         }
+    }
 
-
+    private void saveCategoryInfoData(String assetsId) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < valueArrList.size(); i++) {
+                    View view = valueArrList.get(i);
+                    TextView paramKeyTv = view.findViewById(R.id.custom_param_key);
+                    EditText paramValueTv = view.findViewById(R.id.custom_param_value);
+                    if (!TextUtils.isEmpty(paramValueTv.getText().toString())) {
+                        AssetInfoBean localInfoBean = XinMaDatabase.getInstance().assetInfoBeanDao().getLocalAssetInfo(assetsId, paramKeyTv.getText().toString());
+                        AssetInfoBean categoryInfoBean = new AssetInfoBean();
+                        categoryInfoBean.setInfoName(paramKeyTv.getText().toString());
+                        categoryInfoBean.setAssetID(assetsId);
+                        categoryInfoBean.setInfoType(typeArrList.get(i));
+                        categoryInfoBean.setInfoValue(paramValueTv.getText().toString());
+                        if (null != localInfoBean) {
+                            categoryInfoBean.setAssetInfoID(localInfoBean.getAssetInfoID());
+                        } else {
+                            categoryInfoBean.setAssetInfoID("xm" + String.valueOf(System.currentTimeMillis()));
+                        }
+                        XinMaDatabase.getInstance().assetInfoBeanDao().insert(categoryInfoBean);
+                    }
+                }
+            }
+        }).start();
     }
 
     private List<View> valueArrList = new ArrayList<>();
     private List<String> typeArrList = new ArrayList<>();
+    private List<String> categoryArrList = new ArrayList<>();
 
     @Override
     public boolean isTimeSelectInit() {

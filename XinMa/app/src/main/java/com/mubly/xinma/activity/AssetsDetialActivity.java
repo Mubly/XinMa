@@ -1,9 +1,17 @@
 package com.mubly.xinma.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,15 +22,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.luck.picture.lib.PictureSelector;
 import com.mubly.xinma.R;
 import com.mubly.xinma.base.BaseActivity;
 import com.mubly.xinma.databinding.ActivityAssetsDetialBinding;
 import com.mubly.xinma.databinding.BottomAssetDetailLayoutBinding;
+import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IAssetsDetialView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetInfoBean;
 import com.mubly.xinma.presenter.AssetsDetialPresenter;
+import com.mubly.xinma.presenter.ImageUrlPersenter;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.GlideEngine;
 import com.shehuan.nicedialog.BaseNiceDialog;
@@ -62,9 +76,49 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
         }
         binding.setVm(mPresenter);
         binding.setLifecycleOwner(this);
-        mPresenter.init(selectAssetsBean);
+
         if (null != selectAssetsBean)
             initBottomoperate();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (null != selectAssetsBean) {
+            Observable.create(new ObservableOnSubscribe<AssetBean>() {
+                @Override
+                public void subscribe(ObservableEmitter<AssetBean> emitter) throws Exception {
+                    emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAssetBeanByAssetId(selectAssetsBean.getAssetID()));
+                }
+            }).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<AssetBean>() {
+                        @Override
+                        public void accept(AssetBean bean) throws Exception {
+                            selectAssetsBean = bean;
+                            mPresenter.init(selectAssetsBean);
+                            initImageView();
+                        }
+                    });
+        }
+    }
+
+    private boolean imageLoad;
+
+    private void initImageView() {
+        Glide.with(this).load(new ImageUrlPersenter().getAssetListUrl(selectAssetsBean.getHeadimg())).error(R.mipmap.img_defaut).listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                imageLoad = true;
+                binding.bigImage.setImageDrawable(resource);
+                return false;
+            }
+        }).into(binding.createAssetImg);
     }
 
     @Override
@@ -122,6 +176,22 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
             assetOperateBind.assetDetailBottomDispose.setOnClickListener(this);
             assetOperateBind.assetDetailBottomCopy.setOnClickListener(this);
         }
+        binding.createAssetImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (imageLoad) {
+                    binding.bigImage.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        binding.bigImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (binding.bigImage.getVisibility() == View.VISIBLE) {
+                    binding.bigImage.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -213,12 +283,16 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
 
     @Override
     public void showCustomParam(List<AssetInfoBean> infoBeans) {
+        binding.dryParamLayout.removeAllViews();
         if (null != infoBeans && infoBeans.size() > 0) {
             for (AssetInfoBean assetInfoBean : infoBeans) {
                 View view = View.inflate(this, R.layout.custom_param_layout, null);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
                 TextView leftTv = view.findViewById(R.id.custom_param_key);
+                EditText rightTV = view.findViewById(R.id.custom_param_value);
                 leftTv.setText(assetInfoBean.getInfoName());
+                rightTV.setText(assetInfoBean.getInfoValue());
+                rightTV.setEnabled(false);
                 view.setLayoutParams(layoutParams);
                 binding.dryParamLayout.addView(view);
             }

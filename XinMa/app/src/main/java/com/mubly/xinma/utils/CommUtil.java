@@ -705,7 +705,7 @@ public class CommUtil {
         return decimalFormat.format(Double.parseDouble(str));
     }
 
-
+    //软键盘弹出
     public static void showKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) view.getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -714,7 +714,7 @@ public class CommUtil {
             imm.showSoftInput(view, 0);
         }
     }
-
+    //软键盘隐藏
     public static void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) view.getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -67,4 +67,8 @@ public class AssetsDetialPresenter extends BasePresenter<IAssetsDetialView> {
             }
         });
     }
+
+    public String getdepStaff(String dep,String staf) {
+      return dep+"-"+staf;
+    }
 }

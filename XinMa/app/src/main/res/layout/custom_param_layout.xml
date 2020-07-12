@@ -27,7 +27,7 @@
         android:maxLines="1"
         android:gravity="center_vertical|right"
         android:background="@null"
-        android:layout_marginRight="@dimen/size_50dp"
+        android:layout_marginRight="@dimen/size_40dp"
         tools:text="参数value"
         android:layout_marginLeft="@dimen/size_16dp"
         android:layout_height="match_parent">
@@ -36,9 +36,8 @@
     <ImageView
         android:id="@+id/custom_param_arrow_icon"
         android:layout_width="@dimen/size_20dp"
-        android:visibility="gone"
         android:src="@mipmap/arrow_right_gray"
-        android:layout_marginRight="@dimen/size_20dp"
+        android:layout_marginRight="@dimen/size_16dp"
         android:padding="@dimen/size_2dp"
         android:layout_gravity="right|center_vertical"
         android:layout_height="@dimen/size_20dp">

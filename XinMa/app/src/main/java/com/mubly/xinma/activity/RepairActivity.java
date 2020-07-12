@@ -164,8 +164,8 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.repairDepartTv.setText(groupBean.getDepart());
-                        binding.repairStaffTv.setText(staffBean.getStaff());
+                        binding.repairDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+//                        binding.repairStaffTv.setText(staffBean.getStaff());
                     }
                 });
             }
@@ -176,6 +176,23 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
                 Fee = obj;
             }
         });
+        binding.repairFeeTv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String eGuaranteed = binding.repairFeeTv.getText().toString();
+                double dGuaranteed = Double.valueOf(TextUtils.isEmpty(eGuaranteed) ? "0.00" : eGuaranteed);
+                if (b) {
+                    if (dGuaranteed == 0) {
+                        binding.repairFeeTv.setText("");
+                    }
+                } else {
+                    if (TextUtils.isEmpty(eGuaranteed)) {
+                        binding.repairFeeTv.setText("0.00");
+                    }
+                }
+            }
+        });
+
         EditViewUtil.EditDatachangeLister(binding.repairAddressTv, new CallBack<String>() {
             @Override
             public void callBack(String obj) {

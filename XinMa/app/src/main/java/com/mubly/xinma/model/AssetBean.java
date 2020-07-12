@@ -228,7 +228,7 @@ public class AssetBean implements Serializable {
     }
 
     public String getDepart() {
-        return StringUtils.notNull2(Depart);
+        return StringUtils.notNull(Depart);
     }
 
     public void setDepart(String Depart) {
@@ -236,7 +236,7 @@ public class AssetBean implements Serializable {
     }
 
     public String getStaff() {
-        return Staff;
+        return StringUtils.notNull(Staff);
     }
 
     public void setStaff(String Staff) {
@@ -310,6 +310,10 @@ public class AssetBean implements Serializable {
             label = "处置方式";
         }
         return label;
+    }
+
+    public String getDepartStaff() {
+        return getDepart() + "-" + getStaff();
     }
 
     public void setStatusName(String StatusName) {

@@ -46,10 +46,10 @@ public class AssetDataBean extends BaseModel {
 
     public static void assetsCreate(String assetsId, String headimg, String assetNo, String assetName, String assetModel, String assetUnit
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
-            , String Staff, String seat, String Category, String CategoryId, String param, CallBack<Boolean> callBack) {
+            , String Staff, String seat, String Category, String CategoryId, String param, CallBack<AssetsCreateRes> callBack) {
         OkGo.<AssetsCreateRes>post(URLConstant.ASSET_DATA_UpdateAsset_URL)
                 .params("Headimg", StringUtils.notNull(headimg))
-                .params("AssetID",StringUtils.notNull(assetsId))
+                .params("AssetID", StringUtils.notNull(assetsId))
                 .params("AssetNo", StringUtils.notNull(assetNo))
                 .params("AssetName", StringUtils.notNull(assetName))
                 .params("CategoryID", StringUtils.notNull(CategoryId))
@@ -83,6 +83,7 @@ public class AssetDataBean extends BaseModel {
                                     assetBean.setExpireDate(response.body().getAsset().get(0).getExpireDate());
                                     assetBean.setHeadimg(headimg);
                                     assetBean.setAssetNo(response.body().getAsset().get(0).getAssetNo());
+                                    assetBean.setDepreciated(response.body().getAsset().get(0).getDepreciated());
                                     assetBean.setAssetName(assetName);
                                     assetBean.setCategory(Category);
                                     assetBean.setCategoryID(CategoryId);
@@ -99,13 +100,8 @@ public class AssetDataBean extends BaseModel {
                                     assetBean.setStatusName("闲置");
                                     assetBean.setCreateTime(CommUtil.getCurrentTime());
                                     XinMaDatabase.getInstance().assetBeanDao().insert(assetBean);
-                                    callBack.callBack(true);
-                                } else if (response.body().getCode() == 0) {
-
-                                } else {
-                                    CommUtil.ToastU.showToast("资产数据获取失败");
+                                    callBack.callBack(response.body());
                                 }
-
                             }
                         }).start();
 

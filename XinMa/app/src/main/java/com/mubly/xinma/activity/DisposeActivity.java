@@ -175,8 +175,8 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.disposeDepartTv.setText(groupBean.getDepart());
-                        binding.disposeStaffTv.setText(staffBean.getStaff());
+                        binding.disposeDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+//                        binding.disposeStaffTv.setText(staffBean.getStaff());
                     }
                 });
             }
