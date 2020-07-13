@@ -45,4 +45,9 @@ public class ChangeListActivity extends BaseActivity<ChangeListPresenter, IOpera
         binding.changeLogRv.setLayoutManager(new LinearLayoutManager(this));
         binding.changeLogRv.setAdapter(adapter);
     }
+
+    @Override
+    public void toDesPage(String OperateID, String type) {
+
+    }
 }

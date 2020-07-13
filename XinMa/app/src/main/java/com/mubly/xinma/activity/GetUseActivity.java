@@ -32,6 +32,7 @@ import com.mubly.xinma.iview.IGetUseVIew;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetParam;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.resbean.OperateDataRes;
@@ -65,6 +66,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     private String Remark;
     private JSONArray AssetIDList = new JSONArray();
     private AssetBean operaAsset = null;
+    private String operateID;
 
     @Override
     public void initView() {
@@ -72,11 +74,23 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
         setRightTv("保存");
         binding.setPersent(mPresenter);
         binding.setLifecycleOwner(this);
+        if (null != operateID) {
+            mPresenter.setHideDelect(true);
+        }
         mPresenter.init();
-        if (null!=operaAsset){
+        if (null != operaAsset) {
             initSelectAssetsBean();
             selectAssetsBean.getSelectBean().add(operaAsset);
             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
+        if (null != operateID) {//日志页面进入的
+            setRightTvEnable(false);
+            binding.bottomLayout.setVisibility(View.GONE);
+            binding.getUseTimeLayout.setEnabled(false);
+            binding.getUseDepartLayout.setEnabled(false);
+            binding.getUseAddressTv.setEnabled(false);
+            binding.getUseReasonTv.setEnabled(false);
+            mPresenter.gainOperateData(operateID);
         }
     }
 
@@ -88,7 +102,8 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_get_use);
-        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operaAsset = (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operateID = getIntent().getStringExtra("operateId");
     }
 
     @Override
@@ -108,9 +123,17 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     }
 
     @Override
+    public void showOperateLogInfo(OperateBean operateBean) {
+        mPresenter.getCreatDate().setValue(operateBean.getProcessTime());
+        binding.getUseDepartTv.setText(operateBean.getDepart() + "-" + operateBean.getStaff());
+        binding.getUseAddressTv.setText(operateBean.getSeat());
+        binding.getUseReasonTv.setText(operateBean.getRemark());
+    }
+
+    @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart) ) {
+        if (TextUtils.isEmpty(Depart)) {
             CommUtil.ToastU.showToast("请先选择资产");
             return;
         }
@@ -184,7 +207,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.getUseDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+                        binding.getUseDepartTv.setText(groupBean.getDepart() + "-" + staffBean.getStaff());
 //                        binding.getUseStaffTv.setText(staffBean.getStaff());
                     }
                 });

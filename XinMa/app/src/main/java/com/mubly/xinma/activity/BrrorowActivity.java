@@ -30,6 +30,7 @@ import com.mubly.xinma.iview.IBrrorowView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetParam;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.resbean.OperateDataRes;
@@ -59,19 +60,33 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
     private String Seat;
 
     private String Remark;
-    private JSONArray AssetIDList=new JSONArray();
+    private JSONArray AssetIDList = new JSONArray();
     private AssetBean operaAsset = null;
+    private String operateID;
+
     @Override
     public void initView() {
         setTitle(R.string.brrorow_name);
         setRightTv("保存");
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
+        if (null != operateID) {
+            mPresenter.setHideDelect(true);
+        }
         mPresenter.init();
-        if (null!=operaAsset){
+        if (null != operaAsset) {
             initSelectAssetsBean();
             selectAssetsBean.getSelectBean().add(operaAsset);
             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
+        if (null != operateID) {//日志页面进入的
+            setRightTvEnable(false);
+            binding.bottomLayout.setVisibility(View.GONE);
+            binding.brrorowTimeLayou.setEnabled(false);
+            binding.brrorowDepartLayout.setEnabled(false);
+            binding.brrorowAddressTv.setEnabled(false);
+            binding.brrorowReasonTv.setEnabled(false);
+            mPresenter.gainOperateData(operateID);
         }
     }
 
@@ -86,11 +101,11 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
             CommUtil.ToastU.showToast("请先选择资产");
             return;
         } else {
-            AssetIDList=new JSONArray();
+            AssetIDList = new JSONArray();
             for (AssetBean bean : selectAssetsBean.getSelectBean()) {
-                JSONObject object=new JSONObject();
+                JSONObject object = new JSONObject();
                 try {
-                    object.put("AssetID",bean.getAssetID());
+                    object.put("AssetID", bean.getAssetID());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -114,7 +129,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
-                      closeCurrentAct();
+                        closeCurrentAct();
                     }
                 }).start();
             }
@@ -129,7 +144,8 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_brrorow);
-        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operaAsset = (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operateID = getIntent().getStringExtra("operateId");
     }
 
     @Override
@@ -163,7 +179,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.brrorowDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+                        binding.brrorowDepartTv.setText(groupBean.getDepart() + "-" + staffBean.getStaff());
 //                        binding.brrorowStaffTv.setText(staffBean.getStaff());
                     }
                 });
@@ -198,6 +214,15 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
         binding.brrorowRv.setLayoutManager(new LinearLayoutManager(this));
         binding.brrorowRv.setAdapter(adapter);
     }
+
+    @Override
+    public void showOperateLogInfo(OperateBean operateBean) {
+        mPresenter.getCreatDate().setValue(operateBean.getProcessTime());
+        binding.brrorowDepartTv.setText(operateBean.getDepart() + "-" + operateBean.getStaff());
+        binding.brrorowAddressTv.setText(operateBean.getSeat());
+        binding.brrorowReasonTv.setText(operateBean.getRemark());
+    }
+
     @Override
     public void forScanResult(String code) {
         super.forScanResult(code);
@@ -225,6 +250,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
             selectAssetsBean.setSelectBean(assetBeans);
         }
     }
+
     @Override
     public boolean isTimeSelectInit() {
         return true;

@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class OperateData extends BaseModel {
-    private List<OperateBean>Operate;
-    private List<ProcessBean>Process;
+    private List<OperateBean> Operate;
+    private List<ProcessBean> Process;
 
 
     public List<OperateBean> getOperate() {
@@ -78,4 +78,39 @@ public class OperateData extends BaseModel {
                     }
                 });
     }
+
+    public static void getOperateLogList(String assetId, CallBack<OperateData> callBack) {
+        OkGo.<OperateData>post(URLConstant.API_Process_SelectProcess_URL)
+                .params("AssetID",assetId)
+                .execute(new JsonCallback<OperateData>() {
+                    @Override
+                    public void onSuccess(Response<OperateData> response) {
+                        callBack.callBack(response.body());
+                    }
+
+                    @Override
+                    public void onError(Response<OperateData> response) {
+                        super.onError(response);
+                        CommUtil.ToastU.showToast("网络连接异常");
+                    }
+                });
+    }
+
+    public static void getOperateAssetInfo(String operateID, CallBack<OperateData> callBack) {
+        OkGo.<OperateData>post(URLConstant.API_Process_SelectOperate_URL)
+                .params("OperateID",operateID)
+                .execute(new JsonCallback<OperateData>() {
+                    @Override
+                    public void onSuccess(Response<OperateData> response) {
+                        callBack.callBack(response.body());
+                    }
+
+                    @Override
+                    public void onError(Response<OperateData> response) {
+                        super.onError(response);
+                        CommUtil.ToastU.showToast("网络连接异常");
+                    }
+                });
+    }
+
 }

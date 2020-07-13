@@ -1,5 +1,7 @@
 package com.mubly.xinma.utils;
 
+import android.text.TextUtils;
+
 import java.util.regex.Pattern;
 
 /**
@@ -23,7 +25,7 @@ public class StringUtils {
     }
 
     public static String notNull2(String str){
-        return str == null ? "--" : str;
+        return TextUtils.isEmpty(str) ? "--" : str;
     }
 
     public static String notNullf0(String str){

@@ -115,15 +115,17 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
     private void initStatus() {
         switch (from) {
             case GET_USE_REQUEST_CODE://领用
-            case DISPOSE_REQUEST_CODE://处置
             case BRROROW_REQUEST_CODE://借用
                 statusData = new String[]{"1"};
+                break;
+            case DISPOSE_REQUEST_CODE://处置
+                statusData = new String[]{"1", "3","8"};
                 break;
             case RETURN_REQUEST_CODE://归还
                 statusData = new String[]{"3", "5", "6"};
                 break;
             case REPAIR_REQUEST_CODE://维修
-                statusData = new String[]{"1", "3", "5"};
+                statusData = new String[]{"1", "3"};
                 break;
 
             case CHECK_CREATE_REQUEST_CODE://盘点

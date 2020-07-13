@@ -6,7 +6,11 @@ import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IChangeView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.ChangeDataBean;
+import com.mubly.xinma.model.OperateData;
+import com.mubly.xinma.model.ProcessBean;
 import com.mubly.xinma.utils.CommUtil;
+
+import java.util.List;
 
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
@@ -53,5 +57,33 @@ public class ChangePresenter extends BasePresenter<IChangeView> {
                         });
             }
         });
+    }
+
+
+    public void gainOperateData(String operateID) {
+        OperateData.getOperateAssetInfo(operateID, new CallBack<OperateData>() {
+            @Override
+            public void callBack(OperateData obj) {
+                if (obj.getCode() == 1) {
+                    if (obj.getOperate() != null && obj.getOperate().size() > 0) {
+                        getMvpView().showOperateLogInfo(obj.getOperate().get(0));
+                    }
+                    if (null != obj.getProcess() && obj.getProcess().size() > 0) {
+                        makeAssetBeanData(obj.getProcess());
+                    }
+                } else {
+                    getMvpView().checkNetCode(obj.getCode(), obj.getMsg());
+                }
+            }
+        });
+    }
+
+    private void makeAssetBeanData(List<ProcessBean> process) {
+            AssetBean assetBean = new AssetBean();
+            assetBean.setHeadimg(process.get(0).getHeadimg());
+            assetBean.setAssetModel(process.get(0).getAssetModel());
+            assetBean.setAssetName(process.get(0).getAssetName());
+            assetBean.setAssetNo(process.get(0).getAssetNo());
+            assetBean.setAssetID(process.get(0).getAssetID());
     }
 }

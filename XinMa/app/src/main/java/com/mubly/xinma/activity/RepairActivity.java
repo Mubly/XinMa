@@ -30,6 +30,7 @@ import com.mubly.xinma.iview.IRepairView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetParam;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.resbean.OperateDataRes;
@@ -56,22 +57,46 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
 
     private String Staff;
     private String Seat;
-    private String Fee="0.00";
+    private String Fee = "0.00";
     private String Remark;
-    private JSONArray AssetIDList=new JSONArray();
+    private JSONArray AssetIDList = new JSONArray();
     private AssetBean operaAsset = null;
+    private String operateID;
+
     @Override
     public void initView() {
         setTitle(R.string.repair_name);
         setRightTv("保存");
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
+        if (null != operateID) {
+            mPresenter.setHideDelect(true);
+        }
         mPresenter.init();
-        if (null!=operaAsset){
+        if (null != operaAsset) {//资产详情页通过操作进入的
             initSelectAssetsBean();
             selectAssetsBean.getSelectBean().add(operaAsset);
             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
         }
+        if (null != operateID) {//日志页面进入的
+            setRightTvEnable(false);
+            binding.bottomLayout.setVisibility(View.GONE);
+            binding.repairTimeLayout.setEnabled(false);
+            binding.repairDepartLayout.setEnabled(false);
+            binding.repairFeeTv.setEnabled(false);
+            binding.repairAddressTv.setEnabled(false);
+            binding.repairReasonEt.setEnabled(false);
+            mPresenter.gainOperateData(operateID);
+        }
+    }
+
+    @Override
+    public void showOperateLogInfo(OperateBean operateBean) {
+        mPresenter.getCreatDate().setValue(operateBean.getProcessTime());
+        binding.repairDepartTv.setText(operateBean.getDepart() + "-" + operateBean.getStaff());
+        binding.repairFeeTv.setText(operateBean.getFee());
+        binding.repairAddressTv.setText(operateBean.getSeat());
+        binding.repairReasonEt.setText(operateBean.getRemark());
     }
 
     @Override
@@ -82,7 +107,8 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repair);
-        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operaAsset = (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operateID = getIntent().getStringExtra("operateId");
     }
 
     @Override
@@ -96,11 +122,11 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
             CommUtil.ToastU.showToast("请先选择资产");
             return;
         } else {
-            AssetIDList=new JSONArray();
+            AssetIDList = new JSONArray();
             for (AssetBean bean : selectAssetsBean.getSelectBean()) {
-                JSONObject object=new JSONObject();
+                JSONObject object = new JSONObject();
                 try {
-                    object.put("AssetID",bean.getAssetID());
+                    object.put("AssetID", bean.getAssetID());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -124,7 +150,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
                             bean.setLastProcessTime(mPresenter.getCreatDate().getValue());
                             XinMaDatabase.getInstance().assetBeanDao().update(bean);
                         }
-                      closeCurrentAct();
+                        closeCurrentAct();
                     }
                 }).start();
             }
@@ -164,7 +190,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.repairDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+                        binding.repairDepartTv.setText(groupBean.getDepart() + "-" + staffBean.getStaff());
 //                        binding.repairStaffTv.setText(staffBean.getStaff());
                     }
                 });
@@ -213,6 +239,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
         binding.repairRv.setAdapter(adapter);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -221,6 +248,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
         }
     }
+
     @Override
     public void forScanResult(String code) {
         super.forScanResult(code);
@@ -248,6 +276,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
             selectAssetsBean.setSelectBean(assetBeans);
         }
     }
+
     @Override
     public boolean isTimeSelectInit() {
         return true;

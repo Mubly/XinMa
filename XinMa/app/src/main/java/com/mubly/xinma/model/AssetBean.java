@@ -228,7 +228,7 @@ public class AssetBean implements Serializable {
     }
 
     public String getDepart() {
-        return StringUtils.notNull(Depart);
+        return StringUtils.notNull2(Depart);
     }
 
     public void setDepart(String Depart) {
@@ -236,7 +236,7 @@ public class AssetBean implements Serializable {
     }
 
     public String getStaff() {
-        return StringUtils.notNull(Staff);
+        return StringUtils.notNull2(Staff);
     }
 
     public void setStaff(String Staff) {

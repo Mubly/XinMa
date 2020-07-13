@@ -23,7 +23,7 @@ public class CheckCreatePresenter extends BaseOperatPresenter<ICheckCreateView> 
 
     @Override
     public void init() {
-        adapter = new AssetsListCallBackAdapter(selectDataList);
+        adapter = new AssetsListCallBackAdapter(selectDataList,false);
         getMvpView().showRv(adapter);
     }
 
@@ -46,5 +46,10 @@ public class CheckCreatePresenter extends BaseOperatPresenter<ICheckCreateView> 
         selectDataList.clear();
         selectDataList.addAll(newDataList);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void gainOperateData(String operateID) {
+
     }
 }

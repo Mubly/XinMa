@@ -128,7 +128,44 @@
 
             </View>
         </FrameLayout>
+        <FrameLayout
+            android:id="@+id/asset_detail_bottom_return"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/size_20dp"
+                    android:layout_height="@dimen/size_20dp"
+                    android:src="@mipmap/menu_return"></ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_5dp"
+                    android:text="归还"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/size_10sp">
+
+                </TextView>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_gravity="top"
+                android:background="@color/clr_gray_line">
+
+            </View>
+        </FrameLayout>
         <FrameLayout
             android:id="@+id/asset_detail_bottom_rapir"
             android:layout_width="wrap_content"

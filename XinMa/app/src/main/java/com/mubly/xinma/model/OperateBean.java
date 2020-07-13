@@ -54,7 +54,7 @@ public class OperateBean {
     }
 
     public String getDepart() {
-        return Depart;
+        return StringUtils.notNull(Depart);
     }
 
     public void setDepart(String depart) {
@@ -62,7 +62,7 @@ public class OperateBean {
     }
 
     public String getStaff() {
-        return Staff;
+        return StringUtils.notNull(Staff);
     }
 
     public void setStaff(String staff) {
@@ -70,7 +70,7 @@ public class OperateBean {
     }
 
     public String getSeat() {
-        return Seat;
+        return StringUtils.notNull2(Seat);
     }
 
     public void setSeat(String seat) {
@@ -86,7 +86,7 @@ public class OperateBean {
     }
 
     public String getRemark() {
-        return Remark;
+        return StringUtils.notNull2(Remark);
     }
 
     public void setRemark(String remark) {

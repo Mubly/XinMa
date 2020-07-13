@@ -4,16 +4,20 @@ import com.mubly.xinma.utils.StringUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "processBean")
-public class ProcessBean {
+public class ProcessBean implements Serializable {
     @NotNull
     @PrimaryKey
     private String ProcessID;
     private String AssetID;
     private String AssetNo;
+    private String AssetModel;
+    private String AssetName;
     private String OperateID;
     private String ProcessCate;
     private String ProcessTime;
@@ -23,6 +27,32 @@ public class ProcessBean {
     private String Fee;
     private String Remark;
     private String CreateTime;
+    private String Headimg;
+
+
+    public String getAssetModel() {
+        return AssetModel;
+    }
+
+    public void setAssetModel(String assetModel) {
+        AssetModel = assetModel;
+    }
+
+    public String getAssetName() {
+        return AssetName;
+    }
+
+    public void setAssetName(String assetName) {
+        AssetName = assetName;
+    }
+
+    public String getHeadimg() {
+        return Headimg;
+    }
+
+    public void setHeadimg(String headimg) {
+        Headimg = headimg;
+    }
 
     public String getOperateID() {
         return OperateID;

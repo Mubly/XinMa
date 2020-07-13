@@ -29,6 +29,7 @@ import com.mubly.xinma.iview.IDisposeView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetParam;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.PropertyBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
@@ -37,6 +38,7 @@ import com.mubly.xinma.presenter.DisposePresenter;
 import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.DialogUtils;
 import com.mubly.xinma.utils.EditViewUtil;
+import com.mubly.xinma.utils.StringUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,25 +67,41 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     private String Remark;
     private JSONArray AssetIDList = new JSONArray();
     private AssetBean operaAsset = null;
+    private String operateID;
+
     @Override
     public void initView() {
         setTitle(R.string.dispose_name);
         setRightTv("保存");
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
+        if (null != operateID) {
+            mPresenter.setHideDelect(true);
+        } else {
+            initDisopseType();//初始化处置方式
+        }
         mPresenter.init();
-        initDisopseType();
-        if (null!=operaAsset){
+        if (null != operaAsset) {//资产详情页通过操作进入的
             initSelectAssetsBean();
             selectAssetsBean.getSelectBean().add(operaAsset);
             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
+        if (null != operateID) {//日志页面进入的
+            setRightTvEnable(false);
+            binding.bottomLayout.setVisibility(View.GONE);
+            binding.disposeTimeLayout.setEnabled(false);
+            binding.disposeDepartLayout.setEnabled(false);
+            binding.disposeFeeTv.setEnabled(false);
+            binding.disposeTypeLayout.setEnabled(false);
+            binding.disposeReasonEt.setEnabled(false);
+            mPresenter.gainOperateData(operateID);
         }
     }
 
     @Override
     public void onRightClickEvent(TextView rightTv) {
         super.onRightClickEvent(rightTv);
-        if (TextUtils.isEmpty(Depart) ) {
+        if (TextUtils.isEmpty(Depart)) {
             CommUtil.ToastU.showToast("请完善处置信息");
             return;
         }
@@ -134,7 +152,8 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dispose);
-        operaAsset= (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operaAsset = (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operateID = getIntent().getStringExtra("operateId");
     }
 
     @Override
@@ -144,13 +163,13 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
             @Override
             public void onFocusChange(View view, boolean b) {
                 String eGuaranteed = binding.disposeFeeTv.getText().toString();
-                double dGuaranteed = Double.valueOf(TextUtils.isEmpty(eGuaranteed)?"0.00":eGuaranteed);
-                if (b){
-                    if (dGuaranteed==0){
+                double dGuaranteed = Double.valueOf(TextUtils.isEmpty(eGuaranteed) ? "0.00" : eGuaranteed);
+                if (b) {
+                    if (dGuaranteed == 0) {
                         binding.disposeFeeTv.setText("");
                     }
-                }else {
-                    if (TextUtils.isEmpty(eGuaranteed)){
+                } else {
+                    if (TextUtils.isEmpty(eGuaranteed)) {
                         binding.disposeFeeTv.setText("0.00");
                     }
                 }
@@ -175,7 +194,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.disposeDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+                        binding.disposeDepartTv.setText(groupBean.getDepart() + "-" + staffBean.getStaff());
 //                        binding.disposeStaffTv.setText(staffBean.getStaff());
                     }
                 });
@@ -225,6 +244,16 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
         binding.disposeRv.setLayoutManager(new LinearLayoutManager(this));
         binding.disposeRv.setAdapter(adapter);
     }
+
+    @Override
+    public void showOperateLogInfo(OperateBean operateBean) {
+        mPresenter.getCreatDate().setValue(operateBean.getProcessTime());
+        binding.disposeDepartTv.setText(operateBean.getDepart() + "-" + operateBean.getStaff());
+        binding.disposeTypeTv.setText(operateBean.getSeat());
+        binding.disposeFeeTv.setText(operateBean.getFee());
+        binding.disposeReasonEt.setText(operateBean.getRemark());
+    }
+
     @Override
     public void forScanResult(String code) {
         super.forScanResult(code);
@@ -252,6 +281,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
             selectAssetsBean.setSelectBean(assetBeans);
         }
     }
+
     @Override
     public boolean isTimeSelectInit() {
         return true;
@@ -284,7 +314,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
                 .subscribe(new Consumer<List<PropertyBean>>() {
                     @Override
                     public void accept(List<PropertyBean> propertyBeans) throws Exception {
-                        if (propertyBeans.size() > 0){
+                        if (propertyBeans.size() > 0) {
                             binding.disposeTypeTv.setText(propertyBeans.get(0).getProperty());
                         }
 

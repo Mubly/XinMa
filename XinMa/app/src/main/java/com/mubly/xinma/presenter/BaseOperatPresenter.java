@@ -19,6 +19,8 @@ public abstract class BaseOperatPresenter<V extends BaseMvpView> extends BasePre
 
     public abstract void notifyDataChange(List<AssetBean> newDataList);
 
+    public abstract void gainOperateData(String operateID);
+
     //领用操作
     public void operate(String ProcessCate, String ProcessTime, String Depart, String Staff, String Seat, String Remark
             , String AssetID, String Fee, CallBack<OperateDataRes> callBack) {

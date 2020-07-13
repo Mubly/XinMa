@@ -17,6 +17,7 @@ import com.mubly.xinma.databinding.ActivityChangeBinding;
 import com.mubly.xinma.iview.IChangeView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.presenter.ChangePresenter;
 import com.mubly.xinma.presenter.CreatePresenter;
@@ -26,18 +27,33 @@ import com.mubly.xinma.utils.EditViewUtil;
 public class ChangeActivity extends BaseOperateActivity<ChangePresenter, IChangeView> implements IChangeView {
     ActivityChangeBinding binding = null;
     private AssetBean changeAsset;
+    private String operateID;
 
     @Override
     public void initView() {
         setBackBtnEnable(true);
         setTitle("变更");
         setRightTv("保存");
-        mPresenter.init();
-        mPresenter.getDepartStaff().setValue(changeAsset.getDepart()+"-"+changeAsset.getStaff());
+        if (null != operateID&&null==changeAsset) {
+            changeAsset = new AssetBean();
+        }else {
+            mPresenter.init();
+            mPresenter.getDepartStaff().setValue(changeAsset.getDepart() + "-" + changeAsset.getStaff());
+        }
         binding.setBean(changeAsset);
         binding.setImagePresenter(new ImageUrlPersenter());
         binding.setVm(mPresenter);
         binding.setLifecycleOwner(this);
+
+        if (null != operateID) {//日志页面进入的
+            setRightTvEnable(false);
+            binding.changeHideForLogLayout.setVisibility(View.GONE);
+            binding.departChangeFeeDiffLayout.setVisibility(View.VISIBLE);
+            binding.changeTime.setEnabled(false);
+            binding.departChange.setEnabled(false);
+            binding.changeNewSeat.setEnabled(false);
+            mPresenter.gainOperateData(operateID);
+        }
     }
 
     @Override
@@ -109,6 +125,7 @@ public class ChangeActivity extends BaseOperateActivity<ChangePresenter, IChange
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change);
         changeAsset = (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operateID = getIntent().getStringExtra("operateId");
     }
 
     @Override
@@ -129,5 +146,21 @@ public class ChangeActivity extends BaseOperateActivity<ChangePresenter, IChange
     @Override
     public boolean isGroupSelectInit() {
         return true;
+    }
+
+    @Override
+    public void showOperateLogInfo(OperateBean operateBean) {
+        mPresenter.getChangeTime().setValue(operateBean.getProcessTime());
+        mPresenter.getDepartStaff().setValue(operateBean.getDepart() + "-" + operateBean.getStaff());
+        changeAsset.setSeat(operateBean.getSeat());
+    }
+
+    @Override
+    public void showOperateInfo(AssetBean assetBean) {
+        changeAsset.setHeadimg(assetBean.getHeadimg());
+        changeAsset.setAssetModel(assetBean.getAssetModel());
+        changeAsset.setAssetName(assetBean.getAssetName());
+        changeAsset.setAssetNo(assetBean.getAssetNo());
+        changeAsset.setAssetID(assetBean.getAssetID());
     }
 }

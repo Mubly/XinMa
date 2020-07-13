@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "08eddd991473e092af6de4442967957d",
+    "identityHash": "739cead0b6649bb416be77163f023091",
     "entities": [
       {
         "tableName": "asset",
@@ -574,7 +574,7 @@
       },
       {
         "tableName": "processBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ProcessID` TEXT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `OperateID` TEXT, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, `CreateTime` TEXT, PRIMARY KEY(`ProcessID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ProcessID` TEXT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `AssetModel` TEXT, `AssetName` TEXT, `OperateID` TEXT, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, `CreateTime` TEXT, `Headimg` TEXT, PRIMARY KEY(`ProcessID`))",
         "fields": [
           {
             "fieldPath": "ProcessID",
@@ -591,6 +591,18 @@
           {
             "fieldPath": "AssetNo",
             "columnName": "AssetNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetModel",
+            "columnName": "AssetModel",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "AssetName",
+            "columnName": "AssetName",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -645,6 +657,12 @@
           {
             "fieldPath": "CreateTime",
             "columnName": "CreateTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Headimg",
+            "columnName": "Headimg",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -767,7 +785,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"08eddd991473e092af6de4442967957d\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"739cead0b6649bb416be77163f023091\")"
     ]
   }
 }

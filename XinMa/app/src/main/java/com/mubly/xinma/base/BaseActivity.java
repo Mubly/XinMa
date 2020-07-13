@@ -245,6 +245,10 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends BaseMvp
         rightTv.setText(rightStr);
     }
 
+    public void setRightTvEnable(boolean enable) {
+        rightTv.setVisibility(enable?View.VISIBLE:View.GONE);
+    }
+
     public void onRightClickEvent(TextView rightTv) {
     }
 

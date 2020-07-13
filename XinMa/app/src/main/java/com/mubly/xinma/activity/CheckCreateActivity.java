@@ -26,6 +26,7 @@ import com.mubly.xinma.iview.ICheckCreateView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CheckBean;
 import com.mubly.xinma.model.CheckData;
+import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.presenter.CheckCreatePresenter;
 import com.mubly.xinma.utils.CommUtil;
@@ -113,6 +114,11 @@ public class CheckCreateActivity extends BaseActivity<CheckCreatePresenter, IChe
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.checkOrderRv.setLayoutManager(new LinearLayoutManager(this));
         binding.checkOrderRv.setAdapter(adapter);
+    }
+
+    @Override
+    public void showOperateLogInfo(OperateBean operateBean) {
+
     }
 
     @Override

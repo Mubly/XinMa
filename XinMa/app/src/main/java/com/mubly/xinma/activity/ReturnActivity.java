@@ -31,6 +31,7 @@ import com.mubly.xinma.iview.IReturnView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.AssetParam;
 import com.mubly.xinma.model.GroupBean;
+import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.PropertyBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.model.StaffBean;
@@ -62,9 +63,10 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
 
     private String Staff;
     private String Seat = "";
-
+    private AssetBean operaAsset = null;
     private String Remark = "";
     private JSONArray AssetIDList = new JSONArray();
+    private String operateID;
 
     @Override
     protected ReturnPresenter createPresenter() {
@@ -77,10 +79,27 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         setRightTv("保存");
         binding.setPresenter(mPresenter);
         binding.setLifecycleOwner(this);
+        if (null != operateID) {
+            mPresenter.setHideDelect(true);
+        } else {
+            initReturnStatus();
+        }
         mPresenter.init();
-        initReturnStatus();
 
-
+        if (null != operaAsset) {
+            initSelectAssetsBean();
+            selectAssetsBean.getSelectBean().add(operaAsset);
+            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+        }
+        if (null != operateID) {//日志页面进入的
+            setRightTvEnable(false);
+            binding.bottomLayout.setVisibility(View.GONE);
+            binding.returnTimeLayout.setEnabled(false);
+            binding.returnDepartLayout.setEnabled(false);
+            binding.returnAddressTv.setEnabled(false);
+            binding.returnStatusLayout.setEnabled(false);
+            mPresenter.gainOperateData(operateID);
+        }
 
     }
 
@@ -151,7 +170,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
                         Depart = groupBean.getDepart();
                         Staff = staffBean.getStaff();
-                        binding.returnDepartTv.setText(groupBean.getDepart()+"-"+staffBean.getStaff());
+                        binding.returnDepartTv.setText(groupBean.getDepart() + "-" + staffBean.getStaff());
 //                        binding.returnStaffTv.setText(staffBean.getStaff());
                     }
                 });
@@ -174,6 +193,8 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     @Override
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_return);
+        operaAsset = (AssetBean) getIntent().getSerializableExtra("assetBean");
+        operateID = getIntent().getStringExtra("operateId");
     }
 
     @Override
@@ -199,6 +220,14 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.returnRv.setLayoutManager(new LinearLayoutManager(this));
         binding.returnRv.setAdapter(adapter);
+    }
+
+    @Override
+    public void showOperateLogInfo(OperateBean operateBean) {
+        mPresenter.getCreatDate().setValue(operateBean.getProcessTime());
+        binding.returnStatusTv.setText(operateBean.getRemark());
+        binding.returnAddressTv.setText(operateBean.getSeat());
+        binding.returnDepartTv.setText(operateBean.getDepart()+"-"+operateBean.getStaff());
     }
 
     @Override
@@ -262,7 +291,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                 .subscribe(new Consumer<List<PropertyBean>>() {
                     @Override
                     public void accept(List<PropertyBean> propertyBeans) throws Exception {
-                        if (propertyBeans.size() > 0){
+                        if (propertyBeans.size() > 0) {
                             binding.returnStatusTv.setText(propertyBeans.get(0).getProperty());
                         }
 

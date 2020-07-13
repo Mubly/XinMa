@@ -313,12 +313,12 @@
                                 android:id="@+id/return_status_tv"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:gravity="center_vertical|right"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_50dp"
+                                android:gravity="center_vertical|right"
+                                android:hint="请选择资产状况"
                                 android:textColor="@color/color_919191"
                                 android:textSize="@dimen/size_14sp"
-                                android:hint="请选择资产状况"
                                 tools:text="155876839755"></TextView>
 
                             <ImageView

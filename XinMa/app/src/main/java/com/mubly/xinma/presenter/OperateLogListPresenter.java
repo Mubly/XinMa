@@ -2,6 +2,7 @@ package com.mubly.xinma.presenter;
 
 import android.drm.ProcessedData;
 import android.graphics.Color;
+import android.view.View;
 
 import com.mubly.xinma.R;
 import com.mubly.xinma.adapter.SmartAdapter;
@@ -44,26 +45,37 @@ public class OperateLogListPresenter extends BasePresenter<IOperateLogListView> 
                 TimeLineView lineView = (TimeLineView) holder.getChildView(R.id.time_line_view);
                 if (data.getProcessCate().equals("维修")) {
                     lineView.setBgColor(Color.parseColor("#57bc6a"));
-                    holder.setTextColor(R.id.process_title_label,Color.parseColor("#57bc6a"));
+                    holder.setTextColor(R.id.process_title_label, Color.parseColor("#57bc6a"));
                 } else if (data.getProcessCate().equals("领用")) {
                     lineView.setBgColor(Color.parseColor("#d76b54"));
-                    holder.setTextColor(R.id.process_title_label,Color.parseColor("#d76b54"));
+                    holder.setTextColor(R.id.process_title_label, Color.parseColor("#d76b54"));
                 } else if (data.getProcessCate().equals("盘点")) {
                     lineView.setBgColor(Color.parseColor("#ec6e2c"));
-                    holder.setTextColor(R.id.process_title_label,Color.parseColor("#ec6e2c"));
+                    holder.setTextColor(R.id.process_title_label, Color.parseColor("#ec6e2c"));
                 } else if (data.getProcessCate().equals("变更")) {
                     lineView.setBgColor(Color.parseColor("#4dacf7"));
-                    holder.setTextColor(R.id.process_title_label,Color.parseColor("#4dacf7"));
-                }else if (data.getProcessCate().equals("借用")) {
+                    holder.setTextColor(R.id.process_title_label, Color.parseColor("#4dacf7"));
+                } else if (data.getProcessCate().equals("借用")) {
                     lineView.setBgColor(Color.parseColor("#00bfa5"));
-                    holder.setTextColor(R.id.process_title_label,Color.parseColor("#00bfa5"));
+                    holder.setTextColor(R.id.process_title_label, Color.parseColor("#00bfa5"));
                 } else if (data.getProcessCate().equals("归还")) {
                     lineView.setBgColor(Color.parseColor("#527BD7"));
-                    holder.setTextColor(R.id.process_title_label,Color.parseColor("#527BD7"));
-                }else {
+                    holder.setTextColor(R.id.process_title_label, Color.parseColor("#527BD7"));
+                } else {
                     lineView.setBgColor(Color.parseColor("#cccccc"));
-                    holder.setTextColor(R.id.process_title_label,Color.parseColor("#cccccc"));
+                    holder.setTextColor(R.id.process_title_label, Color.parseColor("#cccccc"));
                 }
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (data.getProcessCate().equals("变更")) {
+                            getMvpView().toChangeView(data);
+                        } else {
+                            getMvpView().toDesPage(data.getOperateID(), data.getProcessCate());
+                        }
+
+                    }
+                });
             }
         };
         getMvpView().showRv(adapter);
@@ -72,16 +84,32 @@ public class OperateLogListPresenter extends BasePresenter<IOperateLogListView> 
     }
 
     public void initData() {
-        OperateData.getOperateLog(new CallBack<OperateData>() {
+        OperateData.getOperateLogList(assetId, new CallBack<OperateData>() {
             @Override
             public void callBack(OperateData obj) {
                 if (obj.getCode() == 1) {
-                    dealData(obj);
+                    dataList.clear();
+                    if (null != obj.getProcess()) {
+                        dataList.addAll(obj.getProcess());
+                    }
+
+                    adapter.notifyDataSetChanged();
                 } else {
                     getMvpView().checkNetCode(obj.getCode(), obj.getMsg());
                 }
             }
         });
+
+//        OperateData.getOperateLog(new CallBack<OperateData>() {
+//            @Override
+//            public void callBack(OperateData obj) {
+//                if (obj.getCode() == 1) {
+//                    dealData(obj);
+//                } else {
+//                    getMvpView().checkNetCode(obj.getCode(), obj.getMsg());
+//                }
+//            }
+//        });
     }
 
     private void dealData(OperateData obj) {

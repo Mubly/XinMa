@@ -140,23 +140,32 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
     private void initBottomoperate() {
 
         if (TextUtils.isEmpty(selectAssetsBean.getStatus()) || null == assetOperateBind) return;
-//        assetOperateBind.assetDetailBottomCopy.setVisibility(View.GONE);
-        if (selectAssetsBean.getStatus().equals("1")) {
 
-        } else if (selectAssetsBean.getStatus().equals("3")) {
+        if (selectAssetsBean.getStatus().equals("1")) {//闲置
+            assetOperateBind.assetDetailBottomReturn.setVisibility(View.GONE);
+        } else if (selectAssetsBean.getStatus().equals("3")) {//在用
             assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
             assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
-        } else if (selectAssetsBean.getStatus().equals("5")) {
+            assetOperateBind.assetDetailBottomDispose.setVisibility(View.GONE);
+        } else if (selectAssetsBean.getStatus().equals("5")) {//借用
             assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
             assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
-        } else if (selectAssetsBean.getStatus().equals("6")) {
+            assetOperateBind.assetDetailBottomRapir.setVisibility(View.GONE);
+            assetOperateBind.assetDetailBottomDispose.setVisibility(View.GONE);
+        } else if (selectAssetsBean.getStatus().equals("6")) {//维修
             assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
             assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
             assetOperateBind.assetDetailBottomRapir.setVisibility(View.GONE);
         } else if (selectAssetsBean.getStatus().equals("8")) {
-            assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
-            assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
-            assetOperateBind.assetDetailBottomDispose.setVisibility(View.GONE);
+            setRightImgLayoutEnable(false);
+            assetOperateBind.getRoot().setVisibility(View.GONE);
+//            assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
+//            assetOperateBind.assetDetailBottomChange.setVisibility(View.GONE);
+//            assetOperateBind.assetDetailBottomReturn.setVisibility(View.GONE);
+//            assetOperateBind.assetDetailBottomRapir.setVisibility(View.GONE);
+//            assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
+//            assetOperateBind.assetDetailBottomDispose.setVisibility(View.GONE);
+//            assetOperateBind.assetDetailBottomCopy.setVisibility(View.GONE);
         }
     }
 
@@ -175,6 +184,7 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
             assetOperateBind.assetDetailBottomRapir.setOnClickListener(this);
             assetOperateBind.assetDetailBottomDispose.setOnClickListener(this);
             assetOperateBind.assetDetailBottomCopy.setOnClickListener(this);
+            assetOperateBind.assetDetailBottomReturn.setOnClickListener(this);
         }
         binding.createAssetImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,6 +228,10 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
                 break;
             case R.id.asset_detail_bottom_rapir:
                 toPeratePage(RepairActivity.class);
+                break;
+
+            case R.id.asset_detail_bottom_return:
+                toPeratePage(ReturnActivity.class);
                 break;
             case R.id.asset_detail_bottom_dispose:
                 toPeratePage(DisposeActivity.class);

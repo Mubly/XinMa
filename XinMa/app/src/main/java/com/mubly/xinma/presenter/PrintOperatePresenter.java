@@ -23,7 +23,7 @@ public class PrintOperatePresenter extends BasePresenter<IPrintOperateView> {
     }
 
     public void init() {
-        adapter = new AssetsListCallBackAdapter(selectDataList);
+        adapter = new AssetsListCallBackAdapter(selectDataList,false);
         getMvpView().showRv(adapter);
     }
 
