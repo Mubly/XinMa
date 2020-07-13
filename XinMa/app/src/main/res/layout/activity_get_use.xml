@@ -176,6 +176,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
+                                android:gravity="right|center_vertical"
                                 android:layout_marginRight="@dimen/size_50dp"
                                 android:textColor="@color/color_919191"
                                 android:hint="请选择领用部门/人员"

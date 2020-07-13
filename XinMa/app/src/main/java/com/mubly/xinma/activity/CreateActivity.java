@@ -2,6 +2,7 @@ package com.mubly.xinma.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -208,6 +209,12 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         String seat = binding.assetCreateSeat.getText().toString();
         String Category = selectCategory;//资产分类
         String CategoryId = selectCategoryId;//资产分类Id
+        String status = "1";
+        String statusName = "闲置";
+        if (type == 1 && null != selectAssetBean) {
+            status = selectAssetBean.getStatus();
+            statusName = selectAssetBean.getStatusName();
+        }
 
         if (TextUtils.isEmpty(assetName)) {
             CommUtil.ToastU.showToast("请输入资产名称");
@@ -220,7 +227,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         }
         gainCustomParam();
         mPresenter.createAssets(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original, depreciated, guaranteed, Depart
-                , Staff, seat, Category, CategoryId, paramArray.toString(), new CallBack<AssetsCreateRes>() {
+                , Staff, seat, Category, CategoryId, paramArray.toString(), status, statusName, new CallBack<AssetsCreateRes>() {
                     @Override
                     public void callBack(AssetsCreateRes obj) {
                         saveCategoryInfoData(obj.getAssetID());
@@ -258,7 +265,7 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
                 .isDragFrame(false)
                 .withAspectRatio(1, 1)
                 .minimumCompressSize(300)
-                .cropImageWideHigh(640,640)
+                .cropImageWideHigh(640, 640)
                 .compressQuality(90)
                 .isCompress(true)
                 .imageEngine(GlideEngine.createGlideEngine())

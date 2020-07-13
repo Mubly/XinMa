@@ -46,7 +46,7 @@ public class AssetDataBean extends BaseModel {
 
     public static void assetsCreate(String assetsId, String headimg, String assetNo, String assetName, String assetModel, String assetUnit
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
-            , String Staff, String seat, String Category, String CategoryId, String param, CallBack<AssetsCreateRes> callBack) {
+            , String Staff, String seat, String Category, String CategoryId, String param,String status,String statusName, CallBack<AssetsCreateRes> callBack) {
         OkGo.<AssetsCreateRes>post(URLConstant.ASSET_DATA_UpdateAsset_URL)
                 .params("Headimg", StringUtils.notNull(headimg))
                 .params("AssetID", StringUtils.notNull(assetsId))
@@ -64,8 +64,8 @@ public class AssetDataBean extends BaseModel {
                 .params("Depart", StringUtils.notNull(Depart))
                 .params("Staff", StringUtils.notNull(Staff))
                 .params("Seat", StringUtils.notNull(seat))
-                .params("Status", "1")
-                .params("StatusName", "闲置")
+                .params("Status", status)
+                .params("StatusName", statusName)
                 .params("Param", StringUtils.notNull(param))
 
                 .execute(new JsonCallback<AssetsCreateRes>() {
@@ -96,8 +96,8 @@ public class AssetDataBean extends BaseModel {
                                     assetBean.setDepart(Depart);
                                     assetBean.setStaff(Staff);
                                     assetBean.setSeat(seat);
-                                    assetBean.setStatus("1");
-                                    assetBean.setStatusName("闲置");
+                                    assetBean.setStatus(status);
+                                    assetBean.setStatusName(statusName);
                                     assetBean.setCreateTime(CommUtil.getCurrentTime());
                                     XinMaDatabase.getInstance().assetBeanDao().insert(assetBean);
                                     callBack.callBack(response.body());

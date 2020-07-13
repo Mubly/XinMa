@@ -111,7 +111,7 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
         mPresenter.init(selectBean, statusData);
         initfilterData();
     }
-
+//1闲置3在用5借用6维修8处置
     private void initStatus() {
         switch (from) {
             case GET_USE_REQUEST_CODE://领用
@@ -127,10 +127,10 @@ public class AssetSelectActivity extends BaseActivity<AssetSelectPresenter, IAss
                 break;
 
             case CHECK_CREATE_REQUEST_CODE://盘点
-                statusData = new String[]{"1", "3", "5", "6", "8"};
+                statusData = new String[]{"1", "3", "5", "6"};
                 break;
             case PRINT_REQUEST_CODE://打印
-                statusData = new String[]{"1", "3", "5", "6", "8"};
+                statusData = new String[]{"1", "3", "5", "6"};
             default:
                 statusData = new String[]{"1"};
                 break;

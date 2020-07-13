@@ -52,9 +52,9 @@ public class CreatePresenter extends BasePresenter<ICreateView> {
 
     public void createAssets(String assetsId, String headimg, String assetNo, String assetName, String assetModel, String assetUnit
             , String assetSupply, String PurchaseDate, String original, String depreciated, String guaranteed, String Depart
-            , String Staff, String seat, String Category, String CategoryId, String param, CallBack<AssetsCreateRes> callBack) {
+            , String Staff, String seat, String Category, String CategoryId, String param, String status, String statusNme, CallBack<AssetsCreateRes> callBack) {
         AssetDataBean.assetsCreate(assetsId, headimg, assetNo, assetName, assetModel, assetUnit, assetSupply, PurchaseDate, original,
-                depreciated, guaranteed, Depart, Staff, seat, Category, CategoryId, param, new CallBack<AssetsCreateRes>() {
+                depreciated, guaranteed, Depart, Staff, seat, Category, CategoryId, param, status, statusNme, new CallBack<AssetsCreateRes>() {
                     @Override
                     public void callBack(AssetsCreateRes obj) {
                         callBack.callBack(obj);
