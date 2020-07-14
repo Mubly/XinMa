@@ -74,6 +74,9 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
             View assetOperate = binding.assetDetailBottomOperate.getViewStub().inflate();
             assetOperateBind = DataBindingUtil.bind(assetOperate);
         }
+        if (from.equals("operatePage")) {
+
+        }
         binding.setVm(mPresenter);
         binding.setLifecycleOwner(this);
 
@@ -115,7 +118,9 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
             @Override
             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                 imageLoad = true;
-                binding.bigImage.setImageDrawable(resource);
+                Glide.with(AssetsDetialActivity.this).load(new ImageUrlPersenter().getAssetListBigUrl(selectAssetsBean.getHeadimg())).error(R.mipmap.img_defaut)
+                        .into(binding.bigImage);
+//                binding.bigImage.setImageDrawable(resource);
                 return false;
             }
         }).into(binding.createAssetImg);
@@ -159,13 +164,6 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
         } else if (selectAssetsBean.getStatus().equals("8")) {
             setRightImgLayoutEnable(false);
             assetOperateBind.getRoot().setVisibility(View.GONE);
-//            assetOperateBind.assetDetailBottomGetuse.setVisibility(View.GONE);
-//            assetOperateBind.assetDetailBottomChange.setVisibility(View.GONE);
-//            assetOperateBind.assetDetailBottomReturn.setVisibility(View.GONE);
-//            assetOperateBind.assetDetailBottomRapir.setVisibility(View.GONE);
-//            assetOperateBind.assetDetailBottomBorrow.setVisibility(View.GONE);
-//            assetOperateBind.assetDetailBottomDispose.setVisibility(View.GONE);
-//            assetOperateBind.assetDetailBottomCopy.setVisibility(View.GONE);
         }
     }
 
@@ -313,6 +311,7 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
         } else {
             View view = View.inflate(this, R.layout.custom_param_layout, null);
             TextView leftTv = view.findViewById(R.id.custom_param_key);
+            view.findViewById(R.id.custom_param_value).setEnabled(false);
             leftTv.setText("无");
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, CommUtil.dip2px(40));
             view.setLayoutParams(layoutParams);

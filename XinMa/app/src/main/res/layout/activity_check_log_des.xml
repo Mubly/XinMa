@@ -8,6 +8,7 @@
         <variable
             name="imagePresenter"
             type="com.mubly.xinma.presenter.ImageUrlPersenter" />
+
         <variable
             name="bean"
             type="com.mubly.xinma.model.AssetBean" />
@@ -83,6 +84,7 @@
                         android:layout_width="@dimen/size_60dp"
                         android:layout_height="@dimen/size_60dp"
                         android:layout_gravity="right"
+                        android:src="@drawable/ic_ldle_icon_bg"
                         android:scaleType="fitXY"></ImageView>
 
                     <com.mubly.xinma.common.weight.RotateTextView
@@ -94,6 +96,166 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/size_12dp"></com.mubly.xinma.common.weight.RotateTextView>
                 </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:background="@color/background"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="变更信息"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/change_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="盘点时间"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:orientation="horizontal"
+                            android:paddingRight="@dimen/size_10dp">
+
+                            <TextView
+                                android:id="@+id/check_des_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="@dimen/size_6dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical|right"
+                                android:text=""
+                                android:textColor="@color/color_919191"
+                                android:textSize="@dimen/size_13sp"
+                                tools:text="2020-12-23">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/depart_change"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="盘点状态"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:orientation="horizontal"
+                            android:paddingRight="@dimen/size_10dp">
+
+                            <TextView
+                                android:id="@+id/check_des_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="@dimen/size_6dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:textColor="@color/color_919191"
+                                android:textSize="@dimen/size_13sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:background="@color/clr_gray_line"></View>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_50dp"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:text="盘点描述"
+                            android:textColor="@color/color_414141"
+                            android:textSize="@dimen/size_14sp">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:orientation="horizontal"
+                            android:paddingRight="@dimen/size_10dp">
+
+                            <TextView
+                                android:id="@+id/check_des_remark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:layout_marginRight="@dimen/size_6dp"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:gravity="right|center_vertical"
+                                android:maxLines="1"
+                                android:minWidth="@dimen/size_100dp"
+                                android:singleLine="true"
+                                android:textColor="@color/color_919191"
+                                android:textSize="@dimen/size_13sp">
+
+                            </TextView>
+                        </LinearLayout>
+
+                    </FrameLayout>
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

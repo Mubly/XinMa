@@ -56,4 +56,9 @@ public class ChangeListActivity extends BaseActivity<ChangeListPresenter, IOpera
     public void toChangeView(ProcessBean processBean) {
 
     }
+
+    @Override
+    public void toCheckView(ProcessBean processBean) {
+
+    }
 }

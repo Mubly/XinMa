@@ -176,6 +176,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
         binding.repairTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.repairTimeLayout);
                 showTimeSelectDialog(new CallBack<String>() {
                     @Override
                     public void callBack(String obj) {
@@ -187,6 +188,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
         binding.repairDepartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.repairTimeLayout);
                 showGroupStaffDialog(new GroupSelectCallBack() {
                     @Override
                     public void callback(GroupBean groupBean, StaffBean staffBean) {

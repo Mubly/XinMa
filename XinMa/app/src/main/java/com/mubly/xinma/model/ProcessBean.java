@@ -28,7 +28,15 @@ public class ProcessBean implements Serializable {
     private String Remark;
     private String CreateTime;
     private String Headimg;
+    private String StatusName;
 
+    public String getStatusName() {
+        return StatusName;
+    }
+
+    public void setStatusName(String statusName) {
+        StatusName = statusName;
+    }
 
     public String getAssetModel() {
         return AssetModel;

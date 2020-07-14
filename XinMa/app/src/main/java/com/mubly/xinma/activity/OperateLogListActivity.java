@@ -64,7 +64,6 @@ public class OperateLogListActivity extends BaseActivity<OperateLogListPresenter
         } else if (type.equals("领用")) {
             toDes(GetUseActivity.class, OperateID);
         } else if (type.equals("盘点")) {
-            toDes(CheckLogDesActivity.class, OperateID);
         } else if (type.equals("变更")) {
             toDes(ChangeActivity.class, OperateID);
         } else if (type.equals("借用")) {
@@ -81,6 +80,15 @@ public class OperateLogListActivity extends BaseActivity<OperateLogListPresenter
         Intent intent = new Intent(this, ChangeActivity.class);
         processBean.setAssetID(assetBean.getAssetID());
         intent.putExtra("processBean", processBean);
+        startActivity(intent);
+        startPage();
+    }
+
+    @Override
+    public void toCheckView(ProcessBean processBean) {
+        Intent intent = new Intent(this, CheckLogDesActivity.class);
+        intent.putExtra("processBean", processBean);
+        intent.putExtra("assetBean", assetBean);
         startActivity(intent);
         startPage();
     }

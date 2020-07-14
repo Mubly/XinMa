@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "739cead0b6649bb416be77163f023091",
+    "identityHash": "e8212a3b76de03c17424f5adfb5ed4ab",
     "entities": [
       {
         "tableName": "asset",
@@ -574,7 +574,7 @@
       },
       {
         "tableName": "processBean",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ProcessID` TEXT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `AssetModel` TEXT, `AssetName` TEXT, `OperateID` TEXT, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, `CreateTime` TEXT, `Headimg` TEXT, PRIMARY KEY(`ProcessID`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ProcessID` TEXT NOT NULL, `AssetID` TEXT, `AssetNo` TEXT, `AssetModel` TEXT, `AssetName` TEXT, `OperateID` TEXT, `ProcessCate` TEXT, `ProcessTime` TEXT, `Depart` TEXT, `Staff` TEXT, `Seat` TEXT, `Fee` TEXT, `Remark` TEXT, `CreateTime` TEXT, `Headimg` TEXT, `StatusName` TEXT, PRIMARY KEY(`ProcessID`))",
         "fields": [
           {
             "fieldPath": "ProcessID",
@@ -663,6 +663,12 @@
           {
             "fieldPath": "Headimg",
             "columnName": "Headimg",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "StatusName",
+            "columnName": "StatusName",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -785,7 +791,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"739cead0b6649bb416be77163f023091\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e8212a3b76de03c17424f5adfb5ed4ab\")"
     ]
   }
 }

@@ -156,6 +156,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         binding.returnTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.returnStatusLayout);
                 showTimeSelectDialog(new CallBack<String>() {
                     @Override
                     public void callBack(String obj) {
@@ -167,6 +168,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         binding.returnDepartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.returnStatusLayout);
                 showGroupStaffDialog(new GroupSelectCallBack() {
                     @Override
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
@@ -181,6 +183,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         binding.returnStatusLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommUtil.hideKeyboard( binding.returnStatusLayout);
                 assetStatusDialog.show();
             }
         });

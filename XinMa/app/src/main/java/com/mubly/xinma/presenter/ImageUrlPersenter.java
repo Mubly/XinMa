@@ -22,7 +22,10 @@ public class ImageUrlPersenter {
         Log.i("imgUrl", Constant.ASSET_HRADIMG_LITTLE_URL + headUrl);
         return TextUtils.isEmpty(headUrl) ? null : Constant.ASSET_HRADIMG_LITTLE_URL + companyId + "/" + headUrl;
     }
-
+    public String getAssetListBigUrl(String headUrl) {
+        Log.i("imgUrl", Constant.ASSET_HRADIMG_LITTLE_URL + headUrl);
+        return TextUtils.isEmpty(headUrl) ? null : Constant.ASSET_HRADIMG_BIG_URL + companyId + "/" + headUrl;
+    }
     public static String getPrintModeurl(String imgUrl) {
         return TextUtils.isEmpty(imgUrl) ? null : Constant.PRINT_MODE_IMG_SCAN_URL + imgUrl;
     }

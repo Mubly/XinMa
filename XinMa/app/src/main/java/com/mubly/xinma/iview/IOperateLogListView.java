@@ -8,4 +8,5 @@ public interface IOperateLogListView extends BaseMvpView {
     void showRv(SmartAdapter adapter);
     void toDesPage(String OperateID,String type);
     void toChangeView(ProcessBean processBean);
+    void toCheckView(ProcessBean processBean);
 }

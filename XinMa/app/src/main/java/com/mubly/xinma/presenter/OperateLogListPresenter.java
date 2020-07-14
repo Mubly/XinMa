@@ -70,6 +70,9 @@ public class OperateLogListPresenter extends BasePresenter<IOperateLogListView> 
                     public void onClick(View view) {
                         if (data.getProcessCate().equals("变更")) {
                             getMvpView().toChangeView(data);
+                        }
+                        if (data.getProcessCate().equals("盘点")) {
+                            getMvpView().toCheckView(data);
                         } else {
                             getMvpView().toDesPage(data.getOperateID(), data.getProcessCate());
                         }

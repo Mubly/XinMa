@@ -199,6 +199,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
         binding.getUseTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.getUseTimeLayout);
                 showTimeSelectDialog(new CallBack<String>() {
                     @Override
                     public void callBack(String obj) {
@@ -210,6 +211,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
         binding.getUseDepartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.getUseDepartLayout);
                 showGroupStaffDialog(new GroupSelectCallBack() {
                     @Override
                     public void callback(GroupBean groupBean, StaffBean staffBean) {

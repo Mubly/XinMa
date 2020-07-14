@@ -165,6 +165,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
         binding.brrorowTimeLayou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.brrorowTimeLayou);
                 showTimeSelectDialog(new CallBack<String>() {
                     @Override
                     public void callBack(String obj) {
@@ -176,6 +177,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
         binding.brrorowDepartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.brrorowDepartLayout);
                 showGroupStaffDialog(new GroupSelectCallBack() {
                     @Override
                     public void callback(GroupBean groupBean, StaffBean staffBean) {

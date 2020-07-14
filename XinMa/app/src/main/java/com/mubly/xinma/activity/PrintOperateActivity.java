@@ -197,6 +197,23 @@ public class PrintOperateActivity extends BaseActivity<PrintOperatePresenter, IP
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.printOperateRv.setLayoutManager(new LinearLayoutManager(this));
         binding.printOperateRv.setAdapter(adapter);
+        adapter.setOnDelectListener(new AssetsListCallBackAdapter.OnItemDelectistener() {
+            @Override
+            public void itemClick(AssetBean data, int index) {
+                selectAssetsBean.getSelectBean().remove(data);
+                mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+            }
+        });
+        adapter.setOnItemClickListener(new AssetsListCallBackAdapter.OnItemClickListener() {
+            @Override
+            public void itemClick(AssetBean data, int index) {
+                Intent intent = new Intent(PrintOperateActivity.this, AssetsDetialActivity.class);
+                intent.putExtra("from", "operatePage");
+                intent.putExtra("assetBean", data);
+                startActivity(intent);
+                startPage();
+            }
+        });
     }
 
     public void forScanResult(String code) {
@@ -211,11 +228,11 @@ public class PrintOperateActivity extends BaseActivity<PrintOperatePresenter, IP
                 .subscribe(new Consumer<AssetBean>() {
                     @Override
                     public void accept(AssetBean assetBean) throws Exception {
-                        if (null!=assetBean){
+                        if (null != assetBean) {
                             initSelectAssetsBean();
                             selectAssetsBean.getSelectBean().add(assetBean);
                             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
-                        }else {
+                        } else {
                             CommUtil.ToastU.showToast("查无信息");
                         }
 

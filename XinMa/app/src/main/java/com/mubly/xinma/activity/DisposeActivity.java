@@ -180,6 +180,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
         binding.disposeTimeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.disposeTypeLayout);
                 showTimeSelectDialog(new CallBack<String>() {
                     @Override
                     public void callBack(String obj) {
@@ -191,6 +192,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
         binding.disposeDepartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CommUtil.hideKeyboard( binding.disposeTypeLayout);
                 showGroupStaffDialog(new GroupSelectCallBack() {
                     @Override
                     public void callback(GroupBean groupBean, StaffBean staffBean) {
@@ -205,6 +207,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
         binding.disposeTypeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CommUtil.hideKeyboard( binding.disposeTypeLayout);
                 disposeTypeDialog.show();
             }
         });
