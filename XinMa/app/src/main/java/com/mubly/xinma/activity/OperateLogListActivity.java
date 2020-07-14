@@ -79,6 +79,7 @@ public class OperateLogListActivity extends BaseActivity<OperateLogListPresenter
     @Override
     public void toChangeView(ProcessBean processBean) {
         Intent intent = new Intent(this, ChangeActivity.class);
+        processBean.setAssetID(assetBean.getAssetID());
         intent.putExtra("processBean", processBean);
         startActivity(intent);
         startPage();

@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.CheckLogDesActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="imagePresenter"
+            type="com.mubly.xinma.presenter.ImageUrlPersenter" />
+        <variable
+            name="bean"
+            type="com.mubly.xinma.model.AssetBean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.CheckLogDesActivity">
+
+        <include layout="@layout/top_bar_layout"></include>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_40dp"
+                    android:background="@color/background"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/size_16dp"
+                    android:text="资产"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_90dp">
+
+                    <ImageView
+                        android:id="@+id/create_asset_img"
+                        imageUrl="@{imagePresenter.getAssetListUrl(bean.Headimg)}"
+                        android:layout_width="@dimen/size_60dp"
+                        android:layout_height="@dimen/size_60dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/img_defaut"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/size_80dp"
+                        android:layout_marginTop="@dimen/size_14dp"
+                        android:text="@{bean.assetName}"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_14sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/size_80dp"
+                        android:layout_marginBottom="@dimen/size_10dp"
+                        android:text="@{bean.assetModel}"
+                        android:textColor="@color/color_919191"
+                        android:textSize="@dimen/size_12sp">
+
+                    </TextView>
+
+                    <ImageView
+                        imgRadious="10"
+                        resIdImg="@{imagePresenter.getAssetIcon(bean.status)}"
+                        android:layout_width="@dimen/size_60dp"
+                        android:layout_height="@dimen/size_60dp"
+                        android:layout_gravity="right"
+                        android:scaleType="fitXY"></ImageView>
+
+                    <com.mubly.xinma.common.weight.RotateTextView
+                        android:layout_width="@dimen/size_40dp"
+                        android:layout_height="@dimen/size_40dp"
+                        android:layout_gravity="right"
+                        android:gravity="center"
+                        android:text="@{bean.statusName}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_12dp"></com.mubly.xinma.common.weight.RotateTextView>
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

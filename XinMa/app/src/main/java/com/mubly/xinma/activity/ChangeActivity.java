@@ -14,46 +14,91 @@ import com.mubly.xinma.base.BasePresenter;
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.common.GroupSelectCallBack;
 import com.mubly.xinma.databinding.ActivityChangeBinding;
+import com.mubly.xinma.db.XinMaDatabase;
 import com.mubly.xinma.iview.IChangeView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.GroupBean;
 import com.mubly.xinma.model.OperateBean;
+import com.mubly.xinma.model.ProcessBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.presenter.ChangePresenter;
 import com.mubly.xinma.presenter.CreatePresenter;
 import com.mubly.xinma.presenter.ImageUrlPersenter;
 import com.mubly.xinma.utils.EditViewUtil;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 public class ChangeActivity extends BaseOperateActivity<ChangePresenter, IChangeView> implements IChangeView {
     ActivityChangeBinding binding = null;
     private AssetBean changeAsset;
-    private String operateID;
+    private ProcessBean processBean;
 
     @Override
     public void initView() {
         setBackBtnEnable(true);
         setTitle("变更");
         setRightTv("保存");
-        if (null != operateID&&null==changeAsset) {
-            changeAsset = new AssetBean();
-        }else {
+        if (null != processBean && null == changeAsset) {
+            gainAssetData();
+        } else {
             mPresenter.init();
             mPresenter.getDepartStaff().setValue(changeAsset.getDepart() + "-" + changeAsset.getStaff());
+            binding.setBean(changeAsset);
+            binding.setImagePresenter(new ImageUrlPersenter());
+            binding.setVm(mPresenter);
+            binding.setLifecycleOwner(this);
         }
-        binding.setBean(changeAsset);
-        binding.setImagePresenter(new ImageUrlPersenter());
-        binding.setVm(mPresenter);
-        binding.setLifecycleOwner(this);
 
-        if (null != operateID) {//日志页面进入的
+
+        if (null != processBean) {//日志页面进入的
             setRightTvEnable(false);
             binding.changeHideForLogLayout.setVisibility(View.GONE);
             binding.departChangeFeeDiffLayout.setVisibility(View.VISIBLE);
             binding.changeTime.setEnabled(false);
             binding.departChange.setEnabled(false);
             binding.changeNewSeat.setEnabled(false);
-            mPresenter.gainOperateData(operateID);
+//            mPresenter.gainOperateData(operateID);
         }
+    }
+
+    private void gainAssetData() {
+        Observable.create(new ObservableOnSubscribe<AssetBean>() {
+            @Override
+            public void subscribe(ObservableEmitter<AssetBean> emitter) throws Exception {
+                emitter.onNext(XinMaDatabase.getInstance().assetBeanDao().getAssetBeanByAssetId(processBean.getAssetID()));
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<AssetBean>() {
+                    @Override
+                    public void accept(AssetBean assetBean) throws Exception {
+                        if (assetBean != null) {
+                            changeAsset = assetBean;
+                            mPresenter.getDepartStaff().setValue(changeAsset.getDepart() + "-" + changeAsset.getStaff());
+                            binding.setBean(changeAsset);
+                            binding.setImagePresenter(new ImageUrlPersenter());
+                            binding.setVm(mPresenter);
+                            binding.setLifecycleOwner(ChangeActivity.this);
+                            mPresenter.getChangeTime().setValue(processBean.getProcessTime());
+                            mPresenter.getDepartStaff().setValue(processBean.getDepart() + "-" + processBean.getStaff());
+                            changeAsset.setSeat(processBean.getSeat());
+                            binding.departChangeFeeDiffTv.setText(processBean.getFee());
+                            hideArrowView();
+                        }
+
+                    }
+                });
+    }
+
+    private void hideArrowView() {
+        binding.changeArrow1.setVisibility(View.GONE);
+        binding.changeArrow2.setVisibility(View.GONE);
+        binding.changeArrow3.setVisibility(View.GONE);
     }
 
     @Override
@@ -125,7 +170,7 @@ public class ChangeActivity extends BaseOperateActivity<ChangePresenter, IChange
     protected void getLayoutId() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change);
         changeAsset = (AssetBean) getIntent().getSerializableExtra("assetBean");
-        operateID = getIntent().getStringExtra("operateId");
+        processBean = (ProcessBean) getIntent().getSerializableExtra("processBean");
     }
 
     @Override
@@ -150,9 +195,7 @@ public class ChangeActivity extends BaseOperateActivity<ChangePresenter, IChange
 
     @Override
     public void showOperateLogInfo(OperateBean operateBean) {
-        mPresenter.getChangeTime().setValue(operateBean.getProcessTime());
-        mPresenter.getDepartStaff().setValue(operateBean.getDepart() + "-" + operateBean.getStaff());
-        changeAsset.setSeat(operateBean.getSeat());
+
     }
 
     @Override

@@ -32,6 +32,7 @@ import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CompanyBean;
 import com.mubly.xinma.model.UserInfoBean;
 import com.mubly.xinma.utils.AppConfig;
+import com.mubly.xinma.utils.CommUtil;
 import com.mubly.xinma.utils.StringUtils;
 
 public class MainActivity extends BaseActivity<HomePresenter, IHomeView> implements IHomeView {
@@ -85,10 +86,14 @@ public class MainActivity extends BaseActivity<HomePresenter, IHomeView> impleme
                     .subscribe(new Consumer<AssetBean>() {
                         @Override
                         public void accept(AssetBean assetBean) throws Exception {
-                            Intent intent = new Intent(MainActivity.this, AssetsDetialActivity.class);
-                            intent.putExtra("from", "manScan");
-                            intent.putExtra("assetBean", assetBean);
-                            startActivity(intent);
+                            if (null!=assetBean){
+                                Intent intent = new Intent(MainActivity.this, AssetsDetialActivity.class);
+                                intent.putExtra("from", "manScan");
+                                intent.putExtra("assetBean", assetBean);
+                                startActivity(intent);
+                            }else
+                                CommUtil.ToastU.showToast("查无信息");
+
                         }
                     });
 

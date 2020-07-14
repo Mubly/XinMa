@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -80,6 +81,7 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
         }
         if (null != operateID) {//日志页面进入的
             setRightTvEnable(false);
+            hideArrowView();
             binding.bottomLayout.setVisibility(View.GONE);
             binding.repairTimeLayout.setEnabled(false);
             binding.repairDepartLayout.setEnabled(false);
@@ -237,6 +239,13 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.repairRv.setLayoutManager(new LinearLayoutManager(this));
         binding.repairRv.setAdapter(adapter);
+        adapter.setOnDelectListener(new AssetsListCallBackAdapter.OnItemDelectistener() {
+            @Override
+            public void itemClick(AssetBean data, int index) {
+                selectAssetsBean.getSelectBean().remove(data);
+                mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+            }
+        });
     }
 
 
@@ -262,9 +271,13 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
                 .subscribe(new Consumer<AssetBean>() {
                     @Override
                     public void accept(AssetBean assetBean) throws Exception {
-                        initSelectAssetsBean();
-                        selectAssetsBean.getSelectBean().add(assetBean);
-                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        if (null != assetBean) {
+                            initSelectAssetsBean();
+                            selectAssetsBean.getSelectBean().add(assetBean);
+                            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        } else {
+                            CommUtil.ToastU.showToast("查无信息");
+                        }
                     }
                 });
     }
@@ -295,5 +308,13 @@ public class RepairActivity extends BaseOperateActivity<RepairPresenter, IRepair
     @Override
     public boolean isGroupSelectInit() {
         return true;
+    }
+    private void hideArrowView() {
+        binding.getUseArrow1.setVisibility(View.GONE);
+        binding.getUseArrow2.setVisibility(View.GONE);
+        binding.getUseArrow3.setVisibility(View.GONE);
+        binding.getUseArrow4.setVisibility(View.GONE);
+        binding.getUseArrow5.setVisibility(View.GONE);
+        binding.assetListTitle.setText("资产信息");
     }
 }

@@ -139,25 +139,36 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingRight="@dimen/size_10dp"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:orientation="horizontal"
+                            android:layout_gravity="right|center_vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical|right"
+                                android:layout_marginRight="@dimen/size_6dp"
+                                android:text="@{vm.changeTime}"
+                                tools:text="2020-12-23"
+                                android:textColor="@color/color_919191"
+                                android:textSize="@dimen/size_13sp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|right"
-                            android:layout_marginRight="@dimen/size_50dp"
-                            android:text="@{vm.changeTime}"
-                            android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            </TextView>
 
-                        </TextView>
+                            <ImageView
+                                android:id="@+id/change_arrow_1"
+                                android:layout_width="@dimen/size_20dp"
+                                android:layout_height="@dimen/size_20dp"
+                                android:layout_gravity="right|center_vertical"
+                                android:padding="@dimen/size_2dp"
+                                tools:visibility="gone"
+                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                        </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="@dimen/size_20dp"
-                            android:layout_height="@dimen/size_20dp"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="@dimen/size_20dp"
-                            android:padding="@dimen/size_2dp"
-                            android:src="@mipmap/arrow_right_gray"></ImageView>
 
                         <View
                             android:layout_width="match_parent"
@@ -183,27 +194,37 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingRight="@dimen/size_10dp"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:orientation="horizontal"
+                            android:layout_gravity="right|center_vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="@dimen/size_6dp"
+                                android:gravity="right"
+                                android:hint="请选择部门与人员"
+                                android:text="@{vm.departStaff}"
+                                android:textColor="@color/color_919191"
+                                android:textSize="@dimen/size_13sp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|right"
-                            android:layout_marginRight="@dimen/size_50dp"
-                            android:gravity="right"
-                            android:hint="请选择部门与人员"
-                            android:text="@{vm.departStaff}"
-                            android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            </TextView>
 
-                        </TextView>
+                            <ImageView
+                                android:id="@+id/change_arrow_2"
+                                android:layout_width="@dimen/size_20dp"
+                                android:layout_height="@dimen/size_20dp"
+                                android:layout_gravity="right|center_vertical"
+                                android:padding="@dimen/size_2dp"
+                                tools:visibility="gone"
+                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                        </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="@dimen/size_20dp"
-                            android:layout_height="@dimen/size_20dp"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="@dimen/size_20dp"
-                            android:padding="@dimen/size_2dp"
-                            android:src="@mipmap/arrow_right_gray"></ImageView>
 
                         <View
                             android:layout_width="match_parent"
@@ -228,37 +249,49 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
-
-                        <EditText
-                            android:id="@+id/change_new_seat"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical|right"
+                            android:paddingRight="@dimen/size_10dp"
                             android:layout_marginLeft="@dimen/size_100dp"
-                            android:layout_marginRight="@dimen/size_50dp"
-                            android:background="@null"
-                            android:gravity="right|center_vertical"
-                            android:hint="请输入新的存放地"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@{bean.seat}"
-                            android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            android:orientation="horizontal"
+                            android:layout_gravity="right|center_vertical">
+                            <EditText
+                                android:id="@+id/change_new_seat"
+                                android:layout_width="wrap_content"
+                                android:minWidth="@dimen/size_100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:layout_marginRight="@dimen/size_6dp"
+                                android:background="@null"
+                                android:gravity="right|center_vertical"
+                                android:hint="请输入新的存放地"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@{bean.seat}"
+                                android:textColor="@color/color_919191"
+                                android:textSize="@dimen/size_13sp">
 
-                        </EditText>
+                            </EditText>
 
-                        <ImageView
-                            android:layout_width="@dimen/size_20dp"
-                            android:layout_height="@dimen/size_20dp"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="@dimen/size_20dp"
-                            android:padding="@dimen/size_2dp"
-                            android:src="@mipmap/arrow_right_gray"></ImageView>
+                            <ImageView
+                                android:id="@+id/change_arrow_3"
+                                android:layout_width="@dimen/size_20dp"
+                                android:layout_height="@dimen/size_20dp"
+                                android:layout_gravity="right|center_vertical"
+                                android:padding="@dimen/size_2dp"
+                                tools:visibility="gone"
+                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                        </LinearLayout>
+
                     </FrameLayout>
                     <FrameLayout
                         android:id="@+id/depart_change_fee_diff_layout"
                         android:layout_width="match_parent"
                         android:visibility="gone"
+                        tools:visibility="visible"
                         android:layout_height="@dimen/size_50dp"
                         android:background="@color/white">
 
@@ -272,27 +305,42 @@
                             android:textSize="@dimen/size_14sp">
 
                         </TextView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingRight="@dimen/size_10dp"
+                            android:layout_marginLeft="@dimen/size_100dp"
+                            android:orientation="horizontal"
+                            android:layout_gravity="right|center_vertical">
+                            <TextView
+                                android:id="@+id/depart_change_fee_diff_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="@dimen/size_6dp"
+                                android:gravity="right"
+                                tools:text="33947"
+                                android:textColor="@color/color_919191"
+                                android:textSize="@dimen/size_13sp">
 
-                        <TextView
-                            android:id="@+id/depart_change_fee_diff_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical|right"
-                            android:layout_marginRight="@dimen/size_50dp"
-                            android:gravity="right"
-                            android:textColor="@color/color_919191"
-                            android:textSize="@dimen/size_13sp">
+                            </TextView>
 
-                        </TextView>
+                            <ImageView
+                                android:layout_width="@dimen/size_20dp"
+                                android:layout_height="@dimen/size_20dp"
+                                android:layout_gravity="right|center_vertical"
+                                android:visibility="gone"
+                                android:padding="@dimen/size_2dp"
+                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                        </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="@dimen/size_20dp"
-                            android:layout_height="@dimen/size_20dp"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_marginRight="@dimen/size_20dp"
-                            android:padding="@dimen/size_2dp"
-                            android:src="@mipmap/arrow_right_gray"></ImageView>
-
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="top"
+                            android:layout_marginLeft="@dimen/size_16dp"
+                            android:background="@color/clr_gray_line"></View>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -372,7 +420,7 @@
                                 android:layout_width="@dimen/size_20dp"
                                 android:layout_height="@dimen/size_20dp"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_20dp"
+                                android:layout_marginRight="@dimen/size_16dp"
                                 android:padding="@dimen/size_2dp"
                                 android:src="@mipmap/arrow_right_gray"></ImageView>
 
@@ -423,7 +471,7 @@
                                 android:layout_width="@dimen/size_20dp"
                                 android:layout_height="@dimen/size_20dp"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_20dp"
+                                android:layout_marginRight="@dimen/size_16dp"
                                 android:padding="@dimen/size_2dp"
                                 android:src="@mipmap/arrow_right_gray"></ImageView>
 
@@ -471,7 +519,7 @@
                                 android:layout_width="@dimen/size_20dp"
                                 android:layout_height="@dimen/size_20dp"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_20dp"
+                                android:layout_marginRight="@dimen/size_16dp"
                                 android:padding="@dimen/size_2dp"
                                 android:src="@mipmap/arrow_right_gray"></ImageView>
 

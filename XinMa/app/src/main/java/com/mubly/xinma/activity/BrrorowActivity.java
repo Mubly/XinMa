@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -81,6 +82,7 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
         }
         if (null != operateID) {//日志页面进入的
             setRightTvEnable(false);
+            hideArrowView();
             binding.bottomLayout.setVisibility(View.GONE);
             binding.brrorowTimeLayou.setEnabled(false);
             binding.brrorowDepartLayout.setEnabled(false);
@@ -213,6 +215,13 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.brrorowRv.setLayoutManager(new LinearLayoutManager(this));
         binding.brrorowRv.setAdapter(adapter);
+        adapter.setOnDelectListener(new AssetsListCallBackAdapter.OnItemDelectistener() {
+            @Override
+            public void itemClick(AssetBean data, int index) {
+                selectAssetsBean.getSelectBean().remove(data);
+                mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+            }
+        });
     }
 
     @Override
@@ -236,9 +245,14 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
                 .subscribe(new Consumer<AssetBean>() {
                     @Override
                     public void accept(AssetBean assetBean) throws Exception {
-                        initSelectAssetsBean();
-                        selectAssetsBean.getSelectBean().add(assetBean);
-                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        if (null != assetBean) {
+                            initSelectAssetsBean();
+                            selectAssetsBean.getSelectBean().add(assetBean);
+                            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        } else {
+                            CommUtil.ToastU.showToast("查无信息");
+                        }
+
                     }
                 });
     }
@@ -269,5 +283,13 @@ public class BrrorowActivity extends BaseOperateActivity<BrrorowPresenter, IBrro
     @Override
     public boolean isGroupSelectInit() {
         return true;
+    }
+
+    private void hideArrowView() {
+        binding.brrorowArrow1.setVisibility(View.GONE);
+        binding.brrorowArrow2.setVisibility(View.GONE);
+        binding.brrorowArrow3.setVisibility(View.GONE);
+        binding.brrorowArrow4.setVisibility(View.GONE);
+        binding.assetListTitle.setText("资产信息");
     }
 }

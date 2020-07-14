@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -88,6 +89,7 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
         }
         if (null != operateID) {//日志页面进入的
             setRightTvEnable(false);
+            hideArrowView();
             binding.bottomLayout.setVisibility(View.GONE);
             binding.disposeTimeLayout.setEnabled(false);
             binding.disposeDepartLayout.setEnabled(false);
@@ -243,6 +245,13 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.disposeRv.setLayoutManager(new LinearLayoutManager(this));
         binding.disposeRv.setAdapter(adapter);
+        adapter.setOnDelectListener(new AssetsListCallBackAdapter.OnItemDelectistener() {
+            @Override
+            public void itemClick(AssetBean data, int index) {
+                selectAssetsBean.getSelectBean().remove(data);
+                mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+            }
+        });
     }
 
     @Override
@@ -267,9 +276,13 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
                 .subscribe(new Consumer<AssetBean>() {
                     @Override
                     public void accept(AssetBean assetBean) throws Exception {
-                        initSelectAssetsBean();
-                        selectAssetsBean.getSelectBean().add(assetBean);
-                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        if (null != assetBean) {
+                            initSelectAssetsBean();
+                            selectAssetsBean.getSelectBean().add(assetBean);
+                            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        } else {
+                            CommUtil.ToastU.showToast("查无信息");
+                        }
                     }
                 });
     }
@@ -330,5 +343,14 @@ public class DisposeActivity extends BaseOperateActivity<DisposePresenter, IDisp
                         disposeTypeDialog.setPicker(selectTypeList);
                     }
                 });
+    }
+
+    private void hideArrowView() {
+        binding.disposeArrow1.setVisibility(View.GONE);
+        binding.disposeArrow2.setVisibility(View.GONE);
+        binding.disposeArrow3.setVisibility(View.GONE);
+        binding.disposeArrow4.setVisibility(View.GONE);
+        binding.disposeArrow5.setVisibility(View.GONE);
+        binding.assetListTitle.setText("资产信息");
     }
 }

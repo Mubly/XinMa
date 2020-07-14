@@ -85,6 +85,7 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
         }
         if (null != operateID) {//日志页面进入的
             setRightTvEnable(false);
+            hideArrowView();
             binding.bottomLayout.setVisibility(View.GONE);
             binding.getUseTimeLayout.setEnabled(false);
             binding.getUseDepartLayout.setEnabled(false);
@@ -120,6 +121,13 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.getUseRv.setLayoutManager(new LinearLayoutManager(this));
         binding.getUseRv.setAdapter(adapter);
+        adapter.setOnDelectListener(new AssetsListCallBackAdapter.OnItemDelectistener() {
+            @Override
+            public void itemClick(AssetBean data, int index) {
+                selectAssetsBean.getSelectBean().remove(data);
+                mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+            }
+        });
     }
 
     @Override
@@ -240,9 +248,14 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
                 .subscribe(new Consumer<AssetBean>() {
                     @Override
                     public void accept(AssetBean assetBean) throws Exception {
-                        initSelectAssetsBean();
-                        selectAssetsBean.getSelectBean().add(assetBean);
-                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        if (null != assetBean) {
+
+                            initSelectAssetsBean();
+                            selectAssetsBean.getSelectBean().add(assetBean);
+                            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        } else {
+                            CommUtil.ToastU.showToast("查无信息");
+                        }
                     }
                 });
     }
@@ -273,5 +286,12 @@ public class GetUseActivity extends BaseOperateActivity<GetUsePresenter, IGetUse
     @Override
     public boolean isGroupSelectInit() {
         return true;
+    }
+    private void hideArrowView() {
+        binding.getUseArrow1.setVisibility(View.GONE);
+        binding.getUseArrow2.setVisibility(View.GONE);
+        binding.getUseArrow3.setVisibility(View.GONE);
+        binding.getUseArrow4.setVisibility(View.GONE);
+        binding.assetListTitle.setText("资产信息");
     }
 }

@@ -9,6 +9,7 @@ import com.mubly.xinma.databinding.ActivityChangeListBinding;
 import com.mubly.xinma.databinding.ActivityOperateLogListBinding;
 import com.mubly.xinma.iview.IOperateLogListView;
 import com.mubly.xinma.model.AssetBean;
+import com.mubly.xinma.model.ProcessBean;
 import com.mubly.xinma.presenter.ChangeListPresenter;
 import com.mubly.xinma.presenter.OperateLogListPresenter;
 
@@ -48,6 +49,11 @@ public class ChangeListActivity extends BaseActivity<ChangeListPresenter, IOpera
 
     @Override
     public void toDesPage(String OperateID, String type) {
+
+    }
+
+    @Override
+    public void toChangeView(ProcessBean processBean) {
 
     }
 }

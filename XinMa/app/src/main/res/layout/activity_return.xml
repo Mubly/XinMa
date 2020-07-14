@@ -13,9 +13,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:orientation="vertical"
         tools:context=".activity.ReturnActivity">
 
         <include layout="@layout/top_bar_layout"></include>
@@ -116,24 +116,37 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <TextView
-                                android:id="@+id/return_time_tv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                android:hint="@{presenter.creatDate}"
-                                tools:text="2020-0607 24:33"></TextView>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <TextView
+                                    android:id="@+id/return_time_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="@{presenter.creatDate}"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="2020-0607 24:33"></TextView>
+
+                                <ImageView
+                                    android:id="@+id/return_arrow1"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -171,25 +184,37 @@
                                     android:visibility="gone"></TextView>
                             </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/return_depart_tv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:gravity="center_vertical|right"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                android:hint="请选择保管部门/人员"
-                                tools:text="小刘"></TextView>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <TextView
+                                    android:id="@+id/return_depart_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|right"
+                                    android:hint="请选择保管部门/人员"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="小刘"></TextView>
+
+                                <ImageView
+                                    android:id="@+id/return_arrow2"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -199,57 +224,57 @@
                                 android:background="@color/clr_gray_line"></View>
                         </FrameLayout>
 
-<!--                        <FrameLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="@dimen/size_50dp">-->
+                        <!--                        <FrameLayout-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="@dimen/size_50dp">-->
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_gravity="center_vertical">-->
+                        <!--                            <LinearLayout-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_gravity="center_vertical">-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginLeft="@dimen/size_16dp"-->
-<!--                                    android:text="保管人"-->
-<!--                                    android:textColor="@color/color_414141"-->
-<!--                                    android:textSize="@dimen/size_15sp"></TextView>-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="wrap_content"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_marginLeft="@dimen/size_16dp"-->
+                        <!--                                    android:text="保管人"-->
+                        <!--                                    android:textColor="@color/color_414141"-->
+                        <!--                                    android:textSize="@dimen/size_15sp"></TextView>-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginLeft="@dimen/size_3dp"-->
-<!--                                    android:text="*"-->
-<!--                                    android:textColor="@color/red"-->
-<!--                                    android:visibility="gone"></TextView>-->
-<!--                            </LinearLayout>-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="wrap_content"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_marginLeft="@dimen/size_3dp"-->
+                        <!--                                    android:text="*"-->
+                        <!--                                    android:textColor="@color/red"-->
+                        <!--                                    android:visibility="gone"></TextView>-->
+                        <!--                            </LinearLayout>-->
 
-<!--                            <TextView-->
-<!--                                android:id="@+id/return_staff_tv"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_gravity="right|center_vertical"-->
-<!--                                android:layout_marginRight="@dimen/size_50dp"-->
-<!--                                android:textColor="@color/color_919191"-->
-<!--                                android:textSize="@dimen/size_14sp"-->
-<!--                                tools:text="小刘"></TextView>-->
+                        <!--                            <TextView-->
+                        <!--                                android:id="@+id/return_staff_tv"-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_gravity="right|center_vertical"-->
+                        <!--                                android:layout_marginRight="@dimen/size_50dp"-->
+                        <!--                                android:textColor="@color/color_919191"-->
+                        <!--                                android:textSize="@dimen/size_14sp"-->
+                        <!--                                tools:text="小刘"></TextView>-->
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="@dimen/size_20dp"-->
-<!--                                android:layout_height="@dimen/size_20dp"-->
-<!--                                android:layout_gravity="center_vertical|right"-->
-<!--                                android:layout_marginRight="@dimen/size_16dp"-->
-<!--                                android:padding="@dimen/size_2dp"-->
-<!--                                android:src="@mipmap/arrow_right_gray"></ImageView>-->
+                        <!--                            <ImageView-->
+                        <!--                                android:layout_width="@dimen/size_20dp"-->
+                        <!--                                android:layout_height="@dimen/size_20dp"-->
+                        <!--                                android:layout_gravity="center_vertical|right"-->
+                        <!--                                android:layout_marginRight="@dimen/size_16dp"-->
+                        <!--                                android:padding="@dimen/size_2dp"-->
+                        <!--                                android:src="@mipmap/arrow_right_gray"></ImageView>-->
 
-<!--                            <View-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="1dp"-->
-<!--                                android:layout_gravity="bottom"-->
-<!--                                android:layout_marginLeft="@dimen/size_16dp"-->
-<!--                                android:background="@color/clr_gray_line"></View>-->
-<!--                        </FrameLayout>-->
+                        <!--                            <View-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="1dp"-->
+                        <!--                                android:layout_gravity="bottom"-->
+                        <!--                                android:layout_marginLeft="@dimen/size_16dp"-->
+                        <!--                                android:background="@color/clr_gray_line"></View>-->
+                        <!--                        </FrameLayout>-->
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -264,28 +289,40 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <EditText
-                                android:id="@+id/return_address_tv"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@null"
-                                android:gravity="right|center_vertical"
-                                android:hint="请输入存放地点"
-                                android:maxLines="1"
-                                android:singleLine="true"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                tools:text="小刘"></EditText>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <EditText
+                                    android:id="@+id/return_address_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_5dp"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请输入存放地点"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="小刘"></EditText>
+
+                                <ImageView
+                                    android:id="@+id/return_arrow3"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -309,25 +346,37 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <TextView
-                                android:id="@+id/return_status_tv"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:gravity="center_vertical|right"
-                                android:hint="请选择资产状况"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                tools:text="155876839755"></TextView>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <TextView
+                                    android:id="@+id/return_status_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|right"
+                                    android:hint="请选择资产状况"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="155876839755"></TextView>
+
+                                <ImageView
+                                    android:id="@+id/return_arrow4"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -338,6 +387,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/asset_list_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size_16dp"

@@ -211,9 +211,14 @@ public class PrintOperateActivity extends BaseActivity<PrintOperatePresenter, IP
                 .subscribe(new Consumer<AssetBean>() {
                     @Override
                     public void accept(AssetBean assetBean) throws Exception {
-                        initSelectAssetsBean();
-                        selectAssetsBean.getSelectBean().add(assetBean);
-                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        if (null!=assetBean){
+                            initSelectAssetsBean();
+                            selectAssetsBean.getSelectBean().add(assetBean);
+                            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        }else {
+                            CommUtil.ToastU.showToast("查无信息");
+                        }
+
                     }
                 });
     }

@@ -115,24 +115,37 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <TextView
-                                android:id="@+id/repair_time_tv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                android:text="@{presenter.creatDate}"
-                                tools:text="2020-0607 24:33"></TextView>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <TextView
+                                    android:id="@+id/repair_time_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:gravity="right|center_vertical"
+                                    android:text="@{presenter.creatDate}"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="2020-0607 24:33"></TextView>
+
+                                <ImageView
+                                    android:id="@+id/get_use_arrow1"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -170,25 +183,37 @@
                                     android:visibility="gone"></TextView>
                             </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/repair_depart_tv"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:hint="请选择送修部门与人员"
-                                android:gravity="center_vertical|right"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                tools:text="小刘"></TextView>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <TextView
+                                    android:id="@+id/repair_depart_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical|right"
+                                    android:hint="请选择送修部门与人员"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="小刘"></TextView>
+
+                                <ImageView
+                                    android:id="@+id/get_use_arrow2"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -198,57 +223,57 @@
                                 android:background="@color/clr_gray_line"></View>
                         </FrameLayout>
 
-<!--                        <FrameLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="@dimen/size_50dp">-->
+                        <!--                        <FrameLayout-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="@dimen/size_50dp">-->
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_gravity="center_vertical">-->
+                        <!--                            <LinearLayout-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_gravity="center_vertical">-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginLeft="@dimen/size_16dp"-->
-<!--                                    android:text="送修人"-->
-<!--                                    android:textColor="@color/color_414141"-->
-<!--                                    android:textSize="@dimen/size_15sp"></TextView>-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="wrap_content"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_marginLeft="@dimen/size_16dp"-->
+                        <!--                                    android:text="送修人"-->
+                        <!--                                    android:textColor="@color/color_414141"-->
+                        <!--                                    android:textSize="@dimen/size_15sp"></TextView>-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginLeft="@dimen/size_3dp"-->
-<!--                                    android:text="*"-->
-<!--                                    android:textColor="@color/red"-->
-<!--                                    android:visibility="gone"></TextView>-->
-<!--                            </LinearLayout>-->
+                        <!--                                <TextView-->
+                        <!--                                    android:layout_width="wrap_content"-->
+                        <!--                                    android:layout_height="wrap_content"-->
+                        <!--                                    android:layout_marginLeft="@dimen/size_3dp"-->
+                        <!--                                    android:text="*"-->
+                        <!--                                    android:textColor="@color/red"-->
+                        <!--                                    android:visibility="gone"></TextView>-->
+                        <!--                            </LinearLayout>-->
 
-<!--                            <TextView-->
-<!--                                android:id="@+id/repair_staff_tv"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_gravity="right|center_vertical"-->
-<!--                                android:layout_marginRight="@dimen/size_50dp"-->
-<!--                                android:textColor="@color/color_919191"-->
-<!--                                android:textSize="@dimen/size_14sp"-->
-<!--                                tools:text="小刘"></TextView>-->
+                        <!--                            <TextView-->
+                        <!--                                android:id="@+id/repair_staff_tv"-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_gravity="right|center_vertical"-->
+                        <!--                                android:layout_marginRight="@dimen/size_50dp"-->
+                        <!--                                android:textColor="@color/color_919191"-->
+                        <!--                                android:textSize="@dimen/size_14sp"-->
+                        <!--                                tools:text="小刘"></TextView>-->
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="@dimen/size_20dp"-->
-<!--                                android:layout_height="@dimen/size_20dp"-->
-<!--                                android:layout_gravity="center_vertical|right"-->
-<!--                                android:layout_marginRight="@dimen/size_16dp"-->
-<!--                                android:padding="@dimen/size_2dp"-->
-<!--                                android:src="@mipmap/arrow_right_gray"></ImageView>-->
+                        <!--                            <ImageView-->
+                        <!--                                android:layout_width="@dimen/size_20dp"-->
+                        <!--                                android:layout_height="@dimen/size_20dp"-->
+                        <!--                                android:layout_gravity="center_vertical|right"-->
+                        <!--                                android:layout_marginRight="@dimen/size_16dp"-->
+                        <!--                                android:padding="@dimen/size_2dp"-->
+                        <!--                                android:src="@mipmap/arrow_right_gray"></ImageView>-->
 
-<!--                            <View-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="1dp"-->
-<!--                                android:layout_gravity="bottom"-->
-<!--                                android:layout_marginLeft="@dimen/size_16dp"-->
-<!--                                android:background="@color/clr_gray_line"></View>-->
-<!--                        </FrameLayout>-->
+                        <!--                            <View-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="1dp"-->
+                        <!--                                android:layout_gravity="bottom"-->
+                        <!--                                android:layout_marginLeft="@dimen/size_16dp"-->
+                        <!--                                android:background="@color/clr_gray_line"></View>-->
+                        <!--                        </FrameLayout>-->
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -263,31 +288,42 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <EditText
-                                android:id="@+id/repair_fee_tv"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="35dp"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
                                 android:layout_marginLeft="@dimen/size_100dp"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:background="@null"
-                                android:gravity="right|center_vertical"
-                                android:hint="请输入维修费用"
-                                android:text="0.00"
-                                android:inputType="numberDecimal"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                tools:text="小刘"></EditText>
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <EditText
+                                    android:id="@+id/repair_fee_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请输入维修费用"
+                                    android:inputType="numberDecimal"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="0.00"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="小刘"></EditText>
+
+                                <ImageView
+                                    android:id="@+id/get_use_arrow3"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -310,29 +346,40 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <EditText
-                                android:id="@+id/repair_address_tv"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:gravity="center_vertical|right"
-                                android:background="@null"
-                                android:hint="请输入维修地点"
-                                android:layout_marginLeft="@dimen/size_100dp"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                tools:text="小刘"></EditText>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <EditText
+                                    android:id="@+id/repair_address_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:gravity="center_vertical|right"
+                                    android:hint="请输入维修地点"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="小刘"></EditText>
+
+                                <ImageView
+                                    android:id="@+id/get_use_arrow4"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -355,29 +402,40 @@
                                 android:textColor="@color/color_414141"
                                 android:textSize="@dimen/size_15sp"></TextView>
 
-                            <EditText
-                                android:id="@+id/repair_reason_et"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:gravity="right|center_vertical"
-                                android:background="@null"
-                                android:layout_marginLeft="@dimen/size_100dp"
-                                android:maxLines="1"
-                                android:singleLine="true"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
-                                android:layout_marginRight="@dimen/size_50dp"
-                                android:textColor="@color/color_919191"
-                                android:textSize="@dimen/size_14sp"
-                                android:hint="请输入维修原因"
-                                tools:text="155876839755"></EditText>
+                                android:layout_marginLeft="@dimen/size_100dp"
+                                android:orientation="horizontal"
+                                android:paddingRight="@dimen/size_10dp">
 
-                            <ImageView
-                                android:layout_width="@dimen/size_20dp"
-                                android:layout_height="@dimen/size_20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="@dimen/size_16dp"
-                                android:padding="@dimen/size_2dp"
-                                android:src="@mipmap/arrow_right_gray"></ImageView>
+                                <EditText
+                                    android:id="@+id/repair_reason_et"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:layout_marginRight="@dimen/size_6dp"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:gravity="right|center_vertical"
+                                    android:hint="请输入维修原因"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/color_919191"
+                                    android:textSize="@dimen/size_14sp"
+                                    tools:text="155876839755"></EditText>
+
+                                <ImageView
+                                    android:id="@+id/get_use_arrow5"
+                                    android:layout_width="@dimen/size_20dp"
+                                    android:layout_height="@dimen/size_20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:padding="@dimen/size_2dp"
+                                    android:src="@mipmap/arrow_right_gray"
+                                    tools:visibility="gone"></ImageView>
+                            </LinearLayout>
+
 
                             <View
                                 android:layout_width="match_parent"
@@ -388,6 +446,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/asset_list_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/size_16dp"

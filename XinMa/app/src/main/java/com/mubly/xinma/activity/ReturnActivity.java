@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -93,6 +94,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         }
         if (null != operateID) {//日志页面进入的
             setRightTvEnable(false);
+            hideArrowView();
             binding.bottomLayout.setVisibility(View.GONE);
             binding.returnTimeLayout.setEnabled(false);
             binding.returnDepartLayout.setEnabled(false);
@@ -220,6 +222,13 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
     public void showRv(AssetsListCallBackAdapter adapter) {
         binding.returnRv.setLayoutManager(new LinearLayoutManager(this));
         binding.returnRv.setAdapter(adapter);
+        adapter.setOnDelectListener(new AssetsListCallBackAdapter.OnItemDelectistener() {
+            @Override
+            public void itemClick(AssetBean data, int index) {
+                selectAssetsBean.getSelectBean().remove(data);
+                mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+            }
+        });
     }
 
     @Override
@@ -227,7 +236,7 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
         mPresenter.getCreatDate().setValue(operateBean.getProcessTime());
         binding.returnStatusTv.setText(operateBean.getRemark());
         binding.returnAddressTv.setText(operateBean.getSeat());
-        binding.returnDepartTv.setText(operateBean.getDepart()+"-"+operateBean.getStaff());
+        binding.returnDepartTv.setText(operateBean.getDepart() + "-" + operateBean.getStaff());
     }
 
     @Override
@@ -243,9 +252,13 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                 .subscribe(new Consumer<AssetBean>() {
                     @Override
                     public void accept(AssetBean assetBean) throws Exception {
-                        initSelectAssetsBean();
-                        selectAssetsBean.getSelectBean().add(assetBean);
-                        mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        if (null != assetBean) {
+                            initSelectAssetsBean();
+                            selectAssetsBean.getSelectBean().add(assetBean);
+                            mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
+                        } else {
+                            CommUtil.ToastU.showToast("查无信息");
+                        }
                     }
                 });
     }
@@ -308,5 +321,12 @@ public class ReturnActivity extends BaseOperateActivity<ReturnPresenter, IReturn
                     }
                 });
 
+    }
+    private void hideArrowView() {
+        binding.returnArrow1.setVisibility(View.GONE);
+        binding.returnArrow2.setVisibility(View.GONE);
+        binding.returnArrow3.setVisibility(View.GONE);
+        binding.returnArrow4.setVisibility(View.GONE);
+        binding.assetListTitle.setText("资产信息");
     }
 }
