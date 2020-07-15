@@ -8,6 +8,7 @@ import androidx.work.WorkerParameters;
 
 import com.mubly.xinma.common.CallBack;
 import com.mubly.xinma.db.XinMaDatabase;
+import com.mubly.xinma.model.InventoryBean;
 import com.mubly.xinma.model.StaffBean;
 import com.mubly.xinma.model.SynDataLowData;
 
@@ -33,8 +34,13 @@ public class SynLowWork extends Worker {
                             XinMaDatabase.getInstance().checkBeanDao().insertAll(obj.getCheck());
                         if (null != obj.getDepart())
                             XinMaDatabase.getInstance().groupBeanDao().insertAll(obj.getDepart());
-                        if (null != obj.getInventory())
+                        if (null != obj.getInventory()){
+                            for (InventoryBean inventoryBean:obj.getInventory()){
+                                XinMaDatabase.getInstance().inventoryBeanDao().deleteByCheckId(inventoryBean.getCheckID());
+                            }
                             XinMaDatabase.getInstance().inventoryBeanDao().insertAll(obj.getInventory());
+                        }
+
                         if (null != obj.getProperty())
                             XinMaDatabase.getInstance().propertyBeanDao().insertAll(obj.getProperty());
                         if (null != obj.getStaff()) {

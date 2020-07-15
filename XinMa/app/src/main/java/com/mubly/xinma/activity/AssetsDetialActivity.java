@@ -56,13 +56,14 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
     ActivityAssetsDetialBinding binding = null;
     private View checkBottomLayout;
     private TextView normalTv, diffTv, lessTV;
+    private int checkStatus;
 
     BottomAssetDetailLayoutBinding assetOperateBind = null;
 
     @Override
     public void initView() {
         setTitle("资产详情");
-        if (from.equals("check")) {
+        if (from.equals("check") && checkStatus == 0) {
             binding.checkDetialPromptLayout.getViewStub().inflate();
             checkBottomLayout = binding.checkDetialBottom.getViewStub().inflate();
             normalTv = checkBottomLayout.findViewById(R.id.check_normal_tv);
@@ -170,7 +171,7 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
     @Override
     public void initEvent() {
         super.initEvent();
-        if (from.equals("check")) {
+        if (from.equals("check") && checkStatus == 0) {
             normalTv.setOnClickListener(this);
             diffTv.setOnClickListener(this);
             lessTV.setOnClickListener(this);
@@ -290,6 +291,7 @@ public class AssetsDetialActivity extends BaseActivity<AssetsDetialPresenter, IA
         selectAssetsBean = (AssetBean) getIntent().getSerializableExtra("assetBean");
         from = getIntent().getStringExtra("from");
         checkId = getIntent().getStringExtra("checkId");
+        checkStatus = getIntent().getIntExtra("checkStatus",-1);
     }
 
 

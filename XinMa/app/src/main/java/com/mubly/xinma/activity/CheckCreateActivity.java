@@ -27,10 +27,12 @@ import com.mubly.xinma.iview.ICheckCreateView;
 import com.mubly.xinma.model.AssetBean;
 import com.mubly.xinma.model.CheckBean;
 import com.mubly.xinma.model.CheckData;
+import com.mubly.xinma.model.InventoryBean;
 import com.mubly.xinma.model.OperateBean;
 import com.mubly.xinma.model.SelectAssetsBean;
 import com.mubly.xinma.presenter.CheckCreatePresenter;
 import com.mubly.xinma.utils.CommUtil;
+import com.mubly.xinma.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +78,18 @@ public class CheckCreateActivity extends BaseActivity<CheckCreatePresenter, IChe
                                 checkBean.setStatusName("待盘点");
                                 checkBean.setStatus("0");
                                 XinMaDatabase.getInstance().checkBeanDao().insert(checkBean);
+                                for (String assetId : getParam()) {
+                                    InventoryBean inventoryBean = new InventoryBean();
+                                    inventoryBean.setAssetID(assetId);
+                                    inventoryBean.setCheckID(obj);
+                                    inventoryBean.setStatus("0");
+                                    inventoryBean.setStatusName("待盘点");
+                                    inventoryBean.setCreateTime(CommUtil.getCurrentTime());
+                                    inventoryBean.setInventoryID("xima" + System.currentTimeMillis());
+                                    XinMaDatabase.getInstance().inventoryBeanDao().insert(inventoryBean);
+                                }
+
+
                                 finish();
                             }
                         }).start();
@@ -148,9 +162,7 @@ public class CheckCreateActivity extends BaseActivity<CheckCreatePresenter, IChe
                             initSelectAssetsBean();
                             selectAssetsBean.getSelectBean().add(assetBean);
                             mPresenter.notifyDataChange(selectAssetsBean.getSelectBean());
-                        }
-
-                        else{
+                        } else {
                             CommUtil.ToastU.showToast("查无信息");
                         }
                     }

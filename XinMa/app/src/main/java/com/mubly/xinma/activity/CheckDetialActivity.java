@@ -193,6 +193,7 @@ public class CheckDetialActivity extends BaseActivity<CheckDetialPresenter, IChe
         intent.putExtra("assetBean", assetBean);
         intent.putExtra("from", "check");
         intent.putExtra("checkId", checkId);
+        intent.putExtra("checkStatus", currentTap);
         startActivity(intent);
         startPage();
     }
