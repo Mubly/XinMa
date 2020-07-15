@@ -22,16 +22,16 @@
 
         <ImageView
             android:id="@+id/asset_select_delect_iv"
-            android:layout_width="@dimen/size_20dp"
-            android:layout_height="@dimen/size_20dp"
-            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="match_parent"
+          android:paddingLeft="@dimen/size_10dp"
+            android:paddingRight="@dimen/size_10dp"
             android:src="@mipmap/delet_red_icon"></ImageView>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingLeft="@dimen/size_10dp">
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/assets_img"

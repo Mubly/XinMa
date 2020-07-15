@@ -19,6 +19,8 @@
         android:paddingLeft="@dimen/size_36dp"
         android:maxLines="1"
         android:singleLine="true"
+       android:imeOptions="actionSearch"
+
         android:layout_height="match_parent"
         android:background="@null"
         android:textSize="@dimen/size_14sp"></EditText>

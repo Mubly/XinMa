@@ -10,4 +10,6 @@ public interface ICreateView extends BaseMvpView {
     void choosePhoto();
     void customeParam();
     void createCustomerParam(List<CategoryInfoBean>categoryInfoBeans);
+
+    void showHasPromat();
 }

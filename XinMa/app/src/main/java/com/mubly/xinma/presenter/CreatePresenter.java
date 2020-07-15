@@ -91,7 +91,8 @@ public class CreatePresenter extends BasePresenter<ICreateView> {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
                         if (!aBoolean)
-                            CommUtil.ToastU.showToast("该资产已添加");
+                            getMvpView().showHasPromat();
+
                     }
                 });
     }

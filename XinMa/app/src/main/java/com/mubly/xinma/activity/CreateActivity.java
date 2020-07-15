@@ -484,6 +484,26 @@ public class CreateActivity extends BaseOperateActivity<CreatePresenter, ICreate
         }
     }
 
+    @Override
+    public void showHasPromat() {
+        NiceDialog.init().setLayoutId(R.layout.dialog_text_promapt)
+                .setConvertListener(new ViewConvertListener() {
+                    @Override
+                    protected void convertView(ViewHolder holder, BaseNiceDialog dialog) {
+                        holder.setText(R.id.dialog_tittle_tv, "提示");
+                        holder.setText(R.id.dialog_content_tv, "该资产已添加");
+                        holder.getView(R.id.dialog_promapt_ack).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                })
+                .setMargin(80)
+                .show(getSupportFragmentManager());
+    }
+
     private void createCustomParam(String key, String value, String type) {
         View itemView = View.inflate(CreateActivity.this, R.layout.custom_param_layout, null);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, CommUtil.dip2px(50));
